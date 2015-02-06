@@ -3,7 +3,15 @@
 
 /**
  * @file
- * Functions for working with a simple queue data structure.
+ * Implements a basic Queue data structure. Items can only be pushed to the back
+ * of the Queue, and taken from the front.
+ *
+ * Memory for this structure is allocated in blocks. The initial capacity of the
+ * Queue can be set by using the NewSizedQueue constructor function, and can be
+ * changed later using the SetQueueCapacity and TrimQueueToSize functions.
+ *
+ * Memory overhead can be calculated as follows:
+ * ( sizeof( size_t ) * 3 ) + ( sizeof( void * ) * ( queue_capacity + 1 ) )
  */
 
 /**
@@ -28,7 +36,7 @@ DestroyQueue
 ( Queue *queue );
 
 /**
- * Creates a new Queue.
+ * Creates a new Queue. The default capacity of the Queue is 100.
  *
  * @return the new Queue, or NULL on failure
  */
