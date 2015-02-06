@@ -1,0 +1,14 @@
+# Installation
+
+## Features
+All features of the library are listed below. Each can be activated by using the following syntax in the call to configure:
+`--enable-<feature>[=argument]`
+
+# Development
+The following packages need to be installed for development:
+autoconf
+automake
+libtool
+make (along with a compatible C compiler)
+
+To install the package after cloning the repository, simply run the dev-install script [scripts/dev-install.sh] to generate the required files in the repository. These files are necessary to build and test the library, but are not included in the repository as they can be easily generated.
