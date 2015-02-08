@@ -160,4 +160,18 @@ unsigned short
 StackIsEmpty
 ( const Stack *stack );
 
+/**
+ * Creates a string representation of the given Stack, using the provided
+ * function to get the string representation of each string.
+ *
+ * @param stack the Stack to get a representation of
+ * @param element_to_string the function to use to get string representaitons of
+ * elements
+ *
+ * @return a char buffer holding a string representation of the Stack
+ */
+char *
+StackToString
+( const Stack *stack, char * ( *element_to_string )( const void * ) );
+
 #endif

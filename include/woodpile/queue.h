@@ -1,10 +1,15 @@
-#ifndef __STUMPLESS_PRIVATE_CONTAINER_QUEUE_H
-#define __STUMPLESS_PRIVATE_CONTAINER_QUEUE_H
+#ifndef __WOODPILE_QUEUE_H
+#define __WOODPILE_QUEUE_H
 
 /**
  * @file
- * Implements a basic Queue data structure. Items can only be pushed to the back
- * of the Queue, and taken from the front.
+ * Declaration and functions for the Queue container.
+ */
+
+/**
+ * The Queue data structure is a simple array-based implementation of a First In
+ * First Out (FIFO) structure. Elements can only be pushed to the back of the
+ * Queue and pulled from the front.
  *
  * Memory for this structure is allocated in blocks. The initial capacity of the
  * Queue can be set by using the NewSizedQueue constructor function, and can be
@@ -13,6 +18,8 @@
  * Memory overhead can be calculated as follows:
  * ( sizeof( size_t ) * 3 ) + ( sizeof( void * ) * ( queue_capacity + 1 ) )
  */
+struct Queue;
+typedef struct Queue Queue;
 
 /**
  * Creates a copy of the given Queue. If the supplied Queue is NULL, then a
@@ -27,7 +34,7 @@ CopyQueue
 ( const Queue *queue );
 
 /**
- * Destroys a Queue
+ * Destroys a Queue.
  *
  * @param queue the Queue to destroy
  */
@@ -45,7 +52,7 @@ NewQueue
 ( void );
 
 /**
- * Creates a new Queue of the given capcity.
+ * Creates a new Queue of the given capacity.
  *
  * @param capacity the capacity to give the Queue
  *
@@ -136,6 +143,20 @@ QueueIsEmpty
 size_t
 QueueSize
 ( const Queue *queue);
+
+/**
+ * Creates a string representation of the given Queue, using the provided
+ * function to get the string representation of each string.
+ *
+ * @param queue the Queue to get a representation of
+ * @param element_to_string the function to use to get string representaitons of
+ * elements
+ *
+ * @return a char buffer holding a string representation of the Queue.
+ */
+char *
+QueueToString
+( const Queue *queue, char * ( *element_to_string )( const void * ) );
 
 /**
  * Removes the first occurrence of a value from the Queue given. If the value
