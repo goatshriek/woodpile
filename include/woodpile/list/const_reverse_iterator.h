@@ -40,10 +40,6 @@ unsigned short
 ListConstReverseIteratorHasNext
 ( const ListConstReverseIterator * );
 
-ListConstReverseIterator *
-NewListConstReverseIterator
-( const List *, int );
-
 const void *
 NextInListConstReverseIterator
 ( ListConstReverseIterator * );

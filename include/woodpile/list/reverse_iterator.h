@@ -41,10 +41,6 @@ unsigned short
 ListReverseIteratorHasPrevious
 ( const ListReverseIterator *iterator );
 
-ListReverseIterator *
-NewListReverseIterator
-( List *, int );
-
 void *
 NextInListReverseIterator
 ( ListReverseIterator * );
