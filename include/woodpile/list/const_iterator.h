@@ -3,16 +3,18 @@
 
 /**
  * @file
- * Declaration and functions for the ListConstIterator iterator.
+ * Declaration and functions for the ListConstIterator structure.
  */
 
 #include <woodpile/list.h>
 
 /**
- * The ListConstIterator provides a simple iterator for a List structure.
+ * The ListConstIterator provides a simple iterator for a List structure that
+ * is guaranteed not to change the order or composition of the List, or any of
+ * the elements the List contains.
  *
  * Memory overhead can be calculated as follows:
- * 
+ * sizeof( void * ) * 3
  */
 struct ListConstIterator;
 typedef struct ListConstIterator ListConstIterator;

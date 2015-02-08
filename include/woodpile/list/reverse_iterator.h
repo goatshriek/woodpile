@@ -1,7 +1,22 @@
 #ifndef __WOODPILE_LIST_REVERSE_ITERATOR_H
 #define __WOODPILE_LIST_REVERSE_ITERATOR_H
 
+/**
+ * @file
+ * Declaration and functions for the ListReverseIterator structure.
+ */
+
 #include <woodpile/list.h>
+
+/**
+ * The ListReverseIterator provides an iterator for the List structure that
+ * traverses the List from back to front.
+ *
+ * Memory overhead can be calculated as follows:
+ * sizeof( void * ) * 3
+ */
+struct ListReverseIterator;
+typedef struct ListReverseIterator ListReverseIterator;
 
 ListReverseIterator *
 CopyListReverseIterator
