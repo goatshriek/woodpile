@@ -10,7 +10,17 @@
  * The List data structure is a simple doubly linked list implementation.
  *
  * The List is optimized for insertions and deletions at either end, and
- * sequential walks via the iterators.
+ * sequential walks via the iterators. If random access is needed then the
+ * ArrayList structure is more suitable.
+ *
+ * Memory for this structure is allocated dynamically, allowing it to grow and
+ * shrink along with the number of elements it holds. This makes it suitable for
+ * use when the size is constantly changing; if a more static list size is
+ * needed then the ArrayList structure would be more efficient as its memory
+ * overhead is lower.
+ *
+ * Memory overhead can be calculated as follows:
+ * 2 * sizeof( void * ) * ( number_of_elements + 1 )
  */
 struct List;
 typedef struct List List;
@@ -27,36 +37,12 @@ List *
 AppendToList
 ( List *, void * );
 
-ListIterator *
-BeginList
-( List * );
-
-ListConstIterator *
-CBeginList
-( const List * );
-
-ListConstIterator *
-CEndList
-( const List * );
-
 List *
 CopyList
 ( const List * );
 
-ListConstReverseIterator *
-CRBeginList
-( const List * );
-
-ListConstReverseIterator *
-CREndList
-( const List * );
-
 void
 DestroyList
-( List * );
-
-ListIterator *
-EndList
 ( List * );
 
 void *
@@ -86,13 +72,5 @@ NewList
 List *
 PrependToList
 ( List *, void * );
-
-ListReverseIterator *
-RBeginList
-( List * );
-
-ListReverseIterator *
-REndList
-( List * );
 
 #endif

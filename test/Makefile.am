@@ -1,4 +1,7 @@
-check_PROGRAMS = test/function/stack_suite \
+check_PROGRAMS = test/function/dictionary_suite \
+                 test/function/list_suite \
+                 test/function/queue_suite \
+                 test/function/stack_suite
 
 TESTS = $(check_PROGRAMS)
 

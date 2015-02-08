@@ -16,7 +16,7 @@
  * changed later using the SetQueueCapacity and TrimQueueToSize functions.
  *
  * Memory overhead can be calculated as follows:
- * ( sizeof( size_t ) * 3 ) + ( sizeof( void * ) * ( queue_capacity + 1 ) )
+ * sizeof( size_t ) * 3 + sizeof( void * ) * ( queue_capacity + 1 )
  */
 struct Queue;
 typedef struct Queue Queue;
