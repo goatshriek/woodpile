@@ -4,7 +4,6 @@
 
 #include "private/container/list.h"
 #include "private/container/list/iterator.h"
-#include "private/container/list/reverse_iterator.h"
 #include "private/type.h"
 #include "static/container/list.h"
 #include "test/helper.h"
