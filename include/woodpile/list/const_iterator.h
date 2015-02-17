@@ -84,6 +84,17 @@ ListConstIteratorHasNext
 ( const ListConstIterator *iterator );
 
 /**
+ * Checks to see if a ListConstIterator has a previous value.
+ *
+ * @param iterator the iterator to check for a previous value
+ *
+ * @return a positive value if a previous value exists, and a 0 if not.
+ */
+unsigned short
+ListConstIteratorHasPrevious
+( const ListConstIterator *iterator );
+
+/**
  * Gets the next value in the ListConstIterator. If the ListConstIterator does
  * not have any more values (it is at the end of the list) then NULL is
  * returned. The current index of the iterator is advanced forward by one as a
@@ -95,6 +106,20 @@ ListConstIteratorHasNext
  */
 const void *
 NextInListConstIterator
+( ListConstIterator *iterator );
+
+/**
+ * Gets the previous value in the ListConstIterator. If the ListConstIterator
+ * does not have any previous values (it is at the beginning of the list) then
+ * NULL is returned. The current index of the iterator is advanced backward by
+ * one as a result of this function call.
+ *
+ * @param iterator the iterator to retrieve the previous value of
+ *
+ * @return the previous value of the iterator, or NULL if there is not one
+ */
+const void *
+PreviousInListConstIterator
 ( ListConstIterator *iterator );
 
 #endif
