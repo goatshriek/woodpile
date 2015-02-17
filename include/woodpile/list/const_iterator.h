@@ -13,6 +13,9 @@
  * is guaranteed not to change the order or composition of the List, or any of
  * the elements the List contains.
  *
+ * This iterator is bidirectional; that is, it can iterate through the list in
+ * either a forward or backward direction but does not support random acccess.
+ *
  * Memory overhead can be calculated as follows:
  * sizeof( void * ) * 3
  */

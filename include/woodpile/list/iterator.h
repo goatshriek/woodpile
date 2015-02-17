@@ -9,7 +9,12 @@
 #include <woodpile/list.h>
 
 /**
- * The ListIterator provides a simple iterator for a List structure.
+ * The ListIterator provides a simple iterator for a List structure. The list
+ * may also have elements added to and/or removed from it while being iterated
+ * through.
+ *
+ * This iterator is bidirectional; that is, it can iterate through the list in
+ * either a forward or backward direction but does not support random access.
  *
  * Memory overhead can be calculated as follows:
  * sizeof( void * ) * 3
