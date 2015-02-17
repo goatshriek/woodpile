@@ -34,6 +34,16 @@ BuildDictionaryConstIterator
 /**
  * Creates a List. The List contains several strings.
  *
+ * index | contents
+ * ----------------
+ *   0   | This
+ *   1   | is
+ *   2   | a
+ *   3   | test
+ *   4   | List
+ *   5   | o'
+ *   6   | strings!
+ *
  * @return a new List or NULL on failure
  */
 List *
@@ -42,7 +52,8 @@ BuildList
 
 /**
  * Creates a ListConstIterator. The iterator is created for a new List created
- * using the BuildList function.
+ * using the BuildList function. The position of the iterator will be such that
+ * the next element returned will be that at index 3.
  *
  * @return a ListConstIterator at the beginning of the list or NULL on failure
  */
@@ -52,22 +63,13 @@ BuildListConstIterator
 
 /**
  * Creates a ListIterator. The iterator is created for a new List created using
- * the BuildList function.
+ * the BuildList function. The position of the iterator will be such that the
+ * next element returned will be that at index 3.
  *
  * @return a ListIterator at the beginning of the list or NULL on failure
  */
 ListIterator *
 BuildListIterator
-( void );
-
-/**
- * Creates a ListReverseIterator. The iterator is created for a new List created
- * using the BuildList function.
- *
- * @return a new ListReverseIterator or NULL on failure
- */
-ListReverseIterator *
-BuildListReverseIterator
 ( void );
 
 /**
