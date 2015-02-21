@@ -53,14 +53,14 @@ AppendToList
 ( List *list, void *element );
 
 /**
- * Creates a copy of a List. Elements within the List are not reproduced,
- * meaning that changes made to elements in the original List will also change
- * the elements in the copy. Changes made to the original List will not affect
- * the copy.
+ * Creates a copy of a List. Elements within the List are not copied, meaning
+ * that changes made to elements in the original List will also change the
+ * elements in the copy. Changes made to the original List will not affect the
+ * copy.
  *
  * @param list the List to copy
  * 
- * @return a new List that is a copy of the original
+ * @return a copy of the original List or NULL on failure
  */
 List *
 CopyList
@@ -98,7 +98,7 @@ GetListFront
 ( const List *list );
 
 /**
- * Gets the number of elements in the List.
+ * Gets the number of elements in the List. An empty List will return 0.
  *
  * @param list the List to get the size of
  *
@@ -115,18 +115,17 @@ GetListSize
  * considered equal but are located at different addresses then they are not
  * considered equal by this function.
  *
- * @param list theList to search
+ * @param list the List to search
  * @param element the element to search for
  *
- * @return 0 if the List does not contain the given element, or the number of
- * entries of the element in the Stack if it does
+ * @return the number of entries of element in list
  */
 unsigned short
 ListContains
 ( const List *list, const void *element );
 
 /**
- * Checks whether or not a List is empty.
+ * Checks whether or not a List is empty. A NULL List will be considered empty.
  *
  * @param list the List to check
  *
@@ -137,9 +136,23 @@ ListIsEmpty
 ( const List *list );
 
 /**
+ * Creates a string representation of the given List, using the provided
+ * function to get the string representation of each element.
+ *
+ * @param list the List to get a representation of
+ * @param element_to_string a function returning string representations of
+ * elements
+ *
+ * @return a char buffer holding a string representation of the List
+ */
+char *
+ListToString
+( const List *list, char * ( *element_to_string )( const void * ) );
+
+/**
  * Creates a new List.
  * 
- * @return a new List, or NULL if an error occurred
+ * @return a new List or NULL on failure
  */
 List *
 NewList

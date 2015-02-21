@@ -19,14 +19,14 @@ struct Stack;
 typedef struct Stack Stack;
 
 /**
- * Creates a copy of a Stack. Elements within the Stack are not reproduced,
- * meaning that changes made to elements in the original Stack will also change
- * the elements in the copy. Changes made to the original Stack will not affect
- * the copy.
+ * Creates a copy of a Stack. Elements within the Stack are not copied, meaning
+ * that changes made to elements in the original Stack will also change the
+ * elements in the copy. Changes made to the original Stack will not affect the
+ * copy.
  *
  * @param stack the Stack to copy
  *
- * @return a new Stack that is a copy of the original
+ * @return a copy of the original Stack or NULL on failure
  */
 Stack *
 CopyStack
@@ -53,7 +53,7 @@ GetStackCapacity
 ( const Stack *stack );
 
 /**
- * Gets the number of elements in the Stack.
+ * Gets the number of elements in the Stack. An empty Stack will return 0.
  *
  * @param stack the Stack to get the size of
  *
@@ -145,15 +145,15 @@ SetStackCapacity
  * @param stack the Stack to search
  * @param element the element to search for
  *
- * @return 0 if the Stack does not contain the given element, or the number of
- * entries of the element in the Stack if it does
+ * @return the number of entries of element in stack
  */
 size_t
 StackContains
 ( const Stack *stack, const void *element );
 
 /**
- * Checks whether or not a Stack is empty.
+ * Checks whether or not a Stack is empty. A NULL Stack will be considered
+ * empty.
  *
  * @param stack the Stack to check
  *
@@ -165,10 +165,10 @@ StackIsEmpty
 
 /**
  * Creates a string representation of the given Stack, using the provided
- * function to get the string representation of each string.
+ * function to get the string representation of each element.
  *
  * @param stack the Stack to get a representation of
- * @param element_to_string the function to use to get string representaitons of
+ * @param element_to_string a function returning string representations of
  * elements
  *
  * @return a char buffer holding a string representation of the Stack

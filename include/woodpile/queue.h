@@ -22,19 +22,21 @@ struct Queue;
 typedef struct Queue Queue;
 
 /**
- * Creates a copy of the given Queue. If the supplied Queue is NULL, then a
- * NULL is returned.
+ * Creates a copy of a Queue. Elements within the Queue are not copied, meaning
+ * that changes made to elements in the original Queue will also change the
+ * elements in the copy. Changes made to the original Queue will not affect the
+ * copy.
  *
  * @param queue the Queue to copy
  *
- * @return the copy of the original Queue, or NULL on failure.
+ * @return the copy of the original Queue or NULL on failure
  */
 Queue *
 CopyQueue
 ( const Queue *queue );
 
 /**
- * Destroys a Queue.
+ * Destroys a Queue. Does not affect the elements stored in the Queue.
  *
  * @param queue the Queue to destroy
  */
@@ -43,9 +45,31 @@ DestroyQueue
 ( Queue *queue );
 
 /**
+ * Gets the current capacity of the Queue.
+ *
+ * @param queue the Queue to get the capacity of
+ *
+ * @return the current capacity of the Queue
+ */
+size_t
+GetQueueCapacity
+( const Queue *queue );
+
+/**
+ * Gets the number of elements in a Queue. An empty Queue will return 0.
+ *
+ * @param queue the Queue to measure
+ *
+ * @return the number of elements in the Queue
+ */
+size_t
+GetQueueSize
+( const Queue *queue);
+
+/**
  * Creates a new Queue. The default capacity of the Queue is 100.
  *
- * @return the new Queue, or NULL on failure
+ * @return a new Queue or NULL on failure
  */
 Queue *
 NewQueue
@@ -98,24 +122,12 @@ PushToQueue
 ( Queue *queue, void *value );
 
 /**
- * Gets the maximum number of elements the Queue can hold.
+ * Searches a Queue for an element.
  *
- * @param queue the Queue to check the capacity of
+ * @param queue the Queue to search
+ * @param element the element to search for
  *
- * @return the maximum number of elements the Queue can hold
- */
-size_t
-QueueCapacity
-( const Queue *queue );
-
-/**
- * Searches a Queue for a specific value.
- *
- * @param queue the Queue to search for the value
- * @param value the value to search for in the Queue
- *
- * @return the number of times the Queue contains the value, and 0 if it does
- * not
+ * @return the number of entries of element in queue
  */
 size_t
 QueueContains
@@ -133,26 +145,14 @@ QueueIsEmpty
 ( const Queue *queue );
 
 /**
- * Gets the number of elements in a Queue. If a NULL Queue is provided then the
- * size will be 0.
- *
- * @param queue the Queue to measure
- *
- * @return the number of elements in the Queue
- */
-size_t
-QueueSize
-( const Queue *queue);
-
-/**
  * Creates a string representation of the given Queue, using the provided
- * function to get the string representation of each string.
+ * function to get the string representation of each element.
  *
  * @param queue the Queue to get a representation of
- * @param element_to_string the function to use to get string representaitons of
+ * @param element_to_string a function returining string representations of
  * elements
  *
- * @return a char buffer holding a string representation of the Queue.
+ * @return a char buffer holding a string representation of the Queue
  */
 char *
 QueueToString
