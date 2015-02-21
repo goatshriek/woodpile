@@ -19,7 +19,10 @@ struct Stack;
 typedef struct Stack Stack;
 
 /**
- * Creates a copy of the provided Stack.
+ * Creates a copy of a Stack. Elements within the Stack are not reproduced,
+ * meaning that changes made to elements in the original Stack will also change
+ * the elements in the copy. Changes made to the original Stack will not affect
+ * the copy.
  *
  * @param stack the Stack to copy
  *
@@ -30,7 +33,7 @@ CopyStack
 ( const Stack *stack );
 
 /**
- * Destroys the provided Stack. Does not affect the data stored in the Stack.
+ * Destroys a Stack. Does not affect the elements stored in the Stack.
  *
  * @param stack the Stack to destroy
  */
@@ -50,7 +53,7 @@ GetStackCapacity
 ( const Stack *stack );
 
 /**
- * Gets the number of elements on the Stack.
+ * Gets the number of elements in the Stack.
  *
  * @param stack the Stack to get the size of
  *
@@ -133,24 +136,24 @@ SetStackCapacity
 ( Stack *stack, size_t capacity );
 
 /**
- * Searches a Stack for a given value.
+ * Searches a Stack for an element.
  *
- * Note that the value is identified using a pointer; if two structures are
+ * Note that the element is identified using a pointer; if two structures are
  * considered equal but are located at different addresses then they are not
  * considered equal by this function. 
  *
- * @param stack the Stack to search for a specific value
- * @param value the value to search the Stack for
+ * @param stack the Stack to search
+ * @param element the element to search for
  *
- * @return 0 if the Stack does not contain the given value, or the number of
- * entries of the value in the Stack if it does
+ * @return 0 if the Stack does not contain the given element, or the number of
+ * entries of the element in the Stack if it does
  */
 size_t
 StackContains
-( const Stack *stack, const void *value );
+( const Stack *stack, const void *element );
 
 /**
- * Checks a Stack to see if it's empty.
+ * Checks whether or not a Stack is empty.
  *
  * @param stack the Stack to check
  *
