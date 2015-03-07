@@ -4,6 +4,9 @@
 #include <stdint.h>
 #include <woodpile/list.h>
 
+struct Node;
+
+typedef struct Node Node;
 
 /** a helper macro to XOR two Node pointers together */
 #define XORNODES( first, second )                                              \
@@ -11,8 +14,8 @@
 
 /** the List container */
 struct List {
-  Node * first; /**< the first Node in the list */
-  Node * last; /**< the last Node in the list */
+  Node *first; /**< the first Node in the list */
+  Node *last; /**< the last Node in the list */
 };
 
 /**
@@ -26,7 +29,6 @@ struct Node {
   Node *neighbors; /**< the XOR of this Node's neighbors */
   void *value; /**< the value held by the Node */
 };
-typedef struct Node Node;
 
 static
 void

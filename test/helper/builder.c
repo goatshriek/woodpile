@@ -37,7 +37,7 @@ BuildListConstIterator
   return iterator;
 }
 
-ListConstIterator *
+ListIterator *
 BuildListIterator
 ( void )
 {

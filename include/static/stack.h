@@ -8,4 +8,16 @@ struct Stack {
   void **values; /**< the elements */
 };
 
+/**
+ * Doubles the capacity of a Stack.
+ *
+ * @param stack the Stack to enlarge
+ *
+ * @return stack or NULL if memory is not available
+ */
+static
+Stack *
+Resize
+( Stack *stack );
+
 #endif

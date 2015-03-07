@@ -43,7 +43,7 @@ unsigned short
 ListConstIteratorHasPrevious
 ( const ListConstIterator *iterator )
 {
-  return NULL;
+  return 0;
 }
 
 const void *

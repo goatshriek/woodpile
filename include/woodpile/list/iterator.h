@@ -148,7 +148,6 @@ PreviousInListIterator
  * @return the element removed
  */
 void *
-ListIterator *
 RemoveFromListIterator
 ( ListIterator *iterator );
 

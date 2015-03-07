@@ -8,6 +8,8 @@
 
 #include <woodpile/list.h>
 
+#include "static/list.h"
+
 /** the ListConstIterator structure */
 struct ListConstIterator {
   const Node *current; /**< the current value of the iterator */

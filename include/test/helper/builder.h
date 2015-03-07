@@ -7,8 +7,12 @@
  */
 
 #include <woodpile/dictionary.h>
+#include <woodpile/dictionary/const_iterator.h>
+#include <woodpile/dictionary/iterator.h>
 #include <woodpile/list.h>
-#include <woodpiler/queue.h>
+#include <woodpile/list/const_iterator.h>
+#include <woodpile/list/iterator.h>
+#include <woodpile/queue.h>
 #include <woodpile/stack.h>
 #include <woodpile/tree.h>
 

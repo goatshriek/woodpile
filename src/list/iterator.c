@@ -50,7 +50,7 @@ unsigned short
 ListIteratorHasPrevious
 ( const ListIterator *iterator )
 {
-  return NULL;
+  return 0;
 }
 
 void *
@@ -68,7 +68,6 @@ PreviousInListIterator
 }
 
 void *
-ListIterator *
 RemoveFromListIterator
 ( ListIterator *iterator )
 {

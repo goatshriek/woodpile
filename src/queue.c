@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <string.h>
 
 #include <woodpile/queue.h>
 
@@ -147,16 +148,19 @@ QueueSize
 
 void *
 RemoveFromQueue
-( Queue *queue, void *value )
+( Queue *queue, const void *value )
 {
   size_t current;
+  void *queue_value;
 
   if( QueueIsEmpty( queue ) )
     return NULL;
 
   current = queue->front;
   while( current != queue->back ){
-    if( queue->elements[current] == value ){
+    queue_value = queue->elements[current];
+
+    if( queue_value == value ){
       queue->back = queue->back == 0 ? queue->capacity - 1 : queue->back - 1;
 
       while( current != queue->back ){
@@ -164,7 +168,7 @@ RemoveFromQueue
         current = (current + 1 ) % queue->capacity;
       }
 
-      return value;
+      return queue_value;
     }
 
     current = ( current + 1 ) % queue->capacity;
