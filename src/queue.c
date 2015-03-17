@@ -33,13 +33,13 @@ CopyQueue
 
 void
 DestroyQueue
-( Queue *queue )
+( const Queue *queue )
 {
   if( !queue )
     return;
 
-  free( queue->elements );
-  free( queue );
+  free( ( void * ) queue->elements );
+  free( ( void * ) queue );
 
   return;
 }

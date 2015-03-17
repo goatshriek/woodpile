@@ -42,7 +42,7 @@ CopyQueue
  */
 void
 DestroyQueue
-( Queue *queue );
+( const Queue *queue );
 
 /**
  * Gets the current capacity of the Queue.

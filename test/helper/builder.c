@@ -50,3 +50,20 @@ BuildListIterator
 
   return iterator;
 }
+
+Queue *
+BuildQueue
+( void )
+{
+  Queue *queue;
+
+  queue = NewQueue();
+  
+  PushToQueue( queue, "front of Queue" );
+  PushToQueue( queue, "test string" );
+  PushToQueue( queue, "middle string" );
+  PushToQueue( queue, "second test string" );
+  PushToQueue( queue, "end of Queue" );
+
+  return queue;
+}

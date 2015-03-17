@@ -79,6 +79,13 @@ BuildListIterator
 /**
  * Creates a Queue. The Queue contains several strings.
  *
+ * index | contents
+ *   0   | front of Queue
+ *   1   | test string
+ *   2   | middle string
+ *   3   | second test string
+ *   4   | end of Queue
+ *
  * @return a new Queue or NULL on failure
  */
 Queue *
