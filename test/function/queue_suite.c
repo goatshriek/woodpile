@@ -23,8 +23,9 @@ main
   TEST( CopyContents )
   TEST( CopyNotSame )
   TEST( CopyNullQueue )
-  TEST( Destroy )
+  TEST( CopySize )
   TEST( DestroyNullQueue )
+  TEST( DestroyPopulatedQueue )
   TEST( IsEmptyWithEmptyQueue )
   TEST( IsEmptyWithPopulatedQueue )
   TEST( IsEmptyWithNullQueue )
@@ -140,7 +141,7 @@ TestContainsUniqueValue
   PushToQueue( queue, value );
 
   if( QueueContains( queue, value ) != 1 )
-    return "1 was returned for a value contained exactly once in the Queue";
+    return "1 was not returned for a value contained exactly once in the Queue";
 
   DestroyQueue( queue );
 
@@ -238,21 +239,27 @@ TestCopyNullQueue
 ( void )
 {
   if( CopyQueue( NULL ) != NULL )
-    return "NULL was not returned for a NULL Queue";
+    return "NULL was not returned when copying a NULL Queue";
 
   return NULL;
 }
 
 const char *
-TestDestroy
+TestCopySize
 ( void )
 {
-  Queue *queue;
-  
+  const Queue *copy, *queue;
+
   queue = BuildQueue();
   if( !queue )
     return "could not build a Queue";
 
+  copy = CopyQueue( queue );
+
+  if( QueueSize( queue ) != QueueSize( copy ) )
+    return "the copy was not the same size as the original";
+
+  DestroyQueue( copy );
   DestroyQueue( queue );
 
   return NULL;
@@ -264,6 +271,21 @@ TestDestroyNullQueue
 {
   DestroyQueue( NULL );
   
+  return NULL;
+}
+
+const char *
+TestDestroyPopulatedQueue
+( void )
+{
+  const Queue *queue;
+  
+  queue = BuildQueue();
+  if( !queue )
+    return "could not build a Queue";
+
+  DestroyQueue( queue );
+
   return NULL;
 }
 
@@ -317,7 +339,7 @@ const char *
 TestNew
 ( void )
 {
-  Queue *queue;
+  const Queue *queue;
 
   queue = NewQueue();
   if( !queue )
@@ -535,7 +557,7 @@ TestPushToPopulatedQueue
 ( void )
 {
   Queue *queue;
-  unsigned i, size;
+  size_t i, size;
   void *front_value, *value = "test push string";
 
   queue = BuildQueue();

@@ -18,9 +18,7 @@ BuildList
   AppendToList( list, "test" );
   AppendToList( list, "List" );
   AppendToList( list, "o'" );
-  AppendToList( list, "strings!" );
-
-  return list;
+  return AppendToList( list, "strings!" );
 }
 
 ListConstIterator *

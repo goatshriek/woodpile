@@ -73,7 +73,7 @@ CopyList
  */
 void
 DestroyList
-( List *list );
+( const List *list );
 
 /**
  * Gets the last element in the List.
@@ -83,29 +83,7 @@ DestroyList
  * @return the last element of list, or NULL if list is empty
  */
 void *
-GetListBack
-( const List *list );
-
-/**
- * Gets the first element in the List.
- *
- * @param list the List to get the element from
- *
- * @return the first element of list, or NULL if list is empty
- */
-void *
-GetListFront
-( const List *list );
-
-/**
- * Gets the number of elements in the List. An empty List will return 0.
- *
- * @param list the List to get the size of
- *
- * @return the number of elements in the List
- */
-unsigned
-GetListSize
+ListBack
 ( const List *list );
 
 /**
@@ -120,12 +98,46 @@ GetListSize
  *
  * @return the number of entries of element in list
  */
-unsigned short
+size_t
 ListContains
 ( const List *list, const void *element );
 
 /**
- * Checks whether or not a List is empty. A NULL List will be considered empty.
+ * Gets the first element in the List.
+ *
+ * @param list the List to get the element from
+ *
+ * @return the first element of list, or NULL if list is empty
+ */
+void *
+ListFront
+( const List *list );
+
+/**
+ * Gets the element at the specified position in the List. If the list does not
+ * have an element at this index then NULL is returned. NULL is returned if
+ * list is NULL.
+ *
+ * Negative indexes count backwards through the list, for example an index of
+ * -2 returns the second to last value in the list.
+ *
+ * Both positive and negative indexes will wrap around if greater than the size
+ * of the List. For example, if the List contains 3 elements, then an index of
+ * 4 will return the second element in the List. Likewise, an index of -4 will
+ * return the last element in the List.
+ *
+ * @param list the List to get the element from
+ * @param index the index of the element to retrieve
+ *
+ * @return the element of the List at the given index, or NULL if it does not
+ * exist
+ */
+void *
+ListGet
+( const List *list, int index );
+
+/**
+ * Checks whether or not a List is empty. A NULL List is considered empty.
  *
  * @param list the List to check
  *
@@ -136,8 +148,30 @@ ListIsEmpty
 ( const List *list );
 
 /**
+ * Gets the number of elements in the List. An empty List will return 0.
+ *
+ * @param list the List to get the size of
+ *
+ * @return the number of elements in the List
+ */
+unsigned
+ListSize
+( const List *list );
+
+/**
  * Creates a string representation of the given List, using the provided
- * function to get the string representation of each element.
+ * function to get the string representation of each element. If the
+ * element_to_string function is NULL, then the element is printed as a void
+ * pointer.
+ *
+ * The list is enclosed in square brackets, and elements within the list are
+ * separated by a comma and space as shown here:
+ * [element_1, element_2, element_3]
+ *
+ * The element_to_string function must create new strings that can be
+ * deallocated with a call to free. For example, if the elements themselves are
+ * string literals, then the function must return a copy of the string rather
+ * than the string itself.
  *
  * @param list the List to get a representation of
  * @param element_to_string a function returning string representations of

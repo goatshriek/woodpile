@@ -45,28 +45,6 @@ DestroyQueue
 ( const Queue *queue );
 
 /**
- * Gets the current capacity of the Queue.
- *
- * @param queue the Queue to get the capacity of
- *
- * @return the current capacity of the Queue
- */
-size_t
-GetQueueCapacity
-( const Queue *queue );
-
-/**
- * Gets the number of elements in a Queue. An empty Queue will return 0.
- *
- * @param queue the Queue to measure
- *
- * @return the number of elements in the Queue
- */
-size_t
-GetQueueSize
-( const Queue *queue);
-
-/**
  * Creates a new Queue. The default capacity of the Queue is 100.
  *
  * @return a new Queue or NULL on failure
@@ -122,6 +100,17 @@ PushToQueue
 ( Queue *queue, void *value );
 
 /**
+ * Gets the current capacity of the Queue.
+ *
+ * @param queue the Queue to get the capacity of
+ *
+ * @return the current capacity of the Queue
+ */
+size_t
+QueueCapacity
+( const Queue *queue );
+
+/**
  * Searches a Queue for an element.
  *
  * @param queue the Queue to search
@@ -143,6 +132,17 @@ QueueContains
 unsigned short
 QueueIsEmpty
 ( const Queue *queue );
+
+/**
+ * Gets the number of elements in a Queue. An empty Queue will return 0.
+ *
+ * @param queue the Queue to measure
+ *
+ * @return the number of elements in the Queue
+ */
+size_t
+QueueSize
+( const Queue *queue);
 
 /**
  * Creates a string representation of the given Queue, using the provided

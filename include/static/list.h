@@ -27,17 +27,19 @@ struct List {
  */
 struct Node {
   Node *neighbors; /**< the XOR of this Node's neighbors */
-  void *value; /**< the value held by the Node */
+  void *element; /**< the element held by the Node */
 };
 
+/**
+ * Creates a string holding the address pointed to by the pointer.
+ *
+ * @param pointer the pointer to represent in a string
+ *
+ * @return a char buffer holding a string representation of the pointer
+ */
 static
-void
-DestroyNodes
-( Node *, Node * );
-
-static
-void *
-SeparateNodes
-( Node *, Node *, void * );
+char *
+PointerToString
+( const void *pointer );
 
 #endif

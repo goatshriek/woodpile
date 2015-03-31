@@ -112,14 +112,14 @@ TestCopyNullQueue
 ( void );
 
 /**
- * Tests the DestroyQueue function.
+ * Tests the size of the Queue returned by the CopyQueue function.
  *
- * @test A populated Queue must not cause an error.
+ * @test The copy of a populated Queue must be the same size as the original.
  *
  * @return NULL on completion or a string describing the failure
  */
 const char *
-TestDestroy
+TestCopySize
 ( void );
 
 /**
@@ -131,6 +131,17 @@ TestDestroy
  */
 const char *
 TestDestroyNullQueue
+( void );
+
+/**
+ * Tests the DestroyQueue function with a populated Queue.
+ *
+ * @test A populated Queue must not cause an error.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestDestroyPopulatedQueue
 ( void );
 
 /**
