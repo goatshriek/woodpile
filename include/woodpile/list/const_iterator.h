@@ -17,7 +17,7 @@
  * either a forward or backward direction but does not support random acccess.
  *
  * Memory overhead can be calculated as follows:
- * sizeof( void * ) * 3
+ * sizeof( void * ) * 2
  */
 struct ListConstIterator;
 typedef struct ListConstIterator ListConstIterator;
@@ -70,7 +70,7 @@ CopyListConstIterator
  */
 void
 DestroyListConstIterator
-( ListConstIterator *iterator );
+( const ListConstIterator *iterator );
 
 /**
  * Checks to see if a ListConstIterator has a next value.

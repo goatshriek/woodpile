@@ -226,7 +226,7 @@ TestCopyContents
  * @return NULL on completion or a string describing the failure
  */
 const char *
-TestCopyNotSame
+TestCopyDistinct
 ( void );
 
 /**

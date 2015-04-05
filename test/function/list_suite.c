@@ -31,7 +31,7 @@ main( void )
   TEST( ContainsWithNullList )
   TEST( Copy )
   TEST( CopyContents )
-  TEST( CopyNotSame )
+  TEST( CopyDistinct )
   TEST( CopyNullList )
   TEST( CopySize )
   TEST( DestroyNullList )
@@ -459,7 +459,7 @@ TestCopyContents
 }
 
 const char *
-TestCopyNotSame
+TestCopyDistinct
 ( void )
 {
   const List *copy, *list;

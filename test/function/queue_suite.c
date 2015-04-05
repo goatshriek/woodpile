@@ -21,7 +21,7 @@ main
   TEST( ContainsWithNullQueue )
   TEST( Copy )
   TEST( CopyContents )
-  TEST( CopyNotSame )
+  TEST( CopyDistinct )
   TEST( CopyNullQueue )
   TEST( CopySize )
   TEST( DestroyNullQueue )
@@ -214,7 +214,7 @@ TestCopyContents
 }
 
 const char *
-TestCopyNotSame
+TestCopyDistinct
 ( void )
 {
   const Queue *copy, *queue;

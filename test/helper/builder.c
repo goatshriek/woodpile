@@ -21,34 +21,6 @@ BuildList
   return AppendToList( list, "strings!" );
 }
 
-ListConstIterator *
-BuildListConstIterator
-( void )
-{
-  ListConstIterator *iterator;
-
-  iterator = CBeginList( BuildList() );
-  NextInListConstIterator( iterator );
-  NextInListConstIterator( iterator );
-  NextInListConstIterator( iterator );
-
-  return iterator;
-}
-
-ListIterator *
-BuildListIterator
-( void )
-{
-  ListIterator *iterator;
-
-  iterator = BeginList( BuildList() );
-  NextInListIterator( iterator );
-  NextInListIterator( iterator );
-  NextInListIterator( iterator );
-
-  return iterator;
-}
-
 Queue *
 BuildQueue
 ( void )

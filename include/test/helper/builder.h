@@ -55,28 +55,6 @@ BuildList
 ( void );
 
 /**
- * Creates a ListConstIterator. The iterator is created for a new List created
- * using the BuildList function. The position of the iterator will be such that
- * the next element returned will be that at index 3.
- *
- * @return a ListConstIterator at the beginning of the list or NULL on failure
- */
-ListConstIterator *
-BuildListConstIterator
-( void );
-
-/**
- * Creates a ListIterator. The iterator is created for a new List created using
- * the BuildList function. The position of the iterator will be such that the
- * next element returned will be that at index 3.
- *
- * @return a ListIterator at the beginning of the list or NULL on failure
- */
-ListIterator *
-BuildListIterator
-( void );
-
-/**
  * Creates a Queue. The Queue contains several strings.
  *
  * index | contents
