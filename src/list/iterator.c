@@ -175,7 +175,6 @@ RemoveFromListIterator
 
   switch( iterator->direction ){
     case 1:
-      iterator->direction = 0;
       removed = iterator->previous;
       if( !removed )
         return NULL;
@@ -184,18 +183,18 @@ RemoveFromListIterator
       left_neighbor = XORNODES( removed->neighbors, right_neighbor);
       break;
     case 2:
-      iterator->direction = 0;
-      left_neighbor = iterator->previous;
       removed = iterator->current;
       if( !removed )
         return NULL;
       
+      left_neighbor = iterator->previous;
       right_neighbor = XORNODES( removed->neighbors, left_neighbor );
       break;
     default:
       return NULL;
   }
 
+  iterator->direction = 0;
   element = removed->element;
 
   if( left_neighbor ){
