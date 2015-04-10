@@ -16,17 +16,29 @@
  * This iterator is bidirectional; that is, it can iterate through the list in
  * either a forward or backward direction but does not support random access.
  *
+ * Unless addition or removal needs to be performed, it is recommended to use
+ * a ListConstIterator instead. This structure has several advantages over it's
+ * non-const analog:
+ *  + less memory overhead
+ *  + enforces const-correctness
+ *  + slightly faster
+ *
  * Memory overhead can be calculated as follows:
- * sizeof( void * ) * 3
+ * ( sizeof( void * ) * 3 ) + sizeof( unsigned short )
  */
 struct ListIterator;
-typedef struct ListIteratore ListIterator;
+typedef struct ListIterator ListIterator;
 
 /**
  * Inserts the specified element into the list. The element is inserted
  * immediately before the element that would be returned by a call to
  * NextInListIterator (if any), and after the element that would be returned by
- * a call to PreviousInListIterator (if any). A NULL element will be ignored.
+ * a call to PreviousInListIterator (if any). A NULL element is ignored.
+ *
+ * After a call to this function, the position of the iterator will be directly
+ * after the added element. That is, a call to PreviousInListIterator would
+ * return the newly added element, and a call to NextInListIterator would return
+ * the same element as it would have before a call to this function.
  *
  * @param iterator the ListIterator to add to
  * @param element the element to insert into the List
@@ -54,13 +66,13 @@ BeginList
  * Creates a copy of a ListIterator. The position of the copy will be the same
  * as the original at the time of the copy.
  *
- * @param original the ListIterator to copy
+ * @param iterator the ListIterator to copy
  *
  * @return a copy of the original ListIterator
  */
 ListIterator *
 CopyListIterator
-( const ListIterator *original );
+( const ListIterator *iterator );
 
 /**
  * Destroys a ListIterator and releases its memory. This function does not

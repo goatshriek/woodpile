@@ -7,11 +7,19 @@
 #include "test/function/list/const_iterator_suite.h"
 #include "test/helper.h"
 
+static const List *common_list = NULL;
+
 int
 main( void )
 {
   unsigned failure_count = 0;
   const char *result;
+
+  common_list = BuildList();
+  if( !common_list ){
+    puts( "could not build a List for testing" );
+    return EXIT_FAILURE;
+  }
 
   TEST( CBeginWithEmptyList )
   TEST( CBeginWithNullList )
@@ -46,6 +54,8 @@ main( void )
   TEST( PreviousAtMiddle )
   TEST( PreviousWithEmptyList )
   TEST( PreviousWithNullIterator )
+
+  DestroyList( common_list );
 
   if( failure_count > 0 )
     return EXIT_FAILURE;
@@ -95,15 +105,10 @@ const char *
 TestCBeginWithPopulatedList
 ( void )
 {
-  const List *list;
   ListConstIterator *iterator;
   const void *element;
 
-  list = BuildList();
-  if( !list )
-    return "could not build a List";
-
-  iterator = CBeginList( list );
+  iterator = CBeginList( common_list );
   if( !iterator )
     return "a NULL ListConstIterator was returned for a populated List";
 
@@ -115,7 +120,6 @@ TestCBeginWithPopulatedList
     return "the next element of the iterator was NULL";
   ASSERT_STRINGS_EQUAL( "This", element, "the next element of the iterator was not the first element of the List" )
 
-  DestroyList( list );
   DestroyListConstIterator( iterator );
 
   return NULL;
@@ -163,15 +167,10 @@ const char *
 TestCEndWithPopulatedList
 ( void )
 {
-  const List *list;
   ListConstIterator *iterator;
   const void *element;
 
-  list = BuildList();
-  if( !list )
-    return "could not build a List";
-
-  iterator = CEndList( list );
+  iterator = CEndList( common_list );
   if( !iterator )
     return "a NULL ListConstIterator was returned for a populated List";
 
@@ -183,7 +182,6 @@ TestCEndWithPopulatedList
     return "the previous element of the iterator was NULL";
   ASSERT_STRINGS_EQUAL( "strings!", element, "the previous element of the iterator was not the last element of the List" )
 
-  DestroyList( list );
   DestroyListConstIterator( iterator );
 
   return NULL;
@@ -193,14 +191,9 @@ const char *
 TestCopy
 ( void )
 {
-  const List *list;
   const ListConstIterator *copy, *iterator;
 
-  list = BuildList();
-  if( !list )
-    return "could not build a List"; 
-
-  iterator = CBeginList( list );
+  iterator = CBeginList( common_list );
   if( !iterator )
     return "could not build a ListConstIterator";
 
@@ -208,7 +201,6 @@ TestCopy
   if( copy == NULL )
     return "NULL was returned for a non-NULL ListConstIterator";
 
-  DestroyList( list );
   DestroyListConstIterator( copy );
   DestroyListConstIterator( iterator );
 
@@ -219,15 +211,10 @@ const char *
 TestCopyContents
 ( void )
 {
-  const List *list;
   ListConstIterator *copy, *iterator;
   const void *element;
 
-  list = BuildList();
-  if( !list )
-    return "could not build a List";
-
-  iterator = CBeginList( list );
+  iterator = CBeginList( common_list );
   if( !iterator )
     return "could not build a ListConstIterator";
 
@@ -239,13 +226,12 @@ TestCopyContents
   if( !element )
     return "the copied ListConstIterator did not have a first element";
 
-  if( element != ListFront( list ) )
+  if( element != ListFront( common_list ) )
     return "the first element in the ListConstIterator was not the first element in the List";
 
   if( element != NextInListConstIterator( iterator ) )
     return "the first element in the original did not match the first element of the copy";
 
-  DestroyList( list );
   DestroyListConstIterator( copy );
   DestroyListConstIterator( iterator );
 
@@ -256,15 +242,10 @@ const char *
 TestCopyDistinct
 ( void )
 {
-  const List *list;
   ListConstIterator *copy, *iterator;
   const void *element_1, *element_2, *element_3;
 
-  list = BuildList();
-  if( !list )
-    return "could not build a List";
-
-  iterator = CBeginList( list );
+  iterator = CBeginList( common_list );
   if( !iterator )
     return "could not build a ListConstIterator"; 
 
@@ -294,7 +275,6 @@ TestCopyDistinct
   if( PreviousInListConstIterator( iterator ) != element_1 )
     return "backing up the pointer of the copy changed the pointer of the original";
 
-  DestroyList( list );
   DestroyListConstIterator( copy );
   DestroyListConstIterator( iterator );
  
@@ -315,14 +295,9 @@ const char *
 TestCopyPosition
 ( void )
 {
-  const List *list;
   ListConstIterator *copy, *iterator;
 
-  list = BuildList();
-  if( !list )
-    return "could not build a List";
-
-  iterator = CBeginList( list );
+  iterator = CBeginList( common_list );
   if( !iterator )
     return "could not build a ListConstIterator";
 
@@ -336,7 +311,6 @@ TestCopyPosition
   if( NextInListConstIterator( iterator ) != NextInListConstIterator( copy ) )
     return "the position of the iterator was not the same in the copy as the original";
 
-  DestroyList( list );
   DestroyListConstIterator( copy );
   DestroyListConstIterator( iterator );
 
@@ -347,20 +321,13 @@ const char *
 TestDestroy
 ( void )
 {
-  const List *list;
   const ListConstIterator *iterator;
 
-  list = BuildList();
-  if( !list )
-    return "could not build a List";
-
-  iterator = CBeginList( list );
+  iterator = CBeginList( common_list );
   if( !iterator )
     return "could not build a ListConstIterator";
 
   DestroyListConstIterator( iterator );
-
-  DestroyList( list );
 
   return NULL;
 }
@@ -378,21 +345,15 @@ const char *
 TestHasNextAtBeginning
 ( void )
 {
-  const List *list;
   ListConstIterator *iterator;
 
-  list = BuildList();
-  if( !list )
-    return "could not build a List";
-
-  iterator = CBeginList( list );
+  iterator = CBeginList( common_list );
   if( !iterator )
     return "could not build a ListConstIterator";
 
   if( !ListConstIteratorHasNext( iterator ) )
     return "a ListConstIterator at the beginning of a List returned false";
 
-  DestroyList( list );
   DestroyListConstIterator( iterator );
 
   return NULL;
@@ -402,21 +363,15 @@ const char *
 TestHasNextAtEnd
 ( void )
 {
-  const List *list;
   ListConstIterator *iterator;
 
-  list = BuildList();
-  if( !list )
-    return "could not build a List";
-
-  iterator = CEndList( list );
+  iterator = CEndList( common_list );
   if( !iterator )
     return "could not build a ListConstIterator";
 
   if( ListConstIteratorHasNext( iterator ) )
     return "a ListConstIterator at the end of a List returned true";
 
-  DestroyList( list );
   DestroyListConstIterator( iterator );
 
   return NULL;
@@ -426,14 +381,9 @@ const char *
 TestHasNextAtMiddle
 ( void )
 {
-  const List *list;
   ListConstIterator *iterator;
 
-  list = BuildList();
-  if( !list )
-    return "could not build a List";
-
-  iterator = CBeginList( list );
+  iterator = CBeginList( common_list );
   if( !iterator )
     return "could not build a ListConstIterator";
 
@@ -444,7 +394,6 @@ TestHasNextAtMiddle
   if( !ListConstIteratorHasNext( iterator ) )
     return "a ListConstIterator in the middle of a List returned false";
 
-  DestroyList( list );
   DestroyListConstIterator( iterator );
 
   return NULL;
@@ -488,21 +437,15 @@ const char *
 TestHasPreviousAtBeginning
 ( void )
 {
-  const List *list;
   ListConstIterator *iterator;
 
-  list = BuildList();
-  if( !list )
-    return "could not build a List";
-
-  iterator = CBeginList( list );
+  iterator = CBeginList( common_list );
   if( !iterator )
     return "could not build a ListConstIterator";
 
   if( ListConstIteratorHasPrevious( iterator ) )
     return "a ListConstIterator at the beginning of a List returned true";
 
-  DestroyList( list );
   DestroyListConstIterator( iterator );
 
   return NULL;
@@ -512,21 +455,15 @@ const char *
 TestHasPreviousAtEnd
 ( void )
 {
-  const List *list;
   ListConstIterator *iterator;
 
-  list = BuildList();
-  if( !list )
-    return "could not build a List";
-
-  iterator = CEndList( list );
+  iterator = CEndList( common_list );
   if( !iterator )
     return "could not build a ListConstIterator";
 
   if( !ListConstIteratorHasPrevious( iterator ) )
     return "a ListConstIterator at the end of a List returned false";
 
-  DestroyList( list );
   DestroyListConstIterator( iterator );
 
   return NULL;
@@ -536,14 +473,9 @@ const char *
 TestHasPreviousAtMiddle
 ( void )
 {
-  const List *list;
   ListConstIterator *iterator;
 
-  list = BuildList();
-  if( !list )
-    return "could not build a List";
-
-  iterator = CBeginList( list );
+  iterator = CBeginList( common_list );
   if( !iterator )
     return "could not build a ListConstIterator";
 
@@ -554,7 +486,6 @@ TestHasPreviousAtMiddle
   if( !ListConstIteratorHasPrevious( iterator ) )
     return "a ListConstIterator in the middle of a List returned false";
 
-  DestroyList( list );
   DestroyListConstIterator( iterator );
 
   return NULL;
@@ -598,21 +529,15 @@ const char *
 TestNextAtBeginning
 ( void )
 {
-  const List *list;
   ListConstIterator *iterator;
 
-  list = BuildList();
-  if( !list )
-    return "could not build a List";
-
-  iterator = CBeginList( list );
+  iterator = CBeginList( common_list );
   if( !iterator )
     return "could not build a ListConstIterator";
 
-  if( NextInListConstIterator( iterator ) != ListFront( list ) )
+  if( NextInListConstIterator( iterator ) != ListFront( common_list ) )
     return "the first element in the List was not returned by the first call to NextInListConstIterator";
 
-  DestroyList( list );
   DestroyListConstIterator( iterator );
 
   return NULL;
@@ -622,21 +547,15 @@ const char *
 TestNextAtEnd
 ( void )
 {
-  const List *list;
   ListConstIterator *iterator;
 
-  list = BuildList();
-  if( !list )
-    return "could not build a List";
-
-  iterator = CEndList( list );
+  iterator = CEndList( common_list );
   if( !iterator )
     return "could not build a ListConstIterator";
 
   if( NextInListConstIterator( iterator ) )
     return "a non-NULL value was returned by a ListConstIterator at the end of a List";
 
-  DestroyList( list );
   DestroyListConstIterator( iterator );
 
   return NULL;
@@ -646,15 +565,10 @@ const char *
 TestNextAtMiddle
 ( void )
 {
-  const List *list;
   ListConstIterator *iterator;
   const void *element;
 
-  list = BuildList();
-  if( !list )
-    return "could not build a List";
-
-  iterator = CBeginList( list );
+  iterator = CBeginList( common_list );
   if( !iterator )
     return "could not build a ListConstIterator";
 
@@ -693,7 +607,6 @@ TestNextAtMiddle
     return "the List did not have a seventh element";
   ASSERT_STRINGS_EQUAL( "strings!", element, "the seventh element was not returned by the seventh call" )
 
-  DestroyList( list );
   DestroyListConstIterator( iterator );
 
   return NULL;
@@ -737,21 +650,15 @@ const char *
 TestPreviousAtBeginning
 ( void )
 {
-  const List *list;
   ListConstIterator *iterator;
 
-  list = BuildList();
-  if( !list )
-    return "could not build a List";
-
-  iterator = CBeginList( list );
+  iterator = CBeginList( common_list );
   if( !iterator )
     return "could not build a ListConstIterator";
 
   if( PreviousInListConstIterator( iterator ) != NULL )
     return "a non-NULL value was returned by the first call to PreviousInListConstIterator";
 
-  DestroyList( list );
   DestroyListConstIterator( iterator );
 
   return NULL;
@@ -761,21 +668,15 @@ const char *
 TestPreviousAtEnd
 ( void )
 {
-  const List *list;
   ListConstIterator *iterator;
 
-  list = BuildList();
-  if( !list )
-    return "could not build a List";
-
-  iterator = CEndList( list );
+  iterator = CEndList( common_list );
   if( !iterator )
     return "could not build a ListConstIterator";
 
-  if( PreviousInListConstIterator( iterator ) != ListBack( list ) )
+  if( PreviousInListConstIterator( iterator ) != ListBack( common_list ) )
     return "the last element was not returned by a ListConstIterator at the end of a List";
 
-  DestroyList( list );
   DestroyListConstIterator( iterator );
 
   return NULL;
@@ -785,15 +686,10 @@ const char *
 TestPreviousAtMiddle
 ( void )
 {
-  const List *list;
   ListConstIterator *iterator;
   const void *element;
 
-  list = BuildList();
-  if( !list )
-    return "could not build a List";
-
-  iterator = CEndList( list );
+  iterator = CEndList( common_list );
   if( !iterator )
     return "could not build a ListConstIterator";
 
@@ -832,7 +728,6 @@ TestPreviousAtMiddle
     return "the List did not have a seventh to last element";
   ASSERT_STRINGS_EQUAL( "This", element, "the seventh to last element was not returned by the seventh call" )
 
-  DestroyList( list );
   DestroyListConstIterator( iterator );
 
   return NULL;
