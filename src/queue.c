@@ -118,7 +118,7 @@ QueueContains
 
   current = queue->front;
   while( current != queue->back ){
-    if( queue->elements[current] == value )
+    if( queue->elements[current] == element )
       count++;
 
     current = ( current + 1 ) % queue->capacity;
