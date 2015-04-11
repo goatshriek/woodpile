@@ -68,7 +68,7 @@ GetStackSize
  *
  * @param size the capacity for the stack to have
  *
- * @retun a new Stack of the given size, or NULL if an error occurred
+ * @return a new Stack of the given size, or NULL if an error occurred
  */
 Stack *
 NewSizedStack

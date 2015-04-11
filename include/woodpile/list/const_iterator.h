@@ -54,7 +54,7 @@ CEndList
  * Creates a copy of a ListConstIterator. The position of the copy will be the
  * same as the original at the time of the copy.
  *
- * @param original the ListConstIterator to copy
+ * @param iterator the ListConstIterator to copy
  *
  * @return a copy of the original ListConstIterator
  */

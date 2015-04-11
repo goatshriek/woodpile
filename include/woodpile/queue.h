@@ -120,7 +120,7 @@ QueueCapacity
  */
 size_t
 QueueContains
-( const Queue *queue, const void *value );
+( const Queue *queue, const void *element );
 
 /**
  * Checks a Queue to see if it's empty.

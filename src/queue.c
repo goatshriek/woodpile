@@ -109,7 +109,7 @@ PushToQueue
 
 size_t
 QueueContains
-( const Queue *queue, const void *value )
+( const Queue *queue, const void *element )
 {
   size_t count = 0, current;
 
