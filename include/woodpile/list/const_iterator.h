@@ -3,12 +3,13 @@
 
 /**
  * @file
- * Declaration and functions for the ListConstIterator structure.
+ * ListConstIterator declaration and functions
  */
 
 #include <woodpile/list.h>
 
 /**
+ * @struct ListConstIterator
  * The ListConstIterator provides a simple iterator for a List structure that
  * is guaranteed not to change the order or composition of the List, or any of
  * the elements the List contains.

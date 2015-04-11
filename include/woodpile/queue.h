@@ -3,10 +3,11 @@
 
 /**
  * @file
- * Declaration and functions for the Queue container.
+ * Queue declaration and functions
  */
 
 /**
+ * @struct Queue
  * The Queue data structure is a simple array-based implementation of a First In
  * First Out (FIFO) structure. Elements can only be pushed to the back of the
  * Queue and pulled from the front.

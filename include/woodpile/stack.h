@@ -3,10 +3,11 @@
 
 /**
  * @file
- * Declaration and functions for the Stack container.
+ * Stack declaration and functions
  */
 
 /**
+ * @struct Stack
  * The Stack data structure is a simple array-based implementation of a typical
  * Last In First Out (LIFO) Stack structure, where elements can be pushed onto
  * the top or popped off of it.

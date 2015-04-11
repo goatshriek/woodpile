@@ -3,7 +3,7 @@
 
 /**
  * @file
- * Tests for the List container.
+ * List tests
  */
 
 /**

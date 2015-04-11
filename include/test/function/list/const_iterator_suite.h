@@ -3,7 +3,7 @@
 
 /**
  * @file
- * Tests for the ListConstIterator functions.
+ * ListConstIterator tests
  */
 
 /**

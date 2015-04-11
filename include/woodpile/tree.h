@@ -3,7 +3,7 @@
 
 /**
  * @file
- * Declaration and functions for the Tree container.
+ * Tree declaration and functions
  */
 
 struct Tree;

@@ -1,6 +1,11 @@
 #ifndef __WOODPILE_STATIC_LIST_H
 #define __WOODPILE_STATIC_LIST_H
 
+/**
+ * @file
+ * List definition
+ */
+
 #include <stdint.h>
 #include <woodpile/list.h>
 

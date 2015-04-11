@@ -3,10 +3,11 @@
 
 /**
  * @file
- * Declaration and functions for the List container.
+ * List declaration and functions
  */
 
 /**
+ * @struct List
  * The List data structure is a simple doubly linked list implementation.
  *
  * The List is optimized for insertions and deletions at either end, and

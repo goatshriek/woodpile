@@ -3,7 +3,7 @@
 
 /**
  * @file
- * The definition of the ListConstIterator structure.
+ * ListConstIterator definition
  */
 
 #include <woodpile/list.h>

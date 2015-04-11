@@ -3,7 +3,7 @@
 
 /**
  * @file
- * Declaration and functions for the Dictionary container.
+ * Dictionary declaration and functions
  */
 
 struct Dictionary;

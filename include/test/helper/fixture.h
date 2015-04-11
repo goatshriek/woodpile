@@ -3,7 +3,7 @@
 
 /**
  * @file
- * Functions to assist with testing.
+ * Functions to use as function pointers
  */
 
 /**

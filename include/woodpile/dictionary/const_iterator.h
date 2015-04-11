@@ -3,7 +3,7 @@
 
 /**
  * @file
- * Declaration and functions for the DictionaryConstIterator structure.
+ * DictionaryConstIterator declaration and functions
  */
 
 #include <woodpile/dictionary.h>

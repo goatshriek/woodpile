@@ -3,7 +3,7 @@
 
 /**
  * @file
- * Declaration and functions for the DictionaryIterator structure.
+ * DictionaryIterator declaration and functions
  */
 
 #include <woodpile/dictionary.h>

@@ -1,6 +1,11 @@
 #ifndef __WOODPILE_STATIC_QUEUE_H
 #define __WOODPILE_STATIC_QUEUE_H
 
+/**
+ * @file
+ * Queue definition
+ */
+
 /** the Queue container */
 struct Queue {
   size_t back; /**< the index of the back element + 1 */

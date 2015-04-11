@@ -3,12 +3,13 @@
 
 /**
  * @file
- * Declaration and functions for the ListIterator structure.
+ * ListIterator declaration and functions
  */
 
 #include <woodpile/list.h>
 
 /**
+ * @struct ListIterator
  * The ListIterator provides a simple iterator for a List structure. The list
  * may also have elements added to and/or removed from it while being iterated
  * through.

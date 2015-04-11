@@ -3,7 +3,7 @@
 
 /**
  * @file
- * Functions for testing DictionaryConstIterators and the related functions.
+ * DictionaryConstIterator tests
  */
 
 /**

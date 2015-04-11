@@ -1,6 +1,11 @@
 #ifndef __WOODPILE_TEST_INCLUDE_CHECKER_H
 #define __WOODPILE_TEST_INCLUDE_CHECKER_H
 
+/**
+ * @file
+ * Macros for checking values for accuracy
+ */
+
 #include <stdlib.h>
 
 #define ASSERT_STRINGS_EQUAL( expected, actual, message )                      \

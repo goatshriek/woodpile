@@ -3,7 +3,7 @@
 
 /**
  * @file
- * Tests for the Queue container.
+ * Queue tests
  */
 
 /**

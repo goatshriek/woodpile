@@ -3,7 +3,7 @@
 
 /**
  * @file
- * Functions for building test instances of containers and their iterators.
+ * Functions for building test instances
  */
 
 #include <woodpile/dictionary.h>
