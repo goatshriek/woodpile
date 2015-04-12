@@ -43,28 +43,6 @@ DestroyStack
 ( Stack *stack );
 
 /**
- * Gets the current capacity of the Stack.
- *
- * @param stack the Stack to get the capacity of
- *
- * @return the current capacity of the Stack
- */
-size_t
-GetStackCapacity
-( const Stack *stack );
-
-/**
- * Gets the number of elements in the Stack. An empty Stack will return 0.
- *
- * @param stack the Stack to get the size of
- *
- * @return the number of elements in the Stack
- */
-size_t
-GetStackSize
-( const Stack *stack );
-
-/**
  * Creates a new Stack with the provided capacity.
  *
  * @param size the capacity for the stack to have
@@ -123,7 +101,7 @@ PushToStack
 ( Stack *stack, void *value );
 
 /**
- * Resizes the given Stack to the specified capacity. If the given capacity is 
+ * Resizes the given Stack to the specified capacity. If the given capacity is
  * less than the current number of elements, then the extra items at the top of
  * the Stack (those most recently pushed) are discarded.
  *
@@ -137,11 +115,22 @@ SetStackCapacity
 ( Stack *stack, size_t capacity );
 
 /**
+ * Gets the current capacity of the Stack.
+ *
+ * @param stack the Stack to get the capacity of
+ *
+ * @return the current capacity of the Stack
+ */
+size_t
+StackCapacity
+( const Stack *stack );
+
+/**
  * Searches a Stack for an element.
  *
  * Note that the element is identified using a pointer; if two structures are
  * considered equal but are located at different addresses then they are not
- * considered equal by this function. 
+ * considered equal by this function.
  *
  * @param stack the Stack to search
  * @param element the element to search for
@@ -162,6 +151,17 @@ StackContains
  */
 unsigned short
 StackIsEmpty
+( const Stack *stack );
+
+/**
+ * Gets the number of elements in the Stack. An empty Stack will return 0.
+ *
+ * @param stack the Stack to get the size of
+ *
+ * @return the number of elements in the Stack
+ */
+size_t
+StackSize
 ( const Stack *stack );
 
 /**

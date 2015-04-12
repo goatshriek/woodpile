@@ -68,7 +68,7 @@ CopyList
 
   if( !list )
     return NULL;
-  
+
   copy = NewList();
   node = list->first;
   while( node ){
@@ -94,7 +94,7 @@ DestroyList
   current = list->first;
   while( current ){
     free( ( void * ) previous );
- 
+
     next = XORNODES( previous, current->neighbors );
     previous = current;
     current = next;
@@ -154,7 +154,6 @@ ListGet
 {
   Node *current, *next, *previous=NULL, *start;
   size_t i, steps;
-  void *element;
 
   if( ListIsEmpty( list ) )
     return NULL;
@@ -310,12 +309,11 @@ PointerToString
 ( const void *pointer )
 {
   char *str;
-  size_t size;
 
   str = malloc( sizeof( char ) * 100 );
   if( !str )
     return NULL;
-  
+
   sprintf( str, "%p", pointer );
 
   return str;

@@ -43,6 +43,13 @@ DestroyStack
 }
 
 Stack *
+NewSizedStack
+( size_t size )
+{
+  return NULL;
+}
+
+Stack *
 NewStack
 ( void )
 {
@@ -97,6 +104,30 @@ PushToStack
   return stack;
 }
 
+Stack *
+SetStackCapacity
+( Stack *stack, size_t capacity )
+{
+  return NULL;
+}
+
+size_t
+StackCapacity
+( const Stack *stack )
+{
+  if( !stack )
+    return 0;
+
+  return stack->capacity;
+}
+
+size_t
+StackContains
+( const Stack *stack, const void *element )
+{
+  return 0;
+}
+
 unsigned short
 StackIsEmpty
 ( const Stack *stack )
@@ -104,7 +135,7 @@ StackIsEmpty
   return stack == NULL || stack->top == 0;
 }
 
-unsigned
+size_t
 StackSize
 ( const Stack *stack )
 {
@@ -112,6 +143,13 @@ StackSize
     return 0;
 
   return stack->top;
+}
+
+char *
+StackToString
+( const Stack *stack, char * ( *element_to_string )( const void * ) )
+{
+  return NULL;
 }
 
 static

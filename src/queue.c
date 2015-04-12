@@ -62,6 +62,13 @@ NewQueue
   return queue;
 }
 
+Queue *
+NewSizedQueue
+( size_t capacity )
+{
+  return NULL;
+}
+
 void *
 PeekAtQueue
 ( const Queue *queue )
@@ -92,7 +99,7 @@ Queue *
 PushToQueue
 ( Queue *queue, void *element )
 {
-  unsigned new_back;
+  size_t new_back;
 
   if( !queue || !element )
     return NULL;
@@ -105,6 +112,13 @@ PushToQueue
   queue->back = new_back;
 
   return queue;
+}
+
+size_t
+QueueCapacity
+( const Queue *queue )
+{
+  return 0;
 }
 
 size_t
@@ -146,6 +160,13 @@ QueueSize
     return queue->back + queue->capacity - queue->front;
 }
 
+char *
+QueueToString
+( const Queue *queue, char * ( *element_to_string )( const void * ) )
+{
+  return NULL;
+}
+
 void *
 RemoveFromQueue
 ( Queue *queue, const void *value )
@@ -175,4 +196,18 @@ RemoveFromQueue
   }
 
   return NULL;
+}
+
+Queue *
+SetQueueCapacity
+( Queue *queue, size_t capacity )
+{
+  return NULL;
+}
+
+size_t
+TrimQueueToSize
+( Queue *queue )
+{
+  return 0;
 }

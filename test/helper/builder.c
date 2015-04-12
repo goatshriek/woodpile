@@ -4,6 +4,20 @@
 
 #include "test/helper/builder.h"
 
+Dictionary *
+BuildDictionary
+( void )
+{
+  return NULL;
+}
+
+DictionaryConstIterator *
+BuildDictionaryConstIterator
+( void )
+{
+  return NULL;
+}
+
 List *
 BuildList
 ( void )
@@ -28,7 +42,7 @@ BuildQueue
   Queue *queue;
 
   queue = NewQueue();
-  
+
   PushToQueue( queue, "front of Queue" );
   PushToQueue( queue, "test string" );
   PushToQueue( queue, "middle string" );
@@ -36,4 +50,18 @@ BuildQueue
   PushToQueue( queue, "end of Queue" );
 
   return queue;
+}
+
+Stack *
+BuildStack
+( void )
+{
+  return NULL;
+}
+
+Tree *
+BuildTree
+( void )
+{
+  return NULL;
 }
