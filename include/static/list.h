@@ -35,16 +35,4 @@ struct Node {
   void *element; /**< the element held by the Node */
 };
 
-/**
- * Creates a string holding the address pointed to by the pointer.
- *
- * @param pointer the pointer to represent in a string
- *
- * @return a char buffer holding a string representation of the pointer
- */
-static
-char *
-PointerToString
-( const void *pointer );
-
 #endif

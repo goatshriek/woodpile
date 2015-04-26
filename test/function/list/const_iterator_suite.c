@@ -69,7 +69,6 @@ TestCBeginWithEmptyList
 {
   const List *list;
   ListConstIterator *iterator;
-  const void *element;
 
   list = NewList();
   if( !list )
@@ -131,7 +130,6 @@ TestCEndWithEmptyList
 {
   const List *list;
   ListConstIterator *iterator;
-  const void *element;
 
   list = NewList();
   if( !list )
@@ -247,7 +245,7 @@ TestCopyDistinct
 
   iterator = CBeginList( common_list );
   if( !iterator )
-    return "could not build a ListConstIterator"; 
+    return "could not build a ListConstIterator";
 
   copy = CopyListConstIterator( iterator );
   if( !copy )
@@ -277,7 +275,7 @@ TestCopyDistinct
 
   DestroyListConstIterator( copy );
   DestroyListConstIterator( iterator );
- 
+
   return NULL;
 }
 

@@ -4,6 +4,7 @@
 
 #include <woodpile/list.h>
 
+#include "lib/str.h"
 #include "test/function/list_suite.h"
 #include "test/helper.h"
 
@@ -169,7 +170,7 @@ TestAppendNullElement
 ( void )
 {
   List *list;
-  
+
   if( AppendToList( NULL, NULL ) != NULL )
     return "a non-NULL value was returned when appending NULL to a NULL List";
 
@@ -191,7 +192,7 @@ TestAppendToEmptyList
 {
   List *list;
   void *element = "test value";
-  
+
   list = NewList();
   if( !list )
     return "could not build a List";
@@ -434,7 +435,6 @@ TestCopyContents
 ( void )
 {
   List *copy, *list;
-  const void *copy_element, *list_element;
   unsigned i, size;
 
   list = BuildList();
@@ -515,7 +515,7 @@ TestDestroyNullList
 ( void )
 {
   DestroyList( NULL );
-  
+
   return NULL;
 }
 
@@ -524,7 +524,7 @@ TestDestroyPopulatedList
 ( void )
 {
   const List *list;
-  
+
   list = BuildList();
   if( !list )
     return "could not build a List";
@@ -626,7 +626,7 @@ TestGetNegativeIndex
 {
   const List *list;
   const void *element;
-  
+
   list = BuildList();
   if( !list )
     return "could not build a List";
@@ -685,7 +685,7 @@ TestGetNegativeIndexWrap
 
   size = ListSize( list );
 
-  if( ListGet( list, -( size + 2 ) ) != ListGet( list, -2 ) )
+  if( ListGet( list, -( (int) size + 2 ) ) != ListGet( list, -2 ) )
     return "a negative index did not correctly wrap around the List";
 
   DestroyList( list );
@@ -699,7 +699,7 @@ TestGetPositiveIndex
 {
   const List *list;
   const void *element;
-  
+
   list = BuildList();
   if( !list )
     return "could not build a List";
@@ -844,7 +844,7 @@ TestPrependNullElement
 ( void )
 {
   List *list;
-  
+
   if( PrependToList( NULL, NULL ) != NULL )
     return "a non-NULL value was returned when prepending NULL to a NULL List";
 
@@ -866,7 +866,7 @@ TestPrependToEmptyList
 {
   List *list;
   void *element = "test value";
-  
+
   list = NewList();
   if( !list )
     return "could not build a List";
@@ -1014,7 +1014,7 @@ TestToStringWithNullFunction
 
   size = ListSize( list );
   for( i = 0; i < size; i++ ){
-    sprintf( pointer, "%p", ListGet( list, i ) );
+    strprint( pointer, 100, "%p", ListGet( list, i ) );
     if( !strstr( str, pointer ) )
       return "the string did not contain the pointer address of one of the elements";
   }

@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "lib/str.h"
 #include "test/helper/fixture.h"
 
 char *
@@ -16,8 +17,7 @@ ElementToString
   if( !str )
     return NULL;
 
-  strncpy( str, element, element_length );
-  str[element_length] = '\0';
+  strcopy( str, element, element_length + 1 );
 
   return str;
 }

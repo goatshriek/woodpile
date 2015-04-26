@@ -3,7 +3,7 @@ AUTOMAKE_OPTIONS = -Wall subdir-objects parallel-tests color-tests
 ACLOCAL_AMFLAGS = -I m4
 
 vpath %.h $(top_srcdir)/../../include
-vpath %.c $(top_srcdir)/../../src $(top_srcdir)/../../test
+vpath %.c $(top_srcdir)/../../lib $(top_srcdir)/../../src $(top_srcdir)/../../test
 
 # header files
 include_HEADERS = woodpile.h
@@ -24,7 +24,8 @@ woodpile_list_includedir = $(includedir)/woodpile/list
 woodpile_list_include_HEADERS = woodpile/list/const_iterator.h \
                                 woodpile/list/iterator.h
 
-noinst_HEADERS = static/list.h \
+noinst_HEADERS = lib/str.h \
+                 static/list.h \
                  static/list/const_iterator.h \
                  static/list/iterator.h \
                  static/queue.h \
@@ -45,7 +46,8 @@ AM_CFLAGS = -g -I $(top_srcdir)/../../include
 
 lib_LTLIBRARIES = libwoodpile.la
 
-libwoodpile_la_SOURCES = list.c \
+libwoodpile_la_SOURCES = str.c \
+                         list.c \
                          list/const_iterator.c \
                          list/iterator.c \
                          queue.c \

@@ -4,6 +4,7 @@
 
 #include <woodpile/list.h>
 
+#include "lib/str.h"
 #include "static/list.h"
 
 List *
@@ -223,7 +224,7 @@ ListToString
     return NULL;
 
   if( !element_to_string )
-    element_to_string = PointerToString;
+    element_to_string = strpointer;
 
   str = malloc( sizeof( char ) * str_capacity );
   if( !str )
@@ -240,7 +241,7 @@ ListToString
       str = realloc( str, str_capacity );
     }
 
-    strncpy( str + str_length, element, element_length );
+    memcpy( str + str_length, element, element_length * sizeof( char ) );
     str_length += element_length;
     free( ( void * ) element );
 
@@ -301,20 +302,4 @@ PrependToList
   }
 
   return list;
-}
-
-static
-char *
-PointerToString
-( const void *pointer )
-{
-  char *str;
-
-  str = malloc( sizeof( char ) * 100 );
-  if( !str )
-    return NULL;
-
-  sprintf( str, "%p", pointer );
-
-  return str;
 }

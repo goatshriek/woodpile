@@ -262,7 +262,6 @@ TestBeginWithEmptyList
 {
   List *list;
   ListIterator *iterator;
-  const void *element;
 
   list = NewList();
   if( !list )
@@ -333,7 +332,7 @@ TestCopy
 
   list = BuildList();
   if( !list )
-    return "could not build a List"; 
+    return "could not build a List";
 
   iterator = BeginList( list );
   if( !iterator )
@@ -401,7 +400,7 @@ TestCopyDistinct
 
   iterator = BeginList( list );
   if( !iterator )
-    return "could not build a ListIterator"; 
+    return "could not build a ListIterator";
 
   copy = CopyListIterator( iterator );
   if( !copy )
@@ -432,7 +431,7 @@ TestCopyDistinct
   DestroyList( list );
   DestroyListIterator( copy );
   DestroyListIterator( iterator );
- 
+
   return NULL;
 }
 
@@ -515,7 +514,6 @@ TestEndWithEmptyList
 {
   List *list;
   ListIterator *iterator;
-  const void *element;
 
   list = NewList();
   if( !list )
@@ -1263,7 +1261,7 @@ TestRemoveAfterRemove
 
   if( ListContains( list, removed ) )
     return "the removed element was no longer removed from the List";
- 
+
   if( ListFront( list ) != element )
     return "the front element of the List changed after the second call to RemoveFromListIterator";
 
