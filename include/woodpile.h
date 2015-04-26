@@ -3,7 +3,7 @@
 
 /**
  * @file
- * Configuration and version information of woodpile
+ * Configuration and version information
  */
 
 #include <woodpile/config/check.h>

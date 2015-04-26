@@ -6,6 +6,8 @@
  * Functions for working with strings.
  */
 
+#include <stdarg.h>
+
 /**
  * Copies source to destination, to a maximum of length characters (including
  * the NULL terminating character). Source is guaranteed to be NULL terminated.

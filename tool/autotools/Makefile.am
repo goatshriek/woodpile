@@ -42,7 +42,7 @@ noinst_HEADERS = lib/str.h \
                  test/helper/runner.h
 
 # source files
-AM_CFLAGS = -g -I $(top_srcdir)/../../include
+AM_CFLAGS = -g -I $(top_srcdir)/../../include -I ./include
 
 lib_LTLIBRARIES = libwoodpile.la
 

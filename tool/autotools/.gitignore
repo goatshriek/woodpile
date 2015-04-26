@@ -3,6 +3,7 @@ build/
 config/
 m4/
 aclocal.m4
+check.h.in
 check.h.in~
 configure
 Makefile
