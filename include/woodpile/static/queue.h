@@ -116,9 +116,9 @@ PushToStaticQueue
  * @return the current capacity of the Queue
  */
 size_t
-QueueStaticCapacity
+StaticQueueCapacity
 ( const StaticQueue *queue );
-#define SQueueCapacity QueueStaticCapacity
+#define SQueueCapacity StaticQueueCapacity
 
 /**
  * Searches a Queue for an element.

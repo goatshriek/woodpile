@@ -46,10 +46,10 @@ WOODPILEOBJS = $(OUTDIR)\lib\str.obj \
 $(OUTDIR)\lib\str.obj: $(OUTDIR) $(LIBDIR)\str.c
   $(cc) $(WOODPILECFLAGS) /Fo$(OUTDIR)\lib\ /Fd$(OUTDIR)\lib.pdb $(LIBDIR)\str.c
 
-/$(OUTDIR)\src\dynamic\list.obj: $(OUTDIR) $(SRCDIR)\list.c
-  $(cc) $(WOODPILECFLAGS) /Fo$(OUTDIR)\src\dynamic\ /Fd$(OUTDIR)\woodpile.pdb $(SRCDIR)\list.c
+$(OUTDIR)\src\dynamic\list.obj: $(OUTDIR) $(SRCDIR)\dynamic\list.c
+  $(cc) $(WOODPILECFLAGS) /Fo$(OUTDIR)\src\dynamic\ /Fd$(OUTDIR)\woodpile.pdb $(SRCDIR)\dynamic\list.c
   
-$(OUTDIR)\src\dynamic\list\const_iterator.obj: $(OUTDIR) $(SRCDIR)\list\const_iterator.c
+$(OUTDIR)\src\dynamic\list\const_iterator.obj: $(OUTDIR) $(SRCDIR)\dynamic\list\const_iterator.c
   $(cc) $(WOODPILECFLAGS) /Fo$(OUTDIR)\src\dynamic\list\ /Fd$(OUTDIR)\woodpile.pdb $(SRCDIR)\dynamic\list\const_iterator.c
   
 $(OUTDIR)\src\dynamic\list\iterator.obj: $(OUTDIR) $(SRCDIR)\dynamic\list\iterator.c
@@ -90,7 +90,7 @@ TESTEXES = $(OUTDIR)\test\function\dynamic\list_suite.exe \
 $(OUTDIR)\test\function\dynamic\list_suite.exe: $(OUTDIR)\helper.dll $(OUTDIR)\test\function\dynamic\list_suite.obj $(OUTDIR)\lib\str.obj
   $(link) $(WOODPILELFLAGS) /out:$(OUTDIR)\test\function\dynamic\list_suite.exe $(OUTDIR)\woodpile.lib $(OUTDIR)\helper.lib $(OUTDIR)\test\function\dynamic\list_suite.obj $(OUTDIR)\lib\str.obj
 
-$(OUTDIR)\test\function\list\dynamic\const_iterator_suite.exe: $(OUTDIR)\helper.dll $(OUTDIR)\test\function\dynamic\list\const_iterator_suite.obj
+$(OUTDIR)\test\function\dynamic\list\const_iterator_suite.exe: $(OUTDIR)\helper.dll $(OUTDIR)\test\function\dynamic\list\const_iterator_suite.obj
   $(link) $(WOODPILELFLAGS) /out:$(OUTDIR)\test\function\dynamic\list\const_iterator_suite.exe $(OUTDIR)\woodpile.lib $(OUTDIR)\helper.lib  $(OUTDIR)\test\function\dynamic\list\const_iterator_suite.obj
 
 $(OUTDIR)\test\function\dynamic\list\iterator_suite.exe: $(OUTDIR)\helper.dll $(OUTDIR)\test\function\dynamic\list\iterator_suite.obj
@@ -121,8 +121,8 @@ $(OUTDIR)\test\function\dynamic\list_suite.obj: $(OUTDIR) $(TESTDIR)\function\dy
 $(OUTDIR)\test\function\dynamic\list\const_iterator_suite.obj: $(OUTDIR) $(TESTDIR)\function\dynamic\list\const_iterator_suite.c
   $(cc) $(WOODPILECFLAGS) /Fo$(OUTDIR)\test\function\dynamic\list\ /Fd$(OUTDIR)\test\function\dynamic\list\const_iterator.pdb $(TESTDIR)\function\dynamic\list\const_iterator_suite.c
   
-$(OUTDIR)\test\function\static\list\iterator_suite.obj: $(OUTDIR) $(TESTDIR)\function\static\list\iterator_suite.c
-  $(cc) $(WOODPILECFLAGS) /Fo$(OUTDIR)\test\function\static\list\ /Fd$(OUTDIR)\test\function\static\list\iterator.pdb $(TESTDIR)\function\static\list\iterator_suite.c
+$(OUTDIR)\test\function\dynamic\list\iterator_suite.obj: $(OUTDIR) $(TESTDIR)\function\dynamic\list\iterator_suite.c
+  $(cc) $(WOODPILECFLAGS) /Fo$(OUTDIR)\test\function\dynamic\list\ /Fd$(OUTDIR)\test\function\dynamic\list\iterator.pdb $(TESTDIR)\function\dynamic\list\iterator_suite.c
   
 $(OUTDIR)\test\function\static\queue_suite.obj: $(OUTDIR) $(TESTDIR)\function\static\queue_suite.c
   $(cc) $(WOODPILECFLAGS) /Fo$(OUTDIR)\test\function\static\ /Fd$(OUTDIR)\test\function\static\queue_suite.pdb $(TESTDIR)\function\static\queue_suite.c

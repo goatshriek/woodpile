@@ -30,10 +30,10 @@ typedef struct StaticStack SStack;
  *
  * @return a copy of the original Stack or NULL on failure
  */
-SStack *
+StaticStack *
 CopyStaticStack
-( const SStack *stack );
-#define SStackCopy CopySaticStack
+( const StaticStack *stack );
+#define SStackCopy CopyStaticStack
 
 /**
  * Destroys a Stack. Does not affect the elements stored in the Stack.
