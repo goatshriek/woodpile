@@ -1,66 +1,40 @@
 #include <stdlib.h>
 
-#include <woodpile/list.h>
+#include <woodpile/dynamic/list.h>
+#include <woodpile/static/queue.h>
 
 #include "test/helper/builder.h"
 
-Dictionary *
-BuildDictionary
+DList *
+BuildDList
 ( void )
 {
-  return NULL;
+  DList *list = DListNew();
+
+  DListAppend( list, "This" );
+  DListAppend( list, "is" );
+  DListAppend( list, "a" );
+  DListAppend( list, "test" );
+  DListAppend( list, "List" );
+  DListAppend( list, "o'" );
+  return DListAppend( list, "strings!" );
 }
 
-DictionaryConstIterator *
-BuildDictionaryConstIterator
+SQueue *
+BuildSQueue
 ( void )
 {
-  return NULL;
+  SQueue *queue = SQueueNew();
+
+  SQueuePush( queue, "front of Queue" );
+  SQueuePush( queue, "test string" );
+  SQueuePush( queue, "middle string" );
+  SQueuePush( queue, "second test string" );
+  return SQueuePush( queue, "end of Queue" );
 }
 
-List *
-BuildList
-( void )
-{
-  List *list;
-
-  list = NewList();
-
-  AppendToList( list, "This" );
-  AppendToList( list, "is" );
-  AppendToList( list, "a" );
-  AppendToList( list, "test" );
-  AppendToList( list, "List" );
-  AppendToList( list, "o'" );
-  return AppendToList( list, "strings!" );
-}
-
-Queue *
-BuildQueue
-( void )
-{
-  Queue *queue;
-
-  queue = NewQueue();
-
-  PushToQueue( queue, "front of Queue" );
-  PushToQueue( queue, "test string" );
-  PushToQueue( queue, "middle string" );
-  PushToQueue( queue, "second test string" );
-  PushToQueue( queue, "end of Queue" );
-
-  return queue;
-}
-
-Stack *
-BuildStack
-( void )
-{
-  return NULL;
-}
-
-Tree *
-BuildTree
+SStack *
+BuildSStack
 ( void )
 {
   return NULL;

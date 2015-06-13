@@ -6,37 +6,12 @@
  * Functions for building test instances
  */
 
-#include <woodpile/dictionary.h>
-#include <woodpile/dictionary/const_iterator.h>
-#include <woodpile/dictionary/iterator.h>
-#include <woodpile/list.h>
-#include <woodpile/list/const_iterator.h>
-#include <woodpile/list/iterator.h>
-#include <woodpile/queue.h>
-#include <woodpile/stack.h>
-#include <woodpile/tree.h>
+#include <woodpile/dynamic/list.h>
+#include <woodpile/static/queue.h>
+#include <woodpile/static/stack.h>
 
 /**
- * Builds a new Dictionary. The Dictionary contains several strings.
- *
- * @return a new Dictionary or NULL on failure
- */
-Dictionary *
-BuildDictionary
-( void );
-
-/**
- * Builds a DictionaryConstIterator. The iterator is created for a new
- * Dictionary that is created using the BuildDictionary function.
- *
- * @return a new DictionaryConstIterator or NULL on failure
- */
-DictionaryConstIterator *
-BuildDictionaryConstIterator
-( void );
-
-/**
- * Creates a List. The List contains several strings.
+ * Creates a DynamicList. The DynamicList contains several strings.
  *
  * index | contents
  * ----------------
@@ -48,10 +23,10 @@ BuildDictionaryConstIterator
  *   5   | o'
  *   6   | strings!
  *
- * @return a new List or NULL on failure
+ * @return a new DynamicList or NULL on failure
  */
-List *
-BuildList
+DList *
+BuildDList
 ( void );
 
 /**
@@ -66,8 +41,8 @@ BuildList
  *
  * @return a new Queue or NULL on failure
  */
-Queue *
-BuildQueue
+SQueue *
+BuildSQueue
 ( void );
 
 /**
@@ -75,17 +50,8 @@ BuildQueue
  *
  * @return a new Stack or NULL on failure
  */
-Stack *
-BuildStack
-( void );
-
-/**
- * Creates a Tree. The Tree contains several strings.
- *
- * @return a new Tree or NULL on failure
- */
-Tree *
-BuildTree
+SStack *
+BuildSStack
 ( void );
 
 #endif

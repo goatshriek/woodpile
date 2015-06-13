@@ -10,31 +10,25 @@ include_HEADERS = woodpile.h
 
 woodpile_includedir = $(includedir)/woodpile
 
-woodpile_include_HEADERS = woodpile/list.h \
-                           woodpile/queue.h \
-                           woodpile/stack.h
+woodpile_include_HEADERS = woodpile/dynamic/list.h \
+                           woodpile/static/queue.h \
+                           woodpile/static/stack.h
 
-woodpile_dictionary_includedir = $(includedir)/woodpile/dictionary
+woodpile_list_includedir = $(includedir)/woodpile/dynamic/list
 
-woodpile_dictionary_include_HEADERS = woodpile/dictionary/const_iterator.h \
-                                      woodpile/dictionary/iterator.h
-
-woodpile_list_includedir = $(includedir)/woodpile/list
-
-woodpile_list_include_HEADERS = woodpile/list/const_iterator.h \
-                                woodpile/list/iterator.h
+woodpile_list_include_HEADERS = woodpile/dynamic/list/const_iterator.h \
+                                woodpile/dynamic/list/iterator.h
 
 noinst_HEADERS = lib/str.h \
-                 static/list.h \
-                 static/list/const_iterator.h \
-                 static/list/iterator.h \
-                 static/queue.h \
-                 static/stack.h \
-                 test/function/dictionary/const_iterator_suite.h \
-                 test/function/list_suite.h \
-                 test/function/list/const_iterator_suite.h \
-                 test/function/list/iterator_suite.h \
-                 test/function/queue_suite.h \
+                 private/dynamic/list.h \
+                 private/dynamic/list/const_iterator.h \
+                 private/dynamic/list/iterator.h \
+                 private/static/queue.h \
+                 private/static/stack.h \
+                 test/function/dynamic/list_suite.h \
+                 test/function/dynamic/list/const_iterator_suite.h \
+                 test/function/dynamic/list/iterator_suite.h \
+                 test/function/static/queue_suite.h \
                  test/helper.h \
                  test/helper/builder.h \
                  test/helper/checker.h \
@@ -46,20 +40,20 @@ AM_CFLAGS = -g -I $(top_srcdir)/../../include -I ./include
 
 lib_LTLIBRARIES = libwoodpile.la
 
-libwoodpile_la_SOURCES = str.c \
-                         list.c \
-                         list/const_iterator.c \
-                         list/iterator.c \
-                         queue.c \
-                         stack.c 
+libwoodpile_la_SOURCES = dynamic/list.c \
+                         dynamic/list/const_iterator.c \
+                         dynamic/list/iterator.c \
+                         static/queue.c \
+                         static/stack.c \
+                         str.c
 
 
 # test files
-check_PROGRAMS = test/function/list_suite \
-                 test/function/list/const_iterator_suite \
-                 test/function/list/iterator_suite \
-                 test/function/queue_suite \
-                 test/function/stack_suite
+check_PROGRAMS = test/function/dynamic/list_suite \
+                 test/function/dynamic/list/const_iterator_suite \
+                 test/function/dynamic/list/iterator_suite \
+                 test/function/static/queue_suite \
+                 test/function/static/stack_suite
 
 TESTS = $(check_PROGRAMS)
 
@@ -73,17 +67,17 @@ libhelper_la_LIBADD = libwoodpile.la
 test_libraries = libhelper.la \
                  libwoodpile.la
 
-test_function_list_suite_SOURCES = function/list_suite.c
-test_function_list_suite_LDADD = $(test_libraries)
+test_function_dynamic_list_suite_SOURCES = function/dynamic/list_suite.c
+test_function_dynamic_list_suite_LDADD = $(test_libraries)
 
-test_function_list_const_iterator_suite_SOURCES = function/list/const_iterator_suite.c
-test_function_list_const_iterator_suite_LDADD = $(test_libraries)
+test_function_dynamic_list_const_iterator_suite_SOURCES = function/dynamic/list/const_iterator_suite.c
+test_function_dynamic_list_const_iterator_suite_LDADD = $(test_libraries)
 
-test_function_list_iterator_suite_SOURCES = function/list/iterator_suite.c
-test_function_list_iterator_suite_LDADD = $(test_libraries)
+test_function_dynamic_list_iterator_suite_SOURCES = function/dynamic/list/iterator_suite.c
+test_function_dynamic_list_iterator_suite_LDADD = $(test_libraries)
 
-test_function_queue_suite_SOURCES = function/queue_suite.c
-test_function_queue_suite_LDADD = $(test_libraries)
+test_function_static_queue_suite_SOURCES = function/static/queue_suite.c
+test_function_static_queue_suite_LDADD = $(test_libraries)
 
-test_function_stack_suite_SOURCES = function/stack_suite.c
-test_function_stack_suite_LDADD = $(test_libraries)
+test_function_static_stack_suite_SOURCES = function/static/stack_suite.c
+test_function_static_stack_suite_LDADD = $(test_libraries)
