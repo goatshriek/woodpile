@@ -7,6 +7,7 @@
  */
 
 #include <woodpile/dynamic/list.h>
+#include <woodpile/dynamic/tree/splay.h>
 #include <woodpile/static/queue.h>
 #include <woodpile/static/stack.h>
 
@@ -27,6 +28,41 @@
  */
 DList *
 BuildDList
+( void );
+
+/**
+ * Creates a DynamicSplay. The DynamicSplay contains several strings.
+ *
+ * Alpha
+ * Beta
+ * Charlie
+ * Delta
+ * Echo
+ * Foxtrot
+ * Gamma
+ * Hotel
+ * India
+ * Juliet
+ * Kilo
+ * Lima
+ * Mike
+ * November
+ * Oscar
+ * Papa
+ * Quebec
+ * Romeo
+ * Sierra
+ * Tango
+ * Uniform
+ * Victor
+ * Whiskey
+ * X-Ray
+ * Yankee
+ * Zulu
+ *
+ */
+DSplay *
+BuildDSplay
 ( void );
 
 /**

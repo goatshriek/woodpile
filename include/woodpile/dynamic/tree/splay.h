@@ -3,92 +3,125 @@
 
 /**
  * @file
- * Splay Tree declaration and functions
+ * DynamicSplay Tree declaration and functions
  */
 
 /**
- * @struct Splay
- * The Splay data structure is a self-balancing tree structure that allows
- * faster access to recently accessed elements.
+ * @struct DynamicSplay
+ * The DynamicSplay data structure is a self-balancing tree structure that
+ * allows faster access to recently accessed elements.
  *
- * The Splay is optimized for search and retrieval in a data set where certain
- * elements are needed more than others.
+ * Elements are sorted using the comparator function. This function must be
+ * non-NULL. This function is expected to return a negative number when the
+ * first element should come first, a positive number when the second should,
+ * and zero when the two are equal. strcmp is an example of such a function.
+ *
+ * Duplicate elements are not allowed in the structure.
+ *
+ * The DynamicSplay is optimized for search and retrieval in a data set where
+ * certain elements are needed more often than others.
  *
  * Memory for this structure is allocated dynamically, allowing it to grow and
  * shrink along with the number of elements it holds. This makes it suitable for
  * use when the size is constantly changing; if a more static splay size is
- * needed then the array-based implementation should be used as its memory
+ * expected then the array-based implementation should be used as its memory
  * overhead is lower.
  *
  * Memory overhead can be calculated as follows:
- * 2 * sizeof( void * ) * ( number_of_elements + 1 )
+ * sizeof( void * ) * ( ( number_of_elements * 4 ) + 2 )
  */
-struct Splay;
-typedef struct Splay Splay;
+struct DynamicSplay;
+
+typedef struct DynamicSplay DSplay;
+typedef int ( *comparator_t )( const void *, const void * );
+typedef char * ( *to_string_t )( const void * );
 
 /**
- * Creates a copy of a Splay. Elements within the Splay are not copied, meaning
- * that changes made to elements in the original Splay will also change the
- * elements in the copy. Changes made to the original Splay will not affect the
- * copy.
+ * Adds an element to a DynamicSplay. NULL elements are not allowed and are
+ * ignored.
  *
- * @param splay the Splay to copy
+ * @param splay the DynamicSplay to add to
+ * @param element the element to add
+ *
+ * @return splay, or NULL on failure
+ */
+DSplay *
+AddToDynamicSplay
+( DSplay *splay, void *element );
+/** shortened AddToDynamicSplay function name */
+#define DSplayAdd AddToDynamicSplay
+
+/**
+ * Creates a copy of a DynamicSplay. Elements within are not copied, meaning
+ * that changes made to elements in the original structure will also change the
+ * elements in the copy. Changes made to splay will not affect the copy.
+ *
+ * @param splay the DynamicSplay to copy
  * 
- * @return a copy of the original Splay or NULL on failure
+ * @return a copy of the original DynamicSplay or NULL on failure
  */
-Splay *
-CopySplay
-( const Splay *splay );
+DSplay *
+CopyDynamicSplay
+( const DSplay *splay );
+/** shortened CopyDynamicSplay function name */
+#define DSplayCopy CopyDynamicSplay
 
 /**
- * Destroys a Splay. Does not affect the elements stored in the Splay.
+ * Destroys a DynamicSplay. Does not affect the elements stored within.
  *
- * @param splay the Splay to destroy
+ * @param splay the DynamicSplay to destroy
  */
 void
-DestroySplay
-( const Splay *splay );
+DestroyDynamicSplay
+( const DSplay *splay );
+/** shortened DestroyDynamicSplay function name */
+#define DSplayDestroy DestroyDynamicSplay
 
 /**
- * Searches a Splay for an element.
+ * Searches a DynamicSplay for an element. If found, the element is splayed to
+ * the root of the tree.
  *
- * Note that the element is identified using a pointer; if two structures are
- * considered equal but are located at different addresses then they are not
- * considered equal by this function.
- *
- * @param splay the Splay to search
+ * @param splay the DynamicSplay to search
  * @param element the element to search for
  *
- * @return the number of entries of element in splay
- */
-size_t
-SplayContains
-( const Splay *splay, const void *element );
-
-/**
- * Checks whether or not a Splay is empty. A NULL Splay is considered empty.
- *
- * @param splay the Splay to check
- *
- * @return a positive value if the Splay is empty, 0 otherwise
+ * @return a value that evaluats to true if element exists in splay, otherwise
+ * a value that evaluates to false
  */
 unsigned short
-SplayIsEmpty
-( const Splay *splay );
+DynamicSplayContains
+( DSplay *splay, const void *element );
+/** shortened DynamicSplayContains function name */
+#define DSplayContains DynamicSplayContains
 
 /**
- * Gets the number of elements in the Splay. An empty Splay will return 0.
+ * Checks whether or not a DynamicSplay is empty. A NULL DynamicSplay is
+ * considered empty.
  *
- * @param splay the Splay to get the size of
+ * @param splay the DynamicSplay to check
  *
- * @return the number of elements in the Splay
+ * @return a positive value if the DynamicSplay is empty, 0 otherwise
  */
-unsigned
-SplaySize
-( const Splay *splay );
+unsigned short
+DynamicSplayIsEmpty
+( const DSplay *splay );
+/** shortened DynamicSplayIsEmpty function name */
+#define DSplayIsEmpty DynamicSplayIsEmpty
 
 /**
- * Creates a string representation of the given Splay, using the provided
+ * Gets the number of elements in the DynamicSplay. An empty DynamicSplay will return 0.
+ *
+ * @param splay the DynamicSplay to get the size of
+ *
+ * @return the number of elements in the DynamicSplay
+ */
+size_t
+DynamicSplaySize
+( const DSplay *splay );
+/** shortened DynamicSplaySize function name */
+#define DSplaySize DynamicSplaySize
+
+/**
+ * Creates a string representation of the given DynamicSplay, using the provided
  * function to get the string representation of each element. If the
  * element_to_string function is NULL, then the element is printed as a void
  * pointer.
@@ -102,23 +135,73 @@ SplaySize
  * string literals, then the function must return a copy of the string rather
  * than the string itself.
  *
- * @param splay the Splay to get a representation of
+ * @param splay the DynamicSplay to get a representation of
  * @param element_to_string a function returning string representations of
  * elements
  *
- * @return a char buffer holding a string representation of the Splay
+ * @return a char buffer holding a string representation of the DynamicSplay
  */
 char *
-SplayToString
-( const Splay *splay, char * ( *element_to_string )( const void * ) );
+DynamicSplayToString
+( const DSplay *splay, to_string_t element_to_string );
+/** shortened DynamicSplayToString function name */
+#define DSplayToString DynamicSplayToString
 
 /**
- * Creates a new Splay.
- * 
- * @return a new Splay or NULL on failure
+ * Gets the first element in the DynamicSplay. The element is NOT splayed to the
+ * root of the tree, however, as this would guarantee an unbalanced tree.
+ *
+ * @param splay the DynamicSplay to get the element from
+ *
+ * @return the first element in the splay, or NULL if the splay is empty
  */
-Splay *
-NewSplay
-( void );
+void *
+FirstInDynamicSplay
+( const DSplay *splay );
+/** shortened FirstInDynamicSplay function name */
+#define DSplayFirst FirstInDynamicSplay
+
+/**
+ * Gets the last element in the DynamicSplay. The element is NOT splayed to the
+ * root of the tree, however, as this would guarantee an unbalanced tree.
+ *
+ * @param splay the DynamicSplay to get the element from
+ *
+ * @return the last element in the splay, or NULL if the splay is empty
+ */
+void *
+LastInDynamicSplay
+( const DSplay *splay );
+/** shortened FirstInDynamicSplay function name */
+#define DSplayLast LastInDynamicSplay
+
+/**
+ * Creates a new DynamicSplay. If comparator is NULL then the elements will be
+ * sorted according to their natural order (that is, the order of their
+ * pointers).
+ * 
+ * @param comparator the comparator function for the DynamicSplay
+ *
+ * @return a new DynamicSplay or NULL on failure
+ */
+DSplay *
+NewDynamicSplay
+( comparator_t comparator );
+/** shortened NewDynamicSplay function name */
+#define DSplayNew NewDynamicSplay
+
+/**
+ * Searches for an element in a DynamicSplay and removes it if it is found.
+ *
+ * @param splay the DynamicSplay to remove from
+ * @param element the element to search for and remove
+ *
+ * @return the removed element, or NULL if it was not found
+ */
+void *
+RemoveFromDynamicSplay
+( DSplay *splay, const void *element );
+/** shortened RemoveFromDynamicSplay */
+#define DSplayRemove RemoveFromDynamicSplay
 
 #endif

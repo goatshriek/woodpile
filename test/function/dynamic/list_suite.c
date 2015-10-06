@@ -978,7 +978,7 @@ const char *
 TestToStringWithEmptyList
 ( void )
 {
-  const char *str;
+  char *str;
   const DList *list;
 
   list = DListNew();
@@ -990,6 +990,7 @@ TestToStringWithEmptyList
     return "NULL was returned for an empty List";
   ASSERT_STRINGS_EQUAL( "[]", str, "an empty List did not return an empty pair of square brackets" )
 
+  free( str );
   DListDestroy( list );
 
   return NULL;

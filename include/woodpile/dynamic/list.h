@@ -125,7 +125,7 @@ DynamicListFront
 /**
  * Gets the element at the specified position in the DynamicList. If the
  * DynamicList does not have an element at this index then NULL is returned.
- * NULL is returned if list is NULL.
+ * NULL is returned if list is NULL or empty.
  *
  * Negative indexes count backwards through the list, for example an index of
  * -2 returns the second to last value in the list.

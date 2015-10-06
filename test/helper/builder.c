@@ -1,6 +1,8 @@
 #include <stdlib.h>
+#include <string.h>
 
 #include <woodpile/dynamic/list.h>
+#include <woodpile/dynamic/tree/splay.h>
 #include <woodpile/static/queue.h>
 
 #include "test/helper/builder.h"
@@ -18,6 +20,40 @@ BuildDList
   DListAppend( list, "List" );
   DListAppend( list, "o'" );
   return DListAppend( list, "strings!" );
+}
+
+DSplay *
+BuildDSplay
+( void )
+{
+  DSplay *splay = DSplayNew( ( comparator_t ) strcmp );
+
+  DSplayAdd( splay, "Alpha" );
+  DSplayAdd( splay, "Zulu" );
+  DSplayAdd( splay, "Beta" );
+  DSplayAdd( splay, "Yankee" );
+  DSplayAdd( splay, "Charlie" );
+  DSplayAdd( splay, "X-Ray" );
+  DSplayAdd( splay, "Delta" );
+  DSplayAdd( splay, "Whiskey" );
+  DSplayAdd( splay, "Echo" );
+  DSplayAdd( splay, "Victor" );
+  DSplayAdd( splay, "Foxtrot" );
+  DSplayAdd( splay, "Uniform" );
+  DSplayAdd( splay, "Gamma" );
+  DSplayAdd( splay, "Tango" );
+  DSplayAdd( splay, "Hotel" );
+  DSplayAdd( splay, "Sierra" );
+  DSplayAdd( splay, "India" );
+  DSplayAdd( splay, "Romeo" );
+  DSplayAdd( splay, "Juliet" );
+  DSplayAdd( splay, "Quebec" );
+  DSplayAdd( splay, "Kilo" );
+  DSplayAdd( splay, "Papa" );
+  DSplayAdd( splay, "Oscar");
+  DSplayAdd( splay, "Lima" );
+  DSplayAdd( splay, "November" );
+  return DSplayAdd( splay, "Mike" );
 }
 
 SQueue *
