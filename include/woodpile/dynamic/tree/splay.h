@@ -108,7 +108,8 @@ DynamicSplayIsEmpty
 #define DSplayIsEmpty DynamicSplayIsEmpty
 
 /**
- * Gets the number of elements in the DynamicSplay. An empty DynamicSplay will return 0.
+ * Gets the number of elements in the DynamicSplay. An empty DynamicSplay will
+ * return 0.
  *
  * @param splay the DynamicSplay to get the size of
  *

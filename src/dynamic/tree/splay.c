@@ -148,7 +148,7 @@ DSplayIsEmpty
   return ( ( splay == NULL ) || ( splay->root == NULL ) );
 }
 
-unsigned
+size_t
 DSplaySize
 ( const DSplay *splay )
 {
@@ -450,7 +450,7 @@ int
 DirectCompare
 ( const void *element_1, const void *element_2 )
 {
-  return ( ( int ) element_1 ) - ( ( int ) element_2 );
+  return ( int ) ( element_1 - element_2 );
 }
 
 static
