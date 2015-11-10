@@ -26,6 +26,8 @@ struct StaticHash;
 typedef struct StaticHash StaticHash;
 typedef struct StaticHash SHash;
 
+typedef void ( *hasher_t )( const void * );
+
 /**
  * Creates a copy of a SHash. Elements within the hash are not copied, meaning
  * that changes made to elements in the original hash will also change the
@@ -50,6 +52,21 @@ void
 DestroyStaticHash
 ( const SHash *hash );
 #define SHashDestroy DestroyStaticHash
+
+/**
+ * Retrieves the value mapped to a given key. If the key does not exist in the
+ * hash, then NULL is returned.
+ *
+ * @param hash the SHash to query
+ * @param key the key that the requested value is mapped to
+ *
+ * @return the value mapped to the provided key, or NULL if there is no such
+ * value
+ */
+void *
+GetFromStaticHash
+( const SHash *hash, const void *key );
+#define SHashGet GetFromStaticHash
 
 /**
  * Creates a new SHash. The default capacity of the hash is 100.
@@ -90,6 +107,31 @@ void *
 PutIntoStaticHash
 ( SHash *hash, void *key, void *value );
 #define SHashPut PutIntoStaticHash
+
+/**
+ * Removes the element mapped to the given key. If there is no such element,
+ * then the hash is left unchanged.
+ *
+ * @param hash the SHash to remove the element from
+ * @param key the key mapped to the value to remove
+ *
+ * @return the removed element, or NULL if there was not an element to remove
+ */
+void *
+RemoveFromStaticHash
+( SHash *hash, const void *key );
+#define SHashRemove RemoveFromStaticHash
+
+/**
+ * Sets the hashing function for an SHash.
+ *
+ * @param hash the SHash to set the function for
+ * @param hasher the hashing function to use
+ */
+void
+SetStaticHashHasher
+( SHash *hash, hasher_t hasher );
+#define SHashSetHasher SetStaticHashHasher
 
 /**
  * Gets the current capacity of the SHash.
