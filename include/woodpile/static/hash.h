@@ -69,25 +69,30 @@ GetFromStaticHash
 #define SHashGet GetFromStaticHash
 
 /**
- * Creates a new SHash. The default capacity of the hash is 100.
+ * Creates a new SHash. The default capacity of the hash is 100. If the hashing
+ * function is NULL, then a default function is used based on element's pointer
+ * values.
+ *
+ * @param hasher the hashing function to use on keys
  *
  * @return a new SHash or NULL on failure
  */
 SHash *
 NewStaticHash
-( void );
+( const hasher_t hasher );
 #define SHashNew NewStaticHash
 
 /**
  * Creates a new SHash of the given capacity.
  *
+ * @param hasher the hashing function to use on keys
  * @param capacity the capacity to give the SHash
  *
  * @return a new SHash of the provided capacity, or NULL on failure
  */
 SHash *
 NewSizedStaticHash
-( size_t capacity );
+( const hasher_t hasher, size_t capacity );
 #define SHashNewSized NewSizedStaticHash
 
 /**
@@ -130,7 +135,7 @@ RemoveFromStaticHash
  */
 void
 SetStaticHashHasher
-( SHash *hash, hasher_t hasher );
+( SHash *hash, const hasher_t hasher );
 #define SHashSetHasher SetStaticHashHasher
 
 /**
