@@ -8,6 +8,7 @@
 
 #include <woodpile/dynamic/list.h>
 #include <woodpile/dynamic/tree/splay.h>
+#include <woodpile/static/hash.h>
 #include <woodpile/static/queue.h>
 #include <woodpile/static/stack.h>
 
@@ -63,6 +64,27 @@ BuildDList
  */
 DSplay *
 BuildDSplay
+( void );
+
+/**
+ * Creates an SHash. The hash contains a mapping of one set of strings to
+ * another set of strings.
+ *
+ * 1st  => First
+ * 2nd  => Second
+ * 3rd  => Third
+ * 4th  => Fourth
+ * 5th  => Fifth
+ * 6th  => Sixth
+ * 7th  => Seventh
+ * 8th  => Eighth
+ * 9th  => Ninth
+ * 10th => Tenth
+ *
+ * @return a new SHash or NULL on failure.
+ */
+SHash *
+BuildSHash
 ( void );
 
 /**

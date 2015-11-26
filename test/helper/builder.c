@@ -56,6 +56,30 @@ BuildDSplay
   return DSplayAdd( splay, "Mike" );
 }
 
+SHash *
+BuildSHash
+( void )
+{
+  SHash *hash;
+
+  hash = SHashNew();
+  if( !hash )
+    return NULL;
+
+  SHashPut( hash, "1st", "First" );
+  SHashPut( hash, "2nd", "Second" );
+  SHashPut( hash, "3rd", "Third" );
+  SHashPut( hash, "4th", "Fourth" );
+  SHashPut( hash, "5th", "Fifth" );
+  SHashPut( hash, "6th", "Sixth" );
+  SHashPut( hash, "7th", "Seventh" );
+  SHashPut( hash, "8th", "Eighth" );
+  SHashPut( hash, "9th", "Ninth" );
+  SHashPut( hash, "10th", "Tenth" );
+
+  return hash;
+}
+
 SQueue *
 BuildSQueue
 ( void )
