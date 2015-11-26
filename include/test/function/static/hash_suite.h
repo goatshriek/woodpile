@@ -11,6 +11,7 @@
  * SHash.
  *
  * @test A value existing twice in the SHash must return a logically true value.
+ * The returned value must be equal to one of the two keys mapped to the value.
  *
  * @return NULL on completion or a string describing the failure
  */

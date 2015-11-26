@@ -23,6 +23,7 @@ main
   }
 
   TEST( ContainsDuplicateValues )
+  TEST( ContainsNonExistentValue )
 
   if( failure_count > 0 )
     return EXIT_FAILURE;
@@ -35,7 +36,7 @@ TestContainsDuplicateValues
 ( void )
 {
   SHash *hash;
-  void *value;
+  void *key, *value;
 
   hash = BuildSHash();
   if( !hash )
@@ -48,25 +49,24 @@ TestContainsDuplicateValues
   if( SHashPut( hash, "3RD", value != value )
     return "a duplicate could not be added to the hash";
   
-  if( !SHashContains( hash, value ) )
+  key = SHashContains( hash, value );
+  if( !key )
     return "true was not returned for a value in the hash twice";
-  
+
+  if( strcmp( key, "3rd" ) != 0 && strcmp( key, "3RD" ) != 0 )
+    return "the returned key was not one of the keys mapped to the value";
+
   return NULL;
 }
 
-/**
- * Tests the SHashContains function with a value that does not exist in the
- * SHash.
- *
- * @test A value not existing in the SHash must return a logically false value.
- *
- * @return NULL on completion or a string describing the failure
- */
 const char *
 TestContainsNonExistentValue
 ( void )
 {
-  
+  if( SHashContains( common_hash, "this doesn't exist" ) != NULL )
+    return "NULL was not returned for a value not in the hash";
+
+  return NULL;
 }
 
 /**
