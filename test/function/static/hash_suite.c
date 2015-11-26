@@ -7,12 +7,20 @@
 #include "test/function/static/hash_suite.h"
 #include "test/helper.h"
 
+static const SHash *common_hash = NULL;
+
 int
 main
 ( void )
 {
   unsigned failure_count = 0;
   const char *result;
+
+  common_hash = BuildSHash();
+  if( !common_hash ){
+    printf( "Could not build a test SHash" );
+    return EXIT_FAILURE;
+  }
 
   TEST( ContainsDuplicateValues )
 
@@ -22,18 +30,27 @@ main
     return EXIT_SUCCESS;
 }
 
-/**
- * Tests the SHashContains function with a value existing multiple times in the
- * SHash.
- *
- * @test A value existing twice in the SHash must return a logically true value.
- *
- * @return NULL on completion or a string describing the failure
- */
 const char *
 TestContainsDuplicateValues
 ( void )
 {
+  SHash *hash;
+  void *value;
+
+  hash = BuildSHash();
+  if( !hash )
+    return "could not build a test hash";
+
+  value = SHashGet( hash, "3rd" );
+  if( !value )
+    return "could not get an existing value";
+
+  if( SHashPut( hash, "3RD", value != value )
+    return "a duplicate could not be added to the hash";
+  
+  if( !SHashContains( hash, value ) )
+    return "true was not returned for a value in the hash twice";
+  
   return NULL;
 }
 
@@ -47,7 +64,10 @@ TestContainsDuplicateValues
  */
 const char *
 TestContainsNonExistentValue
-( void );
+( void )
+{
+  
+}
 
 /**
  * Tests the SHashContains function a NULL value supplied.

@@ -152,6 +152,22 @@ StaticHashCapacity
 #define SHashCapacity StaticHashCapacity
 
 /**
+ * Searches a SHash for a given value. If the value exists in the hash, one of
+ * the keys mapped to the value is returned. If the value exists in the hash
+ * multiple times (therefore with multiple keys), there is no guarantee of which
+ * key will be returned or that the same key will be returned each time.
+ *
+ * @param hash the SHash to search
+ * @param value the value to search for
+ *
+ * @return a key for the value if it is in the hash, or NULL if not
+ */
+void *
+StaticHashContains
+( const SHash *hash, const void *value );
+#define SHashContains StaticHashContains
+
+/**
  * Checks a SHash to see if it's empty.
  *
  * @param hash the SHash to check
