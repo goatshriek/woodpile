@@ -99,7 +99,8 @@ NewSizedStaticHash
  * Adds an element into the provided SHash. The provided key and value pair are
  * assigned. If the key is already associated with the value, then the key is
  * re-associated with the new value, effectively removing the previous value.
- * This previous value is returned if it exists.
+ * This previous value is returned if it exists. NULL key and value arguments
+ * will ignored and the function will return NULL.
  *
  * @param hash the SHash to set the key for
  * @param key the value to use as the key
