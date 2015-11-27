@@ -1,6 +1,6 @@
 AC_PREREQ([2.68])
 
-AC_INIT([woodpile], [0.0.1], [stumpless@verizon.net]])
+AC_INIT([woodpile], [0.0.1], [stumpless@verizon.net])
 
 AC_CONFIG_AUX_DIR([config])
 AC_CONFIG_SRCDIR([../../src/dynamic/list.c])

@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <woodpile/static/queue.h>
+#include "lib/validate.h"
 #include "private/static/queue.h"
 
 SQueue *
@@ -9,8 +10,7 @@ SQueueCopy
 {
   SQueue *copy;
 
-  if( !original )
-    return NULL;
+  VALIDATE( original )
 
   copy = malloc( sizeof( SQueue ) );
   if( !copy )
@@ -83,7 +83,9 @@ SQueuePop
 {
   void *value;
 
-  if( !queue || !queue->elements || queue->front == queue->back )
+  VALIDATE( queue && queue->elements )
+
+  if( queue->front == queue->back )
     return NULL;
 
   value = queue->elements[ queue->front ];
@@ -99,8 +101,7 @@ SQueuePush
 {
   size_t new_back;
 
-  if( !queue || !element )
-    return NULL;
+  VALIDATE( queue && element )
 
   new_back = (queue->back + 1) % queue->capacity;
   if( new_back == queue->front )
