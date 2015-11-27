@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <woodpile/static/stack.h>
+#include "lib/validate.h"
 #include "private/static/stack.h"
 
 SStack *
@@ -9,8 +10,7 @@ SStackCopy
   SStack *copy;
   unsigned i;
 
-  if( !stack )
-    return NULL;
+  VALIDATE( stack )
 
   copy = malloc( sizeof( SStack ) );
   if( !copy )
@@ -70,28 +70,31 @@ void *
 SStackPeek
 ( const SStack *stack )
 {
-  if( !stack || stack->top == 0 )
-    return NULL;
+  VALIDATE( stack )
 
-  return stack->values[stack->top - 1];
+  if( stack->top == 0 )
+    return NULL;
+  else
+    return stack->values[stack->top - 1];
 }
 
 void *
 SStackPop
 ( SStack *stack )
 {
-  if( !stack || stack->top == 0 )
-    return NULL;
+  VALIDATE( stack )
 
-  return stack->values[--stack->top];
+  if( stack->top == 0 )
+    return NULL;
+  else
+    return stack->values[--stack->top];
 }
 
 SStack *
 SStackPush
 ( SStack *stack, void *value )
 {
-  if( !stack )
-    return NULL;
+  VALIDATE( stack )
 
   if( stack->top == stack->capacity )
     if( !Resize( stack ) )
@@ -157,6 +160,8 @@ Resize
 {
   unsigned i;
   void **new_array;
+
+  VALIDATE( stack )
 
   stack->capacity *= 2;
 
