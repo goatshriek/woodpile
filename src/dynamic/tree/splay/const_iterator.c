@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <woodpile/dynamic/tree/splay/const_iterator.h>
+#include "lib/validate.h"
 #include "private/dynamic/tree/splay.h"
 #include "private/dynamic/tree/splay/const_iterator.h"
 
@@ -10,8 +11,7 @@ DSplayCBegin
   DSplayCItr *itr;
   const Node *current;
 
-  if( !splay )
-    return NULL;
+  VALIDATE( splay )
 
   itr = malloc( sizeof( DSplayCItr ) );
   if( !itr )
@@ -36,8 +36,7 @@ DSplayCEnd
   DSplayCItr *itr;
   const Node *current;
 
-  if( !splay )
-    return NULL;
+  VALIDATE( splay )
 
   itr = malloc( sizeof( DSplayCItr ) );
   if( !itr )
@@ -61,8 +60,7 @@ DSplayCItrCopy
 {
   DSplayCItr *copy;
 
-  if( !iterator )
-    return NULL;
+  VALIDATE( iterator )
 
   copy = malloc( sizeof( DSplayCItr ) );
   if( !copy )
@@ -101,7 +99,9 @@ const void *
 DSplayCItrNext
 ( DSplayCItr *iterator )
 {
-  if( !iterator || !iterator->current )
+  VALIDATE( iterator )
+
+  if( !iterator->current )
     return NULL;
 
   iterator->previous = iterator->current;
@@ -114,7 +114,9 @@ const void *
 DSplayCItrPrevious
 ( DSplayCItr *iterator )
 {
-  if( !iterator || !iterator->previous )
+  VALIDATE( iterator )
+
+  if( !iterator->previous )
     return NULL;
 
   iterator->current = iterator->previous;

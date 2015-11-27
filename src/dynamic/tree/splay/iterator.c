@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <woodpile/dynamic/tree/splay/iterator.h>
+#include "lib/validate.h"
 #include "private/dynamic/tree/splay.h"
 #include "private/dynamic/tree/splay/iterator.h"
 
@@ -10,8 +11,7 @@ DSplayBegin
   DSplayItr *itr;
   Node *current;
 
-  if( !splay )
-    return NULL;
+  VALIDATE( splay )
 
   itr = malloc( sizeof( DSplayItr ) );
   if( !itr )
@@ -37,8 +37,7 @@ DSplayItrCopy
 {
   DSplayItr *copy;
 
-  if( !iterator )
-    return NULL;
+  VALIDATE( iterator )
 
   copy = malloc( sizeof( DSplayItr ) );
   if( !copy )
@@ -68,8 +67,7 @@ DSplayEnd
   DSplayItr *itr;
   Node *current;
 
-  if( !splay )
-    return NULL;
+  VALIDATE( splay )
 
   itr = malloc( sizeof( DSplayItr ) );
   if( !itr )
@@ -107,7 +105,9 @@ void *
 DSplayItrNext
 ( DSplayItr *iterator )
 {
-  if( !iterator || !iterator->current )
+  VALIDATE( iterator )
+
+  if( !iterator->current )
     return NULL;
 
   iterator->previous = iterator->current;
@@ -121,7 +121,9 @@ void *
 DSplayItrPrevious
 ( DSplayItr *iterator )
 {
-  if( !iterator || !iterator->previous )
+  VALIDATE( iterator )
+
+  if( !iterator->previous )
     return NULL;
 
   iterator->current = iterator->previous;
@@ -138,8 +140,7 @@ DSplayItrRemove
   Node *removed, *root;
   void *element;
 
-  if( !iterator )
-    return NULL;
+  VALIDATE( iterator )
 
   switch( iterator->direction ){
     case 1:

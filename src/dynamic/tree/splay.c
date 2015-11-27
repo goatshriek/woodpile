@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <woodpile/dynamic/tree/splay.h>
 #include "lib/str.h"
+#include "lib/validate.h"
 #include "private/dynamic/tree/splay.h"
 
 DSplay *
@@ -12,8 +13,7 @@ DSplayAdd
   int comparison;
   Node *current_node, *new_node, *parent;
 
-  if( !splay )
-    return NULL;
+  VALIDATE( splay )
 
   if( !element )
     return splay;
@@ -79,8 +79,7 @@ DSplayCopy
 {
   DSplay *copy;
 
-  if( !splay )
-    return NULL;
+  VALIDATE( splay )
 
   copy = malloc( sizeof( DSplay ) );
   if( !copy )
@@ -112,7 +111,9 @@ DSplayFirst
   Node *node;
   void *element = NULL;
 
-  if( !splay || !splay->root )
+  VALIDATE( splay )
+
+  if( !splay->root )
     return NULL;
 
   node = splay->root;
@@ -130,7 +131,9 @@ DSplayLast
   Node *node;
   void *element = NULL;
 
-  if( !splay || !splay->root )
+  VALIDATE( splay )
+
+  if( !splay->root )
     return NULL;
 
   node = splay->root;
@@ -167,8 +170,7 @@ DSplayToString
   const Node *current, *next;
   size_t element_length, str_capacity=100, str_length=1;
 
-  if( !splay )
-    return NULL;
+  VALIDATE( splay )
 
   if( !element_to_string )
     element_to_string = strpointer;
@@ -240,8 +242,7 @@ DSplayRemove
   int comparison;
   void *removed;
 
-  if( !splay || !element )
-    return NULL;
+  VALIDATE( splay && element )
 
   parent = NULL;
   node = splay->root;
