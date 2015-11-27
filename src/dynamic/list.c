@@ -3,6 +3,7 @@
 #include <string.h>
 #include <woodpile/dynamic/list.h>
 #include "lib/str.h"
+#include "lib/validate.h"
 #include "private/dynamic/list.h"
 
 DList *
@@ -11,8 +12,7 @@ DListAppendAll
 {
   Node *node, *previous=NULL, *temp;
 
-  if( !first )
-    return NULL;
+  VALIDATE( first )
 
   if( !second )
     return first;
@@ -35,8 +35,7 @@ DListAppend
 {
   Node *node;
 
-  if( !list )
-    return NULL;
+  VALIDATE( list )
 
   if( !element )
     return list;
@@ -65,8 +64,7 @@ DListCopy
   DList *copy;
   Node *node, *previous=NULL, *temp;
 
-  if( !list )
-    return NULL;
+  VALIDATE( list )
 
   copy = DListNew();
   node = list->first;
@@ -108,10 +106,12 @@ void *
 DListBack
 ( const DList *list )
 {
-  if( !list || !list->last )
-    return NULL;
+  VALIDATE( list )
 
-  return list->last->element;
+  if( list->last )
+    return list->last->element;
+  else
+    return NULL;
 }
 
 size_t
@@ -141,10 +141,12 @@ void *
 DListFront
 ( const DList *list )
 {
-  if( !list || !list->first )
-    return NULL;
+  VALIDATE( list )
 
-  return list->first->element;
+  if( list->first )
+    return list->first->element;
+  else
+    return NULL;
 }
 
 void *
@@ -218,8 +220,7 @@ DListToString
   const Node *current, *next, *previous=NULL;
   size_t element_length, str_capacity=100, str_length=1;
 
-  if( !list )
-    return NULL;
+  VALIDATE( list )
 
   if( !element_to_string )
     element_to_string = strpointer;
@@ -282,8 +283,7 @@ DListPrepend
 {
   Node *node;
 
-  if( !list )
-    return NULL;
+  VALIDATE( list )
 
   node = malloc( sizeof( Node ) );
   if( !node )

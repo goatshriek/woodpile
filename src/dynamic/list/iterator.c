@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <woodpile/dynamic/list/iterator.h>
+#include "lib/validate.h"
 #include "private/dynamic/list.h"
 #include "private/dynamic/list/iterator.h"
 
@@ -47,8 +48,7 @@ DListBegin
 {
   DListItr *iterator;
 
-  if( !list )
-    return NULL;
+  VALIDATE( list )
 
   iterator = malloc( sizeof( DListItr ) );
   if( !iterator )
@@ -67,8 +67,7 @@ DListItrCopy
 {
   DListItr *copy;
 
-  if( !iterator )
-    return NULL;
+  VALIDATE( iterator )
 
   copy = malloc( sizeof( DListItr ) );
   if( !copy )
@@ -93,8 +92,7 @@ DListEnd
 {
   DListItr *iterator;
 
-  if( !list )
-    return NULL;
+  VALIDATE( list )
 
   iterator = malloc( sizeof( DListItr ) );
   if( !iterator )
@@ -128,7 +126,9 @@ DListItrNext
   Node *temp;
   void *element;
 
-  if( !iterator || !iterator->current )
+  VALIDATE( iterator )
+
+  if( !iterator->current )
     return NULL;
 
   element = iterator->current->element;
@@ -148,7 +148,9 @@ DListItrPrevious
   Node *temp;
   void *element;
 
-  if( !iterator || !iterator->previous )
+  VALIDATE( iterator )
+
+  if( !iterator->previous )
     return NULL;
 
   element = iterator->previous->element;
@@ -168,8 +170,7 @@ DListItrRemove
   Node *left_neighbor, *removed, *right_neighbor;
   void *element;
 
-  if( !iterator )
-    return NULL;
+  VALIDATE( iterator )
 
   switch( iterator->direction ){
     case 1:
