@@ -47,7 +47,7 @@ TestContainsNullValue
  * Tests the SHashContains function with values that exist in the SHash exactly
  * once.
  *
- * @test A value existing exaclty once in the SHash must return 1.
+ * @test A value existing exactly once in the SHash must return 1.
  *
  * @return NULL on completion or a string describing the failure
  */

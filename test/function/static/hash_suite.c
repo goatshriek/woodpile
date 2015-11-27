@@ -24,6 +24,11 @@ main
 
   TEST( ContainsDuplicateValues )
   TEST( ContainsNonExistentValue )
+  TEST( ContainsNullValue )
+  TEST( ContainsUniqueValue )
+  TEST( ContainsWithNullSHash )
+
+  SHashDestroy( common_hash );
 
   if( failure_count > 0 )
     return EXIT_FAILURE;
@@ -56,6 +61,8 @@ TestContainsDuplicateValues
   if( strcmp( key, "3rd" ) != 0 && strcmp( key, "3RD" ) != 0 )
     return "the returned key was not one of the keys mapped to the value";
 
+  SHashDestroy( hash );
+
   return NULL;
 }
 
@@ -69,41 +76,41 @@ TestContainsNonExistentValue
   return NULL;
 }
 
-/**
- * Tests the SHashContains function a NULL value supplied.
- *
- * @test A NULL value must return a logically false value, whether the SHash
- * supplied is NULL or non-NULL.
- *
- * @return NULL on completion or a string describing the failure
- */
 const char *
 TestContainsNullValue
-( void );
+( void )
+{
+  if( SHashContains( NULL, NULL ) != NULL )
+    return "NULL was not returned for a NULL hash and value";
 
-/**
- * Tests the SHashContains function with values that exist in the SHash exactly
- * once.
- *
- * @test A value existing exaclty once in the SHash must return 1.
- *
- * @return NULL on completion or a string describing the failure
- */
+  if( SHashContains( common_hash, NULL ) != NULL )
+    return "NULL was not returned for a NULL value";
+
+  return NULL;
+}
+
 const char *
 TestContainsUniqueValue
-( void );
+( void )
+{
+  if( strcmp( SHashContains( common_hash, "3rd" ), "Third" ) != 0 )
+    return "the value was not contained in the hash";
 
-/**
- * Tests the SHashContains function with a NULL SHash.
- *
- * @test A NULL hash must return 0, whether the value supplied is NULL or
- * non-NULL.
- *
- * @return NULL on completion or a string describing the failure
- */
+  return NULL;
+}
+
 const char *
 TestContainsWithNullSHash
-( void );
+( void )
+{
+  if( SHashContains( NULL, NULL ) != NULL )
+    return "NULL was not returned for a NULL hash and value";
+
+  if( SHashContains( NULL, "value" ) != NULL )
+    return "NULL was not returned for a NULL hash";
+
+  return NULL;
+}
 
 /**
  * Tests the CopySHash function.
