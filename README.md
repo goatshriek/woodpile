@@ -8,7 +8,7 @@ mark the first release that is considered complete.__
 
 + [Documentation](#documentation)
 + [Memory Allocation](#memory-allocation)
-+ [Parameter Validation](#parameter-validation)
++ [Parameter and Allocation Validation](#parameter-and-allocation-validation)
 
 ## Documentation
 
@@ -63,7 +63,18 @@ during compilation to cause `NULL` to be returned for invalid parameters rather
 than a system abort. This may be done when library size and performance can be
 traded for less complex calling code, since `NULL` checks can be reduced.
 
+Memory allocation is handled in much the same way, and can be configured by
+the `__WOODPILE_ALLOCATION_VALIDATION` `#define`. If you believe that most
+memory allocation requests will be honored, it is strongly recommended to
+leave this setting to using `assert`, as it will improve the performance of
+memory allocation calls. Note that some allocations are still checked even
+when conditional validation is disabled, such as those performed during
+expansions of static structures.
+
 ##### tl;dr
 `assert` calls are used by default and can be removed using `NDEBUG`, but if
 you need invalid parameters to be handled gracefully by the library define
-`__WOODPILE_PARAMETER_VALIDATION` during compilation instead.
+`__WOODPILE_PARAMETER_VALIDATION` during compilation instead. The `#define`
+`__WOODPILE_ALLOCATION_VALIDATION` can be defined to make memory allocations
+checked using conditional statements if needed, though this is not
+recommended.
