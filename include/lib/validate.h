@@ -6,13 +6,13 @@
  * Definitions for parameter validation.
  */
 
-#include <assert.h>
+#include <woodpile/config.h>
 
 /**
  * Performs parameter validation with either the assert macro or conditional
  * and return statements.
  */
-#ifdef __CONDITIONAL_VALIDATION
+#ifdef __WOODPILE_CONDITIONAL_VALIDATION
 #define VALIDATE( value )                                                      \
 if( !(value) )                                                                 \
   return NULL;

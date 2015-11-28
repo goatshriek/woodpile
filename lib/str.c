@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "woodpile/config/check.h"
+#include <woodpile/config.h>
 #include "lib/str.h"
 
 char *

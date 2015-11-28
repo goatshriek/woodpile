@@ -3,6 +3,6 @@
 autoreconf \
 && mkdir build \
 && cd build \
-&& ../configure \
+&& ../configure --enable-conditional-validation \
 && make \
 && make check
