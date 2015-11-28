@@ -13,12 +13,25 @@
  * and return statements.
  */
 #ifdef __WOODPILE_PARAMETER_VALIDATION
-#define VALIDATE_PARAMETERS( value )                                           \
-if( !(value) )                                                                 \
+#define VALIDATE_PARAMETERS( parameters )                                      \
+if( !(parameters) )                                                            \
   return NULL;
 #else
 #include <assert.h>
-#define VALIDATE_PARAMETERS( value ) assert( value );
+#define VALIDATE_PARAMETERS( parameters ) assert( parameters );
+#endif
+
+/**
+ * Performs memory allocation validation with either the assert macro or
+ * conditional and return statements.
+ */
+#ifdef __WOODPILE_ALLOCATION_VALIDATION
+#define VALIDATE_ALLOCATION( allocation )                                      \
+if( !(allocation) )                                                            \
+  return NULL;
+#else
+#include <assert.h>
+#define VALIDATE_ALLOCATION( allocation ) assert( allocation );
 #endif
 
 #endif
