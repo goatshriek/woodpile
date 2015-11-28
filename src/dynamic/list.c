@@ -41,8 +41,7 @@ DListAppend
     return list;
 
   node = malloc( sizeof( Node ) );
-  if( !node )
-    return NULL;
+  VALIDATE_ALLOCATION( node )
 
   node->neighbors = list->last;
   node->element = element;
@@ -226,8 +225,7 @@ DListToString
     element_to_string = strpointer;
 
   str = malloc( sizeof( char ) * str_capacity );
-  if( !str )
-    return NULL;
+  VALIDATE_ALLOCATION( str )
   str[0] = '[';
 
   current = list->first;
@@ -269,8 +267,7 @@ DListNew
 ( void )
 {
   DList *list = malloc( sizeof( DList ) );
-  if( !list )
-    return NULL;
+  VALIDATE_ALLOCATION( list )
 
   list->first = list->last = NULL;
 
@@ -286,8 +283,7 @@ DListPrepend
   VALIDATE_PARAMETERS( list )
 
   node = malloc( sizeof( Node ) );
-  if( !node )
-    return NULL;
+  VALIDATE_ALLOCATION( node )
 
   node->neighbors = list->first;
   node->element = element;

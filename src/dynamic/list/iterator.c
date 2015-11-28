@@ -14,8 +14,7 @@ DListItrAdd
     return iterator;
 
   addition = malloc( sizeof( Node ) );
-  if( !addition )
-    return NULL;
+  VALIDATE_ALLOCATION( addition )
 
   addition->neighbors = XORNODES( iterator->previous, iterator->current );
   addition->element = element;
@@ -51,8 +50,7 @@ DListBegin
   VALIDATE_PARAMETERS( list )
 
   iterator = malloc( sizeof( DListItr ) );
-  if( !iterator )
-    return NULL;
+  VALIDATE_ALLOCATION( iterator )
 
   iterator->list = list;
   iterator->previous = NULL;
@@ -70,8 +68,7 @@ DListItrCopy
   VALIDATE_PARAMETERS( iterator )
 
   copy = malloc( sizeof( DListItr ) );
-  if( !copy )
-    return NULL;
+  VALIDATE_ALLOCATION( copy )
 
   copy->current = iterator->current;
   copy->previous = iterator->previous;
@@ -95,8 +92,7 @@ DListEnd
   VALIDATE_PARAMETERS( list )
 
   iterator = malloc( sizeof( DListItr ) );
-  if( !iterator )
-    return NULL;
+  VALIDATE_ALLOCATION( iterator )
 
   iterator->list = list;
   iterator->previous = list->last;

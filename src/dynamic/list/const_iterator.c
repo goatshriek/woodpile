@@ -14,8 +14,7 @@ DListCBegin
   VALIDATE_PARAMETERS( list )
 
   iterator = malloc( sizeof( DListCItr ) );
-  if( !iterator )
-    return NULL;
+  VALIDATE_ALLOCATION( iterator )
 
   iterator->previous = NULL;
   iterator->current = list->first;
@@ -32,8 +31,7 @@ DListCEnd
   VALIDATE_PARAMETERS( list )
 
   iterator = malloc( sizeof( DListCItr ) );
-  if( !iterator )
-    return NULL;
+  VALIDATE_ALLOCATION( iterator )
 
   iterator->previous = list->last;
   iterator->current = NULL;
@@ -50,8 +48,7 @@ DListCItrCopy
   VALIDATE_PARAMETERS( iterator )
 
   copy = malloc( sizeof( DListCItr ) );
-  if( !copy )
-    return NULL;
+  VALIDATE_ALLOCATION( copy )
 
   copy->current = iterator->current;
   copy->previous = iterator->previous;
