@@ -15,7 +15,7 @@ main( void )
   unsigned failure_count = 0;
   const char *result;
 
-#ifdef __WOODPILE_CONDITIONAL_VALIDATION
+#ifdef __WOODPILE_PARAMETER_VALIDATION
   TEST( AddToNullDynamicSplay )
   TEST( CopyNullDynamicSplay )
   TEST( FirstInNullDynamicSplay )

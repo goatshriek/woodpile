@@ -47,7 +47,7 @@ little extra to avoid forced re-sizes. Will your structure grow/shrink often
 or spend a lot of time empty? Choose a dynamic allocation scheme to avoid large
 allocation costs.
 
-## Parameter Validation
+## Parameter and Allocation Validation
 
 Parameter validation in Woodpile function calls is done one of two ways. The
 default way for parameters to be validated is via the standard `assert` macro
@@ -58,12 +58,12 @@ a smaller library but also reduces the number of checks on parameters (such
 as `NULL` checks) which leads to slightly faster performance.
 
 If `NULL` arguments must be handled in all cases rather than just those
-supported by the library, you can define `__CONDITIONAL_VALIDATION` during
-compilation to cause `NULL` to be returned for invalid parameters rather than
-a system abort. This may be done when library size and performance can be
+supported by the library, you can define `__WOODPILE_PARAMETER_VALIDATION`
+during compilation to cause `NULL` to be returned for invalid parameters rather
+than a system abort. This may be done when library size and performance can be
 traded for less complex calling code, since `NULL` checks can be reduced.
 
 ##### tl;dr
 `assert` calls are used by default and can be removed using `NDEBUG`, but if
 you need invalid parameters to be handled gracefully by the library define
-`__CONDITIONAL_VALIDATION` during compilation instead.
+`__WOODPILE_PARAMETER_VALIDATION` during compilation instead.

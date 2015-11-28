@@ -22,7 +22,7 @@ main( void )
     return EXIT_FAILURE;
   }
 
-#ifdef __WOODPILE_CONDITIONAL_VALIDATION
+#ifdef __WOODPILE_PARAMETER_VALIDATION
   TEST( CBeginWithNullList )
   TEST( CEndWithNullList )
   TEST( CopyNullIterator )

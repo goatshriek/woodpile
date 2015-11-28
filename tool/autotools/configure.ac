@@ -52,13 +52,13 @@ AC_CHECK_HEADER([sys/types.h],
 # Checks for library functions.
 
 # enable arguments
-AC_ARG_ENABLE([conditional-validation],
-              AS_HELP_STRING([--enable-conditional-validation],
-                             [define to have invalid parameters valiated via conditional statements rather than assert calls @<:@default=no@:>@]),
+AC_ARG_ENABLE([parameter-validation],
+              AS_HELP_STRING([--enable-parameter-validation],
+                             [parameters are validated via conditional statements rather than assert calls @<:@default=no@:>@]),
               [],
-              [enable_conditional_validation=no])
-AS_IF([test "x$enable_conditional_validation" = "xyes"],
-      AC_DEFINE([__WOODPILE_CONDITIONAL_VALIDATION],
+              [enable_parameter_validation=no])
+AS_IF([test "x$enable_parameter_validation" = "xyes"],
+      AC_DEFINE([__WOODPILE_PARAMETER_VALIDATION],
                 [1],
                 [define to have parameters validated with conditional expressions rather than assert calls]))
 

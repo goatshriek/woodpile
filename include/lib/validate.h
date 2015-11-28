@@ -12,7 +12,7 @@
  * Performs parameter validation with either the assert macro or conditional
  * and return statements.
  */
-#ifdef __WOODPILE_CONDITIONAL_VALIDATION
+#ifdef __WOODPILE_PARAMETER_VALIDATION
 #define VALIDATE( value )                                                      \
 if( !(value) )                                                                 \
   return NULL;
