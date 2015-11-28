@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include <woodpile/config.h>
 #include <woodpile/dynamic/tree/splay/const_iterator.h>
 
 #include "test/function/dynamic/tree/splay/const_iterator_suite.h"
@@ -21,16 +22,21 @@ main( void )
     return EXIT_FAILURE;
   }
 
-  TEST( CBeginWithEmptyDynamicSplay )
+#ifdef __WOODPILE_CONDITIONAL_VALIDATION
   TEST( CBeginWithNullDynamicSplay )
+  TEST( CEndWithNullDynamicSplay )
+  TEST( CopyNullIterator )
+  TEST( NextWithNullIterator )
+  TEST( PreviousWithNullIterator )
+#endif
+
+  TEST( CBeginWithEmptyDynamicSplay )
   TEST( CBeginWithPopulatedDynamicSplay )
   TEST( CEndWithEmptyDynamicSplay )
-  TEST( CEndWithNullDynamicSplay )
   TEST( CEndWithPopulatedDynamicSplay )
   TEST( Copy )
   TEST( CopyContents )
   TEST( CopyDistinct )
-  TEST( CopyNullIterator )
   TEST( CopyPosition )
   TEST( Destroy )
   TEST( DestroyNullIterator )
@@ -48,12 +54,10 @@ main( void )
   TEST( NextAtEnd )
   TEST( NextAtMiddle )
   TEST( NextWithEmptyDynamicSplay )
-  TEST( NextWithNullIterator )
   TEST( PreviousAtBeginning )
   TEST( PreviousAtEnd )
   TEST( PreviousAtMiddle )
   TEST( PreviousWithEmptyDynamicSplay )
-  TEST( PreviousWithNullIterator )
 
   DSplayDestroy( common_splay );
 

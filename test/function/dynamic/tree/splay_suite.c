@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include <woodpile/config.h>
 #include <woodpile/dynamic/tree/splay.h>
 
 #include "lib/str.h"
@@ -14,10 +15,19 @@ main( void )
   unsigned failure_count = 0;
   const char *result;
 
+#ifdef __WOODPILE_CONDITIONAL_VALIDATION
+  TEST( AddToNullDynamicSplay )
+  TEST( CopyNullDynamicSplay )
+  TEST( FirstInNullDynamicSplay )
+  TEST( LastInNullDynamicSplay )
+  TEST( RemoveFromNullDynamicSplay )
+  TEST( RemoveNullElement )
+  TEST( ToStringWithNullDynamicSplay )
+#endif
+
   TEST( AddDuplicateElement )
   TEST( AddNullElement )
   TEST( AddToEmptyDynamicSplay )
-  TEST( AddToNullDynamicSplay )
   TEST( AddToPopulatedDynamicSplay )
   TEST( ContainsNonExistentElement )
   TEST( ContainsNullElement )
@@ -26,24 +36,19 @@ main( void )
   TEST( Copy )
   TEST( CopyContents )
   TEST( CopyDistinct )
-  TEST( CopyNullDynamicSplay )
   TEST( CopySize )
   TEST( DestroyNullDynamicSplay )
   TEST( DestroyPopulatedDynamicSplay )
   TEST( FirstInEmptyDynamicSplay )
-  TEST( FirstInNullDynamicSplay )
   TEST( FirstInPopulatedDynamicSplay )
   TEST( LastInEmptyDynamicSplay )
-  TEST( LastInNullDynamicSplay )
   TEST( LastInPopulatedDynamicSplay )
   TEST( New )
   TEST( NewWithNullComparator )
   TEST( NewDynamicSplayIsEmpty )
   TEST( NullDynamicSplayIsEmpty )
   TEST( PopulatedDynamicSplayIsNotEmpty )
-  TEST( RemoveFromNullDynamicSplay )
   TEST( RemoveNonExistentElement )
-  TEST( RemoveNullElement )
   TEST( RemoveRootElement )
   TEST( RemoveUniqueElement )
   TEST( SizeOfEmptyDynamicSplay )
@@ -51,7 +56,6 @@ main( void )
   TEST( SizeOfPopulatedDynamicSplay )
   TEST( ToStringWithEmptyDynamicSplay )
   TEST( ToStringWithNullFunction )
-  TEST( ToStringWithNullDynamicSplay )
   TEST( ToStringWithPopulatedDynamicSplay )
 
   if( failure_count > 0 )
@@ -94,9 +98,6 @@ TestAddNullElement
 ( void )
 {
   DSplay *splay;
-
-  if( DSplayAdd( NULL, NULL ) != NULL )
-    return "a non-NULL value was returned when appending NULL to a NULL splay";
 
   splay = BuildDSplay();
   if( !splay )
@@ -608,12 +609,12 @@ TestRemoveNullElement
 {
   DSplay *splay;
 
+  if( DSplayRemove( NULL, NULL ) != NULL )
+    return "NULL was not returned for a NULL splay and NULL element";
+
   splay = BuildDSplay();
   if( !splay )
     return "could not build a populated splay";
-
-  if( DSplayRemove( NULL, NULL ) != NULL )
-    return "NULL was not returned for a NULL splay and element";
 
   if( DSplayRemove( splay, NULL ) != NULL )
     return "NULL was not returned for a non-NULL splay and NULL element";

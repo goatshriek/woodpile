@@ -34,7 +34,7 @@ typedef struct DynamicSplayIterator DSplayItr;
  * Creates a new DynamicSplayIterator for the DynamicSplay provided. The
  * iterator will begin at the beginning of the DynamicSplay.
  *
- * @param splay the DynamicSplay to get an iterator for
+ * @param splay the DynamicSplay to get an iterator for. Must not be NULL.
  *
  * @return a DynamicSplayIterator for the provided DynamicSplay. If splay is NULL
  * or invalid then NULL is returned.
@@ -48,7 +48,7 @@ BeginDynamicSplay
  * Creates a copy of a DynamicSplayIterator. The position of the copy will be
  * the same as the original at the time of the copy.
  *
- * @param iterator the DynamicSplayIterator to copy
+ * @param iterator the DynamicSplayIterator to copy. Must not be NULL.
  *
  * @return a copy of the original DynamicSplayIterator
  */
@@ -75,7 +75,7 @@ DestroyDynamicSplayIterator
  * the last element of the DynamicSplay and advance the iterator pointer
  * backwards one step.
  *
- * @param splay the DynamicSplay to get an iterator for
+ * @param splay the DynamicSplay to get an iterator for. Must not be NULL.
  *
  * @return a DynamicSplayIterator for splay. If splay is NULL or invalid then
  * NULL is returned.
@@ -115,7 +115,7 @@ DynamicSplayIteratorHasPrevious
  * returned. The current index of the iterator is advanced forward by one as a
  * result of this function call.
  *
- * @param iterator the iterator to retrieve the next value of
+ * @param iterator the iterator to retrieve the next value of. Must not be NULL.
  *
  * @return the next value of the iterator, or NULL if there is not one
  */
@@ -130,7 +130,8 @@ NextInDynamicSplayIterator
  * returned. The current index of the iterator is advanced backwards by one as a
  * result of this function call.
  *
- * @param iterator the iterator to retrieve the previous value of
+ * @param iterator the iterator to retrieve the previous value of. Must not be
+ * NULL.
  *
  * @return the previous value of the iterator, or NULL if there is not one
  */
@@ -145,7 +146,8 @@ PreviousInDynamicSplayIterator
  * be done once per call to either function. An element close to the removed
  * element is splayed to the root of the tree after removal.
  *
- * @param iterator the DynamicSplayIterator to remove the value from
+ * @param iterator the DynamicSplayIterator to remove the value from. Must not
+ * be NULL.
  *
  * @return the element removed
  */
