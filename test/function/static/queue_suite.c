@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include <woodpile/config.h>
 #include <woodpile/static/queue.h>
 
 #include "test/function/static/queue_suite.h"
@@ -14,6 +15,13 @@ main
   unsigned failure_count = 0;
   const char *result;
 
+#ifdef __WOODPILE_CONDITIONAL_VALIDATION
+  TEST( CopyNullQueue )
+  TEST( PopFromNullQueue )
+  TEST( PushNullValue )
+  TEST( PushToNullQueue )
+#endif
+
   TEST( ContainsDuplicateValues )
   TEST( ContainsNonExistentValue )
   TEST( ContainsNullValue )
@@ -22,7 +30,6 @@ main
   TEST( Copy )
   TEST( CopyContents )
   TEST( CopyDistinct )
-  TEST( CopyNullQueue )
   TEST( CopySize )
   TEST( DestroyNullQueue )
   TEST( DestroyPopulatedQueue )
@@ -34,12 +41,9 @@ main
   TEST( PeekAtNullQueue )
   TEST( PeekAtPopulatedQueue )
   TEST( PopFromEmptyQueue )
-  TEST( PopFromNullQueue )
   TEST( PopFromPopulatedQueue )
   TEST( PopRemovesValue )
-  TEST( PushNullValue )
   TEST( PushToEmptyQueue )
-  TEST( PushToNullQueue )
   TEST( PushToPopulatedQueue )
   TEST( RemoveDuplicateValues )
   TEST( RemoveFromNullQueue )
