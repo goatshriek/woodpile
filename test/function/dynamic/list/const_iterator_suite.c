@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include <woodpile/config.h>
 #include <woodpile/dynamic/list/const_iterator.h>
 
 #include "test/function/dynamic/list/const_iterator_suite.h"
