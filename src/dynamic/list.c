@@ -12,7 +12,7 @@ DListAppendAll
 {
   Node *node, *previous=NULL, *temp;
 
-  VALIDATE_PARAMETER( first )
+  VALIDATE_PARAMETERS( first )
 
   if( !second )
     return first;
@@ -35,7 +35,7 @@ DListAppend
 {
   Node *node;
 
-  VALIDATE_PARAMETER( list )
+  VALIDATE_PARAMETERS( list )
 
   if( !element )
     return list;
@@ -64,7 +64,7 @@ DListCopy
   DList *copy;
   Node *node, *previous=NULL, *temp;
 
-  VALIDATE_PARAMETER( list )
+  VALIDATE_PARAMETERS( list )
 
   copy = DListNew();
   node = list->first;
@@ -106,7 +106,7 @@ void *
 DListBack
 ( const DList *list )
 {
-  VALIDATE_PARAMETER( list )
+  VALIDATE_PARAMETERS( list )
 
   if( list->last )
     return list->last->element;
@@ -141,7 +141,7 @@ void *
 DListFront
 ( const DList *list )
 {
-  VALIDATE_PARAMETER( list )
+  VALIDATE_PARAMETERS( list )
 
   if( list->first )
     return list->first->element;
@@ -220,7 +220,7 @@ DListToString
   const Node *current, *next, *previous=NULL;
   size_t element_length, str_capacity=100, str_length=1;
 
-  VALIDATE_PARAMETER( list )
+  VALIDATE_PARAMETERS( list )
 
   if( !element_to_string )
     element_to_string = strpointer;
@@ -283,7 +283,7 @@ DListPrepend
 {
   Node *node;
 
-  VALIDATE_PARAMETER( list )
+  VALIDATE_PARAMETERS( list )
 
   node = malloc( sizeof( Node ) );
   if( !node )

@@ -13,7 +13,7 @@ DSplayAdd
   int comparison;
   Node *current_node, *new_node, *parent;
 
-  VALIDATE_PARAMETER( splay )
+  VALIDATE_PARAMETERS( splay )
 
   if( !element )
     return splay;
@@ -79,7 +79,7 @@ DSplayCopy
 {
   DSplay *copy;
 
-  VALIDATE_PARAMETER( splay )
+  VALIDATE_PARAMETERS( splay )
 
   copy = malloc( sizeof( DSplay ) );
   if( !copy )
@@ -111,7 +111,7 @@ DSplayFirst
   Node *node;
   void *element = NULL;
 
-  VALIDATE_PARAMETER( splay )
+  VALIDATE_PARAMETERS( splay )
 
   if( !splay->root )
     return NULL;
@@ -131,7 +131,7 @@ DSplayLast
   Node *node;
   void *element = NULL;
 
-  VALIDATE_PARAMETER( splay )
+  VALIDATE_PARAMETERS( splay )
 
   if( !splay->root )
     return NULL;
@@ -170,7 +170,7 @@ DSplayToString
   const Node *current, *next;
   size_t element_length, str_capacity=100, str_length=1;
 
-  VALIDATE_PARAMETER( splay )
+  VALIDATE_PARAMETERS( splay )
 
   if( !element_to_string )
     element_to_string = strpointer;
@@ -242,7 +242,7 @@ DSplayRemove
   int comparison;
   void *removed;
 
-  VALIDATE_PARAMETER( splay && element )
+  VALIDATE_PARAMETERS( splay && element )
 
   parent = NULL;
   node = splay->root;

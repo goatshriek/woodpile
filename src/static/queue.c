@@ -10,7 +10,7 @@ SQueueCopy
 {
   SQueue *copy;
 
-  VALIDATE_PARAMETER( original )
+  VALIDATE_PARAMETERS( original )
 
   copy = malloc( sizeof( SQueue ) );
   if( !copy )
@@ -83,7 +83,7 @@ SQueuePop
 {
   void *value;
 
-  VALIDATE_PARAMETER( queue && queue->elements )
+  VALIDATE_PARAMETERS( queue && queue->elements )
 
   if( queue->front == queue->back )
     return NULL;
@@ -101,7 +101,7 @@ SQueuePush
 {
   size_t new_back;
 
-  VALIDATE_PARAMETER( queue && element )
+  VALIDATE_PARAMETERS( queue && element )
 
   new_back = (queue->back + 1) % queue->capacity;
   if( new_back == queue->front )

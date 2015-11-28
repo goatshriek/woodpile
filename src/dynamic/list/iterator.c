@@ -48,7 +48,7 @@ DListBegin
 {
   DListItr *iterator;
 
-  VALIDATE_PARAMETER( list )
+  VALIDATE_PARAMETERS( list )
 
   iterator = malloc( sizeof( DListItr ) );
   if( !iterator )
@@ -67,7 +67,7 @@ DListItrCopy
 {
   DListItr *copy;
 
-  VALIDATE_PARAMETER( iterator )
+  VALIDATE_PARAMETERS( iterator )
 
   copy = malloc( sizeof( DListItr ) );
   if( !copy )
@@ -92,7 +92,7 @@ DListEnd
 {
   DListItr *iterator;
 
-  VALIDATE_PARAMETER( list )
+  VALIDATE_PARAMETERS( list )
 
   iterator = malloc( sizeof( DListItr ) );
   if( !iterator )
@@ -126,7 +126,7 @@ DListItrNext
   Node *temp;
   void *element;
 
-  VALIDATE_PARAMETER( iterator )
+  VALIDATE_PARAMETERS( iterator )
 
   if( !iterator->current )
     return NULL;
@@ -148,7 +148,7 @@ DListItrPrevious
   Node *temp;
   void *element;
 
-  VALIDATE_PARAMETER( iterator )
+  VALIDATE_PARAMETERS( iterator )
 
   if( !iterator->previous )
     return NULL;
@@ -170,7 +170,7 @@ DListItrRemove
   Node *left_neighbor, *removed, *right_neighbor;
   void *element;
 
-  VALIDATE_PARAMETER( iterator )
+  VALIDATE_PARAMETERS( iterator )
 
   switch( iterator->direction ){
     case 1:

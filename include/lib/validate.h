@@ -13,12 +13,12 @@
  * and return statements.
  */
 #ifdef __WOODPILE_PARAMETER_VALIDATION
-#define VALIDATE_PARAMETER( value )                                            \
+#define VALIDATE_PARAMETERS( value )                                           \
 if( !(value) )                                                                 \
   return NULL;
 #else
 #include <assert.h>
-#define VALIDATE_PARAMETER( value ) assert( value );
+#define VALIDATE_PARAMETERS( value ) assert( value );
 #endif
 
 #endif
