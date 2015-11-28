@@ -10,7 +10,7 @@ SStackCopy
   SStack *copy;
   unsigned i;
 
-  VALIDATE( stack )
+  VALIDATE_PARAMETER( stack )
 
   copy = malloc( sizeof( SStack ) );
   if( !copy )
@@ -70,7 +70,7 @@ void *
 SStackPeek
 ( const SStack *stack )
 {
-  VALIDATE( stack )
+  VALIDATE_PARAMETER( stack )
 
   if( stack->top == 0 )
     return NULL;
@@ -82,7 +82,7 @@ void *
 SStackPop
 ( SStack *stack )
 {
-  VALIDATE( stack )
+  VALIDATE_PARAMETER( stack )
 
   if( stack->top == 0 )
     return NULL;
@@ -94,7 +94,7 @@ SStack *
 SStackPush
 ( SStack *stack, void *value )
 {
-  VALIDATE( stack )
+  VALIDATE_PARAMETER( stack )
 
   if( stack->top == stack->capacity )
     if( !Resize( stack ) )
@@ -161,7 +161,7 @@ Resize
   unsigned i;
   void **new_array;
 
-  VALIDATE( stack )
+  VALIDATE_PARAMETER( stack )
 
   stack->capacity *= 2;
 

@@ -11,7 +11,7 @@ DSplayBegin
   DSplayItr *itr;
   Node *current;
 
-  VALIDATE( splay )
+  VALIDATE_PARAMETER( splay )
 
   itr = malloc( sizeof( DSplayItr ) );
   if( !itr )
@@ -37,7 +37,7 @@ DSplayItrCopy
 {
   DSplayItr *copy;
 
-  VALIDATE( iterator )
+  VALIDATE_PARAMETER( iterator )
 
   copy = malloc( sizeof( DSplayItr ) );
   if( !copy )
@@ -67,7 +67,7 @@ DSplayEnd
   DSplayItr *itr;
   Node *current;
 
-  VALIDATE( splay )
+  VALIDATE_PARAMETER( splay )
 
   itr = malloc( sizeof( DSplayItr ) );
   if( !itr )
@@ -105,7 +105,7 @@ void *
 DSplayItrNext
 ( DSplayItr *iterator )
 {
-  VALIDATE( iterator )
+  VALIDATE_PARAMETER( iterator )
 
   if( !iterator->current )
     return NULL;
@@ -121,7 +121,7 @@ void *
 DSplayItrPrevious
 ( DSplayItr *iterator )
 {
-  VALIDATE( iterator )
+  VALIDATE_PARAMETER( iterator )
 
   if( !iterator->previous )
     return NULL;
@@ -140,7 +140,7 @@ DSplayItrRemove
   Node *removed, *root;
   void *element;
 
-  VALIDATE( iterator )
+  VALIDATE_PARAMETER( iterator )
 
   switch( iterator->direction ){
     case 1:

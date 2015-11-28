@@ -11,7 +11,7 @@ DSplayCBegin
   DSplayCItr *itr;
   const Node *current;
 
-  VALIDATE( splay )
+  VALIDATE_PARAMETER( splay )
 
   itr = malloc( sizeof( DSplayCItr ) );
   if( !itr )
@@ -36,7 +36,7 @@ DSplayCEnd
   DSplayCItr *itr;
   const Node *current;
 
-  VALIDATE( splay )
+  VALIDATE_PARAMETER( splay )
 
   itr = malloc( sizeof( DSplayCItr ) );
   if( !itr )
@@ -60,7 +60,7 @@ DSplayCItrCopy
 {
   DSplayCItr *copy;
 
-  VALIDATE( iterator )
+  VALIDATE_PARAMETER( iterator )
 
   copy = malloc( sizeof( DSplayCItr ) );
   if( !copy )
@@ -99,7 +99,7 @@ const void *
 DSplayCItrNext
 ( DSplayCItr *iterator )
 {
-  VALIDATE( iterator )
+  VALIDATE_PARAMETER( iterator )
 
   if( !iterator->current )
     return NULL;
@@ -114,7 +114,7 @@ const void *
 DSplayCItrPrevious
 ( DSplayCItr *iterator )
 {
-  VALIDATE( iterator )
+  VALIDATE_PARAMETER( iterator )
 
   if( !iterator->previous )
     return NULL;

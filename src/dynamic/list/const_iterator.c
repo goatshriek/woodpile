@@ -11,7 +11,7 @@ DListCBegin
 {
   DListCItr *iterator;
 
-  VALIDATE( list )
+  VALIDATE_PARAMETER( list )
 
   iterator = malloc( sizeof( DListCItr ) );
   if( !iterator )
@@ -29,7 +29,7 @@ DListCEnd
 {
   DListCItr *iterator;
 
-  VALIDATE( list )
+  VALIDATE_PARAMETER( list )
 
   iterator = malloc( sizeof( DListCItr ) );
   if( !iterator )
@@ -47,7 +47,7 @@ DListCItrCopy
 {
   DListCItr *copy;
 
-  VALIDATE( iterator )
+  VALIDATE_PARAMETER( iterator )
 
   copy = malloc( sizeof( DListCItr ) );
   if( !copy )
@@ -87,7 +87,7 @@ DListCItrNext
   const Node *temp;
   const void *element;
 
-  VALIDATE( iterator )
+  VALIDATE_PARAMETER( iterator )
 
   if( !iterator->current )
     return NULL;
@@ -108,7 +108,7 @@ DListCItrPrevious
   const Node *temp;
   const void *element;
 
-  VALIDATE( iterator )
+  VALIDATE_PARAMETER( iterator )
 
   if( !iterator->previous )
     return NULL;
