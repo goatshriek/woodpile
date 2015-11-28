@@ -62,5 +62,15 @@ AS_IF([test "x$enable_parameter_validation" = "xyes"],
                 [1],
                 [define to have parameters validated with conditional expressions rather than assert calls]))
 
+AC_ARG_ENABLE([allocation-validation],
+              AS_HELP_STRING([--enable-allocation-validation],
+                             [memory allocation requests are validated via conditional statements rather than assert calls @<:@default=no@:>@]),
+              [],
+              [enable_allocation_validation=no])
+AS_IF([test "x$enable_allocation_validation" = "xyes"],
+      AC_DEFINE([__WOODPILE_ALLOCATION_VALIDATION],
+                [1],
+                [define to have memory allocation requests validated with conditional expressions rather than assert calls]))
+
 
 AC_OUTPUT
