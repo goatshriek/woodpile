@@ -21,16 +21,21 @@ main( void )
     return EXIT_FAILURE;
   }
 
-  TEST( CBeginWithEmptyList )
+#ifdef __WOODPILE_CONDITIONAL_VALIDATION
   TEST( CBeginWithNullList )
+  TEST( CEndWithNullList )
+  TEST( CopyNullIterator )
+  TEST( NextWithNullIterator )
+  TEST( PreviousWithNullIterator )
+#endif
+
+  TEST( CBeginWithEmptyList )
   TEST( CBeginWithPopulatedList )
   TEST( CEndWithEmptyList )
-  TEST( CEndWithNullList )
   TEST( CEndWithPopulatedList )
   TEST( Copy )
   TEST( CopyContents )
   TEST( CopyDistinct )
-  TEST( CopyNullIterator )
   TEST( CopyPosition )
   TEST( Destroy )
   TEST( DestroyNullIterator )
@@ -48,12 +53,10 @@ main( void )
   TEST( NextAtEnd )
   TEST( NextAtMiddle )
   TEST( NextWithEmptyList )
-  TEST( NextWithNullIterator )
   TEST( PreviousAtBeginning )
   TEST( PreviousAtEnd )
   TEST( PreviousAtMiddle )
   TEST( PreviousWithEmptyList )
-  TEST( PreviousWithNullIterator )
 
   DListDestroy( common_list );
 

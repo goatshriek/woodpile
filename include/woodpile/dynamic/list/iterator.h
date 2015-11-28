@@ -57,7 +57,7 @@ AddToDynamicListIterator
  * Creates a new DynamicListIterator for the DynamicList provided. The iterator
  * will begin at the beginning of the DynamicList.
  *
- * @param list the DynamicList to get an iterator for
+ * @param list the DynamicList to get an iterator for. Must not be NULL.
  *
  * @return a DynamicListIterator for the provided DynamicList. If list is NULL
  * or invalid then NULL is returned.
@@ -71,7 +71,7 @@ BeginDynamicList
  * Creates a copy of a DynamicListIterator. The position of the copy will be the
  * same as the original at the time of the copy.
  *
- * @param iterator the DynamicListIterator to copy
+ * @param iterator the DynamicListIterator to copy. Must not be NULL.
  *
  * @return a copy of the original DynamicListIterator
  */
@@ -97,7 +97,7 @@ DestroyDynamicListIterator
  * element of the iterator will return NULL, while previous will return the last
  * element of the DynamicList and advance the iterator pointer backwards one step.
  *
- * @param list the DynamicList to get an iterator for
+ * @param list the DynamicList to get an iterator for. Must not be NULL.
  *
  * @return a DynamicListIterator for list. If list is NULL or invalid then NULL
  * is returned.
@@ -137,7 +137,7 @@ DynamicListIteratorHasPrevious
  * returned. The current index of the iterator is advanced forward by one as a
  * result of this function call.
  *
- * @param iterator the iterator to retrieve the next value of
+ * @param iterator the iterator to retrieve the next value of. Must not be NULL.
  *
  * @return the next value of the iterator, or NULL if there is not one
  */
@@ -152,7 +152,8 @@ NextInDynamicListIterator
  * returned. The current index of the iterator is advanced backwards by one as a
  * result of this function call.
  *
- * @param iterator the iterator to retrieve the previous value of
+ * @param iterator the iterator to retrieve the previous value of. Must not be
+ * NULL.
  *
  * @return the previous value of the iterator, or NULL if there is not one
  */
@@ -167,7 +168,8 @@ PreviousInDynamicListIterator
  * done once per call to either function, and only if a call to
  * AddToDynamicListIterator has not been made since then.
  *
- * @param iterator the DynamicListIterator to remove the value from
+ * @param iterator the DynamicListIterator to remove the value from. Must not be
+ * NULL.
  *
  * @return the element removed
  */

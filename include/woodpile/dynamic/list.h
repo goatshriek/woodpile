@@ -30,9 +30,9 @@ typedef struct DynamicList DList;
 /**
  * Appends all elements in the second DynamicList to the end of the first. The
  * second list is not changed as a result of the operation. The elements are
- * appended in the order they exist in the second DynamicList..
+ * appended in the order they exist in the second DynamicList.
  *
- * @param first the DynamicList to append to
+ * @param first the DynamicList to append to. Must not be NULL.
  * @param second the DynamicList to append
  *
  * @return first
@@ -46,7 +46,7 @@ AppendAllToDynamicList
  * Adds a single element to the end of a DynamicList. If element is NULL then
  * nothing is done.
  *
- * @param list the DynamicList to append to
+ * @param list the DynamicList to append to. Must not be NULL.
  * @param element the element to append
  * 
  * @return list
@@ -62,7 +62,7 @@ AppendToDynamicList
  * will also change the elements in the copy. Changes made to the original
  * DynamicList will not affect the copy.
  *
- * @param list the DynamicList to copy
+ * @param list the DynamicList to copy. Must not be NULL.
  * 
  * @return a copy of the original DynamicList or NULL on failure
  */
@@ -84,7 +84,7 @@ DestroyDynamicList
 /**
  * Gets the last element in the DynamicList.
  *
- * @param list the DynamicList to get the element from
+ * @param list the DynamicList to get the element from. Must not be NULL.
  *
  * @return the last element of list, or NULL if list is empty
  */
@@ -113,7 +113,7 @@ DynamicListContains
 /**
  * Gets the first element in the DynamicList.
  *
- * @param list the DynamicList to get the element from
+ * @param list the DynamicList to get the element from. Must not be NULL.
  *
  * @return the first element of list, or NULL if list is empty
  */
@@ -187,7 +187,7 @@ DynamicListSize
  * string literals, then the function must return a copy of the string rather
  * than the string itself.
  *
- * @param list the DynamicList to get a representation of
+ * @param list the DynamicList to get a representation of. Must not be NULL.
  * @param element_to_string a function returning string representations of
  * elements
  *
@@ -212,7 +212,7 @@ NewDynamicList
  * Adds a single element to the beginning of a DynamicList. If element is NULL
  * then nothing is done.
  *
- * @param list the DynamicList to prepend to
+ * @param list the DynamicList to prepend to. Must not be NULL.
  * @param element the element to prepend
  * 
  * @return list

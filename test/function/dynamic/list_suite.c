@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include <woodpile/config.h>
 #include <woodpile/dynamic/list.h>
 
 #include "lib/str.h"
@@ -14,16 +15,23 @@ main( void )
   unsigned failure_count = 0;
   const char *result;
 
+#ifdef __WOODPILE_CONDITIONAL_VALIDATION
+  TEST( AppendAllToNullList )
+  TEST( AppendToNullList )
+  TEST( BackOfNullList )
+  TEST( CopyNullList )
+  TEST( FrontOfNullList )
+  TEST( PrependToNullList )
+  TEST( ToStringWithNullList )
+#endif
+
   TEST( AppendAllOfEmptyList )
   TEST( AppendAllOfNullList )
   TEST( AppendAllOfPopulatedList )
-  TEST( AppendAllToNullList )
   TEST( AppendNullElement )
   TEST( AppendToEmptyList )
-  TEST( AppendToNullList )
   TEST( AppendToPopulatedList )
   TEST( BackOfEmptyList )
-  TEST( BackOfNullList )
   TEST( BackOfPopulatedList )
   TEST( ContainsDuplicateElements )
   TEST( ContainsNonExistentElement )
@@ -33,12 +41,10 @@ main( void )
   TEST( Copy )
   TEST( CopyContents )
   TEST( CopyDistinct )
-  TEST( CopyNullList )
   TEST( CopySize )
   TEST( DestroyNullList )
   TEST( DestroyPopulatedList )
   TEST( FrontOfEmptyList )
-  TEST( FrontOfNullList )
   TEST( FrontOfPopulatedList )
   TEST( GetFromEmptyList )
   TEST( GetFromNullList )
@@ -53,14 +59,12 @@ main( void )
   TEST( PopulatedListIsNotEmpty )
   TEST( PrependNullElement )
   TEST( PrependToEmptyList )
-  TEST( PrependToNullList )
   TEST( PrependToPopulatedList )
   TEST( SizeOfEmptyList )
   TEST( SizeOfNullList )
   TEST( SizeOfPopulatedList )
   TEST( ToStringWithEmptyList )
   TEST( ToStringWithNullFunction )
-  TEST( ToStringWithNullList )
   TEST( ToStringWithPopulatedList )
 
   if( failure_count > 0 )
@@ -170,9 +174,6 @@ TestAppendNullElement
 ( void )
 {
   DList *list;
-
-  if( DListAppend( NULL, NULL ) != NULL )
-    return "a non-NULL value was returned when appending NULL to a NULL List";
 
   list = BuildDList();
   if( !list )
@@ -357,9 +358,6 @@ TestContainsNullElement
 ( void )
 {
   const DList *list;
-
-  if( DListContains( NULL, NULL ) != 0 )
-    return "a NULL element and List did not return 0";
 
   list = BuildDList();
   if( !list )
@@ -844,9 +842,6 @@ TestPrependNullElement
 ( void )
 {
   DList *list;
-
-  if( DListPrepend( NULL, NULL ) != NULL )
-    return "a non-NULL value was returned when prepending NULL to a NULL List";
 
   list = BuildDList();
   if( !list )
