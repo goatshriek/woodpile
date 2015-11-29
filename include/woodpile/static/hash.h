@@ -34,7 +34,7 @@ typedef void ( *hasher_t )( const void * );
  * elements in the copy. Changes made to the original hash will not affect the
  * copy.
  *
- * @param hash the SHash to copy
+ * @param hash the SHash to copy. Must not be NULL.
  *
  * @return the copy of the original SHash or NULL on failure
  */
@@ -57,8 +57,8 @@ DestroyStaticHash
  * Retrieves the value mapped to a given key. If the key does not exist in the
  * hash, then NULL is returned.
  *
- * @param hash the SHash to query
- * @param key the key that the requested value is mapped to
+ * @param hash the SHash to query. Must not be NULL.
+ * @param key the key that the requested value is mapped to. Must not be NULL.
  *
  * @return the value mapped to the provided key, or NULL if there is no such
  * value
@@ -102,9 +102,9 @@ NewSizedStaticHash
  * This previous value is returned if it exists. NULL key and value arguments
  * will ignored and the function will return NULL.
  *
- * @param hash the SHash to set the key for
- * @param key the value to use as the key
- * @param value the value to associate with the key
+ * @param hash The SHash to set the key for. Must not be NULL.
+ * @param key The value to use as the key. Must not be NULL.
+ * @param value The value to associate with the key. Must not be NULL.
  *
  * @return value, if the key was properly set and no equivalent key was already
  * set. If the key was already associated with a value, that value is returned.
@@ -118,8 +118,8 @@ PutIntoStaticHash
  * Removes the element mapped to the given key. If there is no such element,
  * then the hash is left unchanged.
  *
- * @param hash the SHash to remove the element from
- * @param key the key mapped to the value to remove
+ * @param hash The SHash to remove the element from. Must not be NULL.
+ * @param key The key mapped to the value to remove. Must not be NULL.
  *
  * @return the removed element, or NULL if there was not an element to remove
  */
@@ -131,8 +131,8 @@ RemoveFromStaticHash
 /**
  * Sets the hashing function for an SHash.
  *
- * @param hash the SHash to set the function for
- * @param hasher the hashing function to use
+ * @param hash The SHash to set the function for. Must not be NULL.
+ * @param hasher The hashing function to use. Must not be NULL.
  */
 void
 SetStaticHashHasher
@@ -142,7 +142,7 @@ SetStaticHashHasher
 /**
  * Gets the current capacity of the SHash.
  *
- * @param hash the SHash to get the capacity of
+ * @param hash The SHash to get the capacity of. Must not be NULL.
  *
  * @return the current capacity of the SHash
  */
@@ -157,8 +157,8 @@ StaticHashCapacity
  * multiple times (therefore with multiple keys), there is no guarantee of which
  * key will be returned or that the same key will be returned each time.
  *
- * @param hash the SHash to search
- * @param value the value to search for
+ * @param hash The SHash to search. Must not be NULL.
+ * @param value The value to search for. Must not be NULL.
  *
  * @return a key for the value if it is in the hash, or NULL if not
  */
@@ -195,7 +195,7 @@ StaticHashSize
  * Creates a string representation of the given SHash, using the provided
  * function to get the string representation of each element.
  *
- * @param hash the SHash to get a representation of
+ * @param hash the SHash to get a representation of. Must not be NULL.
  * @param element_to_string a function returining string representations of
  * elements
  *
@@ -209,7 +209,7 @@ StaticHashToString
 /**
  * Changes a SHash's capacity, specifically the number of buckets.
  *
- * @param hash the SHash to resize
+ * @param hash the SHash to resize. Must not be NULL.
  * @param capacity the new capacity of the SHash
  *
  * @return the SHash having been resized
