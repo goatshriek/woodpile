@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <woodpile/static/stack.h>
+#include "lib/validate.h"
 #include "private/static/stack.h"
 
 SStack *
@@ -9,17 +10,14 @@ SStackCopy
   SStack *copy;
   unsigned i;
 
-  if( !stack )
-    return NULL;
+  VALIDATE_PARAMETERS( stack )
 
   copy = malloc( sizeof( SStack ) );
-  if( !copy )
-    return NULL;
+  VALIDATE_ALLOCATION( copy )
 
   copy->capacity = stack->capacity;
   copy->values = malloc( sizeof( void * ) * copy->capacity );
-  if( !copy->values )
-    return NULL;
+  VALIDATE_ALLOCATION( copy->values )
 
   for( i = 0; i < stack->top; i++ )
     copy->values[i] = stack->values[i];
@@ -54,13 +52,11 @@ SStackNew
   SStack *stack;
 
   stack = malloc( sizeof( SStack ) );
-  if( !stack )
-    return NULL;
+  VALIDATE_ALLOCATION( stack )
 
   stack->capacity = 10;
   stack->values = malloc( sizeof( void * ) * stack->capacity );
-  if( !stack->values )
-    return NULL;
+  VALIDATE_ALLOCATION( stack->values )
   stack->top = 0;
 
   return stack;
@@ -70,28 +66,31 @@ void *
 SStackPeek
 ( const SStack *stack )
 {
-  if( !stack || stack->top == 0 )
-    return NULL;
+  VALIDATE_PARAMETERS( stack )
 
-  return stack->values[stack->top - 1];
+  if( stack->top == 0 )
+    return NULL;
+  else
+    return stack->values[stack->top - 1];
 }
 
 void *
 SStackPop
 ( SStack *stack )
 {
-  if( !stack || stack->top == 0 )
-    return NULL;
+  VALIDATE_PARAMETERS( stack )
 
-  return stack->values[--stack->top];
+  if( stack->top == 0 )
+    return NULL;
+  else
+    return stack->values[--stack->top];
 }
 
 SStack *
 SStackPush
 ( SStack *stack, void *value )
 {
-  if( !stack )
-    return NULL;
+  VALIDATE_PARAMETERS( stack )
 
   if( stack->top == stack->capacity )
     if( !Resize( stack ) )
@@ -158,11 +157,12 @@ Resize
   unsigned i;
   void **new_array;
 
+  VALIDATE_PARAMETERS( stack )
+
   stack->capacity *= 2;
 
   new_array = malloc( sizeof( void * ) * stack->capacity );
-  if( !new_array )
-    return NULL;
+  VALIDATE_ALLOCATION( new_array )
 
   for( i = 0; i < stack->top; i++ )
     new_array[i] = stack->values[i];

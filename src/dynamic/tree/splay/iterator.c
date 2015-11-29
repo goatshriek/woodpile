@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <woodpile/dynamic/tree/splay/iterator.h>
+#include "lib/validate.h"
 #include "private/dynamic/tree/splay.h"
 #include "private/dynamic/tree/splay/iterator.h"
 
@@ -10,12 +11,10 @@ DSplayBegin
   DSplayItr *itr;
   Node *current;
 
-  if( !splay )
-    return NULL;
+  VALIDATE_PARAMETERS( splay )
 
   itr = malloc( sizeof( DSplayItr ) );
-  if( !itr )
-    return NULL;
+  VALIDATE_ALLOCATION( itr )
 
   itr->splay = splay;
   itr->current = NULL;
@@ -37,12 +36,10 @@ DSplayItrCopy
 {
   DSplayItr *copy;
 
-  if( !iterator )
-    return NULL;
+  VALIDATE_PARAMETERS( iterator )
 
   copy = malloc( sizeof( DSplayItr ) );
-  if( !copy )
-    return NULL;
+  VALIDATE_ALLOCATION( copy )
 
   copy->splay = iterator->splay;
   copy->previous = iterator->previous;
@@ -68,12 +65,10 @@ DSplayEnd
   DSplayItr *itr;
   Node *current;
 
-  if( !splay )
-    return NULL;
+  VALIDATE_PARAMETERS( splay )
 
   itr = malloc( sizeof( DSplayItr ) );
-  if( !itr )
-    return NULL;
+  VALIDATE_ALLOCATION( itr )
 
   itr->splay = splay;
   itr->current = NULL;
@@ -107,7 +102,9 @@ void *
 DSplayItrNext
 ( DSplayItr *iterator )
 {
-  if( !iterator || !iterator->current )
+  VALIDATE_PARAMETERS( iterator )
+
+  if( !iterator->current )
     return NULL;
 
   iterator->previous = iterator->current;
@@ -121,7 +118,9 @@ void *
 DSplayItrPrevious
 ( DSplayItr *iterator )
 {
-  if( !iterator || !iterator->previous )
+  VALIDATE_PARAMETERS( iterator )
+
+  if( !iterator->previous )
     return NULL;
 
   iterator->current = iterator->previous;
@@ -138,8 +137,7 @@ DSplayItrRemove
   Node *removed, *root;
   void *element;
 
-  if( !iterator )
-    return NULL;
+  VALIDATE_PARAMETERS( iterator )
 
   switch( iterator->direction ){
     case 1:

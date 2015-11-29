@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <woodpile/dynamic/tree/splay/const_iterator.h>
+#include "lib/validate.h"
 #include "private/dynamic/tree/splay.h"
 #include "private/dynamic/tree/splay/const_iterator.h"
 
@@ -10,12 +11,10 @@ DSplayCBegin
   DSplayCItr *itr;
   const Node *current;
 
-  if( !splay )
-    return NULL;
+  VALIDATE_PARAMETERS( splay )
 
   itr = malloc( sizeof( DSplayCItr ) );
-  if( !itr )
-    return NULL;
+  VALIDATE_ALLOCATION( itr )
 
   itr->current = NULL;
   itr->previous = NULL;
@@ -36,12 +35,10 @@ DSplayCEnd
   DSplayCItr *itr;
   const Node *current;
 
-  if( !splay )
-    return NULL;
+  VALIDATE_PARAMETERS( splay )
 
   itr = malloc( sizeof( DSplayCItr ) );
-  if( !itr )
-    return NULL;
+  VALIDATE_ALLOCATION( itr )
 
   itr->current = NULL;
   itr->previous = NULL;
@@ -61,12 +58,10 @@ DSplayCItrCopy
 {
   DSplayCItr *copy;
 
-  if( !iterator )
-    return NULL;
+  VALIDATE_PARAMETERS( iterator )
 
   copy = malloc( sizeof( DSplayCItr ) );
-  if( !copy )
-    return NULL;
+  VALIDATE_ALLOCATION( copy )
 
   copy->previous = iterator->previous;
   copy->current = iterator->current;
@@ -101,7 +96,9 @@ const void *
 DSplayCItrNext
 ( DSplayCItr *iterator )
 {
-  if( !iterator || !iterator->current )
+  VALIDATE_PARAMETERS( iterator )
+
+  if( !iterator->current )
     return NULL;
 
   iterator->previous = iterator->current;
@@ -114,7 +111,9 @@ const void *
 DSplayCItrPrevious
 ( DSplayCItr *iterator )
 {
-  if( !iterator || !iterator->previous )
+  VALIDATE_PARAMETERS( iterator )
+
+  if( !iterator->previous )
     return NULL;
 
   iterator->current = iterator->previous;

@@ -29,7 +29,7 @@ typedef struct StaticQueue SQueue;
  * elements in the copy. Changes made to the original Queue will not affect the
  * copy.
  *
- * @param queue the Queue to copy
+ * @param queue the Queue to copy. Must not be NULL.
  *
  * @return the copy of the original Queue or NULL on failure
  */
@@ -85,7 +85,7 @@ PeekAtStaticQueue
 /**
  * Removes the front element from the Queue and returns it.
  *
- * @param queue the Queue to pull the front value from
+ * @param queue the Queue to pull the front value from. Must not be NULL.
  *
  * @return the front value of the Queue, or NULL on failure
  */
@@ -98,8 +98,8 @@ PopFromStaticQueue
  * Puts an element at the back of the Queue. If the Queue or value passed are
  * NULL then no action is taken and NULL is returned.
  *
- * @param queue the Queue to push to
- * @param value the value to push to the Queue
+ * @param queue the Queue to push to. Must not be NULL.
+ * @param value the value to push to the Queue. Must not be NULL.
  *
  * @return the Queue pushed to, or NULL on failure
  */

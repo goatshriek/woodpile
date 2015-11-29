@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <woodpile/static/queue.h>
+#include "lib/validate.h"
 #include "private/static/queue.h"
 
 SQueue *
@@ -9,16 +10,13 @@ SQueueCopy
 {
   SQueue *copy;
 
-  if( !original )
-    return NULL;
+  VALIDATE_PARAMETERS( original )
 
   copy = malloc( sizeof( SQueue ) );
-  if( !copy )
-    return NULL;
+  VALIDATE_ALLOCATION( copy )
 
   copy->elements = malloc( sizeof( void * ) * original->capacity );
-  if( !copy->elements )
-    return NULL;
+  VALIDATE_ALLOCATION( copy )
 
   memcpy( copy->elements, original->elements, original->capacity );
 
@@ -47,15 +45,13 @@ SQueueNew
 ( void )
 {
   SQueue *queue = malloc( sizeof( SQueue ) );
-  if( !queue )
-    return NULL;
+  VALIDATE_ALLOCATION( queue )
 
   queue->front = queue->back = 0;
   queue->capacity = 100;
 
   queue->elements = malloc( sizeof( void * ) * queue->capacity );
-  if( !queue->elements )
-    return NULL;
+  VALIDATE_ALLOCATION( queue->elements )
 
   return queue;
 }
@@ -83,7 +79,9 @@ SQueuePop
 {
   void *value;
 
-  if( !queue || !queue->elements || queue->front == queue->back )
+  VALIDATE_PARAMETERS( queue && queue->elements )
+
+  if( queue->front == queue->back )
     return NULL;
 
   value = queue->elements[ queue->front ];
@@ -99,8 +97,7 @@ SQueuePush
 {
   size_t new_back;
 
-  if( !queue || !element )
-    return NULL;
+  VALIDATE_PARAMETERS( queue && element )
 
   new_back = (queue->back + 1) % queue->capacity;
   if( new_back == queue->front )

@@ -40,7 +40,7 @@ typedef char * ( *to_string_t )( const void * );
  * Adds an element to a DynamicSplay. NULL elements are not allowed and are
  * ignored.
  *
- * @param splay the DynamicSplay to add to
+ * @param splay the DynamicSplay to add to. Must not be NULL.
  * @param element the element to add
  *
  * @return splay, or NULL on failure
@@ -56,7 +56,7 @@ AddToDynamicSplay
  * that changes made to elements in the original structure will also change the
  * elements in the copy. Changes made to splay will not affect the copy.
  *
- * @param splay the DynamicSplay to copy
+ * @param splay the DynamicSplay to copy. Must not be NULL.
  * 
  * @return a copy of the original DynamicSplay or NULL on failure
  */
@@ -136,7 +136,7 @@ DynamicSplaySize
  * string literals, then the function must return a copy of the string rather
  * than the string itself.
  *
- * @param splay the DynamicSplay to get a representation of
+ * @param splay the DynamicSplay to get a representation of. Must not be NULL.
  * @param element_to_string a function returning string representations of
  * elements
  *
@@ -152,7 +152,7 @@ DynamicSplayToString
  * Gets the first element in the DynamicSplay. The element is NOT splayed to the
  * root of the tree, however, as this would guarantee an unbalanced tree.
  *
- * @param splay the DynamicSplay to get the element from
+ * @param splay the DynamicSplay to get the element from. Must not be NULL.
  *
  * @return the first element in the splay, or NULL if the splay is empty
  */
@@ -166,7 +166,7 @@ FirstInDynamicSplay
  * Gets the last element in the DynamicSplay. The element is NOT splayed to the
  * root of the tree, however, as this would guarantee an unbalanced tree.
  *
- * @param splay the DynamicSplay to get the element from
+ * @param splay the DynamicSplay to get the element from. Must not be NULL.
  *
  * @return the last element in the splay, or NULL if the splay is empty
  */
@@ -194,8 +194,8 @@ NewDynamicSplay
 /**
  * Searches for an element in a DynamicSplay and removes it if it is found.
  *
- * @param splay the DynamicSplay to remove from
- * @param element the element to search for and remove
+ * @param splay the DynamicSplay to remove from. Must not be NULL.
+ * @param element the element to search for and remove. Must not be NULL.
  *
  * @return the removed element, or NULL if it was not found
  */

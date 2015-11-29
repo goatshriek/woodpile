@@ -3,6 +3,6 @@
 autoreconf \
 && mkdir build \
 && cd build \
-&& ../configure \
+&& ../configure --enable-parameter-validation --enable-allocation-validation \
 && make \
 && make check

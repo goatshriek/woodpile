@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include <woodpile/config.h>
 #include <woodpile/dynamic/tree/splay/iterator.h>
 
 #include "test/function/dynamic/tree/splay/iterator_suite.h"
@@ -13,18 +14,24 @@ main( void )
   unsigned failure_count = 0;
   const char *result;
 
-  TEST( BeginWithEmptyDynamicSplay )
+#ifdef __WOODPILE_PARAMETER_VALIDATION
   TEST( BeginWithNullDynamicSplay )
+  TEST( CopyNullIterator )
+  TEST( EndWithNullDynamicSplay )
+  TEST( NextWithNullIterator )
+  TEST( PreviousWithNullIterator )
+  TEST( RemoveFromNullIterator )
+#endif
+
+  TEST( BeginWithEmptyDynamicSplay )
   TEST( BeginWithPopulatedDynamicSplay )
   TEST( Copy )
   TEST( CopyContents )
   TEST( CopyDistinct )
-  TEST( CopyNullIterator )
   TEST( CopyPosition )
   TEST( Destroy )
   TEST( DestroyNullIterator )
   TEST( EndWithEmptyDynamicSplay )
-  TEST( EndWithNullDynamicSplay )
   TEST( EndWithPopulatedDynamicSplay )
   TEST( HasNextAtBeginning )
   TEST( HasNextAtEnd )
@@ -40,17 +47,14 @@ main( void )
   TEST( NextAtEnd )
   TEST( NextAtMiddle )
   TEST( NextWithEmptyDynamicSplay )
-  TEST( NextWithNullIterator )
   TEST( PreviousAtBeginning )
   TEST( PreviousAtEnd )
   TEST( PreviousAtMiddle )
   TEST( PreviousWithEmptyDynamicSplay )
-  TEST( PreviousWithNullIterator )
   TEST( RemoveAfterNext )
   TEST( RemoveAfterPrevious )
   TEST( RemoveAfterRemove )
   TEST( RemoveBeforeNextOrPrevious )
-  TEST( RemoveFromNullIterator )
 
   if( failure_count > 0 )
     return EXIT_FAILURE;

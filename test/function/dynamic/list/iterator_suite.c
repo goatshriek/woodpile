@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include <woodpile/config.h>
 #include <woodpile/dynamic/list/iterator.h>
 
 #include "test/function/dynamic/list/iterator_suite.h"
@@ -13,6 +14,15 @@ main( void )
   unsigned failure_count = 0;
   const char *result;
 
+#ifdef __WOODPILE_PARAMETER_VALIDATION
+  TEST( BeginWithNullList )
+  TEST( CopyNullIterator )
+  TEST( EndWithNullList )
+  TEST( NextWithNullIterator )
+  TEST( PreviousWithNullIterator )
+  TEST( RemoveFromNullIterator )
+#endif
+
   TEST( AddNullElement )
   TEST( AddToBeginning )
   TEST( AddToEmptyList )
@@ -20,17 +30,14 @@ main( void )
   TEST( AddToMiddle )
   TEST( AddWithNullIterator )
   TEST( BeginWithEmptyList )
-  TEST( BeginWithNullList )
   TEST( BeginWithPopulatedList )
   TEST( Copy )
   TEST( CopyContents )
   TEST( CopyDistinct )
-  TEST( CopyNullIterator )
   TEST( CopyPosition )
   TEST( Destroy )
   TEST( DestroyNullIterator )
   TEST( EndWithEmptyList )
-  TEST( EndWithNullList )
   TEST( EndWithPopulatedList )
   TEST( HasNextAtBeginning )
   TEST( HasNextAtEnd )
@@ -46,19 +53,16 @@ main( void )
   TEST( NextAtEnd )
   TEST( NextAtMiddle )
   TEST( NextWithEmptyList )
-  TEST( NextWithNullIterator )
   TEST( PreviousAtBeginning )
   TEST( PreviousAtEnd )
   TEST( PreviousAtMiddle )
   TEST( PreviousWithEmptyList )
-  TEST( PreviousWithNullIterator )
   TEST( RemoveAfterNext )
   TEST( RemoveAfterNextAndAdd )
   TEST( RemoveAfterPrevious )
   TEST( RemoveAfterPreviousAndAdd )
   TEST( RemoveAfterRemove )
   TEST( RemoveBeforeNextOrPrevious )
-  TEST( RemoveFromNullIterator )
 
   if( failure_count > 0 )
     return EXIT_FAILURE;

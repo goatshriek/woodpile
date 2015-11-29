@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <woodpile/dynamic/list/iterator.h>
+#include "lib/validate.h"
 #include "private/dynamic/list.h"
 #include "private/dynamic/list/iterator.h"
 
@@ -13,8 +14,7 @@ DListItrAdd
     return iterator;
 
   addition = malloc( sizeof( Node ) );
-  if( !addition )
-    return NULL;
+  VALIDATE_ALLOCATION( addition )
 
   addition->neighbors = XORNODES( iterator->previous, iterator->current );
   addition->element = element;
@@ -47,12 +47,10 @@ DListBegin
 {
   DListItr *iterator;
 
-  if( !list )
-    return NULL;
+  VALIDATE_PARAMETERS( list )
 
   iterator = malloc( sizeof( DListItr ) );
-  if( !iterator )
-    return NULL;
+  VALIDATE_ALLOCATION( iterator )
 
   iterator->list = list;
   iterator->previous = NULL;
@@ -67,12 +65,10 @@ DListItrCopy
 {
   DListItr *copy;
 
-  if( !iterator )
-    return NULL;
+  VALIDATE_PARAMETERS( iterator )
 
   copy = malloc( sizeof( DListItr ) );
-  if( !copy )
-    return NULL;
+  VALIDATE_ALLOCATION( copy )
 
   copy->current = iterator->current;
   copy->previous = iterator->previous;
@@ -93,12 +89,10 @@ DListEnd
 {
   DListItr *iterator;
 
-  if( !list )
-    return NULL;
+  VALIDATE_PARAMETERS( list )
 
   iterator = malloc( sizeof( DListItr ) );
-  if( !iterator )
-    return NULL;
+  VALIDATE_ALLOCATION( iterator )
 
   iterator->list = list;
   iterator->previous = list->last;
@@ -128,7 +122,9 @@ DListItrNext
   Node *temp;
   void *element;
 
-  if( !iterator || !iterator->current )
+  VALIDATE_PARAMETERS( iterator )
+
+  if( !iterator->current )
     return NULL;
 
   element = iterator->current->element;
@@ -148,7 +144,9 @@ DListItrPrevious
   Node *temp;
   void *element;
 
-  if( !iterator || !iterator->previous )
+  VALIDATE_PARAMETERS( iterator )
+
+  if( !iterator->previous )
     return NULL;
 
   element = iterator->previous->element;
@@ -168,8 +166,7 @@ DListItrRemove
   Node *left_neighbor, *removed, *right_neighbor;
   void *element;
 
-  if( !iterator )
-    return NULL;
+  VALIDATE_PARAMETERS( iterator )
 
   switch( iterator->direction ){
     case 1:

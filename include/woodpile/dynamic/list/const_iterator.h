@@ -28,7 +28,7 @@ typedef struct DynamicListConstIterator DListCItr;
  * Creates a new DynamicListConstIterator for the DynamicList provided. The
  * iterator will begin at the beginning of the DynamicList.
  *
- * @param list the DynamicList to get an iterator for
+ * @param list the DynamicList to get an iterator for. Must not be NULL.
  *
  * @return a DynamicListConstIterator for the provided DynamicList. If list is
  * NULL or invalid then NULL is returned.
@@ -45,7 +45,7 @@ CBeginDynamicList
  * last element of the DynamicList and advance the iterator pointer backwards
  * one element.
  *
- * @param list the DynamicList to get an iterator for
+ * @param list the DynamicList to get an iterator for. Must not be NULL.
  *
  * @return a DynamicListConstIterator for the provided DynamicList. If list is
  * NULL or invalid then NULL is returned.
@@ -59,7 +59,7 @@ CEndDynamicList
  * Creates a copy of a DynamicListConstIterator. The position of the copy will
  * be the same as the original at the time of the copy.
  *
- * @param iterator the DynamicListConstIterator to copy
+ * @param iterator the DynamicListConstIterator to copy. Must not be NULL.
  *
  * @return a copy of the original DynamicListConstIterator
  */
@@ -109,7 +109,7 @@ DynamicListConstIteratorHasPrevious
  * returned. The current index of the iterator is advanced forward by one as a
  * result of this function call.
  *
- * @param iterator the iterator to retrieve the next value of
+ * @param iterator the iterator to retrieve the next value of. Must not be NULL.
  *
  * @return the next value of the iterator, or NULL if there is not one
  */
@@ -124,7 +124,8 @@ NextInDynamicListConstIterator
  * NULL is returned. The current index of the iterator is advanced backward by
  * one as a result of this function call.
  *
- * @param iterator the iterator to retrieve the previous value of
+ * @param iterator the iterator to retrieve the previous value of. Must not be
+ * NULL.
  *
  * @return the previous value of the iterator, or NULL if there is not one
  */

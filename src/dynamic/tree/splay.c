@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <woodpile/dynamic/tree/splay.h>
 #include "lib/str.h"
+#include "lib/validate.h"
 #include "private/dynamic/tree/splay.h"
 
 DSplay *
@@ -12,8 +13,7 @@ DSplayAdd
   int comparison;
   Node *current_node, *new_node, *parent;
 
-  if( !splay )
-    return NULL;
+  VALIDATE_PARAMETERS( splay )
 
   if( !element )
     return splay;
@@ -33,8 +33,7 @@ DSplayAdd
   }
 
   new_node = malloc( sizeof( Node ) );
-  if( !new_node )
-    return NULL;
+  VALIDATE_ALLOCATION( new_node )
 
   if( parent ){
     if( comparison < 0 )
@@ -79,12 +78,10 @@ DSplayCopy
 {
   DSplay *copy;
 
-  if( !splay )
-    return NULL;
+  VALIDATE_PARAMETERS( splay )
 
   copy = malloc( sizeof( DSplay ) );
-  if( !copy )
-    return NULL;
+  VALIDATE_ALLOCATION( copy )
 
   copy->root = CopyTree( splay->root );
   copy->root->parent = NULL;
@@ -112,7 +109,9 @@ DSplayFirst
   Node *node;
   void *element = NULL;
 
-  if( !splay || !splay->root )
+  VALIDATE_PARAMETERS( splay )
+
+  if( !splay->root )
     return NULL;
 
   node = splay->root;
@@ -130,7 +129,9 @@ DSplayLast
   Node *node;
   void *element = NULL;
 
-  if( !splay || !splay->root )
+  VALIDATE_PARAMETERS( splay )
+
+  if( !splay->root )
     return NULL;
 
   node = splay->root;
@@ -167,15 +168,13 @@ DSplayToString
   const Node *current, *next;
   size_t element_length, str_capacity=100, str_length=1;
 
-  if( !splay )
-    return NULL;
+  VALIDATE_PARAMETERS( splay )
 
   if( !element_to_string )
     element_to_string = strpointer;
 
   str = malloc( sizeof( char ) * str_capacity );
-  if( !str )
-    return NULL;
+  VALIDATE_ALLOCATION( str )
   str[0] = '[';
 
   current = NULL;
@@ -223,8 +222,7 @@ DSplayNew
   DSplay *splay;
 
   splay = malloc( sizeof( DSplay ) );
-  if( !splay )
-    return NULL;
+  VALIDATE_ALLOCATION( splay )
  
   splay->root = NULL;
   splay->compare = compare ? compare : DirectCompare;
@@ -240,8 +238,7 @@ DSplayRemove
   int comparison;
   void *removed;
 
-  if( !splay || !element )
-    return NULL;
+  VALIDATE_PARAMETERS( splay && element )
 
   parent = NULL;
   node = splay->root;
@@ -331,8 +328,7 @@ CopyTree
   Node *copy;
 
   copy = malloc( sizeof( Node ) );
-  if( !copy )
-    return NULL;
+  VALIDATE_ALLOCATION( copy )
 
   if( root->left_child ){
     copy->left_child = CopyTree( root->left_child );

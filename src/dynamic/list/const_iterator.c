@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <woodpile/dynamic/list/const_iterator.h>
+#include "lib/validate.h"
 #include "private/dynamic/list.h"
 #include "private/dynamic/list/const_iterator.h"
 
@@ -10,12 +11,10 @@ DListCBegin
 {
   DListCItr *iterator;
 
-  if( !list )
-    return NULL;
+  VALIDATE_PARAMETERS( list )
 
   iterator = malloc( sizeof( DListCItr ) );
-  if( !iterator )
-    return NULL;
+  VALIDATE_ALLOCATION( iterator )
 
   iterator->previous = NULL;
   iterator->current = list->first;
@@ -29,12 +28,10 @@ DListCEnd
 {
   DListCItr *iterator;
 
-  if( !list )
-    return NULL;
+  VALIDATE_PARAMETERS( list )
 
   iterator = malloc( sizeof( DListCItr ) );
-  if( !iterator )
-    return NULL;
+  VALIDATE_ALLOCATION( iterator )
 
   iterator->previous = list->last;
   iterator->current = NULL;
@@ -48,12 +45,10 @@ DListCItrCopy
 {
   DListCItr *copy;
 
-  if( !iterator )
-    return NULL;
+  VALIDATE_PARAMETERS( iterator )
 
   copy = malloc( sizeof( DListCItr ) );
-  if( !copy )
-    return NULL;
+  VALIDATE_ALLOCATION( copy )
 
   copy->current = iterator->current;
   copy->previous = iterator->previous;
@@ -89,7 +84,9 @@ DListCItrNext
   const Node *temp;
   const void *element;
 
-  if( !iterator || !iterator->current )
+  VALIDATE_PARAMETERS( iterator )
+
+  if( !iterator->current )
     return NULL;
 
   element = iterator->current->element;
@@ -108,7 +105,9 @@ DListCItrPrevious
   const Node *temp;
   const void *element;
 
-  if( !iterator || !iterator->previous )
+  VALIDATE_PARAMETERS( iterator )
+
+  if( !iterator->previous )
     return NULL;
 
   element = iterator->previous->element;

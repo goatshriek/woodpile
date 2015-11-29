@@ -6,32 +6,33 @@ vpath %.h $(top_srcdir)/../../include
 vpath %.c $(top_srcdir)/../../lib $(top_srcdir)/../../src $(top_srcdir)/../../test
 
 # header files
-include_HEADERS = woodpile.h
+include_HEADERS = $(top_srcdir)/../../include/woodpile.h
 
 woodpile_static_includedir = $(includedir)/woodpile/static
 
-woodpile_static_include_HEADERS = woodpile/static/queue.h \
-                                  woodpile/static/stack.h
+woodpile_static_include_HEADERS = $(top_srcdir)/../../include/woodpile/static/queue.h \
+                                  $(top_srcdir)/../../include/woodpile/static/stack.h
 
 woodpile_dynamic_includedir = $(includedir)/woodpile/dynamic
 
-woodpile_dynamic_include_HEADERS = woodpile/dynamic/list.h
+woodpile_dynamic_include_HEADERS = $(top_srcdir)/../../include/woodpile/dynamic/list.h
 
 woodpile_dynamic_list_includedir = $(includedir)/woodpile/dynamic/list
 
-woodpile_dynamic_list_include_HEADERS = woodpile/dynamic/list/const_iterator.h \
-                                        woodpile/dynamic/list/iterator.h
+woodpile_dynamic_list_include_HEADERS = $(top_srcdir)/../../include/woodpile/dynamic/list/const_iterator.h \
+                                        $(top_srcdir)/../../include/woodpile/dynamic/list/iterator.h
 
 woodpile_dynamic_tree_includedir = $(includedir)/woodpile/dynamic/tree
 
-woodpile_dynamic_tree_include_HEADERS = woodpile/dynamic/tree/splay.h
+woodpile_dynamic_tree_include_HEADERS = $(top_srcdir)/../../include/woodpile/dynamic/tree/splay.h
 
 woodpile_dynamic_tree_splay_includedir = $(includedir)/woodpile/dynamic/tree/splay
 
-woodpile_dynamic_tree_splay_include_HEADERS = woodpile/dynamic/tree/splay/const_iterator.h \
-                                              woodpile/dynamic/tree/splay/iterator.h
+woodpile_dynamic_tree_splay_include_HEADERS = $(top_srcdir)/../../include/woodpile/dynamic/tree/splay/const_iterator.h \
+                                              $(top_srcdir)/../../include/woodpile/dynamic/tree/splay/iterator.h
 
 noinst_HEADERS = lib/str.h \
+                 lib/validate.h \
                  private/dynamic/list.h \
                  private/dynamic/list/const_iterator.h \
                  private/dynamic/list/iterator.h \

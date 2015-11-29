@@ -3,6 +3,7 @@
 #include <string.h>
 #include <woodpile/dynamic/list.h>
 #include "lib/str.h"
+#include "lib/validate.h"
 #include "private/dynamic/list.h"
 
 DList *
@@ -11,8 +12,7 @@ DListAppendAll
 {
   Node *node, *previous=NULL, *temp;
 
-  if( !first )
-    return NULL;
+  VALIDATE_PARAMETERS( first )
 
   if( !second )
     return first;
@@ -35,15 +35,13 @@ DListAppend
 {
   Node *node;
 
-  if( !list )
-    return NULL;
+  VALIDATE_PARAMETERS( list )
 
   if( !element )
     return list;
 
   node = malloc( sizeof( Node ) );
-  if( !node )
-    return NULL;
+  VALIDATE_ALLOCATION( node )
 
   node->neighbors = list->last;
   node->element = element;
@@ -65,8 +63,7 @@ DListCopy
   DList *copy;
   Node *node, *previous=NULL, *temp;
 
-  if( !list )
-    return NULL;
+  VALIDATE_PARAMETERS( list )
 
   copy = DListNew();
   node = list->first;
@@ -108,10 +105,12 @@ void *
 DListBack
 ( const DList *list )
 {
-  if( !list || !list->last )
-    return NULL;
+  VALIDATE_PARAMETERS( list )
 
-  return list->last->element;
+  if( list->last )
+    return list->last->element;
+  else
+    return NULL;
 }
 
 size_t
@@ -141,10 +140,12 @@ void *
 DListFront
 ( const DList *list )
 {
-  if( !list || !list->first )
-    return NULL;
+  VALIDATE_PARAMETERS( list )
 
-  return list->first->element;
+  if( list->first )
+    return list->first->element;
+  else
+    return NULL;
 }
 
 void *
@@ -218,15 +219,13 @@ DListToString
   const Node *current, *next, *previous=NULL;
   size_t element_length, str_capacity=100, str_length=1;
 
-  if( !list )
-    return NULL;
+  VALIDATE_PARAMETERS( list )
 
   if( !element_to_string )
     element_to_string = strpointer;
 
   str = malloc( sizeof( char ) * str_capacity );
-  if( !str )
-    return NULL;
+  VALIDATE_ALLOCATION( str )
   str[0] = '[';
 
   current = list->first;
@@ -268,8 +267,7 @@ DListNew
 ( void )
 {
   DList *list = malloc( sizeof( DList ) );
-  if( !list )
-    return NULL;
+  VALIDATE_ALLOCATION( list )
 
   list->first = list->last = NULL;
 
@@ -282,12 +280,10 @@ DListPrepend
 {
   Node *node;
 
-  if( !list )
-    return NULL;
+  VALIDATE_PARAMETERS( list )
 
   node = malloc( sizeof( Node ) );
-  if( !node )
-    return NULL;
+  VALIDATE_ALLOCATION( node )
 
   node->neighbors = list->first;
   node->element = element;
