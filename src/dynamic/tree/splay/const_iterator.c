@@ -14,8 +14,7 @@ DSplayCBegin
   VALIDATE_PARAMETERS( splay )
 
   itr = malloc( sizeof( DSplayCItr ) );
-  if( !itr )
-    return NULL;
+  VALIDATE_ALLOCATION( itr )
 
   itr->current = NULL;
   itr->previous = NULL;
@@ -39,8 +38,7 @@ DSplayCEnd
   VALIDATE_PARAMETERS( splay )
 
   itr = malloc( sizeof( DSplayCItr ) );
-  if( !itr )
-    return NULL;
+  VALIDATE_ALLOCATION( itr )
 
   itr->current = NULL;
   itr->previous = NULL;
@@ -63,8 +61,7 @@ DSplayCItrCopy
   VALIDATE_PARAMETERS( iterator )
 
   copy = malloc( sizeof( DSplayCItr ) );
-  if( !copy )
-    return NULL;
+  VALIDATE_ALLOCATION( copy )
 
   copy->previous = iterator->previous;
   copy->current = iterator->current;

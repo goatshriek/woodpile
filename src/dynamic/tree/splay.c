@@ -33,8 +33,7 @@ DSplayAdd
   }
 
   new_node = malloc( sizeof( Node ) );
-  if( !new_node )
-    return NULL;
+  VALIDATE_ALLOCATION( new_node )
 
   if( parent ){
     if( comparison < 0 )
@@ -82,8 +81,7 @@ DSplayCopy
   VALIDATE_PARAMETERS( splay )
 
   copy = malloc( sizeof( DSplay ) );
-  if( !copy )
-    return NULL;
+  VALIDATE_ALLOCATION( copy )
 
   copy->root = CopyTree( splay->root );
   copy->root->parent = NULL;
@@ -176,8 +174,7 @@ DSplayToString
     element_to_string = strpointer;
 
   str = malloc( sizeof( char ) * str_capacity );
-  if( !str )
-    return NULL;
+  VALIDATE_ALLOCATION( str )
   str[0] = '[';
 
   current = NULL;
@@ -225,8 +222,7 @@ DSplayNew
   DSplay *splay;
 
   splay = malloc( sizeof( DSplay ) );
-  if( !splay )
-    return NULL;
+  VALIDATE_ALLOCATION( splay )
  
   splay->root = NULL;
   splay->compare = compare ? compare : DirectCompare;
@@ -332,8 +328,7 @@ CopyTree
   Node *copy;
 
   copy = malloc( sizeof( Node ) );
-  if( !copy )
-    return NULL;
+  VALIDATE_ALLOCATION( copy )
 
   if( root->left_child ){
     copy->left_child = CopyTree( root->left_child );

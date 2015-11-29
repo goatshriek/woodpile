@@ -14,8 +14,7 @@ DSplayBegin
   VALIDATE_PARAMETERS( splay )
 
   itr = malloc( sizeof( DSplayItr ) );
-  if( !itr )
-    return NULL;
+  VALIDATE_ALLOCATION( itr )
 
   itr->splay = splay;
   itr->current = NULL;
@@ -40,8 +39,7 @@ DSplayItrCopy
   VALIDATE_PARAMETERS( iterator )
 
   copy = malloc( sizeof( DSplayItr ) );
-  if( !copy )
-    return NULL;
+  VALIDATE_ALLOCATION( copy )
 
   copy->splay = iterator->splay;
   copy->previous = iterator->previous;
@@ -70,8 +68,7 @@ DSplayEnd
   VALIDATE_PARAMETERS( splay )
 
   itr = malloc( sizeof( DSplayItr ) );
-  if( !itr )
-    return NULL;
+  VALIDATE_ALLOCATION( itr )
 
   itr->splay = splay;
   itr->current = NULL;
