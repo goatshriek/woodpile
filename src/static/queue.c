@@ -13,12 +13,10 @@ SQueueCopy
   VALIDATE_PARAMETERS( original )
 
   copy = malloc( sizeof( SQueue ) );
-  if( !copy )
-    return NULL;
+  VALIDATE_ALLOCATION( copy )
 
   copy->elements = malloc( sizeof( void * ) * original->capacity );
-  if( !copy->elements )
-    return NULL;
+  VALIDATE_ALLOCATION( copy )
 
   memcpy( copy->elements, original->elements, original->capacity );
 
@@ -47,15 +45,13 @@ SQueueNew
 ( void )
 {
   SQueue *queue = malloc( sizeof( SQueue ) );
-  if( !queue )
-    return NULL;
+  VALIDATE_ALLOCATION( queue )
 
   queue->front = queue->back = 0;
   queue->capacity = 100;
 
   queue->elements = malloc( sizeof( void * ) * queue->capacity );
-  if( !queue->elements )
-    return NULL;
+  VALIDATE_ALLOCATION( queue->elements )
 
   return queue;
 }
