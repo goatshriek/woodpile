@@ -171,8 +171,7 @@ TestGetNullKeyFromSHash
 /**
  * Tests the SHashGet function with an empty SHash.
  *
- * @test Calling the function with an empty hash must return NULL, regardless
- * of the key being NULL or non-NULL.
+ * @test Calling the function with an empty hash must return NULL.
  *
  * @return NULL on completion or a string describing the failure
  */
@@ -233,6 +232,17 @@ TestIsEmptyWithNullSHash
  */
 const char *
 TestNew
+( void );
+
+/**
+ * Tests the NewSHash function with a NULL hashing function..
+ *
+ * @test Calling the function must return a non-NULL value.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestNewWithNullHasher
 ( void );
 
 /**
