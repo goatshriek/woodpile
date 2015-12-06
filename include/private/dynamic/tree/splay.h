@@ -139,7 +139,7 @@ DestroyTree
  * @return a negative value if element_1 is lower, a positive value if element_2
  * is lower, and 0 if the two are equal.
  */
-static inline
+static
 int
 DirectCompare
 ( const void *element_1, const void *element_2 );
