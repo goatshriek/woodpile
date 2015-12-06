@@ -22,4 +22,16 @@ unsigned long long
 spooky_hasher
 ( const void *str );
 
+
+/**
+ * A simple string hashing function.
+ *
+ * @param str a NULL-terminated string
+ *
+ * @return a noncryptographic hash of the string
+ */
+unsigned long long
+stumpless_hasher
+( const void *str );
+
 #endif

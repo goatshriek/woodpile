@@ -6,3 +6,10 @@ spooky_hasher
 {
   return 0;
 }
+
+unsigned long long
+stumpless_hasher
+( const void *str )
+{
+  return 0;
+}
