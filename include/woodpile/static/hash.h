@@ -26,7 +26,7 @@ struct StaticHash;
 typedef struct StaticHash StaticHash;
 typedef struct StaticHash SHash;
 
-typedef unsigned long ( *hasher_t )( const void * );
+typedef unsigned long long ( *hasher_t )( const void * );
 
 /**
  * Creates a copy of a SHash. Elements within the hash are not copied, meaning

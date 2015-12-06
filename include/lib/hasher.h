@@ -8,15 +8,17 @@
 
 
 /**
- * An adaptation of Bob Jenkin's SpookyHashV2. The original code can be found
- * at http://burtleburtle.net/bob/c/SpookyV2.cpp.
+ * An adaptation of Bob Jenkin's SpookyHashV2. This adaptation was made with 
+ * simplicity and brevity in mind. The original code can be found
+ * at http://burtleburtle.net/bob/c/SpookyV2.cpp and
+ * http://burtleburtle.net/bob/c/SpookyV2.h.
  *
  * @param str a NULL-terminated string
  *
  * @return a noncryptographic hash of the string
  *
  */
-unsigned long
+unsigned long long
 spooky_hasher
 ( const void *str );
 
