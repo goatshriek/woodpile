@@ -441,7 +441,7 @@ DestroyTree
   free( ( void * ) root );
 }
 
-static inline
+static
 int
 DirectCompare
 ( const void *element_1, const void *element_2 )
