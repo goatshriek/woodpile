@@ -1,15 +1,22 @@
+#include <woodpile/config.h>
 #include "lib/hasher.h"
 
+
+#ifdef __WOODPILE_HAS_SPOOKY_HASHER
 unsigned long long
 spooky_hasher
 ( const void *str )
 {
   return 0;
 }
+#endif
 
+
+#ifdef __WOODPILE_HAS_WOODPILE_HASHER
 unsigned long long
-stumpless_hasher
+woodpile_hasher
 ( const void *str )
 {
   return 0;
 }
+#endif
