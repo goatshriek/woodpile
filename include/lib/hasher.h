@@ -17,6 +17,21 @@
 # define __WOODPILE_HAS_WOODPILE_HASHER 1
 #endif
 
+#ifdef __WOODPILE_HAS_CITY_HASHER
+/**
+ * An adaptation of Google's CityHash. The original code can be found on the
+ * github repository for the project at https://github.com/google/cityhash.
+ *
+ * @param str a NULL-terminated string
+ *
+ * @return a noncryptographic hash of the string
+ *
+ */
+unsigned long long
+city_hasher
+( const void *str );
+#endif
+
 #ifdef __WOODPILE_HAS_SPOOKY_HASHER
 /**
  * An adaptation of Bob Jenkin's SpookyHashV2. This adaptation was made with 
