@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <woodpile/hasher.h>
 #include <woodpile/static/hash.h>
 #include "test/performance/static/hash_suite.h"
 
@@ -11,8 +12,8 @@ main
 ( void )
 {
   const char *filename = "../../helper/american_english_words.txt";
-  clock_t city_time, spooky_time;
-  SHash *city_hash, *spooky_hash; 
+  clock_t city_time, spooky_time, woodpile_time;
+  SHash *city_hash, *spooky_hash, woodpile_hash; 
 
   // opening the dictionary file
   FILE *words = fopen( filename, "r" );
@@ -23,19 +24,19 @@ main
 
 
   // measure the city hash performance
-  city_hash = SHashNew(  );
+  city_hash = SHashNew( city_hasher );
 
 
   // measure the spooky hash performance
-  spooky_hash = SHashNew( );
+  spooky_hash = SHashNew( spooky_hasher );
 
 
   // measure the woodpile hash performance
-  woodpile_hash = SHashNew ();
+  woodpile_hash = SHashNew ( woodpile_hasher );
  
  
   // print the results
-  
+  printf( "results" );
 
 
   // cleaning up
