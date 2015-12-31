@@ -11,11 +11,34 @@ main
 ( void )
 {
   const char *filename = "../../helper/american_english_words.txt";
+  clock_t city_time, spooky_time;
+  SHash *city_hash, *spooky_hash; 
 
+  // opening the dictionary file
   FILE *words = fopen( filename, "r" );
+  if( !words ){
+    printf( "Could not open the words file %s\n", filename );
+    return EXIT_FAILURE;
+  }
 
+
+  // measure the city hash performance
+  city_hash = SHashNew(  );
+
+
+  // measure the spooky hash performance
+  spooky_hash = SHashNew( );
+
+
+  // measure the woodpile hash performance
+  woodpile_hash = SHashNew ();
+ 
+ 
+  // print the results
   
 
+
+  // cleaning up
   fclose( words );
   return EXIT_SUCCESS;
 }

@@ -1,9 +1,9 @@
-#ifndef __WOODPILE_LIB_HASHER_H
-#define __WOODPILE_LIB_HASHER_H
+#ifndef __WOODPILE_HASHER_H
+#define __WOODPILE_HASHER_H
 
 /**
  * @file
- * Functions for hashing data.
+ * Hasher functions for use in hash structures.
  */
 
 #include <woodpile/config.h>
@@ -59,7 +59,7 @@ spooky_hasher
  * @return a noncryptographic hash of the string
  */
 unsigned long long
-stumpless_hasher
+woodpile_hasher
 ( const void *str );
 #endif
 
