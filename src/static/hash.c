@@ -28,7 +28,7 @@ SHash *
 SHashNew
 ( const hasher_t hasher )
 {
-  return NULL;
+  return SHashNewSized( hasher, 256 );
 }
 
 SHash *

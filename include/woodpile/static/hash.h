@@ -69,7 +69,7 @@ GetFromStaticHash
 #define SHashGet GetFromStaticHash
 
 /**
- * Creates a new SHash. The default capacity of the hash is 100. If the hashing
+ * Creates a new SHash. The default capacity of the hash is 256. If the hashing
  * function is NULL, then a default function is used based on element's pointer
  * values.
  *
