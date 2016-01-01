@@ -11,7 +11,7 @@ int
 main
 ( void )
 {
-  const char *filename = "../../helper/american_english_words.txt";
+  const char *filename = "../../data/american_english_words.txt";
   clock_t city_load_time, spooky_load_time, woodpile_load_time;
   SHash *city_hash, *spooky_hash, *woodpile_hash; 
 

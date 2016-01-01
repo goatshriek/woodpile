@@ -7,6 +7,7 @@ AC_CONFIG_SRCDIR([../../src/dynamic/list.c])
 AC_CONFIG_HEADERS([include/woodpile/config.h:config.h.in])
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_FILES([Makefile])
+AC_CONFIG_LINKS([test/data/american_english_words.txt:../../test/data/american_english_words.txt])
 
 m4_ifdef([AM_PROG_AR], [AM_PROG_AR])
 
