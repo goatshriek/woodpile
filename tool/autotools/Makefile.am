@@ -3,7 +3,7 @@ AUTOMAKE_OPTIONS = -Wall subdir-objects parallel-tests color-tests
 ACLOCAL_AMFLAGS = -I m4
 
 vpath %.h $(top_srcdir)/../../include
-vpath %.c $(top_srcdir)/../../lib $(top_srcdir)/../../src $(top_srcdir)/../../test
+vpath %.c $(top_srcdir)/../..
 
 # header files
 include_HEADERS = $(top_srcdir)/../../include/woodpile.h
@@ -61,17 +61,17 @@ AM_CFLAGS = -g -I $(top_srcdir)/../../include -I ./include
 
 lib_LTLIBRARIES = libwoodpile.la
 
-libwoodpile_la_SOURCES = dynamic/list.c \
-                         dynamic/list/const_iterator.c \
-                         dynamic/list/iterator.c \
-                         dynamic/tree/splay.c \
-                         dynamic/tree/splay/const_iterator.c \
-                         dynamic/tree/splay/iterator.c \
-                         hasher.c \
-                         static/hash.c \
-                         static/queue.c \
-                         static/stack.c \
-                         str.c
+libwoodpile_la_SOURCES = src/dynamic/list.c \
+                         src/dynamic/list/const_iterator.c \
+                         src/dynamic/list/iterator.c \
+                         src/dynamic/tree/splay.c \
+                         src/dynamic/tree/splay/const_iterator.c \
+                         src/dynamic/tree/splay/iterator.c \
+                         src/hasher.c \
+                         src/static/hash.c \
+                         src/static/queue.c \
+                         src/static/stack.c \
+                         lib/str.c
 
 
 # test files
@@ -96,37 +96,37 @@ TESTS = test/function/dynamic/list_suite \
 
 check_LTLIBRARIES = libhelper.la
 
-libhelper_la_SOURCES = helper/builder.c \
-                       helper/fixture.c
+libhelper_la_SOURCES = test/helper/builder.c \
+                       test/helper/fixture.c
 
 libhelper_la_LIBADD = libwoodpile.la
 
 test_libraries = libhelper.la \
                  libwoodpile.la
 
-test_function_dynamic_list_suite_SOURCES = function/dynamic/list_suite.c
+test_function_dynamic_list_suite_SOURCES = test/function/dynamic/list_suite.c
 test_function_dynamic_list_suite_LDADD = $(test_libraries)
 
-test_function_dynamic_list_const_iterator_suite_SOURCES = function/dynamic/list/const_iterator_suite.c
+test_function_dynamic_list_const_iterator_suite_SOURCES = test/function/dynamic/list/const_iterator_suite.c
 test_function_dynamic_list_const_iterator_suite_LDADD = $(test_libraries)
 
-test_function_dynamic_list_iterator_suite_SOURCES = function/dynamic/list/iterator_suite.c
+test_function_dynamic_list_iterator_suite_SOURCES = test/function/dynamic/list/iterator_suite.c
 test_function_dynamic_list_iterator_suite_LDADD = $(test_libraries)
 
-test_function_dynamic_tree_splay_suite_SOURCES = function/dynamic/tree/splay_suite.c
+test_function_dynamic_tree_splay_suite_SOURCES = test/function/dynamic/tree/splay_suite.c
 test_function_dynamic_tree_splay_suite_LDADD = $(test_libraries)
 
-test_function_dynamic_tree_splay_const_iterator_suite_SOURCES = function/dynamic/tree/splay/const_iterator_suite.c
+test_function_dynamic_tree_splay_const_iterator_suite_SOURCES = test/function/dynamic/tree/splay/const_iterator_suite.c
 test_function_dynamic_tree_splay_const_iterator_suite_LDADD = $(test_libraries)
 
-test_function_dynamic_tree_splay_iterator_suite_SOURCES = function/dynamic/tree/splay/iterator_suite.c
+test_function_dynamic_tree_splay_iterator_suite_SOURCES = test/function/dynamic/tree/splay/iterator_suite.c
 test_function_dynamic_tree_splay_iterator_suite_LDADD = $(test_libraries)
 
-test_function_static_queue_suite_SOURCES = function/static/queue_suite.c
+test_function_static_queue_suite_SOURCES = test/function/static/queue_suite.c
 test_function_static_queue_suite_LDADD = $(test_libraries)
 
-test_function_static_stack_suite_SOURCES = function/static/stack_suite.c
+test_function_static_stack_suite_SOURCES = test/function/static/stack_suite.c
 test_function_static_stack_suite_LDADD = $(test_libraries)
 
-test_performance_static_hash_suite_SOURCES = performance/static/hash_suite.c
+test_performance_static_hash_suite_SOURCES = test/performance/static/hash_suite.c
 test_performance_static_hash_suite_LDADD = $(test_libraries)
