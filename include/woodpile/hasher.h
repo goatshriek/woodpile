@@ -6,18 +6,19 @@
  * Hasher functions for use in hash structures.
  */
 
+#include <stdlib.h>
 #include <woodpile/config.h>
 
-#ifdef __WOODPILE_HAS_ALL_HASHERS
-# undef __WOODPILE_HAS_CITY_HASHER
-# define __WOODPILE_HAS_CITY_HASHER 1
-# undef __WOODPILE_HAS_SPOOKY_HASHER
-# define __WOODPILE_HAS_SPOOKY_HASHER 1
-# undef __WOODPILE_HAS_WOODPILE_HASHER
-# define __WOODPILE_HAS_WOODPILE_HASHER 1
+#ifdef __WOODPILE_ALL_HASHERS
+# undef __WOODPILE_CITY_HASHER
+# define __WOODPILE_CITY_HASHER 1
+# undef __WOODPILE_SPOOKY_HASHER
+# define __WOODPILE_SPOOKY_HASHER 1
+# undef __WOODPILE_WOODPILE_HASHER
+# define __WOODPILE_WOODPILE_HASHER 1
 #endif
 
-#ifdef __WOODPILE_HAS_CITY_HASHER
+#ifdef __WOODPILE_CITY_HASHER
 /**
  * An adaptation of Google's CityHash. The original code can be found on the
  * github repository for the project at https://github.com/google/cityhash.
@@ -61,7 +62,7 @@ city_seeded_hasher
 ( const void *data, size_t length, unsigned long long seed );
 #endif
 
-#ifdef __WOODPILE_HAS_SPOOKY_HASHER
+#ifdef __WOODPILE_SPOOKY_HASHER
 /**
  * An adaptation of Bob Jenkin's SpookyHashV2. This adaptation was made with 
  * simplicity and brevity in mind. The original code can be found
@@ -112,7 +113,7 @@ spooky_seeded_hasher
 #endif
 
 
-#ifdef __WOODPILE_HAS_WOODPILE_HASHER
+#ifdef __WOODPILE_WOODPILE_HASHER
 /**
  * A simple data hashing function.
  *

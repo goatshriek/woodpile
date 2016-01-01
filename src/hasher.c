@@ -1,7 +1,8 @@
+#include <stdlib.h>
 #include <woodpile/config.h>
 #include <woodpile/hasher.h>
 
-#ifdef __WOODPILE_HAS_CITY_HASHER
+#ifdef __WOODPILE_CITY_HASHER
 unsigned long long
 city_data_hasher
 ( const void *data, size_t length )
@@ -25,7 +26,7 @@ city_seeded_hasher
 #endif
 
 
-#ifdef __WOODPILE_HAS_SPOOKY_HASHER
+#ifdef __WOODPILE_SPOOKY_HASHER
 unsigned long long
 spooky_data_hasher
 ( const void *data, size_t length )
@@ -49,7 +50,7 @@ spooky_seeded_hasher
 #endif
 
 
-#ifdef __WOODPILE_HAS_WOODPILE_HASHER
+#ifdef __WOODPILE_WOODPILE_HASHER
 unsigned long long
 woodpile_data_hasher
 ( const void *data, size_t length )

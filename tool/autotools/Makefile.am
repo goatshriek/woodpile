@@ -8,9 +8,14 @@ vpath %.c $(top_srcdir)/../../lib $(top_srcdir)/../../src $(top_srcdir)/../../te
 # header files
 include_HEADERS = $(top_srcdir)/../../include/woodpile.h
 
+woodpile_includedir = $(includedir)/woodpile
+
+woodpile_include_HEADERS = $(top_srcdir)/../../include/woodpile/hasher.h
+
 woodpile_static_includedir = $(includedir)/woodpile/static
 
-woodpile_static_include_HEADERS = $(top_srcdir)/../../include/woodpile/static/queue.h \
+woodpile_static_include_HEADERS = $(top_srcdir)/../../include/woodpile/static/hash.h \
+                                  $(top_srcdir)/../../include/woodpile/static/queue.h \
                                   $(top_srcdir)/../../include/woodpile/static/stack.h
 
 woodpile_dynamic_includedir = $(includedir)/woodpile/dynamic
@@ -62,6 +67,8 @@ libwoodpile_la_SOURCES = dynamic/list.c \
                          dynamic/tree/splay.c \
                          dynamic/tree/splay/const_iterator.c \
                          dynamic/tree/splay/iterator.c \
+                         hasher.c \
+                         static/hash.c \
                          static/queue.c \
                          static/stack.c \
                          str.c
@@ -75,9 +82,17 @@ check_PROGRAMS = test/function/dynamic/list_suite \
                  test/function/dynamic/tree/splay/const_iterator_suite \
                  test/function/dynamic/tree/splay/iterator_suite \
                  test/function/static/queue_suite \
-                 test/function/static/stack_suite
+                 test/function/static/stack_suite \
+                 test/performance/static/hash_suite
 
-TESTS = $(check_PROGRAMS)
+TESTS = test/function/dynamic/list_suite \
+        test/function/dynamic/list/const_iterator_suite \
+        test/function/dynamic/list/iterator_suite \
+        test/function/dynamic/tree/splay_suite \
+        test/function/dynamic/tree/splay/const_iterator_suite \
+        test/function/dynamic/tree/splay/iterator_suite \
+        test/function/static/queue_suite \
+        test/function/static/stack_suite
 
 check_LTLIBRARIES = libhelper.la
 
@@ -112,3 +127,6 @@ test_function_static_queue_suite_LDADD = $(test_libraries)
 
 test_function_static_stack_suite_SOURCES = function/static/stack_suite.c
 test_function_static_stack_suite_LDADD = $(test_libraries)
+
+test_performance_static_hash_suite_SOURCES = performance/static/hash_suite.c
+test_performance_static_hash_suite_LDADD = $(test_libraries)

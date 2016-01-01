@@ -63,6 +63,7 @@ AS_IF([test "x$enable_parameter_validation" = "xyes"],
     [1],
     [define to have parameters validated with conditional expressions rather than assert calls]))
 
+
 AC_ARG_ENABLE([allocation-validation],
   AS_HELP_STRING([--enable-allocation-validation],
     [memory allocation requests are validated via conditional statements rather than assert calls @<:@default=no@:>@]),
@@ -74,14 +75,15 @@ AS_IF([test "x$enable_allocation_validation" = "xyes"],
     [1],
     [define to have memory allocation requests validated with conditional expressions rather than assert calls]))
 
+
 AC_ARG_ENABLE([all-hashers],
   AS_HELP_STRING([--enable-all-hashers],
-    [all defined hashing functions will be included in the library @<:@default=no@:>@]),
+    [all hashing functions will be included in the library @<:@default=no@:>@]),
   [],
   [enable_all_hashers=no])
 
-AS_IF([test "xenable_all_hashers" = "xyes"],
-  AC_DEFINE([__WOODPILE_HAS_ALL_HASHERS],
+AS_IF([test "x$enable_all_hashers" = "xyes"],
+  AC_DEFINE([__WOODPILE_ALL_HASHERS],
     [1],
     [define to have all hashing functions included in the library]))
 

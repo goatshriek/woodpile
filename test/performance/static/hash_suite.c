@@ -12,8 +12,8 @@ main
 ( void )
 {
   const char *filename = "../../helper/american_english_words.txt";
-  clock_t city_time, spooky_time, woodpile_time;
-  SHash *city_hash, *spooky_hash, woodpile_hash; 
+  clock_t city_load_time, spooky_load_time, woodpile_load_time;
+  SHash *city_hash, *spooky_hash, *woodpile_hash; 
 
   // opening the dictionary file
   FILE *words = fopen( filename, "r" );
@@ -25,18 +25,41 @@ main
 
   // measure the city hash performance
   city_hash = SHashNew( city_hasher );
+  if( !city_hash ){
+    printf( "Could not build a city hash.\n" );
+    return EXIT_FAILURE;
+  }
+  city_load_time = LoadSHash( city_hash, words );
+  rewind( words );
+  SHashDestroy( city_hash );
 
 
   // measure the spooky hash performance
   spooky_hash = SHashNew( spooky_hasher );
+  if( !spooky_hash ){
+    printf( "Could not build a spooky hash.\n" );
+    return EXIT_FAILURE;
+  }
+  spooky_load_time = LoadSHash( spooky_hash, words );
+  rewind( words );
+  SHashDestroy( spooky_hash );
 
 
   // measure the woodpile hash performance
   woodpile_hash = SHashNew ( woodpile_hasher );
+  if( !woodpile_hash ){
+    printf( "Could not build a woodpile hash.\n" );
+    return EXIT_FAILURE;
+  }
+  woodpile_load_time = LoadSHash( woodpile_hash, words );
+  rewind( words );
+  SHashDestroy( woodpile_hash );
  
  
   // print the results
-  printf( "results" );
+  printf( "City Hash Load Clock Cycles:     %5d\n", city_load_time );
+  printf( "Spooky Hash Load Clock Cycles:   %5d\n", spooky_load_time );
+  printf( "Woodpile Hash Load Clock Cycles: %5d\n", woodpile_load_time );
 
 
   // cleaning up
@@ -51,12 +74,11 @@ LoadSHash
 {
   clock_t begin, total_clocks=0;
   char key[100];
-  const char *value = "Value";
 
   while( !feof( stream ) ){
     fgets( key, 100, stream );
     begin = clock();
-    SHashPut( hash, key, value );
+    SHashPut( hash, key, "Value" );
     total_clocks = clock() - begin;
   }
 
