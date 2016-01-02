@@ -30,7 +30,7 @@
  *
  */
 unsigned long long
-city_data_hasher
+CityDataHash
 ( const void *data, size_t length );
 
 /**
@@ -43,7 +43,7 @@ city_data_hasher
  *
  */
 unsigned long long
-city_hasher
+CityHash
 ( const void *str );
 
 /**
@@ -58,7 +58,7 @@ city_hasher
  *
  */
 unsigned long long
-city_seeded_hasher
+CitySeededHash
 ( const void *data, size_t length, unsigned long long seed );
 #endif
 
@@ -76,7 +76,7 @@ city_seeded_hasher
  *
  */
 unsigned long long
-spooky_data_hasher
+SpookyDataHash
 ( const void *data, size_t length );
 
 /**
@@ -91,7 +91,7 @@ spooky_data_hasher
  *
  */
 unsigned long long
-spooky_hasher
+SpookyHash
 ( const void *str );
 
 /**
@@ -108,7 +108,7 @@ spooky_hasher
  *
  */
 unsigned long long
-spooky_seeded_hasher
+SpookySeededHash
 ( const void *data, size_t length, unsigned long long seed );
 #endif
 
@@ -123,7 +123,7 @@ spooky_seeded_hasher
  * @return a noncryptographic hash of the string
  */
 unsigned long long
-woodpile_data_hasher
+WoodpileDataHash
 ( const void *data, size_t length );
 
 /**
@@ -134,7 +134,7 @@ woodpile_data_hasher
  * @return a noncryptographic hash of the string
  */
 unsigned long long
-woodpile_hasher
+WoodpileHash
 ( const void *str );
 /**
  * A simple data hashing function with a seed included.
@@ -146,7 +146,7 @@ woodpile_hasher
  * @return a noncryptographic hash of the string
  */
 unsigned long long
-woodpile_seeded_hasher
+WoodpileSeededHash
 ( const void *data, size_t length, unsigned long long seed );
 #endif
 

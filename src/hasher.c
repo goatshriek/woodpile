@@ -4,21 +4,21 @@
 
 #ifdef __WOODPILE_CITY_HASHER
 unsigned long long
-city_data_hasher
+CityDataHash
 ( const void *data, size_t length )
 {
-  return city_seeded_hasher( data, length, 0 );
+  return CitySeededHash( data, length, 0 );
 }
 
 unsigned long long
-city_hasher
+CityHash
 ( const void *str )
 {
   return 0;
 }
 
 unsigned long long
-city_seeded_hasher
+CitySeededHash
 ( const void *data, size_t length, unsigned long long seed )
 {
   return 0;
@@ -28,21 +28,21 @@ city_seeded_hasher
 
 #ifdef __WOODPILE_SPOOKY_HASHER
 unsigned long long
-spooky_data_hasher
+SpookyDataHash
 ( const void *data, size_t length )
 {
-  return spooky_seeded_hasher( data, length, 0 );
+  return SpookySeededHash( data, length, 0 );
 }
 
 unsigned long long
-spooky_hasher
+SpookyHash
 ( const void *str )
 {
   return 0;
 }
 
 unsigned long long
-spooky_seeded_hasher
+SpookySeededHash
 ( const void *data, size_t length, unsigned long long seed )
 {
   return 0;
@@ -52,21 +52,21 @@ spooky_seeded_hasher
 
 #ifdef __WOODPILE_WOODPILE_HASHER
 unsigned long long
-woodpile_data_hasher
+WoodpileDataHash
 ( const void *data, size_t length )
 {
-  return woodpile_seeded_hasher( data, length, 0 );
+  return WoodpileSeededHash( data, length, 0 );
 }
 
 unsigned long long
-woodpile_hasher
+WoodpileHash
 ( const void *str )
 {
   return 0;
 }
 
 unsigned long long
-woodpile_seeded_hasher
+WoodpileSeededHash
 ( const void *data, size_t length, unsigned long long seed )
 {
   return 0;
