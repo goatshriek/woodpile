@@ -17,6 +17,11 @@ void
 SHashDestroy
 ( const SHash *hash )
 {
+  if( hash ){
+    free( hash->values );
+    free( (void *) hash );
+  }
+
   return;
 }
 
@@ -119,12 +124,4 @@ SHashSetCapacity
 ( SHash *hash, size_t capacity )
 {
   return NULL;
-}
-
-static
-int
-DirectCompare
-( const void *element_1, const void *element_2 )
-{
-  return ( int ) ( element_1 - element_2 );
 }
