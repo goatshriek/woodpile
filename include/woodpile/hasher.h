@@ -66,6 +66,21 @@ CitySeededHash
 #endif
 
 /**
+ * Folds a hash into a smaller value using modular arithmetic. This is a very
+ * simply folding operation that is essentially truncation. This means that
+ * two hashes that are identical up to max will return the same result, even
+ * if the hashes differ in another portion.
+ *
+ * @param hash the value to be folded
+ * @param max the maximum value of the resulting value
+ *
+ * @return a value derived from the original hash less than or equal to max
+ */
+unsigned long long
+ModFold
+( unsigned long long hash, unsigned long long max );
+
+/**
  * Creates a hash from a pointer. This is done by simply converting the pointer
  * to an integer.
  *

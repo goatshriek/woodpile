@@ -26,6 +26,13 @@ CitySeededHash
 #endif
 
 unsigned long long
+ModFold
+( unsigned long long hash, unsigned long long max )
+{
+  return hash % max;
+}
+
+unsigned long long
 PointerHash
 ( const void *pointer )
 {
