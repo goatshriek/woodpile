@@ -29,8 +29,6 @@ struct StaticHash;
 typedef struct StaticHash StaticHash;
 typedef struct StaticHash SHash;
 
-typedef unsigned long long ( *folder_t )( unsigned long long, unsigned long long );
-
 /**
  * Creates a copy of a SHash. Elements within the hash are not copied, meaning
  * that changes made to elements in the original hash will also change the

@@ -49,7 +49,7 @@ SHashNewSized
   hash->capacity = capacity;
 
   hash->hash = hasher ? hasher : PointerHash;
-  //hash->fold = folder ? folder : xor_folder;
+  hash->fold = folder ? folder : XORFold;
   hash->compare = comparator ? comparator : ComparePointers;
 
   return hash;

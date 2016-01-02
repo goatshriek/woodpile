@@ -18,19 +18,8 @@
 # define __WOODPILE_WOODPILE_HASHER 1
 #endif
 
+typedef unsigned long long ( *folder_t )( unsigned long long, unsigned long long );
 typedef unsigned long long ( *hasher_t )( const void * );
-
-/**
- * Creates a hash from a pointer. This is done by simply converting the pointer
- * to an integer.
- *
- * @param pointer the pointer to hash
- *
- * @return a noncryptographic hash of a pointer
- */
-unsigned long long
-PointerHash
-( const void *pointer );
 
 #ifdef __WOODPILE_CITY_HASHER
 /**
@@ -75,6 +64,18 @@ unsigned long long
 CitySeededHash
 ( const void *data, size_t length, unsigned long long seed );
 #endif
+
+/**
+ * Creates a hash from a pointer. This is done by simply converting the pointer
+ * to an integer.
+ *
+ * @param pointer the pointer to hash
+ *
+ * @return a noncryptographic hash of a pointer
+ */
+unsigned long long
+PointerHash
+( const void *pointer );
 
 #ifdef __WOODPILE_SPOOKY_HASHER
 /**
@@ -163,5 +164,17 @@ unsigned long long
 WoodpileSeededHash
 ( const void *data, size_t length, unsigned long long seed );
 #endif
+
+/**
+ * Folds a hash into a smaller value using XOR.
+ *
+ * @param hash the value to be folded
+ * @param max the maximum value of the resulting value
+ *
+ * @return a value derived from the original hash less than or equal to max
+ */
+unsigned long long
+XORFold
+( unsigned long long hash, unsigned long long max );
 
 #endif

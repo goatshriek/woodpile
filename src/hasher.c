@@ -2,13 +2,6 @@
 #include <woodpile/config.h>
 #include <woodpile/hasher.h>
 
-unsigned long long
-PointerHash
-( const void *pointer )
-{
-  return (unsigned long long) pointer;
-}
-
 #ifdef __WOODPILE_CITY_HASHER
 unsigned long long
 CityDataHash
@@ -32,6 +25,12 @@ CitySeededHash
 }
 #endif
 
+unsigned long long
+PointerHash
+( const void *pointer )
+{
+  return (unsigned long long) pointer;
+}
 
 #ifdef __WOODPILE_SPOOKY_HASHER
 unsigned long long
@@ -79,3 +78,10 @@ WoodpileSeededHash
   return 0;
 }
 #endif
+
+unsigned long long
+XORFold
+( unsigned long long hash, unsigned long long max )
+{
+  return hash;
+}
