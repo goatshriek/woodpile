@@ -83,5 +83,9 @@ unsigned long long
 XORFold
 ( unsigned long long hash, unsigned long long max )
 {
+  while( hash > max ){
+    hash = (hash & 0xff) ^ (hash << 8);
+  }
+
   return hash;
 }

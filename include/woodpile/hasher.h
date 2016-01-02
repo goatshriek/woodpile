@@ -166,7 +166,9 @@ WoodpileSeededHash
 #endif
 
 /**
- * Folds a hash into a smaller value using XOR.
+ * Folds a hash into a smaller value using XOR. The value is repeatedly
+ * shifted left by 8 bits for the XOR operation, and as such is best used with
+ * a max value that is a power of 256.
  *
  * @param hash the value to be folded
  * @param max the maximum value of the resulting value
