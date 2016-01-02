@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include <woodpile/comparator.h>
 #include <woodpile/dynamic/tree/splay.h>
 #include "lib/str.h"
 #include "lib/validate.h"
@@ -225,7 +226,7 @@ DSplayNew
   VALIDATE_ALLOCATION( splay )
  
   splay->root = NULL;
-  splay->compare = compare ? compare : DirectCompare;
+  splay->compare = compare ? compare : ComparePointers;
  
   return splay;
 }
@@ -439,14 +440,6 @@ DestroyTree
   DestroyTree( root->right_child );
 
   free( ( void * ) root );
-}
-
-static
-int
-DirectCompare
-( const void *element_1, const void *element_2 )
-{
-  return ( int ) ( element_1 - element_2 );
 }
 
 static

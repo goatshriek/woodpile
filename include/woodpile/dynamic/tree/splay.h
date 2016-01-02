@@ -6,6 +6,8 @@
  * DynamicSplay Tree declaration and functions
  */
 
+#include <woodpile/comparator.h>
+
 /**
  * @struct DynamicSplay
  * The DynamicSplay data structure is a self-balancing tree structure that
@@ -33,7 +35,6 @@
 struct DynamicSplay;
 
 typedef struct DynamicSplay DSplay;
-typedef int ( *comparator_t )( const void *, const void * );
 typedef char * ( *to_string_t )( const void * );
 
 /**

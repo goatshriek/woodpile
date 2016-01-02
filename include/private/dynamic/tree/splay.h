@@ -131,20 +131,6 @@ DestroyTree
 ( const Node *root );
 
 /**
- * Directly compares two pointers.
- *
- * @param element_1 the first element to compare
- * @param element_2 the second element to compare
- *
- * @return a negative value if element_1 is lower, a positive value if element_2
- * is lower, and 0 if the two are equal.
- */
-static
-int
-DirectCompare
-( const void *element_1, const void *element_2 );
-
-/**
  * Searches a tree for a node with a value equal to element according to the
  * provided comparator.
  *

@@ -6,6 +6,8 @@
  * Comparison functions for use in structures where comparison is needed.
  */
 
+typedef int ( *comparator_t )( const void *, const void * );
+
 /**
  * Directly compares two values by comparing their pointer values.
  *
