@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include <woodpile/hasher.h>
 #include <woodpile/static/hash.h>
 
 #include "lib/validate.h"
@@ -32,6 +33,8 @@ main
   TEST( PutIntoNullSHash )
   TEST( PutNullKeyIntoSHash )
   TEST( PutNullValueIntoSHash )
+  TEST( RemoveFromNullSHash )
+  TEST( RemoveNullKey )
 #endif
 
   TEST( ContainsDuplicateValues )
@@ -43,12 +46,20 @@ main
   TEST( CopySize )
   TEST( DestroyNullSHash )
   TEST( DestroyPopulatedSHash )
-  TEST( GetFromEmptyHash )
+  TEST( GetFromEmptySHash )
   TEST( GetFromPopulatedSHash )
   TEST( IsEmptyWithEmptySHash )
   TEST( IsEmptyWithPopulatedSHash )
   TEST( IsEmptyWithNullSHash )
+  TEST( New )
   TEST( NewWithNullHasher )
+  TEST( PutValueIntoEmptySHash )
+  TEST( PutValueIntoPopulatedSHash )
+  TEST( Remove )
+  TEST( RemoveNonExistentKey )
+  TEST( Size )
+  TEST( SizeWithEmptySHash )
+  TEST( SizeWithNullSHash )
 
   SHashDestroy( common_hash );
 
@@ -73,7 +84,7 @@ TestContainsDuplicateValues
   if( !value )
     return "could not get an existing value";
 
-  if( SHashPut( hash, "3RD", value != value )
+  if( SHashPut( hash, "3RD", value ) != value )
     return "a duplicate could not be added to the hash";
   
   key = SHashContains( hash, value );
@@ -144,7 +155,7 @@ TestCopy
   if( !copy )
     return "NULL was returned for a non-NULL hash";
 
-  DestroySHash( copy );
+  SHashDestroy( copy );
 
   return NULL;
 }
@@ -224,7 +235,7 @@ const char *
 TestDestroyPopulatedSHash
 ( void )
 {
-  Shash *hash;
+  SHash *hash;
 
   hash = BuildSHash();
   if( !hash )
@@ -283,7 +294,7 @@ TestGetFromPopulatedSHash
   char *value;
 
   value = SHashGet( common_hash, "1st" );
-  ASSERT_SRINGS_EQUAL( "First", value, "the key did not return the correct value" )
+  ASSERT_STRINGS_EQUAL( "First", value, "the key did not return the correct value" )
 
   return NULL;
 }
@@ -326,16 +337,18 @@ TestIsEmptyWithNullSHash
   return NULL;
 }
 
-/**
- * Tests the NewSHash function.
- *
- * @test Calling the function must return a non-NULL value.
- *
- * @return NULL on completion or a string describing the failure
- */
 const char *
 TestNew
-( void );
+( void )
+{
+  SHash *hash;
+
+  hash = SHashNew( woodpile_hasher );
+  if( !hash )
+    return "NULL was returned with a non-NULL hashing function";
+    
+  return NULL;
+}
 
 const char *
 TestNewWithNullHasher
@@ -358,7 +371,7 @@ TestPutIntoNullSHash
     return "a non-NULL value was returned for a NULL hash, key, and value";
 
   if( SHashPut( NULL, NULL, "value" ) != NULL )
-    return "a non-NULL value was returned for a NULL hash and key"
+    return "a non-NULL value was returned for a NULL hash and key";
 
   if( SHashPut( NULL, "key", NULL ) != NULL )
     return "a non-NULL value was returned for a NULl hash and value";
@@ -423,136 +436,162 @@ TestPutNullValueIntoSHash
   return NULL;
 }
 
-/**
- * Tests the SHashPut function with an empty SHash.
- *
- * @test After putting a value into the hash it should be retrievable using
- * the same key. The retrieved value must be equal to the value placed into the
- * hash.
- *
- * @return NULL on completion or a string describing the failure
- */
 const char *
 TestPutValueIntoEmptySHash
-( void );
+( void )
+{
+  SHash *hash;
+  void *key = "Test Key";
+  void *value = "Test Value";
 
-/**
- * Tests the SHashPut function with a populated SHash.
- *
- * @test After putting a value into the hash it should be retrievable using
- * the same key. The retrieved value must be equal to the value placed into the
- * hash.
- *
- * @return NULL on completion or a string describing the failure
- */
+  hash = SHashNew( woodpile_hasher );
+  if( !hash )
+    return "could not build an empty hash";
+
+  if( SHashPut( hash, key, value ) != value )
+    return "could not add a new value to a hash";
+
+  if( SHashGet( hash, key ) != value )
+    return "could not retrieve a newly added value";
+
+  SHashDestroy( hash );
+
+  return NULL;
+}
+
 const char *
 TestPutValueIntoPopulatedSHash
-( void );
+( void )
+{
+  SHash *hash;
+  void *key = "Test Key";
+  void *value = "Test Value";
 
-/**
- * Tests the RemoveFromSHash function with a value that exists in the SHash more
- * than once.
- *
- * @test A SHash that has the value twice will have the first occurrence
- * removed and returned, but not the second.
- *
- * @return NULL on completion or a string describing the failure
- */
+  hash = BuildSHash();
+  if( !hash )
+    return "could not build a populated hash";
+
+  if( SHashPut( hash, key, value ) != value )
+    return "could not add a new value to a hash";
+
+  if( SHashGet( hash, key ) != value )
+    return "could not retrieve a newly added value";
+
+  SHashDestroy( hash );
+
+  return NULL;
+}
+
 const char *
-TestRemoveDuplicateValues
-( void );
+TestRemove
+( void )
+{
+  SHash *hash;
+  void *value;
 
-/**
- * Tests the RemoveFromSHash function with a NULL SHash.
- *
- * @test Removing from a NULL SHash must return NULL, whether the value
- * supplied is NULL or non-NULL.
- *
- * @return NULL on completion or a string describing the failure
- */
+  hash = BuildSHash();
+  if( !hash )
+    return "could not build a populated hash";
+
+  value = SHashRemove( hash, "7th" );
+  if( !value )
+    return "a value could not be removed from the hash";
+  ASSERT_STRINGS_EQUAL( "Seventh", value, "the correct value was not returned upon removal" )
+
+  if( SHashContains( hash, value ) )
+    return "the value was not removed from the hash";
+
+  SHashDestroy( hash );
+
+  return NULL;
+}
+
 const char *
 TestRemoveFromNullSHash
-( void );
+( void )
+{
+  if( SHashRemove( NULL, NULL ) != NULL )
+    return "NULL was not returned for a NULL hash and key";
 
-/**
- * Tests the RemoveFromSHash function when removing the last value from the
- * SHash.
- *
- * @test Removing the only element in a SHash must remove and return the element
- * and leav the SHash empty.
- *
- * @return NULL on completion or a string describing the failure
- */
+  if( SHashRemove( NULL, "key" ) != NULL )
+    return "NULL was not returned for a NULL hash and non-NULL key";
+
+  return NULL;
+}
+
 const char *
-TestRemoveLast
-( void );
+TestRemoveNonExistentKey
+( void )
+{
+  SHash *hash;
 
-/**
- * Tests the RemoveFromSHash function with a value that does not exist in the
- * SHash.
- *
- * @test Removing a value that is not in the SHash must return NULL.
- *
- * @return NULL on completion or a string describing the failure
- */
+  hash = BuildSHash();
+  if( !hash )
+    return "could not build a populated hash";
+
+  if( SHashRemove( hash, "doesn't exist" ) )
+    return "removing a non-existent key did not return NULL";
+
+  SHashDestroy( hash );
+
+  return NULL;
+}
+
 const char *
-TestRemoveNonExistentValue
-( void );
+TestRemoveNullKey
+( void )
+{
+  SHash *hash;
 
-/**
- * Tests the RemoveFromSHash function with a NULL value.
- *
- * @test Removing a NULL value must return NULL, whether the SHash supplied is
- * NULL or non-NULL.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestRemoveNullValue
-( void );
+  hash = BuildSHash();
+  if( !hash )
+    return "could not build a populated hash";
 
-/**
- * Tests the RemoveFromSHash function with a value that exists in the SHash
- * exactly once.
- *
- * @test Removing a value that is in the SHash once must return the value from
- * the SHash and remove the only instance of it.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestRemoveUniqueValue
-( void );
+  if( SHashRemove( hash, NULL ) )
+    return "a non-NULL hash and NULL key did not return NULL";
 
-/**
- * Tests the SHashSize function.
- *
- * @test A populated SHash must return an accurate count of the values.
- *
- * @return NULL on completion or a string describing the failure
- */
+  if( SHashRemove( NULL, NULL ) )
+    return "a NULL hash and key did not return NULL";
+
+  SHashDestroy( hash );
+
+  return NULL;
+}
+
 const char *
 TestSize
-( void );
+( void )
+{
+  if( SHashSize( common_hash ) != 10 )
+    return "the correct size was not returned for a hash";
 
-/**
- * Tests the SHashSize function with an empty SHash.
- *
- * @test An empty SHash must return 0.
- *
- * @return NULL on completion or a string describing the failure
- */
+  return NULL;
+}
+
 const char *
 TestSizeWithEmptySHash
-( void );
+( void )
+{
+  SHash *hash;
 
-/**
- * Tests the SHashSize function with a NULL SHash.
- *
- * @test A NULL SHash must return 0.
- *
- * @return NULL on completion or a string describing the failure
- */
+  hash = SHashNew( NULL );
+  if( !hash )
+    return "could not create an empty hash";
+
+  if( SHashSize( hash ) != 0 )
+    return "the size of an empty hash was not zero";
+
+  SHashDestroy( hash );
+
+  return NULL;
+}
+
 const char *
 TestSizeWithNullSHash
-( void );
+( void )
+{
+  if( SHashSize( NULL ) != 0 )
+    return "0 was not returned for a NULL hash";
+
+  return NULL;
+}

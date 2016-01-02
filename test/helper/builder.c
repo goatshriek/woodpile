@@ -3,6 +3,7 @@
 
 #include <woodpile/dynamic/list.h>
 #include <woodpile/dynamic/tree/splay.h>
+#include <woodpile/hasher.h>
 #include <woodpile/static/queue.h>
 
 #include "test/helper/builder.h"
@@ -62,7 +63,7 @@ BuildSHash
 {
   SHash *hash;
 
-  hash = SHashNew( NULL );
+  hash = SHashNew( woodpile_hasher );
   if( !hash )
     return NULL;
 

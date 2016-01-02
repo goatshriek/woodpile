@@ -308,22 +308,21 @@ TestPutValueIntoPopulatedSHash
 ( void );
 
 /**
- * Tests the RemoveFromSHash function with a value that exists in the SHash more
- * than once.
+ * Tests the SHashRemove function.
  *
- * @test A SHash that has the value twice will have the first occurrence
- * removed and returned, but not the second.
+ * @test Removing a key that is in the SHash must return the value from
+ * the SHash and remove it from the structure.
  *
  * @return NULL on completion or a string describing the failure
  */
 const char *
-TestRemoveDuplicateValues
+TestRemove
 ( void );
 
 /**
- * Tests the RemoveFromSHash function with a NULL SHash.
+ * Tests the SHashRemove function with a NULL SHash.
  *
- * @test Removing from a NULL SHash must return NULL, whether the value
+ * @test Removing from a NULL SHash must return NULL, whether the key
  * supplied is NULL or non-NULL.
  *
  * @return NULL on completion or a string describing the failure
@@ -333,20 +332,7 @@ TestRemoveFromNullSHash
 ( void );
 
 /**
- * Tests the RemoveFromSHash function when removing the last value from the
- * SHash.
- *
- * @test Removing the only element in a SHash must remove and return the element
- * and leav the SHash empty.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestRemoveLast
-( void );
-
-/**
- * Tests the RemoveFromSHash function with a value that does not exist in the
+ * Tests the SHashRemove function with a key that does not exist in the
  * SHash.
  *
  * @test Removing a value that is not in the SHash must return NULL.
@@ -354,32 +340,19 @@ TestRemoveLast
  * @return NULL on completion or a string describing the failure
  */
 const char *
-TestRemoveNonExistentValue
+TestRemoveNonExistentKey
 ( void );
 
 /**
- * Tests the RemoveFromSHash function with a NULL value.
+ * Tests the SHashRemove function with a NULL key.
  *
- * @test Removing a NULL value must return NULL, whether the SHash supplied is
+ * @test Removing a NULL key must return NULL, whether the SHash supplied is
  * NULL or non-NULL.
  *
  * @return NULL on completion or a string describing the failure
  */
 const char *
-TestRemoveNullValue
-( void );
-
-/**
- * Tests the RemoveFromSHash function with a value that exists in the SHash
- * exactly once.
- *
- * @test Removing a value that is in the SHash once must return the value from
- * the SHash and remove the only instance of it.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestRemoveUniqueValue
+TestRemoveNullKey
 ( void );
 
 /**

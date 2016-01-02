@@ -81,6 +81,7 @@ check_PROGRAMS = test/function/dynamic/list_suite \
                  test/function/dynamic/tree/splay_suite \
                  test/function/dynamic/tree/splay/const_iterator_suite \
                  test/function/dynamic/tree/splay/iterator_suite \
+                 test/function/static/hash_suite \
                  test/function/static/queue_suite \
                  test/function/static/stack_suite \
                  test/performance/static/hash_suite
@@ -91,6 +92,7 @@ TESTS = test/function/dynamic/list_suite \
         test/function/dynamic/tree/splay_suite \
         test/function/dynamic/tree/splay/const_iterator_suite \
         test/function/dynamic/tree/splay/iterator_suite \
+        test/function/static/hash_suite \
         test/function/static/queue_suite \
         test/function/static/stack_suite
 
@@ -121,6 +123,9 @@ test_function_dynamic_tree_splay_const_iterator_suite_LDADD = $(test_libraries)
 
 test_function_dynamic_tree_splay_iterator_suite_SOURCES = test/function/dynamic/tree/splay/iterator_suite.c
 test_function_dynamic_tree_splay_iterator_suite_LDADD = $(test_libraries)
+
+test_function_static_hash_suite_SOURCES = test/function/static/hash_suite.c
+test_function_static_hash_suite_LDADD = $(test_libraries)
 
 test_function_static_queue_suite_SOURCES = test/function/static/queue_suite.c
 test_function_static_queue_suite_LDADD = $(test_libraries)

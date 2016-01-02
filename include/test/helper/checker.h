@@ -7,9 +7,10 @@
  */
 
 #include <stdlib.h>
+#include <string.h>
 
 #define ASSERT_STRINGS_EQUAL( expected, actual, message )                      \
-if( !actual ){                                                                 \
+if( !(actual) ){                                                               \
   printf( "Expected: %s\nInstead was NULL\n", (expected) );                    \
   return (message);                                                            \
 }                                                                              \
