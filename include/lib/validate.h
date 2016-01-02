@@ -18,7 +18,7 @@ if( !(parameters) )                                                            \
   return NULL;
 #else
 #include <assert.h>
-#define VALIDATE_PARAMETERS( parameters ) assert( parameters );
+#define VALIDATE_PARAMETERS( parameters ) assert( (parameters) );
 #endif
 
 /**
@@ -29,9 +29,15 @@ if( !(parameters) )                                                            \
 #define VALIDATE_ALLOCATION( allocation )                                      \
 if( !(allocation) )                                                            \
   return NULL;
+#define VALIDATE_ALLOCATION_AND_FREE( allocation, remainder )                  \
+if( !(allocation) ){                                                           \
+  free( remainder );                                                           \
+  return NULL;                                                                 \
+}
 #else
 #include <assert.h>
-#define VALIDATE_ALLOCATION( allocation ) assert( allocation );
+#define VALIDATE_ALLOCATION( allocation ) assert( (allocation) );
+#define VALIDATE_ALLOCATION_AND_FREE( allocation, remainder ) assert( (allocation) );
 #endif
 
 #endif

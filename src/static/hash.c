@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <woodpile/hasher.h>
 #include <woodpile/static/hash.h>
 #include "private/static/hash.h"
 
@@ -35,7 +36,21 @@ SHash *
 SHashNewSized
 ( const hasher_t hasher, const folder_t folder, const comparator_t comparator, size_t capacity )
 {
-  return NULL;
+  SHash *hash;
+
+  hash = malloc( sizeof( SHash ) );
+  VALIDATE_ALLOCATION( hash )
+
+  hash->values = malloc( capacity );
+  VALIDATE_ALLOCATION_AND_FREE( hash->values, hash )
+
+  hash->capacity = capacity;
+
+  hash->hash = hasher ? hasher : pointer_hasher;
+  hash->fold = folder ? folder : xor_folder;
+  hash->compare = comparator ? comparator : DirectCompare;
+
+  return hash;
 }
 
 void *
@@ -102,4 +117,12 @@ SHashSetCapacity
 ( SHash *hash, size_t capacity )
 {
   return NULL;
+}
+
+static
+int
+DirectCompare
+( const void *element_1, const void *element_2 )
+{
+  return ( int ) ( element_1 - element_2 );
 }

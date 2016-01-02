@@ -11,9 +11,9 @@
 /** the Static Stack container */
 struct StaticStack {
   size_t capacity; /**< the number of elements the hash can hold */
-  const comparator_t comparator; /**< the key comparison function */
-  const folder_t folder; /**< the folding function */
-  const hasher_t hasher; /**< the hashing function */
+  const comparator_t compare; /**< the key comparison function */
+  const folder_t fold; /**< the folding function */
+  const hasher_t hash; /**< the hashing function */
   void **values; /**< the elements */
 };
 
