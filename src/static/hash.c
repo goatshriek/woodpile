@@ -10,7 +10,21 @@ SHash *
 SHashCopy
 ( const SHash *hash )
 {
-  return NULL;
+  SHash *copy;
+
+  copy = malloc( sizeof( SHash ) );
+  VALIDATE_ALLOCATION( copy );
+
+  copy->values = malloc( sizeof( void * ) * hash->capacity );
+  VALIDATE_ALLOCATION_AND_FREE( copy->values, copy );
+
+  memcpy( copy->values, hash->values, hash->capacity );
+  copy->capacity = hash->capacity;
+  copy->compare = hash->compare;
+  copy->fold = hash->fold;
+  copy->size = hash->size;
+
+  return copy;
 }
 
 void
@@ -52,6 +66,7 @@ SHashNewSized
   VALIDATE_ALLOCATION_AND_FREE( hash->values, hash )
 
   hash->capacity = capacity;
+  hash->size = 0;
 
   hash->hash = hasher ? hasher : PointerHash;
   hash->fold = folder ? folder : XORFold;
@@ -85,7 +100,10 @@ size_t
 SHashCapacity
 ( const SHash *hash )
 {
-  return 0;
+  if( SHashIsEmpty( hash ) )
+    return 0;
+
+  return hash->capacity;
 }
 
 void *
@@ -99,7 +117,7 @@ unsigned short
 SHashIsEmpty
 ( const SHash *hash )
 {
-  return 0;
+  return hash == NULL || hash->size == 0;
 }
 
 size_t
@@ -109,7 +127,7 @@ SHashSize
   if( SHashIsEmpty( hash ) )
     return 0;
 
-  return 0;
+  return hash->size;
 }
 
 char *
