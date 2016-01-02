@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 #include <woodpile/hasher.h>
 #include <woodpile/static/hash.h>
@@ -24,7 +25,7 @@ main
 
 
   // measure the city hash performance
-  city_hash = SHashNew( city_hasher );
+  city_hash = SHashNew( city_hasher, NULL, ( comparator_t ) strcmp );
   if( !city_hash ){
     printf( "Could not build a city hash.\n" );
     return EXIT_FAILURE;
@@ -35,7 +36,7 @@ main
 
 
   // measure the spooky hash performance
-  spooky_hash = SHashNew( spooky_hasher );
+  spooky_hash = SHashNew( spooky_hasher, NULL, ( comparator_t ) strcmp );
   if( !spooky_hash ){
     printf( "Could not build a spooky hash.\n" );
     return EXIT_FAILURE;
@@ -46,7 +47,7 @@ main
 
 
   // measure the woodpile hash performance
-  woodpile_hash = SHashNew ( woodpile_hasher );
+  woodpile_hash = SHashNew ( woodpile_hasher, NULL, ( comparator_t ) strcmp );
   if( !woodpile_hash ){
     printf( "Could not build a woodpile hash.\n" );
     return EXIT_FAILURE;

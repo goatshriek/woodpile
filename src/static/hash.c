@@ -26,14 +26,14 @@ SHashGet
 
 SHash *
 SHashNew
-( const hasher_t hasher )
+( const hasher_t hasher, const folder_t folder, const comparator_t comparator )
 {
-  return SHashNewSized( hasher, 256 );
+  return SHashNewSized( hasher, folder, comparator, 256 );
 }
 
 SHash *
 SHashNewSized
-( const hasher_t hasher, size_t capacity )
+( const hasher_t hasher, const folder_t folder, const comparator_t comparator, size_t capacity )
 {
   return NULL;
 }
@@ -84,6 +84,9 @@ size_t
 SHashSize
 ( const SHash *hash )
 {
+  if( SHashIsEmpty( hash ) )
+    return 0;
+
   return 0;
 }
 

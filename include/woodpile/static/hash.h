@@ -26,6 +26,8 @@ struct StaticHash;
 typedef struct StaticHash StaticHash;
 typedef struct StaticHash SHash;
 
+typedef int ( *comparator_t )( const void *, const void * );
+typedef unsigned long long ( *folder_t )( unsigned long long, unsigned long long );
 typedef unsigned long long ( *hasher_t )( const void * );
 
 /**
@@ -71,28 +73,37 @@ GetFromStaticHash
 /**
  * Creates a new SHash. The default capacity of the hash is 256. If the hashing
  * function is NULL, then a default function is used based on element's pointer
- * values.
+ * values. If the folding function is NULL, then a simple XOR-based function is
+ * used. If the comparator is NULL, then the pointers for keys are directly
+ * compared.
  *
  * @param hasher the hashing function to use on keys
+ * @param folder the folding function to use on hash values
+ * @param comparator the function to use to compare keys
  *
  * @return a new SHash or NULL on failure
  */
 SHash *
 NewStaticHash
-( const hasher_t hasher );
+( const hasher_t hasher, const folder_t folder, const comparator_t comparator );
 #define SHashNew NewStaticHash
 
 /**
- * Creates a new SHash of the given capacity.
+ * Creates a new SHash of the given capacity. If the hashing function is NULL,
+ * then a default function is used based on element's pointer values. If the
+ * folding function is NULL, then a simple XOR-based function is used. If the
+ * comparator is NULL, then the pointers for keys are directly compared.
  *
  * @param hasher the hashing function to use on keys
+ * @param folder the folding function to use on hash values
+ * @param comparator the function to use to compare keys
  * @param capacity the capacity to give the SHash
  *
  * @return a new SHash of the provided capacity, or NULL on failure
  */
 SHash *
 NewSizedStaticHash
-( const hasher_t hasher, size_t capacity );
+( const hasher_t hasher, const folder_t folder, const comparator_t comparator, size_t capacity );
 #define SHashNewSized NewSizedStaticHash
 
 /**

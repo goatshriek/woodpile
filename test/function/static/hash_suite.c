@@ -278,7 +278,7 @@ TestGetFromEmptySHash
 {
   SHash *hash;
 
-  hash = SHashNew( NULL );
+  hash = SHashNew( woodpile_hasher, NULL, ( comparator_t ) strcmp );
   if( SHashGet( hash, "1st" ) != NULL )
     return "a non-NULL value was returned for an empty hash";
 
@@ -305,7 +305,7 @@ TestIsEmptyWithEmptySHash
 {
   SHash *hash;
 
-  hash = SHashNew( NULL );
+  hash = SHashNew( NULL, NULL, NULL );
   if( !hash )
     return "a new hash could not be created";
 
@@ -343,7 +343,7 @@ TestNew
 {
   SHash *hash;
 
-  hash = SHashNew( woodpile_hasher );
+  hash = SHashNew( woodpile_hasher, NULL, ( comparator_t ) strcmp );
   if( !hash )
     return "NULL was returned with a non-NULL hashing function";
     
@@ -356,7 +356,7 @@ TestNewWithNullHasher
 {
   SHash *hash;
 
-  hash = SHashNew( NULL );
+  hash = SHashNew( NULL, NULL, NULL );
   if( !hash )
     return "NULL was returned with a NULL hashing function";
 
@@ -444,7 +444,7 @@ TestPutValueIntoEmptySHash
   void *key = "Test Key";
   void *value = "Test Value";
 
-  hash = SHashNew( woodpile_hasher );
+  hash = SHashNew( woodpile_hasher, NULL, ( comparator_t ) strcmp );
   if( !hash )
     return "could not build an empty hash";
 
@@ -574,7 +574,7 @@ TestSizeWithEmptySHash
 {
   SHash *hash;
 
-  hash = SHashNew( NULL );
+  hash = SHashNew( NULL, NULL, NULL );
   if( !hash )
     return "could not create an empty hash";
 
