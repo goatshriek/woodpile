@@ -18,6 +18,20 @@
 # define __WOODPILE_WOODPILE_HASHER 1
 #endif
 
+typedef unsigned long long ( *hasher_t )( const void * );
+
+/**
+ * Creates a hash from a pointer. This is done by simply converting the pointer
+ * to an integer.
+ *
+ * @param pointer the pointer to hash
+ *
+ * @return a noncryptographic hash of a pointer
+ */
+unsigned long long
+PointerHash
+( const void *pointer );
+
 #ifdef __WOODPILE_CITY_HASHER
 /**
  * An adaptation of Google's CityHash. The original code can be found on the

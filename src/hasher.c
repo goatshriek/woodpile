@@ -2,6 +2,13 @@
 #include <woodpile/config.h>
 #include <woodpile/hasher.h>
 
+unsigned long long
+PointerHash
+( const void *pointer )
+{
+  return (unsigned long long) pointer;
+}
+
 #ifdef __WOODPILE_CITY_HASHER
 unsigned long long
 CityDataHash

@@ -6,6 +6,9 @@
  * Hash declaration and functions
  */
 
+#include <woodpile/comparator.h>
+#include <woodpile/hasher.h>
+
 /**
  * @struct Hash
  * The StaticHash data structure is an implementation of a hash map. Elements
@@ -26,9 +29,7 @@ struct StaticHash;
 typedef struct StaticHash StaticHash;
 typedef struct StaticHash SHash;
 
-typedef int ( *comparator_t )( const void *, const void * );
 typedef unsigned long long ( *folder_t )( unsigned long long, unsigned long long );
-typedef unsigned long long ( *hasher_t )( const void * );
 
 /**
  * Creates a copy of a SHash. Elements within the hash are not copied, meaning

@@ -48,7 +48,7 @@ SHashNewSized
 
   hash->capacity = capacity;
 
-  //hash->hash = hasher ? hasher : pointer_hasher;
+  hash->hash = hasher ? hasher : PointerHash;
   //hash->fold = folder ? folder : xor_folder;
   hash->compare = comparator ? comparator : ComparePointers;
 
