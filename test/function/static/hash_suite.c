@@ -126,8 +126,13 @@ const char *
 TestContainsUniqueValue
 ( void )
 {
-  if( strcmp( SHashContains( common_hash, "3rd" ), "Third" ) != 0 )
-    return "the value was not contained in the hash";
+  void *value;
+
+  value = SHashContains( common_hash, "Third" );
+  if( !value )
+    return "a value existing in the hash was not returned";
+
+  ASSERT_STRINGS_EQUAL( "3rd", value, "the correct key was not returned" )
 
   return NULL;
 }
