@@ -10,7 +10,8 @@ include_HEADERS = $(top_srcdir)/../../include/woodpile.h
 
 woodpile_includedir = $(includedir)/woodpile
 
-woodpile_include_HEADERS = $(top_srcdir)/../../include/woodpile/hasher.h
+woodpile_include_HEADERS = $(top_srcdir)/../../include/woodpile/comparator.h \
+                           $(top_srcdir)/../../include/woodpile/hasher.h
 
 woodpile_static_includedir = $(includedir)/woodpile/static
 
@@ -67,6 +68,7 @@ libwoodpile_la_SOURCES = src/dynamic/list.c \
                          src/dynamic/tree/splay.c \
                          src/dynamic/tree/splay/const_iterator.c \
                          src/dynamic/tree/splay/iterator.c \
+                         src/comparator.c \
                          src/hasher.c \
                          src/static/hash.c \
                          src/static/queue.c \

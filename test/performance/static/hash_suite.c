@@ -25,7 +25,7 @@ main
 
 
   // measure the city hash performance
-  city_hash = SHashNew( city_hasher, NULL, ( comparator_t ) strcmp );
+  city_hash = SHashNew( CityHash, NULL, ( comparator_t ) strcmp );
   if( !city_hash ){
     printf( "Could not build a city hash.\n" );
     return EXIT_FAILURE;
@@ -36,7 +36,7 @@ main
 
 
   // measure the spooky hash performance
-  spooky_hash = SHashNew( spooky_hasher, NULL, ( comparator_t ) strcmp );
+  spooky_hash = SHashNew( SpookyHash, NULL, ( comparator_t ) strcmp );
   if( !spooky_hash ){
     printf( "Could not build a spooky hash.\n" );
     return EXIT_FAILURE;
@@ -47,7 +47,7 @@ main
 
 
   // measure the woodpile hash performance
-  woodpile_hash = SHashNew ( woodpile_hasher, NULL, ( comparator_t ) strcmp );
+  woodpile_hash = SHashNew ( WoodpileHash, NULL, ( comparator_t ) strcmp );
   if( !woodpile_hash ){
     printf( "Could not build a woodpile hash.\n" );
     return EXIT_FAILURE;

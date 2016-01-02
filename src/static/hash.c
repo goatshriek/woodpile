@@ -1,6 +1,8 @@
 #include <stdlib.h>
+#include <woodpile/comparator.h>
 #include <woodpile/hasher.h>
 #include <woodpile/static/hash.h>
+#include "lib/validate.h"
 #include "private/static/hash.h"
 
 
@@ -41,14 +43,14 @@ SHashNewSized
   hash = malloc( sizeof( SHash ) );
   VALIDATE_ALLOCATION( hash )
 
-  hash->values = malloc( capacity );
+  hash->values = malloc( sizeof( void * ) * capacity );
   VALIDATE_ALLOCATION_AND_FREE( hash->values, hash )
 
   hash->capacity = capacity;
 
-  hash->hash = hasher ? hasher : pointer_hasher;
-  hash->fold = folder ? folder : xor_folder;
-  hash->compare = comparator ? comparator : DirectCompare;
+  //hash->hash = hasher ? hasher : pointer_hasher;
+  //hash->fold = folder ? folder : xor_folder;
+  hash->compare = comparator ? comparator : ComparePointers;
 
   return hash;
 }
