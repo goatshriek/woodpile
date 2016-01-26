@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <string.h>
 #include <woodpile/comparator.h>
 #include <woodpile/hasher.h>
 #include <woodpile/static/hash.h>
@@ -20,7 +21,7 @@ SHashCopy
 
   memcpy( copy->values, hash->values, hash->capacity );
   copy->capacity = hash->capacity;
-  copy->compare = hash->compare;
+  copy->compare_keys = hash->compare_keys;
   copy->fold = hash->fold;
   copy->size = hash->size;
 
@@ -70,7 +71,7 @@ SHashNewSized
 
   hash->hash = hasher ? hasher : PointerHash;
   hash->fold = folder ? folder : XORFold;
-  hash->compare = comparator ? comparator : ComparePointers;
+  hash->compare_keys = comparator ? comparator : ComparePointers;
 
   return hash;
 }

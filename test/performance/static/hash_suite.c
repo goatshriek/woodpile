@@ -58,9 +58,9 @@ main
  
  
   // print the results
-  printf( "City Hash Load Clock Cycles:     %5d\n", city_load_time );
-  printf( "Spooky Hash Load Clock Cycles:   %5d\n", spooky_load_time );
-  printf( "Woodpile Hash Load Clock Cycles: %5d\n", woodpile_load_time );
+  printf( "City Hash Load Clock Cycles:     %5d\n", (int)city_load_time );
+  printf( "Spooky Hash Load Clock Cycles:   %5d\n", (int)spooky_load_time );
+  printf( "Woodpile Hash Load Clock Cycles: %5d\n", (int)woodpile_load_time );
 
 
   // cleaning up
@@ -77,7 +77,8 @@ LoadSHash
   char key[100];
 
   while( !feof( stream ) ){
-    fgets( key, 100, stream );
+    if( !fgets( key, 100, stream ) )
+      return 0;
     begin = clock();
     SHashPut( hash, key, "Value" );
     total_clocks = clock() - begin;
