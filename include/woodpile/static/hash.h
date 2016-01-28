@@ -248,4 +248,19 @@ SetStaticHashElementComparator
 ( SHash *hash, comparator_t comparator );
 #define SHashSetElementComparator SetStaticHashElementComparator
 
+/**
+ * Sets the comparator used to compare keys in a StaticHash. This comparator is
+ * used to compare keys to check for collisions and confirm that a hash has
+ * mapped to the intended element.
+ *
+ * @param hash The SHash to update with the comparator
+ * @param comparator The new comparator to use for keys. Must not be NULL.
+ *
+ * @return the SHash with the updated comparator
+ */
+SHash *
+SetStaticHashKeyComparator
+( SHash *hash, comparator_t comparator );
+#define SHashSetKeyComparator SetStaticHashKeyComparator
+
 #endif

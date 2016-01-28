@@ -152,3 +152,10 @@ SHashSetElementComparator
 {
   return NULL;
 }
+
+SHash *
+SHashSetKeyComparator
+( SHash *hash, comparator_t comparator )
+{
+  return NULL;
+}
