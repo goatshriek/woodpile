@@ -356,6 +356,20 @@ TestRemoveNullKey
 ( void );
 
 /**
+ *  Tests the SHashSetElementComparator function.
+ *
+ *  @test After setting the comparator to a function comparing equality by a
+ *  means other than direct pointer comparison, a call to SHashContains must
+ *  return a logically true value. Setting the comparator back to direct pointer
+ *  comparison must cause SHashContains to return a logically false value.
+ *
+ *  @return NULL on completion or a string describing the failure
+ */
+const char *
+TestSetElementComparator
+( void );
+
+/**
  * Tests the SHashSize function.
  *
  * @test A populated SHash must return an accurate count of the values.
