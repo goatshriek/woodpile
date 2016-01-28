@@ -370,6 +370,30 @@ TestSetElementComparator
 ( void );
 
 /**
+ * Tests the SHashSetElementComparator function with a NULL comparator.
+ *
+ * @test Setting to a NULL comparator must return NULL. The hash must have the
+ * same element comparator as it did before the call.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestSetElementComparatorToNull
+( void );
+
+/**
+ * Tests the SHashSetElementComparator function with a NULL SHash.
+ *
+ * @test Setting the comparator on a NULL SHash must return NULL whether the
+ * comparator is NULL or non-NULL.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestSetElementComparatorWithNullSHash
+( void );
+
+/**
  * Tests the SHashSize function.
  *
  * @test A populated SHash must return an accurate count of the values.

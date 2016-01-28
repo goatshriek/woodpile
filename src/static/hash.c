@@ -13,6 +13,8 @@ SHashCopy
 {
   SHash *copy;
 
+  VALIDATE_PARAMETERS( hash )
+
   copy = malloc( sizeof( SHash ) );
   VALIDATE_ALLOCATION( copy );
 
@@ -111,6 +113,13 @@ SHashCapacity
 void *
 SHashContains
 ( const SHash *hash, const void *element )
+{
+  return NULL;
+}
+
+comparator_t
+SHashElementComparator
+( const SHash *hash )
 {
   return NULL;
 }

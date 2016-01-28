@@ -1,10 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-
 #include <woodpile/hasher.h>
 #include <woodpile/static/hash.h>
-
 #include "lib/validate.h"
 #include "test/function/static/hash_suite.h"
 #include "test/helper.h"
@@ -35,6 +33,8 @@ main
   TEST( PutNullValueIntoSHash )
   TEST( RemoveFromNullSHash )
   TEST( RemoveNullKey )
+  TEST( SetElementComparatorToNull )
+  TEST( SetElementComparatorWithNullSHash )
 #endif
 
   TEST( ContainsDuplicateValues )
@@ -57,6 +57,7 @@ main
   TEST( PutValueIntoPopulatedSHash )
   TEST( Remove )
   TEST( RemoveNonExistentKey )
+  TEST( SetElementComparator )
   TEST( Size )
   TEST( SizeWithEmptySHash )
   TEST( SizeWithNullSHash )
@@ -538,6 +539,71 @@ TestRemoveNonExistentKey
     return "removing a non-existent key did not return NULL";
 
   SHashDestroy( hash );
+
+  return NULL;
+}
+
+const char *
+TestSetElementComparator
+( void )
+{
+  SHash *hash;
+  const char *element = "Fourth";
+
+  hash = BuildSHash();
+  if( !hash )
+    return "could not build a populated hash";
+
+  if( SHashSetElementComparator( hash, CompareStrings ) != hash )
+    return "the element comparator could not be updated";
+
+  if( !SHashContains( hash, element ) )
+    return "the updated element comparator was not used";
+
+  if( SHashSetElementComparator( hash, ComparePointers ) != hash )
+    return "the element comparator could not be updated after being set once";
+
+  if( SHashContains( hash, element) )
+    return "changing the element comparator did not result in different behavior";
+
+  SHashDestroy( hash );
+
+  return NULL;
+}
+
+const char *
+TestSetElementComparatorToNull
+( void )
+{
+  SHash *hash;
+  comparator_t previous;
+
+  hash = BuildSHash();
+  if( !hash )
+    return "could not build a populated hash";
+
+  previous = SHashElementComparator( hash );
+
+  if( SHashSetElementComparator( hash, NULL ) != NULL )
+    return "NULL was not returned for a NULL comparator";
+
+  if( SHashElementComparator( hash ) != previous )
+    return "the comparator was changed after a call with a NULL comparator";
+
+  SHashDestroy( hash );
+
+  return NULL;
+}
+
+const char *
+TestSetElementComparatorWithNullSHash
+( void )
+{
+  if( SHashSetElementComparator( NULL, NULL ) != NULL )
+    return "a non-NULL value was not returned for a NULL hash and comparator";
+
+  if( SHashSetElementComparator( NULL, ComparePointers ) != NULL )
+    return "a non-NULL value was not returned for a NULL hash";
 
   return NULL;
 }

@@ -182,6 +182,18 @@ StaticHashContains
 #define SHashContains StaticHashContains
 
 /**
+ * Gets the comparator used to compare elements in the hash.
+ *
+ * @param hash the SHash using the comparator. Must not be NULL.
+ *
+ * @return the comparator the SHash is using
+ */
+comparator_t
+StaticHashElementComparator
+( const SHash *hash );
+#define SHashElementComparator StaticHashElementComparator
+
+/**
  * Checks a SHash to see if it's empty.
  *
  * @param hash the SHash to check
@@ -238,7 +250,7 @@ SetStaticHashCapacity
  * comparator is used whenever elements are compared, for things such as calls
  * to the StaticHashContains function.
  *
- * @param hash The SHash to update with the comparator
+ * @param hash The SHash to update with the comparator. Must not be NULL.
  * @param comparator The new comparator to use for elements. Must not be NULL.
  *
  * @return the SHash with the updated comparator
@@ -253,7 +265,7 @@ SetStaticHashElementComparator
  * used to compare keys to check for collisions and confirm that a hash has
  * mapped to the intended element.
  *
- * @param hash The SHash to update with the comparator
+ * @param hash The SHash to update with the comparator. Must not be NULL.
  * @param comparator The new comparator to use for keys. Must not be NULL.
  *
  * @return the SHash with the updated comparator
