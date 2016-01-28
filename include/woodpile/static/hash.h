@@ -78,13 +78,13 @@ GetFromStaticHash
  *
  * @param hasher the hashing function to use on keys
  * @param folder the folding function to use on hash values
- * @param comparator the function to use to compare keys
+ * @param key_comparator the function to use to compare keys
  *
  * @return a new SHash or NULL on failure
  */
 SHash *
 NewStaticHash
-( const hasher_t hasher, const folder_t folder, const comparator_t comparator );
+( const hasher_t hasher, const folder_t folder, const comparator_t key_comparator );
 #define SHashNew NewStaticHash
 
 /**
@@ -95,14 +95,14 @@ NewStaticHash
  *
  * @param hasher the hashing function to use on keys
  * @param folder the folding function to use on hash values
- * @param comparator the function to use to compare keys
+ * @param key_comparator the function to use to compare keys
  * @param capacity the capacity to give the SHash
  *
  * @return a new SHash of the provided capacity, or NULL on failure
  */
 SHash *
 NewSizedStaticHash
-( const hasher_t hasher, const folder_t folder, const comparator_t comparator, size_t capacity );
+( const hasher_t hasher, const folder_t folder, const comparator_t key_comparator, size_t capacity );
 #define SHashNewSized NewSizedStaticHash
 
 /**
@@ -162,19 +162,23 @@ StaticHashCapacity
 #define SHashCapacity StaticHashCapacity
 
 /**
- * Searches a SHash for a given value. If the value exists in the hash, one of
- * the keys mapped to the value is returned. If the value exists in the hash
- * multiple times (therefore with multiple keys), there is no guarantee of which
- * key will be returned or that the same key will be returned each time.
+ * Searches a SHash for a given element. If the element exists in the hash, one
+ * of the keys mapped to the element is returned. If the element exists in the
+ * hash multiple times (therefore with multiple keys), there is no guarantee of
+ * which key will be returned or that the same key will be returned each time.
+ *
+ * To modify how this function compares elements use the
+ * SetStaticHashElementComparator function with the desired comparator. By
+ * default elements are compared using their pointer values.
  *
  * @param hash The SHash to search. Must not be NULL.
- * @param value The value to search for. Must not be NULL.
+ * @param element The value to search for. Must not be NULL.
  *
  * @return a key for the value if it is in the hash, or NULL if not
  */
 void *
 StaticHashContains
-( const SHash *hash, const void *value );
+( const SHash *hash, const void *element );
 #define SHashContains StaticHashContains
 
 /**
@@ -206,7 +210,7 @@ StaticHashSize
  * function to get the string representation of each element.
  *
  * @param hash the SHash to get a representation of. Must not be NULL.
- * @param element_to_string a function returining string representations of
+ * @param element_to_string a function returning string representations of
  * elements
  *
  * @return a char buffer holding a string representation of the SHash
@@ -228,5 +232,20 @@ SHash *
 SetStaticHashCapacity
 ( SHash *hash, size_t capacity );
 #define SHashSetCapacity SetStaticHashCapacity
+
+/**
+ * Sets the comparator used to compare elements held in a StaticHash. This
+ * comparator is used whenever elements are compared, for things such as calls
+ * to the StaticHashContains function.
+ *
+ * @param hash The SHash to update with the comparator
+ * @param comparator The new comparator to use for elements. Must not be NULL.
+ *
+ * @return the SHash with the updated comparator
+ */
+SHash *
+SetStaticHashElementComparator
+( SHash *hash, comparator_t comparator );
+#define SHashSetElementComparator SetStaticHashElementComparator
 
 #endif

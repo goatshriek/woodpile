@@ -49,14 +49,14 @@ SHashGet
 
 SHash *
 SHashNew
-( const hasher_t hasher, const folder_t folder, const comparator_t comparator )
+( const hasher_t hasher, const folder_t folder, const comparator_t key_comparator )
 {
-  return SHashNewSized( hasher, folder, comparator, 256 );
+  return SHashNewSized( hasher, folder, key_comparator, 256 );
 }
 
 SHash *
 SHashNewSized
-( const hasher_t hasher, const folder_t folder, const comparator_t comparator, size_t capacity )
+( const hasher_t hasher, const folder_t folder, const comparator_t key_comparator, size_t capacity )
 {
   SHash *hash;
 
@@ -71,7 +71,8 @@ SHashNewSized
 
   hash->hash = hasher ? hasher : PointerHash;
   hash->fold = folder ? folder : XORFold;
-  hash->compare_keys = comparator ? comparator : ComparePointers;
+  hash->compare_keys = key_comparator ? key_comparator : ComparePointers;
+  hash->compare_elements = ComparePointers;
 
   return hash;
 }
@@ -109,7 +110,7 @@ SHashCapacity
 
 void *
 SHashContains
-( const SHash *hash, const void *value )
+( const SHash *hash, const void *element )
 {
   return NULL;
 }
@@ -141,6 +142,13 @@ SHashHashToString
 SHash *
 SHashSetCapacity
 ( SHash *hash, size_t capacity )
+{
+  return NULL;
+}
+
+SHash *
+SHashSetElementComparator
+( SHash *hash, comparator_t comparator )
 {
   return NULL;
 }
