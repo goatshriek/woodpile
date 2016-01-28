@@ -16,10 +16,10 @@ SHashCopy
   VALIDATE_PARAMETERS( hash )
 
   copy = malloc( sizeof( SHash ) );
-  VALIDATE_ALLOCATION( copy );
+  VALIDATE_ALLOCATION( copy )
 
   copy->values = malloc( sizeof( void * ) * hash->capacity );
-  VALIDATE_ALLOCATION_AND_FREE( copy->values, copy );
+  VALIDATE_ALLOCATION_AND_FREE( copy->values, copy )
 
   memcpy( copy->values, hash->values, hash->capacity );
   copy->capacity = hash->capacity;
@@ -93,11 +93,39 @@ SHashRemove
   return NULL;
 }
 
-void
-SetStaticHashHasher
-( SHash *hash, const hasher_t hasher )
+SHash *
+SHashSetCapacity
+( SHash *hash, size_t capacity )
 {
-  return;
+  return NULL;
+}
+
+SHash *
+SHashSetFolder
+( SHash *hash, folder_t folder )
+{
+  return NULL;
+}
+
+SHash *
+SHashSetElementComparator
+( SHash *hash, comparator_t comparator )
+{
+  return NULL;
+}
+
+SHash *
+SHashSetHasher
+( SHash *hash, hasher_t hasher )
+{
+  return NULL;
+}
+
+SHash *
+SHashSetKeyComparator
+( SHash *hash, comparator_t comparator )
+{
+  return NULL;
 }
 
 size_t
@@ -124,6 +152,15 @@ SHashElementComparator
   return NULL;
 }
 
+folder_t
+SHashFolder
+( const SHash *hash )
+{
+  VALIDATE_PARAMETERS( hash )
+
+  return hash->fold;
+}
+
 unsigned short
 SHashIsEmpty
 ( const SHash *hash )
@@ -144,27 +181,6 @@ SHashSize
 char *
 SHashHashToString
 ( const SHash *hash, char * ( *element_to_string )( const void * ) )
-{
-  return NULL;
-}
-
-SHash *
-SHashSetCapacity
-( SHash *hash, size_t capacity )
-{
-  return NULL;
-}
-
-SHash *
-SHashSetElementComparator
-( SHash *hash, comparator_t comparator )
-{
-  return NULL;
-}
-
-SHash *
-SHashSetKeyComparator
-( SHash *hash, comparator_t comparator )
 {
   return NULL;
 }

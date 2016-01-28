@@ -139,15 +139,69 @@ RemoveFromStaticHash
 #define SHashRemove RemoveFromStaticHash
 
 /**
+ * Changes a SHash's capacity, specifically the number of buckets.
+ *
+ * @param hash the SHash to resize. Must not be NULL.
+ * @param capacity the new capacity of the SHash
+ *
+ * @return the SHash having been resized
+ */
+SHash *
+SetStaticHashCapacity
+( SHash *hash, size_t capacity );
+#define SHashSetCapacity SetStaticHashCapacity
+
+/**
+ * Sets the folding function for an SHash.
+ *
+ * @param hash The SHash to update. Must not be NULL.
+ * @param folder The folding function to use. Must not be NULL.
+ */
+SHash *
+SetStaticHashFolder
+( SHash *hash, folder_t folder );
+#define SHashSetFolder SetStaticHashFolder
+
+/**
+ * Sets the comparator used to compare elements held in a StaticHash. This
+ * comparator is used whenever elements are compared, for things such as calls
+ * to the StaticHashContains function.
+ *
+ * @param hash The SHash to update with the comparator. Must not be NULL.
+ * @param comparator The new comparator to use for elements. Must not be NULL.
+ *
+ * @return the SHash with the updated comparator
+ */
+SHash *
+SetStaticHashElementComparator
+( SHash *hash, comparator_t comparator );
+#define SHashSetElementComparator SetStaticHashElementComparator
+
+/**
  * Sets the hashing function for an SHash.
  *
- * @param hash The SHash to set the function for. Must not be NULL.
+ * @param hash The SHash to update. Must not be NULL.
  * @param hasher The hashing function to use. Must not be NULL.
  */
-void
+SHash *
 SetStaticHashHasher
-( SHash *hash, const hasher_t hasher );
+( SHash *hash, hasher_t hasher );
 #define SHashSetHasher SetStaticHashHasher
+
+/**
+ * Sets the comparator used to compare keys in a StaticHash. This comparator is
+ * used to compare keys to check for collisions and confirm that a hash has
+ * mapped to the intended element.
+ *
+ * @param hash The SHash to update with the comparator. Must not be NULL.
+ * @param comparator The new comparator to use for keys. Must not be NULL.
+ *
+ * @return the SHash with the updated comparator
+ */
+SHash *
+SetStaticHashKeyComparator
+( SHash *hash, comparator_t comparator );
+#define SHashSetKeyComparator SetStaticHashKeyComparator
 
 /**
  * Gets the current capacity of the SHash.
@@ -194,6 +248,18 @@ StaticHashElementComparator
 #define SHashElementComparator StaticHashElementComparator
 
 /**
+ * Gets the folding function used in the hash.
+ *
+ * @param hash the SHash using the folding function. Must not be NULL.
+ *
+ * @return the folding function of the SHash
+ */
+folder_t
+StaticHashFolder
+( const SHash *hash );
+#define SHashFolder StaticHashFolder
+
+/**
  * Checks a SHash to see if it's empty.
  *
  * @param hash the SHash to check
@@ -231,48 +297,5 @@ char *
 StaticHashToString
 ( const SHash *hash, char * ( *element_to_string )( const void * ) );
 #define SHashToString StaticHashToString
-
-/**
- * Changes a SHash's capacity, specifically the number of buckets.
- *
- * @param hash the SHash to resize. Must not be NULL.
- * @param capacity the new capacity of the SHash
- *
- * @return the SHash having been resized
- */
-SHash *
-SetStaticHashCapacity
-( SHash *hash, size_t capacity );
-#define SHashSetCapacity SetStaticHashCapacity
-
-/**
- * Sets the comparator used to compare elements held in a StaticHash. This
- * comparator is used whenever elements are compared, for things such as calls
- * to the StaticHashContains function.
- *
- * @param hash The SHash to update with the comparator. Must not be NULL.
- * @param comparator The new comparator to use for elements. Must not be NULL.
- *
- * @return the SHash with the updated comparator
- */
-SHash *
-SetStaticHashElementComparator
-( SHash *hash, comparator_t comparator );
-#define SHashSetElementComparator SetStaticHashElementComparator
-
-/**
- * Sets the comparator used to compare keys in a StaticHash. This comparator is
- * used to compare keys to check for collisions and confirm that a hash has
- * mapped to the intended element.
- *
- * @param hash The SHash to update with the comparator. Must not be NULL.
- * @param comparator The new comparator to use for keys. Must not be NULL.
- *
- * @return the SHash with the updated comparator
- */
-SHash *
-SetStaticHashKeyComparator
-( SHash *hash, comparator_t comparator );
-#define SHashSetKeyComparator SetStaticHashKeyComparator
 
 #endif
