@@ -616,8 +616,8 @@ TestSetKeyComparator
 ( void )
 {
   SHash *hash;
-  const void *new_element = "Fourth Place";
-  const void *new_key = "4th";
+  char *new_element = "Fourth Place";
+  char *new_key = "4th";
 
   hash = BuildSHash();
   if( !hash )
@@ -626,7 +626,7 @@ TestSetKeyComparator
   if( SHashSetKeyComparator( hash, CompareStrings ) != hash )
     return "the key comparator could not be set";
 
-  if( SHashPut( hash, new_key, new_element) == new_element )
+  if( SHashPut( hash, new_key, new_element ) == new_element )
     return "the key comparator did not work correctly";
 
   if( SHashSetKeyComparator( hash, ComparePointers ) != hash )
@@ -635,7 +635,7 @@ TestSetKeyComparator
   if( SHashPut( hash, new_key, new_element ) != new_element )
     return "the key comparator was not changed after being unset";
 
-  DestroySHash( hash );
+  SHashDestroy( hash );
 
   return NULL;
 }
