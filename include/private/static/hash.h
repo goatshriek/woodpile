@@ -19,4 +19,13 @@ struct StaticHash {
   void **values; /**< the elements */
 };
 
+/**
+ * Rehashes the keys in an SHash.
+ *
+ * @param hash the SHash to rehash
+ */
+void
+SHashRehash
+( SHash *hash );
+
 #endif

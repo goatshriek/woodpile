@@ -46,6 +46,8 @@ void *
 SHashGet
 ( const SHash *hash, const void *key )
 {
+  VALIDATE_PARAMETERS( hash && key )
+
   return NULL;
 }
 
@@ -111,7 +113,11 @@ SHash *
 SHashSetElementComparator
 ( SHash *hash, comparator_t comparator )
 {
-  return NULL;
+  VALIDATE_PARAMETERS( hash && comparator )
+
+  hash->compare_elements = comparator;
+
+  return hash;
 }
 
 SHash *
@@ -149,7 +155,9 @@ comparator_t
 SHashElementComparator
 ( const SHash *hash )
 {
-  return NULL;
+  VALIDATE_PARAMETERS( hash )
+
+  return hash->compare_elements;
 }
 
 folder_t
@@ -171,7 +179,9 @@ SHashIsEmpty
 comparator_t
 StaticHashKeyComparator
 ( const SHash *hash ){
-  return NULL;
+  VALIDATE_PARAMETERS( hash )
+
+  return hash->compare_keys;
 }
 
 size_t
