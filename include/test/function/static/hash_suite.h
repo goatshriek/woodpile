@@ -394,6 +394,46 @@ TestSetElementComparatorWithNullSHash
 ( void );
 
 /**
+ *  Tests the SHashSetKeyComparator function.
+ *
+ *  @test After setting the comparator to a function comparing equality by a
+ *  means other than direct pointer comparison, a call to SHashPut with a key
+ *  that already exists in the hash must return the existing element rather than
+ *  the new element. Setting the comparator to a function that does not consider
+ *  the two keys equal must result in another call to SHashPut returning the new
+ *  element.
+ *
+ *  @return NULL on completion or a string describing the failure
+ */
+const char *
+TestSetKeyComparator
+( void );
+
+/**
+ * Tests the SHashSetKeyComparator function with a NULL comparator.
+ *
+ * @test Setting to a NULL comparator must return NULL. The hash must have the
+ * same key comparator as it did before the call.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestSetKeyComparatorToNull
+( void );
+
+/**
+ * Tests the SHashSetKeyComparator function with a NULL SHash.
+ *
+ * @test Setting the comaprator on a NULL SHash must return NULL whether the
+ * comparator is NULL or non-NULL.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestSetKeyComparatorWithNullSHash
+( void );
+
+/**
  * Tests the SHashSize function.
  *
  * @test A populated SHash must return an accurate count of the values.

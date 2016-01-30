@@ -168,6 +168,12 @@ SHashIsEmpty
   return hash == NULL || hash->size == 0;
 }
 
+comparator_t
+StaticHashKeyComparator
+( const SHash *hash ){
+  return NULL;
+}
+
 size_t
 SHashSize
 ( const SHash *hash )

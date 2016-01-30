@@ -272,6 +272,18 @@ StaticHashIsEmpty
 #define SHashIsEmpty StaticHashIsEmpty
 
 /**
+ * Gets the comparator used to compare keys in the hash.
+ *
+ * @param hash the SHash using the comparator. Must not be NULL.
+ *
+ * @return the comparator the SHash is using for keys
+ */
+comparator_t
+StaticHashKeyComparator
+( const SHash *hash );
+#define SHashKeyComparator StaticHashKeyComparator
+
+/**
  * Gets the number of elements in a SHash. An empty hash will return 0.
  *
  * @param hash the SHash to measure

@@ -35,6 +35,8 @@ main
   TEST( RemoveNullKey )
   TEST( SetElementComparatorToNull )
   TEST( SetElementComparatorWithNullSHash )
+  TEST( SetKeyComparatorToNull )
+  TEST( SetKeyComparatorWithNullSHash )
 #endif
 
   TEST( ContainsDuplicateValues )
@@ -58,6 +60,7 @@ main
   TEST( Remove )
   TEST( RemoveNonExistentKey )
   TEST( SetElementComparator )
+  TEST( SetKeyComparator )
   TEST( Size )
   TEST( SizeWithEmptySHash )
   TEST( SizeWithNullSHash )
@@ -609,6 +612,59 @@ TestSetElementComparatorWithNullSHash
 }
 
 const char *
+TestSetKeyComparator
+( void )
+{
+  SHash *hash;
+  const void *new_element = "Fourth Place";
+  const void *new_key = "4th";
+
+  hash = BuildSHash();
+  if( !hash )
+    return "could not build a populated hash";
+
+  if( SHashSetKeyComparator( hash, CompareStrings ) != hash )
+    return "the key comparator could not be set";
+
+  if( SHashPut( hash, new_key, new_element) == new_element )
+    return "the key comparator did not work correctly";
+
+  if( SHashSetKeyComparator( hash, ComparePointers ) != hash )
+    return "the element comparator could not be updated after being set once";
+
+  if( SHashPut( hash, new_key, new_element ) != new_element )
+    return "the key comparator was not changed after being unset";
+
+  DestroySHash( hash );
+
+  return NULL;
+}
+
+const char *
+TestSetKeyComparatorToNull
+( void )
+{
+  SHash *hash;
+  comparator_t previous;
+
+  hash = BuildSHash();
+  if( !hash )
+    return "could not build a populated hash";
+
+  previous = SHashKeyComparator( hash );
+
+  if( SHashSetKeyComparator( hash, NULL ) != NULL )
+    return "NULL was not returned for a NULL comparator";
+
+  if( SHashKeyComparator( hash ) != previous )
+    return "the comparator was changed after a call with a NULL comparator";
+
+  SHashDestroy( hash );
+
+  return NULL;
+}
+
+const char *
 TestRemoveNullKey
 ( void )
 {
@@ -625,6 +681,19 @@ TestRemoveNullKey
     return "a NULL hash and key did not return NULL";
 
   SHashDestroy( hash );
+
+  return NULL;
+}
+
+const char *
+TestSetKeyComparatorWithNullSHash
+( void )
+{
+  if( SHashSetKeyComparator( NULL, NULL ) != NULL )
+    return "a non-NULL value was not returned for a NULL hash and comparator";
+
+  if( SHashSetKeyComparator( NULL, ComparePointers ) != NULL )
+    return "a non-NULL value was not returned for a NULL hash";
 
   return NULL;
 }
