@@ -20,12 +20,18 @@ struct StaticHash {
 };
 
 /**
- * Rehashes the keys in an SHash.
+ * Rehashes the keys in an SHash into a new SHash. This is required whenever
+ * changes are made to a hash such that the way in which elements are mapped
+ * to keys is changed, for example by a change in hash capacity or the
+ * specification of a new hashing function.
+ *
+ * This is a costly operation and should be avoided if possible.
  *
  * @param hash the SHash to rehash
  */
+static
 void
-SHashRehash
-( SHash *hash );
+SHashTransfer
+( SHash *destination, const SHash *source );
 
 #endif

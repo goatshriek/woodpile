@@ -200,3 +200,11 @@ SHashHashToString
 {
   return NULL;
 }
+
+static
+void
+SHashTransfer
+( SHash *destination, const SHash *source )
+{
+  return;
+}
