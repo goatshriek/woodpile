@@ -20,8 +20,17 @@ void *
 SHashContains
 ( const SHash *hash, const void *element )
 {
+  unsigned i;
+
+  VALIDATE_PARAMETERS( element )
+
   if( SHashIsEmpty( hash ) )
     return NULL;
+
+  for( i=1; i < hash->capacity*2; i+=2 ){
+    if( hash->compare_elements( hash->values[i], element ) )
+      return hash->values[i-1];
+  }
 
   return NULL;
 }
