@@ -193,9 +193,9 @@ SetStaticHashHasher
 #define SHashSetHasher SetStaticHashHasher
 
 /**
- * Sets the comparator used to compare keys in a StaticHash. This comparator is
- * used to compare keys to check for collisions and confirm that a hash has
- * mapped to the intended element.
+ * Sets the comparator used to compare keys in a SHash. This comparator is used
+ * to compare keys to check for collisions and confirm that a hash has mapped
+ * to the intended element.
  *
  * @param hash The SHash to update with the comparator. Must not be NULL.
  * @param comparator The new comparator to use for keys. Must not be NULL.
@@ -206,6 +206,19 @@ SHash *
 SetStaticHashKeyComparator
 ( SHash *hash, comparator_t comparator );
 #define SHashSetKeyComparator SetStaticHashKeyComparator
+
+/**
+ * Sets the seed used for the SHash.
+ *
+ * @param hash The SHash to update with the seed. Must not be NULL.
+ * @param seed the seed to use for the SHash
+ *
+ * @return the SHash with the updated seed
+ */
+SHash *
+SetStaticHashSeed
+( SHash *hash, unsigned long long seed );
+#define SHashSetSeed SetStaticHashSeed
 
 /**
  * Gets the current capacity of the SHash.

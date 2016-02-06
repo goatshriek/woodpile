@@ -15,6 +15,7 @@ struct StaticHash {
   comparator_t compare_elements; /**< the element comparison function */
   folder_t fold; /**< the folding function */
   hasher_t hash; /**< the hashing function */
+  unsigned long long seed; /**< the seed to use for hashes */
   size_t size; /**< the number of elements currently in the hash */
   void **values; /**< the elements */
 };

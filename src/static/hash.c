@@ -18,13 +18,14 @@ SHashCopy
   copy = malloc( sizeof( SHash ) );
   VALIDATE_ALLOCATION( copy )
 
-  copy->values = malloc( sizeof( void * ) * hash->capacity );
+  copy->values = calloc( hash->capacity * 2, sizeof( void * ) );
   VALIDATE_ALLOCATION_AND_FREE( copy->values, copy )
 
   memcpy( copy->values, hash->values, hash->capacity );
   copy->capacity = hash->capacity;
   copy->compare_keys = hash->compare_keys;
   copy->fold = hash->fold;
+  copy->seed = hash->seed;
   copy->size = hash->size;
 
   return copy;
@@ -80,7 +81,7 @@ SHashNewSized
   hash = malloc( sizeof( SHash ) );
   VALIDATE_ALLOCATION( hash )
 
-  hash->values = malloc( sizeof( void * ) * capacity );
+  hash->values = calloc( capacity * 2, sizeof( void * ) );
   VALIDATE_ALLOCATION_AND_FREE( hash->values, hash )
 
   hash->capacity = capacity;
@@ -177,6 +178,21 @@ SHashSetKeyComparator
   previous = memcpy( previous, hash, sizeof( SHash ) );
 
   hash->compare_keys = comparator;
+
+  return SHashTransfer( hash, previous );
+}
+
+SHash *
+SHashSetSeed
+( SHash *hash, unsigned long long seed )
+{
+  SHash *previous;
+
+  VALIDATE_PARAMETERS( hash )
+
+  previous = memcpy( previous, hash, sizeof( SHash ) );
+
+  hash->seed = seed;
 
   return SHashTransfer( hash, previous );
 }
