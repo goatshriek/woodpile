@@ -6,6 +6,25 @@
 #include "lib/validate.h"
 #include "private/static/hash.h"
 
+size_t
+SHashCapacity
+( const SHash *hash )
+{
+  if( SHashIsEmpty( hash ) )
+    return 0;
+
+  return hash->capacity;
+}
+
+void *
+SHashContains
+( const SHash *hash, const void *element )
+{
+  if( SHashIsEmpty( hash ) )
+    return NULL;
+
+  return NULL;
+}
 
 SHash *
 SHashCopy
@@ -50,6 +69,39 @@ SHashGet
   VALIDATE_PARAMETERS( hash && key )
 
   return NULL;
+}
+
+comparator_t
+SHashElementComparator
+( const SHash *hash )
+{
+  VALIDATE_PARAMETERS( hash )
+
+  return hash->compare_elements;
+}
+
+folder_t
+SHashFolder
+( const SHash *hash )
+{
+  VALIDATE_PARAMETERS( hash )
+
+  return hash->fold;
+}
+
+unsigned short
+SHashIsEmpty
+( const SHash *hash )
+{
+  return hash == NULL || hash->size == 0;
+}
+
+comparator_t
+SHashKeyComparator
+( const SHash *hash ){
+  VALIDATE_PARAMETERS( hash )
+
+  return hash->compare_keys;
 }
 
 SHash *
@@ -120,17 +172,6 @@ SHashSetCapacity
 }
 
 SHash *
-SHashSetFolder
-( SHash *hash, folder_t folder )
-{
-  VALIDATE_PARAMETERS( hash && folder )
-
-  hash->fold = folder;
-
-  return SHashRehash( hash );
-}
-
-SHash *
 SHashSetElementComparator
 ( SHash *hash, comparator_t comparator )
 {
@@ -139,6 +180,17 @@ SHashSetElementComparator
   hash->compare_elements = comparator;
 
   return hash;
+}
+
+SHash *
+SHashSetFolder
+( SHash *hash, folder_t folder )
+{
+  VALIDATE_PARAMETERS( hash && folder )
+
+  hash->fold = folder;
+
+  return SHashRehash( hash );
 }
 
 SHash *
@@ -172,59 +224,6 @@ SHashSetSeed
   hash->seed = seed;
 
   return SHashRehash( hash );
-}
-
-size_t
-SHashCapacity
-( const SHash *hash )
-{
-  if( SHashIsEmpty( hash ) )
-    return 0;
-
-  return hash->capacity;
-}
-
-void *
-SHashContains
-( const SHash *hash, const void *element )
-{
-  if( SHashIsEmpty( hash ) )
-    return NULL;
-
-  return NULL;
-}
-
-comparator_t
-SHashElementComparator
-( const SHash *hash )
-{
-  VALIDATE_PARAMETERS( hash )
-
-  return hash->compare_elements;
-}
-
-folder_t
-SHashFolder
-( const SHash *hash )
-{
-  VALIDATE_PARAMETERS( hash )
-
-  return hash->fold;
-}
-
-unsigned short
-SHashIsEmpty
-( const SHash *hash )
-{
-  return hash == NULL || hash->size == 0;
-}
-
-comparator_t
-SHashKeyComparator
-( const SHash *hash ){
-  VALIDATE_PARAMETERS( hash )
-
-  return hash->compare_keys;
 }
 
 size_t
