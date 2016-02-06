@@ -63,7 +63,7 @@ BuildSHash
 {
   SHash *hash;
 
-  hash = SHashNew( WoodpileHash, NULL, ( comparator_t ) strcmp );
+  hash = SHashNew();
   if( !hash )
     return NULL;
 

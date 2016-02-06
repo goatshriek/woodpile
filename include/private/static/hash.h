@@ -27,11 +27,14 @@ struct StaticHash {
  *
  * This is a costly operation and should be avoided if possible.
  *
- * @param hash the SHash to rehash
+  * @param hash the SHash to rehash
+  * @param previous the previous version of the hash
+  *
+  * @return the SHash that was rehashed
  */
 static
-void
+SHash *
 SHashTransfer
-( SHash *destination, const SHash *source );
+( SHash *hash, const SHash *previous );
 
 #endif

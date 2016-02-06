@@ -54,7 +54,6 @@ main
   TEST( IsEmptyWithPopulatedSHash )
   TEST( IsEmptyWithNullSHash )
   TEST( New )
-  TEST( NewWithNullHasher )
   TEST( PutValueIntoEmptySHash )
   TEST( PutValueIntoPopulatedSHash )
   TEST( Remove )
@@ -287,7 +286,7 @@ TestGetFromEmptySHash
 {
   SHash *hash;
 
-  hash = SHashNew( WoodpileHash, NULL, ( comparator_t ) strcmp );
+  hash = SHashNewDictionary();
   if( SHashGet( hash, "1st" ) != NULL )
     return "a non-NULL value was returned for an empty hash";
 
@@ -314,7 +313,7 @@ TestIsEmptyWithEmptySHash
 {
   SHash *hash;
 
-  hash = SHashNew( NULL, NULL, NULL );
+  hash = SHashNew();
   if( !hash )
     return "a new hash could not be created";
 
@@ -352,23 +351,10 @@ TestNew
 {
   SHash *hash;
 
-  hash = SHashNew( WoodpileHash, NULL, ( comparator_t ) strcmp );
+  hash = SHashNew();
   if( !hash )
     return "NULL was returned with a non-NULL hashing function";
     
-  return NULL;
-}
-
-const char *
-TestNewWithNullHasher
-( void )
-{
-  SHash *hash;
-
-  hash = SHashNew( NULL, NULL, NULL );
-  if( !hash )
-    return "NULL was returned with a NULL hashing function";
-
   return NULL;
 }
 
@@ -453,7 +439,7 @@ TestPutValueIntoEmptySHash
   void *key = "Test Key";
   void *value = "Test Value";
 
-  hash = SHashNew( WoodpileHash, NULL, ( comparator_t ) strcmp );
+  hash = SHashNewDictionary();
   if( !hash )
     return "could not build an empty hash";
 
@@ -714,7 +700,7 @@ TestSizeWithEmptySHash
 {
   SHash *hash;
 
-  hash = SHashNew( NULL, NULL, NULL );
+  hash = SHashNew();
   if( !hash )
     return "could not create an empty hash";
 

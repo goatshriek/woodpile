@@ -76,16 +76,23 @@ GetFromStaticHash
  * used. If the comparator is NULL, then the pointers for keys are directly
  * compared.
  *
- * @param hasher the hashing function to use on keys
- * @param folder the folding function to use on hash values
- * @param key_comparator the function to use to compare keys
- *
  * @return a new SHash or NULL on failure
  */
 SHash *
 NewStaticHash
-( const hasher_t hasher, const folder_t folder, const comparator_t key_comparator );
+( void );
 #define SHashNew NewStaticHash
+
+/**
+ * Creates a new SHash with hashing and key comparators set to functions
+ * specialized for strings.
+ *
+ * @return a new SHash or NULL on failure
+ */
+SHash *
+NewStaticHashDictionary
+( void );
+#define SHashNewDictionary NewStaticHashDictionary
 
 /**
  * Creates a new SHash of the given capacity. If the hashing function is NULL,
@@ -93,16 +100,13 @@ NewStaticHash
  * folding function is NULL, then a simple XOR-based function is used. If the
  * comparator is NULL, then the pointers for keys are directly compared.
  *
- * @param hasher the hashing function to use on keys
- * @param folder the folding function to use on hash values
- * @param key_comparator the function to use to compare keys
  * @param capacity the capacity to give the SHash
  *
  * @return a new SHash of the provided capacity, or NULL on failure
  */
 SHash *
 NewSizedStaticHash
-( const hasher_t hasher, const folder_t folder, const comparator_t key_comparator, size_t capacity );
+( size_t capacity );
 #define SHashNewSized NewSizedStaticHash
 
 /**

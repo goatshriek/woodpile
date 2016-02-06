@@ -235,17 +235,6 @@ TestNew
 ( void );
 
 /**
- * Tests the NewSHash function with a NULL hashing function..
- *
- * @test Calling the function must return a non-NULL value.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestNewWithNullHasher
-( void );
-
-/**
  * Tests the SHashPut function with a NULL SHash.
  *
  * @test Calling the function with a NULL SHash must return NULL regardless of

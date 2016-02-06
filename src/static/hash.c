@@ -53,14 +53,27 @@ SHashGet
 
 SHash *
 SHashNew
-( const hasher_t hasher, const folder_t folder, const comparator_t key_comparator )
+( void )
 {
-  return SHashNewSized( hasher, folder, key_comparator, 256 );
+  return SHashNewSized( 256 );
+}
+
+SHash *
+SHashNewDictionary
+( void )
+{
+  SHash *hash;
+
+  hash = SHashNew();
+  hash->compare_keys = CompareStrings;
+  hash->hash = WoodpileHash;
+
+  return hash;
 }
 
 SHash *
 SHashNewSized
-( const hasher_t hasher, const folder_t folder, const comparator_t key_comparator, size_t capacity )
+( size_t capacity )
 {
   SHash *hash;
 
@@ -73,10 +86,9 @@ SHashNewSized
   hash->capacity = capacity;
   hash->size = 0;
 
-  hash->hash = hasher ? hasher : PointerHash;
-  hash->fold = folder ? folder : XORFold;
-  hash->compare_keys = key_comparator ? key_comparator : ComparePointers;
-  hash->compare_elements = ComparePointers;
+  hash->hash = PointerHash;
+  hash->fold = XORFold;
+  hash->compare_elements = hash->compare_keys = ComparePointers;
 
   return hash;
 }
@@ -99,14 +111,30 @@ SHash *
 SHashSetCapacity
 ( SHash *hash, size_t capacity )
 {
-  return NULL;
+  SHash *previous;
+
+  VALIDATE_PARAMETERS( hash )
+
+  previous = memcpy( previous, hash, sizeof( SHash ) );
+
+  hash->capacity = capacity;
+
+  return SHashTransfer( hash, previous );
 }
 
 SHash *
 SHashSetFolder
 ( SHash *hash, folder_t folder )
 {
-  return NULL;
+  SHash *previous;
+
+  VALIDATE_PARAMETERS( hash && folder )
+
+  previous = memcpy( previous, hash, sizeof( SHash ) );
+
+  hash->fold = folder;
+
+  return SHashTransfer( hash, previous );
 }
 
 SHash *
@@ -124,14 +152,33 @@ SHash *
 SHashSetHasher
 ( SHash *hash, hasher_t hasher )
 {
-  return NULL;
+  SHash *previous;
+
+  VALIDATE_PARAMETERS( hash && hasher )
+
+  previous = memcpy( previous, hash, sizeof( SHash ) );
+
+  hash->hash = hasher;
+
+  return SHashTransfer( hash, previous );
 }
 
 SHash *
 SHashSetKeyComparator
 ( SHash *hash, comparator_t comparator )
 {
-  return NULL;
+  SHash *previous;
+
+  VALIDATE_PARAMETERS( hash && comparator )
+
+  previous = malloc( sizeof( SHash ) );
+  VALIDATE_ALLOCATION( previous )
+
+  previous = memcpy( previous, hash, sizeof( SHash ) );
+
+  hash->compare_keys = comparator;
+
+  return SHashTransfer( hash, previous );
 }
 
 size_t
@@ -202,9 +249,11 @@ SHashHashToString
 }
 
 static
-void
+SHash *
 SHashTransfer
-( SHash *destination, const SHash *source )
+( SHash *hash, const SHash *previous )
 {
-  return;
+
+
+  return hash;
 }
