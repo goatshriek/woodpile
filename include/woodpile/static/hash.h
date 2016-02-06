@@ -25,9 +25,38 @@
  * depends on pending implementation
  */
 
-struct StaticHash;
-typedef struct StaticHash StaticHash;
-typedef struct StaticHash SHash;
+struct SHash;
+typedef struct SHash SHash;
+
+/**
+ * Gets the current capacity of the SHash.
+ *
+ * @param hash The SHash to get the capacity of. Must not be NULL.
+ *
+ * @return the current capacity of the SHash
+ */
+size_t
+SHashCapacity
+( const SHash *hash );
+
+/**
+ * Searches a SHash for a given element. If the element exists in the hash, one
+ * of the keys mapped to the element is returned. If the element exists in the
+ * hash multiple times (therefore with multiple keys), there is no guarantee of
+ * which key will be returned or that the same key will be returned each time.
+ *
+ * To modify how this function compares elements use the
+ * SetStaticHashElementComparator function with the desired comparator. By
+ * default elements are compared using their pointer values.
+ *
+ * @param hash The SHash to search.
+ * @param element The value to search for. Must not be NULL.
+ *
+ * @return a key for the value if it is in the hash, or NULL if not
+ */
+void *
+SHashContains
+( const SHash *hash, const void *element );
 
 /**
  * Creates a copy of a SHash. Elements within the hash are not copied, meaning
@@ -53,6 +82,28 @@ SHashDestroy
 ( const SHash *hash );
 
 /**
+ * Gets the comparator used to compare elements in the hash.
+ *
+ * @param hash the SHash using the comparator. Must not be NULL.
+ *
+ * @return the comparator the SHash is using
+ */
+comparator_t
+SHashElementComparator
+( const SHash *hash );
+
+/**
+ * Gets the folding function used in the hash.
+ *
+ * @param hash the SHash using the folding function. Must not be NULL.
+ *
+ * @return the folding function of the SHash
+ */
+folder_t
+SHashFolder
+( const SHash *hash );
+
+/**
  * Retrieves the value mapped to a given key. If the key does not exist in the
  * hash, then NULL is returned.
  *
@@ -65,6 +116,28 @@ SHashDestroy
 void *
 SHashGet
 ( const SHash *hash, const void *key );
+
+/**
+ * Checks a SHash to see if it's empty.
+ *
+ * @param hash the SHash to check
+ *
+ * @return a positive value if the SHash is empty, 0 otherwise
+ */
+unsigned short
+SHashIsEmpty
+( const SHash *hash );
+
+/**
+ * Gets the comparator used to compare keys in the hash.
+ *
+ * @param hash the SHash using the comparator. Must not be NULL.
+ *
+ * @return the comparator the SHash is using for keys
+ */
+comparator_t
+SHashKeyComparator
+( const SHash *hash );
 
 /**
  * Creates a new SHash. The default capacity of the hash is 256. If the hashing
@@ -147,16 +220,6 @@ SHashSetCapacity
 ( SHash *hash, size_t capacity );
 
 /**
- * Sets the folding function for an SHash.
- *
- * @param hash The SHash to update. Must not be NULL.
- * @param folder The folding function to use. Must not be NULL.
- */
-SHash *
-SHashSetFolder
-( SHash *hash, folder_t folder );
-
-/**
  * Sets the comparator used to compare elements held in a StaticHash. This
  * comparator is used whenever elements are compared, for things such as calls
  * to the StaticHashContains function.
@@ -169,6 +232,16 @@ SHashSetFolder
 SHash *
 SHashSetElementComparator
 ( SHash *hash, comparator_t comparator );
+
+/**
+ * Sets the folding function for an SHash.
+ *
+ * @param hash The SHash to update. Must not be NULL.
+ * @param folder The folding function to use. Must not be NULL.
+ */
+SHash *
+SHashSetFolder
+( SHash *hash, folder_t folder );
 
 /**
  * Sets the hashing function for an SHash.
@@ -205,80 +278,6 @@ SHashSetKeyComparator
 SHash *
 SHashSetSeed
 ( SHash *hash, unsigned long long seed );
-
-/**
- * Gets the current capacity of the SHash.
- *
- * @param hash The SHash to get the capacity of. Must not be NULL.
- *
- * @return the current capacity of the SHash
- */
-size_t
-SHashCapacity
-( const SHash *hash );
-
-/**
- * Searches a SHash for a given element. If the element exists in the hash, one
- * of the keys mapped to the element is returned. If the element exists in the
- * hash multiple times (therefore with multiple keys), there is no guarantee of
- * which key will be returned or that the same key will be returned each time.
- *
- * To modify how this function compares elements use the
- * SetStaticHashElementComparator function with the desired comparator. By
- * default elements are compared using their pointer values.
- *
- * @param hash The SHash to search. Must not be NULL.
- * @param element The value to search for. Must not be NULL.
- *
- * @return a key for the value if it is in the hash, or NULL if not
- */
-void *
-SHashContains
-( const SHash *hash, const void *element );
-
-/**
- * Gets the comparator used to compare elements in the hash.
- *
- * @param hash the SHash using the comparator. Must not be NULL.
- *
- * @return the comparator the SHash is using
- */
-comparator_t
-SHashElementComparator
-( const SHash *hash );
-
-/**
- * Gets the folding function used in the hash.
- *
- * @param hash the SHash using the folding function. Must not be NULL.
- *
- * @return the folding function of the SHash
- */
-folder_t
-SHashFolder
-( const SHash *hash );
-
-/**
- * Checks a SHash to see if it's empty.
- *
- * @param hash the SHash to check
- *
- * @return a positive value if the SHash is empty, 0 otherwise
- */
-unsigned short
-SHashIsEmpty
-( const SHash *hash );
-
-/**
- * Gets the comparator used to compare keys in the hash.
- *
- * @param hash the SHash using the comparator. Must not be NULL.
- *
- * @return the comparator the SHash is using for keys
- */
-comparator_t
-SHashKeyComparator
-( const SHash *hash );
 
 /**
  * Gets the number of elements in a SHash. An empty hash will return 0.

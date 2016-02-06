@@ -188,6 +188,9 @@ void *
 SHashContains
 ( const SHash *hash, const void *element )
 {
+  if( SHashIsEmpty( hash ) )
+    return NULL;
+
   return NULL;
 }
 

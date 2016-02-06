@@ -9,7 +9,7 @@
 #include <woodpile/static/hash.h>
 
 /** the Static Hash container */
-struct StaticHash {
+struct SHash {
   size_t capacity; /**< the number of elements the hash can hold */
   comparator_t compare_keys; /**< the key comparison function */
   comparator_t compare_elements; /**< the element comparison function */
