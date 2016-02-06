@@ -112,30 +112,22 @@ SHash *
 SHashSetCapacity
 ( SHash *hash, size_t capacity )
 {
-  SHash *previous;
-
   VALIDATE_PARAMETERS( hash )
-
-  previous = memcpy( previous, hash, sizeof( SHash ) );
 
   hash->capacity = capacity;
 
-  return SHashTransfer( hash, previous );
+  return SHashRehash( hash );
 }
 
 SHash *
 SHashSetFolder
 ( SHash *hash, folder_t folder )
 {
-  SHash *previous;
-
   VALIDATE_PARAMETERS( hash && folder )
-
-  previous = memcpy( previous, hash, sizeof( SHash ) );
 
   hash->fold = folder;
 
-  return SHashTransfer( hash, previous );
+  return SHashRehash( hash );
 }
 
 SHash *
@@ -153,48 +145,33 @@ SHash *
 SHashSetHasher
 ( SHash *hash, hasher_t hasher )
 {
-  SHash *previous;
-
   VALIDATE_PARAMETERS( hash && hasher )
-
-  previous = memcpy( previous, hash, sizeof( SHash ) );
 
   hash->hash = hasher;
 
-  return SHashTransfer( hash, previous );
+  return SHashRehash( hash );
 }
 
 SHash *
 SHashSetKeyComparator
 ( SHash *hash, comparator_t comparator )
 {
-  SHash *previous;
-
   VALIDATE_PARAMETERS( hash && comparator )
-
-  previous = malloc( sizeof( SHash ) );
-  VALIDATE_ALLOCATION( previous )
-
-  previous = memcpy( previous, hash, sizeof( SHash ) );
 
   hash->compare_keys = comparator;
 
-  return SHashTransfer( hash, previous );
+  return SHashRehash( hash );
 }
 
 SHash *
 SHashSetSeed
 ( SHash *hash, unsigned long long seed )
 {
-  SHash *previous;
-
   VALIDATE_PARAMETERS( hash )
-
-  previous = memcpy( previous, hash, sizeof( SHash ) );
 
   hash->seed = seed;
 
-  return SHashTransfer( hash, previous );
+  return SHashRehash( hash );
 }
 
 size_t
@@ -240,7 +217,7 @@ SHashIsEmpty
 }
 
 comparator_t
-StaticHashKeyComparator
+SHashKeyComparator
 ( const SHash *hash ){
   VALIDATE_PARAMETERS( hash )
 
@@ -266,8 +243,8 @@ SHashHashToString
 
 static
 SHash *
-SHashTransfer
-( SHash *hash, const SHash *previous )
+SHashRehash
+( SHash *hash )
 {
 
 

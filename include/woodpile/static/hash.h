@@ -40,9 +40,8 @@ typedef struct StaticHash SHash;
  * @return the copy of the original SHash or NULL on failure
  */
 SHash *
-CopyStaticHash
+SHashCopy
 ( const SHash *hash );
-#define SHashCopy CopyStaticHash
 
 /**
  * Destroys a SHash. Does not affect the elements stored in the hash.
@@ -50,9 +49,8 @@ CopyStaticHash
  * @param hash the SHash to destroy
  */
 void
-DestroyStaticHash
+SHashDestroy
 ( const SHash *hash );
-#define SHashDestroy DestroyStaticHash
 
 /**
  * Retrieves the value mapped to a given key. If the key does not exist in the
@@ -65,9 +63,8 @@ DestroyStaticHash
  * value
  */
 void *
-GetFromStaticHash
+SHashGet
 ( const SHash *hash, const void *key );
-#define SHashGet GetFromStaticHash
 
 /**
  * Creates a new SHash. The default capacity of the hash is 256. If the hashing
@@ -79,9 +76,8 @@ GetFromStaticHash
  * @return a new SHash or NULL on failure
  */
 SHash *
-NewStaticHash
+SHashNew
 ( void );
-#define SHashNew NewStaticHash
 
 /**
  * Creates a new SHash with hashing and key comparators set to functions
@@ -90,9 +86,8 @@ NewStaticHash
  * @return a new SHash or NULL on failure
  */
 SHash *
-NewStaticHashDictionary
+SHashNewDictionary
 ( void );
-#define SHashNewDictionary NewStaticHashDictionary
 
 /**
  * Creates a new SHash of the given capacity. If the hashing function is NULL,
@@ -105,9 +100,8 @@ NewStaticHashDictionary
  * @return a new SHash of the provided capacity, or NULL on failure
  */
 SHash *
-NewSizedStaticHash
+SHashNewSized
 ( size_t capacity );
-#define SHashNewSized NewSizedStaticHash
 
 /**
  * Adds an element into the provided SHash. The provided key and value pair are
@@ -124,9 +118,8 @@ NewSizedStaticHash
  * set. If the key was already associated with a value, that value is returned.
  */
 void *
-PutIntoStaticHash
+SHashPut
 ( SHash *hash, void *key, void *value );
-#define SHashPut PutIntoStaticHash
 
 /**
  * Removes the element mapped to the given key. If there is no such element,
@@ -138,9 +131,8 @@ PutIntoStaticHash
  * @return the removed element, or NULL if there was not an element to remove
  */
 void *
-RemoveFromStaticHash
+SHashRemove
 ( SHash *hash, const void *key );
-#define SHashRemove RemoveFromStaticHash
 
 /**
  * Changes a SHash's capacity, specifically the number of buckets.
@@ -151,9 +143,8 @@ RemoveFromStaticHash
  * @return the SHash having been resized
  */
 SHash *
-SetStaticHashCapacity
+SHashSetCapacity
 ( SHash *hash, size_t capacity );
-#define SHashSetCapacity SetStaticHashCapacity
 
 /**
  * Sets the folding function for an SHash.
@@ -162,9 +153,8 @@ SetStaticHashCapacity
  * @param folder The folding function to use. Must not be NULL.
  */
 SHash *
-SetStaticHashFolder
+SHashSetFolder
 ( SHash *hash, folder_t folder );
-#define SHashSetFolder SetStaticHashFolder
 
 /**
  * Sets the comparator used to compare elements held in a StaticHash. This
@@ -177,9 +167,8 @@ SetStaticHashFolder
  * @return the SHash with the updated comparator
  */
 SHash *
-SetStaticHashElementComparator
+SHashSetElementComparator
 ( SHash *hash, comparator_t comparator );
-#define SHashSetElementComparator SetStaticHashElementComparator
 
 /**
  * Sets the hashing function for an SHash.
@@ -188,9 +177,8 @@ SetStaticHashElementComparator
  * @param hasher The hashing function to use. Must not be NULL.
  */
 SHash *
-SetStaticHashHasher
+SHashSetHasher
 ( SHash *hash, hasher_t hasher );
-#define SHashSetHasher SetStaticHashHasher
 
 /**
  * Sets the comparator used to compare keys in a SHash. This comparator is used
@@ -203,9 +191,8 @@ SetStaticHashHasher
  * @return the SHash with the updated comparator
  */
 SHash *
-SetStaticHashKeyComparator
+SHashSetKeyComparator
 ( SHash *hash, comparator_t comparator );
-#define SHashSetKeyComparator SetStaticHashKeyComparator
 
 /**
  * Sets the seed used for the SHash.
@@ -216,9 +203,8 @@ SetStaticHashKeyComparator
  * @return the SHash with the updated seed
  */
 SHash *
-SetStaticHashSeed
+SHashSetSeed
 ( SHash *hash, unsigned long long seed );
-#define SHashSetSeed SetStaticHashSeed
 
 /**
  * Gets the current capacity of the SHash.
@@ -228,9 +214,8 @@ SetStaticHashSeed
  * @return the current capacity of the SHash
  */
 size_t
-StaticHashCapacity
+SHashCapacity
 ( const SHash *hash );
-#define SHashCapacity StaticHashCapacity
 
 /**
  * Searches a SHash for a given element. If the element exists in the hash, one
@@ -248,9 +233,8 @@ StaticHashCapacity
  * @return a key for the value if it is in the hash, or NULL if not
  */
 void *
-StaticHashContains
+SHashContains
 ( const SHash *hash, const void *element );
-#define SHashContains StaticHashContains
 
 /**
  * Gets the comparator used to compare elements in the hash.
@@ -260,9 +244,8 @@ StaticHashContains
  * @return the comparator the SHash is using
  */
 comparator_t
-StaticHashElementComparator
+SHashElementComparator
 ( const SHash *hash );
-#define SHashElementComparator StaticHashElementComparator
 
 /**
  * Gets the folding function used in the hash.
@@ -272,9 +255,8 @@ StaticHashElementComparator
  * @return the folding function of the SHash
  */
 folder_t
-StaticHashFolder
+SHashFolder
 ( const SHash *hash );
-#define SHashFolder StaticHashFolder
 
 /**
  * Checks a SHash to see if it's empty.
@@ -284,9 +266,8 @@ StaticHashFolder
  * @return a positive value if the SHash is empty, 0 otherwise
  */
 unsigned short
-StaticHashIsEmpty
+SHashIsEmpty
 ( const SHash *hash );
-#define SHashIsEmpty StaticHashIsEmpty
 
 /**
  * Gets the comparator used to compare keys in the hash.
@@ -296,9 +277,8 @@ StaticHashIsEmpty
  * @return the comparator the SHash is using for keys
  */
 comparator_t
-StaticHashKeyComparator
+SHashKeyComparator
 ( const SHash *hash );
-#define SHashKeyComparator StaticHashKeyComparator
 
 /**
  * Gets the number of elements in a SHash. An empty hash will return 0.
@@ -308,9 +288,8 @@ StaticHashKeyComparator
  * @return the number of elements in the SHash
  */
 size_t
-StaticHashSize
+SHashSize
 ( const SHash *hash );
-#define SHashSize StaticHashSize
 
 /**
  * Creates a string representation of the given SHash, using the provided
@@ -323,8 +302,7 @@ StaticHashSize
  * @return a char buffer holding a string representation of the SHash
  */
 char *
-StaticHashToString
+SHashToString
 ( const SHash *hash, char * ( *element_to_string )( const void * ) );
-#define SHashToString StaticHashToString
 
 #endif
