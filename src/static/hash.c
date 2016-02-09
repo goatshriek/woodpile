@@ -71,15 +71,6 @@ SHashDestroy
   return;
 }
 
-void *
-SHashGet
-( const SHash *hash, const void *key )
-{
-  VALIDATE_PARAMETERS( hash && key )
-
-  return NULL;
-}
-
 comparator_t
 SHashElementComparator
 ( const SHash *hash )
@@ -96,6 +87,29 @@ SHashFolder
   VALIDATE_PARAMETERS( hash )
 
   return hash->fold;
+}
+
+void *
+SHashGet
+( const SHash *hash, const void *key )
+{
+  unsigned long long start, i;
+
+  VALIDATE_PARAMETERS( hash && key )
+
+  i = start = hash->fold( hash->hash( key, hash->seed ), hash->capacity )*2;
+  if( !hash->values[i] )
+    return NULL;
+
+  do{
+    if( hash->compare_keys( hash->values[i], key ) != 0 ){
+      return hash->values[i+1];
+    } else {
+      i = (i+2)%(hash->capacity*2);
+    }
+  } while( hash->values[i] && i != start );
+
+  return NULL;
 }
 
 unsigned short
@@ -126,7 +140,7 @@ SHashNewDictionary
 {
   SHash *hash;
 
-  hash = SHashNew();
+  hash = SHashNewSized( 256 );
   hash->compare_keys = CompareStrings;
   hash->hash = WoodpileHash;
 
@@ -159,6 +173,8 @@ void *
 SHashPut
 ( SHash *hash, void *key, void *value )
 {
+  
+
   return NULL;
 }
 
