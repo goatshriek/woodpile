@@ -55,7 +55,7 @@ SHashCopy
   copy->compare_elements = hash->compare_elements;
   copy->fold = hash->fold;
   copy->hash = hash->hash;
-  copy->seed = hash->seed;
+  copy->seed = time( NULL );
   copy->size = hash->size;
 
   return copy;
@@ -162,6 +162,7 @@ SHashNewSized
   VALIDATE_ALLOCATION_AND_FREE( hash->values, hash )
 
   hash->capacity = capacity;
+  hash->seed = time( NULL );
   hash->size = 0;
 
   hash->hash = PointerHash;
