@@ -7,6 +7,7 @@ ComparePointers
   return (int) (first - second);
 }
 
+int
 CompareStrings
 ( const void *first, const void *second )
 {

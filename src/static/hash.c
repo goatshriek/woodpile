@@ -52,7 +52,9 @@ SHashCopy
   memcpy( copy->values, hash->values, hash->capacity );
   copy->capacity = hash->capacity;
   copy->compare_keys = hash->compare_keys;
+  copy->compare_elements = hash->compare_elements;
   copy->fold = hash->fold;
+  copy->hash = hash->hash;
   copy->seed = hash->seed;
   copy->size = hash->size;
 
@@ -173,8 +175,6 @@ void *
 SHashPut
 ( SHash *hash, void *key, void *value )
 {
-  
-
   return NULL;
 }
 

@@ -63,7 +63,7 @@ BuildSHash
 {
   SHash *hash;
 
-  hash = SHashNew();
+  hash = SHashNewDictionary();
   if( !hash )
     return NULL;
 
