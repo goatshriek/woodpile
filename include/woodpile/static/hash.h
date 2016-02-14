@@ -180,12 +180,12 @@ SHashNewSized
  * Adds an element into the provided SHash. The provided key and value pair are
  * assigned. If the key is already associated with the value, then the key is
  * re-associated with the new value, effectively removing the previous value.
- * This previous value is returned if it exists. NULL key and value arguments
- * will ignored and the function will return NULL.
+ * This previous value is returned if it exists. A NULL value is equivalent to
+ * calling the SHashRemove function with the provided key.
  *
  * @param hash The SHash to set the key for. Must not be NULL.
  * @param key The value to use as the key. Must not be NULL.
- * @param value The value to associate with the key. Must not be NULL.
+ * @param value The value to associate with the key.
  *
  * @return value, if the key was properly set and no equivalent key was already
  * set. If the key was already associated with a value, that value is returned.

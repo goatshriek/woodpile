@@ -176,7 +176,29 @@ void *
 SHashPut
 ( SHash *hash, void *key, void *value )
 {
-  return NULL;
+  unsigned long long start, i;
+  void *result;
+
+  VALIDATE_PARAMETERS( hash && key )
+
+  if( !value )
+    return SHashRemove( hash, key );
+
+  if( hash->size == hash->capacity )
+    return NULL;
+
+  i = start = hash->fold( hash->hash( key, hash->seed ), hash->capacity )*2;
+  while( hash->values[i] ){
+    i = (i+2)%(hash->capacity*2);
+  }
+
+  result = hash->values[i] ? hash->values[i+1] : value;
+
+  hash->values[i] = key;
+  hash->values[i+1] = value;
+  hash->size++;
+
+  return result;
 }
 
 void *
