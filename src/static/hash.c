@@ -176,7 +176,7 @@ void *
 SHashPut
 ( SHash *hash, void *key, void *value )
 {
-  unsigned long long start, i;
+  unsigned long long i;
   void *result;
 
   VALIDATE_PARAMETERS( hash && key )
@@ -187,12 +187,12 @@ SHashPut
   if( hash->size == hash->capacity )
     return NULL;
 
-  i = start = hash->fold( hash->hash( key, hash->seed ), hash->capacity )*2;
-  while( hash->values[i] ){
+  i = hash->fold( hash->hash( key, hash->seed ), hash->capacity )*2;
+  while( hash->values[i] && hash->compare_keys( key, hash->values[i] ) != 0 ){
     i = (i+2)%(hash->capacity*2);
   }
 
-  result = hash->values[i] ? hash->values[i+1] : value;
+  result = hash->values[i+1] ? hash->values[i+1] : value;
 
   hash->values[i] = key;
   hash->values[i+1] = value;
@@ -205,7 +205,37 @@ void *
 SHashRemove
 ( SHash *hash, const void *key )
 {
-  return NULL;
+  unsigned long long i, start, previous;
+  void *result;
+
+  VALIDATE_PARAMETERS( hash && key )
+ 
+  i = start = hash->fold( hash->hash( key, hash->seed ), hash->capacity )*2;
+ 
+  while( hash->compare_keys( key, hash->values[i] ) != 0 ){
+    if( !hash->values[i] )
+      return NULL;
+
+    i = (i+2)%(hash->capacity*2);
+
+    if( i == start )
+      return NULL;
+  } 
+
+  result = hash->values[i+1];
+  hash->values[i] = hash->values[i+1] = NULL;
+  previous = i;
+  i = (i+2)%(hash->capacity*2);
+
+  while( hash->values[i] && hash->fold( hash->hash( hash->values[i], hash->seed ), hash->capacity )*2 == start ){
+    hash->values[previous] = hash->values[i];
+    hash->values[previous+1] = hash->values[i+1];
+
+    previous = i;
+    i = (i+2)%(hash->capacity*2);
+  }
+
+  return result;
 }
 
 SHash *
