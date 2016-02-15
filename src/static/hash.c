@@ -20,16 +20,19 @@ void *
 SHashContains
 ( const SHash *hash, const void *element )
 {
-  unsigned i;
+  unsigned long long i;
 
   VALIDATE_PARAMETERS( element )
 
   if( SHashIsEmpty( hash ) )
     return NULL;
 
-  for( i=1; i < hash->capacity*2; i+=2 ){
-    if( hash->compare_elements( hash->values[i], element ) )
-      return hash->values[i-1];
+  for( i=0; i < hash->capacity*2; i+=2 ){
+    if( !hash->values[i] )
+      continue;
+
+    if( hash->compare_elements( element, hash->values[i+1] ) == 0 )
+      return hash->values[i];
   }
 
   return NULL;
@@ -104,7 +107,7 @@ SHashGet
     return NULL;
 
   do{
-    if( hash->compare_keys( hash->values[i], key ) != 0 ){
+    if( hash->compare_keys( key, hash->values[i] ) == 0 ){
       return hash->values[i+1];
     } else {
       i = (i+2)%(hash->capacity*2);
@@ -179,24 +182,25 @@ SHashPut
   unsigned long long i;
   void *result;
 
-  VALIDATE_PARAMETERS( hash && key )
-
   if( !value )
     return SHashRemove( hash, key );
 
-  if( hash->size == hash->capacity )
-    return NULL;
+  VALIDATE_PARAMETERS( hash && key )
 
   i = hash->fold( hash->hash( key, hash->seed ), hash->capacity )*2;
   while( hash->values[i] && hash->compare_keys( key, hash->values[i] ) != 0 ){
     i = (i+2)%(hash->capacity*2);
   }
 
-  result = hash->values[i+1] ? hash->values[i+1] : value;
+  if( hash->values[i] ){
+    result = hash->values[i+1];
+  } else {
+    result = value;
+    hash->size++;
+  }
 
   hash->values[i] = key;
   hash->values[i+1] = value;
-  hash->size++;
 
   return result;
 }
@@ -211,14 +215,13 @@ SHashRemove
   VALIDATE_PARAMETERS( hash && key )
  
   i = start = hash->fold( hash->hash( key, hash->seed ), hash->capacity )*2;
+  if( !hash->values[i] )
+    return NULL;
  
   while( hash->compare_keys( key, hash->values[i] ) != 0 ){
-    if( !hash->values[i] )
-      return NULL;
-
     i = (i+2)%(hash->capacity*2);
 
-    if( i == start )
+    if( !hash->values[i] || i == start )
       return NULL;
   } 
 

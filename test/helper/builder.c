@@ -67,6 +67,8 @@ BuildSHash
   if( !hash )
     return NULL;
 
+  SHashSetElementComparator( hash, CompareStrings );
+
   SHashPut( hash, "1st", "First" );
   SHashPut( hash, "2nd", "Second" );
   SHashPut( hash, "3rd", "Third" );
