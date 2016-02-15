@@ -102,7 +102,7 @@ SHashGet
 
   VALIDATE_PARAMETERS( hash && key )
 
-  i = start = hash->fold( hash->hash( key, hash->seed ), hash->capacity )*2;
+  i = start = SHashGetIndex( hash, key );
   if( !hash->values[i] )
     return NULL;
 
@@ -187,7 +187,7 @@ SHashPut
 
   VALIDATE_PARAMETERS( hash && key )
 
-  i = hash->fold( hash->hash( key, hash->seed ), hash->capacity )*2;
+  i = SHashGetIndex( hash, key );
   while( hash->values[i] && hash->compare_keys( key, hash->values[i] ) != 0 ){
     i = (i+2)%(hash->capacity*2);
   }
@@ -230,7 +230,7 @@ SHashRemove
   previous = i;
   i = (i+2)%(hash->capacity*2);
 
-  while( hash->values[i] && hash->fold( hash->hash( hash->values[i], hash->seed ), hash->capacity )*2 == start ){
+  while( hash->values[i] && SHashGetIndex( hash, key ) == start ){
     hash->values[previous] = hash->values[i];
     hash->values[previous+1] = hash->values[i+1];
 
@@ -325,11 +325,28 @@ SHashHashToString
 }
 
 static
+unsigned long long
+SHashGetIndex
+( const SHash *hash, void *key )
+{
+  return hash->fold( hash->hash( key, hash->seed ), hash->capacity )*2;
+}
+
+static
 SHash *
 SHashRehash
 ( SHash *hash )
 {
+  unsigned long long i;
+  void **new_values;
 
+  new_values = calloc( hash->capacity*2, sizeof( void * ) );
+  VALIDATE_ALLOCATION( new_values )
+
+  for( i=0; i < hash->capacity*2; i+=2 ){
+    if( !hash->values[i] )
+      continue;
+  }
 
   return hash;
 }

@@ -18,4 +18,16 @@ char *
 ElementToString
 ( const void *element );
 
+/**
+ * Returns 0 for any data and seed.
+ *
+ * @param data the data that would be hashed
+ * @param seed the seed for the hash
+ *
+ * @return 0
+ */
+unsigned long long
+NullHash
+( const void *data, unsigned long long seed );
+
 #endif

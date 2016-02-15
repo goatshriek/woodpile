@@ -21,6 +21,19 @@ struct SHash {
 };
 
 /**
+ * Gets the index of a key.
+ *
+ * @param hash the SHash to use for the index
+ * @param key the key to use for the index
+ *
+ * @return the index of the key
+ */
+static
+unsigned long long
+SHashGetIndex
+( const SHash *hash, void *key );
+
+/**
  * Rehashes the keys in an SHash. This is required whenever changes are made
  * to a hash such that the way in which elements are mapped to keys is changed,
  * for example by a change in hash capacity or the specification of a new

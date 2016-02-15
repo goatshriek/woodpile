@@ -33,6 +33,7 @@ main
   TEST( PutNullValueIntoSHash )
   TEST( RemoveFromNullSHash )
   TEST( RemoveNullKey )
+  TEST( SetCapacityWithNullSHash)
   TEST( SetElementComparatorToNull )
   TEST( SetElementComparatorWithNullSHash )
   TEST( SetKeyComparatorToNull )
@@ -543,6 +544,8 @@ TestSetCapacity
   if( !hash )
     return "could not build a populated hash";
 
+  SHashSetHasher( hash, WoodpileHash );
+
   if( SHashSetCapacity( hash, 128 ) != hash )
     return "could not set the capacity on a hash";
 
@@ -556,6 +559,24 @@ TestSetCapacity
   ASSERT_STRINGS_EQUAL( "Eighth", SHashGet( hash, "8th" ), "the eighth element was no longer accessible" )
   ASSERT_STRINGS_EQUAL( "Ninth", SHashGet( hash, "9th" ), "the ninth element was no longer accessible" )
   ASSERT_STRINGS_EQUAL( "Tenth", SHashGet( hash, "10th" ), "the tenth element was no longer accessible" )
+
+  SHashDestroy( hash );
+
+  return NULL;
+}
+
+const char *
+TestSetCapacityWithNullSHash
+( void )
+{
+  SHash *hash;
+
+  hash = BuildSHash();
+  if( !hash )
+    return "could not build a populated hash";
+
+  if( SHashSetCapacity( NULL, 512 ) != NULL )
+    return "NULL was not returned for a NULL hash";
 
   SHashDestroy( hash );
 

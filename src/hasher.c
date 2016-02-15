@@ -61,7 +61,7 @@ unsigned long long
 WoodpileHash
 ( const void *str, unsigned long long seed )
 {
-  return 0;
+  return ((unsigned long long) str) ^ ((unsigned long long) seed);
 }
 
 #endif

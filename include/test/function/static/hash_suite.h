@@ -357,6 +357,17 @@ TestSetCapacity
 ( void );
 
 /**
+ * Tests the SHashSetCapacity function with a NULL SHash.
+ *
+ * @test A NULL SHash must return NULL.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestSetCapacityWithNullSHash
+( void );
+
+/**
  *  Tests the SHashSetElementComparator function.
  *
  *  @test After setting the comparator to a function comparing equality by a

@@ -1,12 +1,11 @@
 #include <stdlib.h>
 #include <string.h>
-
 #include <woodpile/dynamic/list.h>
 #include <woodpile/dynamic/tree/splay.h>
 #include <woodpile/hasher.h>
 #include <woodpile/static/queue.h>
-
 #include "test/helper/builder.h"
+#include "test/helper/fixture.h"
 
 DList *
 BuildDList
@@ -67,6 +66,7 @@ BuildSHash
   if( !hash )
     return NULL;
 
+  SHashSetHasher( hash, NullHash );
   SHashSetElementComparator( hash, CompareStrings );
 
   SHashPut( hash, "1st", "First" );

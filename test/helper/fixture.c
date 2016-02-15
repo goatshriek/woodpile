@@ -21,3 +21,10 @@ ElementToString
 
   return str;
 }
+
+unsigned long long
+NullHash
+( const void *data, unsigned long long seed )
+{
+  return 0;
+}
