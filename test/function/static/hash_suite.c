@@ -58,6 +58,7 @@ main
   TEST( PutValueIntoPopulatedSHash )
   TEST( Remove )
   TEST( RemoveNonExistentKey )
+  TEST( SetCapacity )
   TEST( SetElementComparator )
   TEST( SetKeyComparator )
   TEST( Size )
@@ -526,6 +527,35 @@ TestRemoveNonExistentKey
 
   if( SHashRemove( hash, "doesn't exist" ) )
     return "removing a non-existent key did not return NULL";
+
+  SHashDestroy( hash );
+
+  return NULL;
+}
+
+const char *
+TestSetCapacity
+( void )
+{
+  SHash *hash;
+
+  hash = BuildSHash();
+  if( !hash )
+    return "could not build a populated hash";
+
+  if( SHashSetCapacity( hash, 128 ) != hash )
+    return "could not set the capacity on a hash";
+
+  ASSERT_STRINGS_EQUAL( "First", SHashGet( hash, "1st" ), "the first element was no longer accessible" )
+  ASSERT_STRINGS_EQUAL( "Second", SHashGet( hash, "2nd" ), "the second element was no longer accessible" )
+  ASSERT_STRINGS_EQUAL( "Third", SHashGet( hash, "3rd" ), "the third element was no longer accessible" )
+  ASSERT_STRINGS_EQUAL( "Fourth", SHashGet( hash, "4th" ), "the fourth element was no longer accessible" )
+  ASSERT_STRINGS_EQUAL( "Fifth", SHashGet( hash, "5th" ), "the fifth element was no longer accessible" )
+  ASSERT_STRINGS_EQUAL( "Sixth", SHashGet( hash, "6th" ), "the sixth element was no longer accessible" )
+  ASSERT_STRINGS_EQUAL( "Seventh", SHashGet( hash, "7th" ), "the seventh element was no longer accessible" )
+  ASSERT_STRINGS_EQUAL( "Eighth", SHashGet( hash, "8th" ), "the eighth element was no longer accessible" )
+  ASSERT_STRINGS_EQUAL( "Ninth", SHashGet( hash, "9th" ), "the ninth element was no longer accessible" )
+  ASSERT_STRINGS_EQUAL( "Tenth", SHashGet( hash, "10th" ), "the tenth element was no longer accessible" )
 
   SHashDestroy( hash );
 

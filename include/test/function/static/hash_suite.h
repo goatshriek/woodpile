@@ -345,6 +345,18 @@ TestRemoveNullKey
 ( void );
 
 /**
+ * Tests the SHashSetCapacity function.
+ *
+ * @test Setting the capacity on an SHash must return the SHash. Elements must
+ * still be accessible after setting the capacity.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestSetCapacity
+( void );
+
+/**
  *  Tests the SHashSetElementComparator function.
  *
  *  @test After setting the comparator to a function comparing equality by a
