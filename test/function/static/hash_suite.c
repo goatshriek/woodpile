@@ -537,7 +537,19 @@ TestSetElementComparator
 ( void )
 {
   SHash *hash;
-  const char *element = "Fourth";
+  char *element;
+
+  element = malloc( sizeof( char ) * 7 );
+  if( !element )
+    return "could not create a unique element";
+
+  element[0] = 'F';
+  element[1] = 'o';
+  element[2] = 'u';
+  element[3] = 'r';
+  element[4] = 't';
+  element[5] = 'h';
+  element[6] = '\0';
 
   hash = BuildSHash();
   if( !hash )
@@ -552,7 +564,7 @@ TestSetElementComparator
   if( SHashSetElementComparator( hash, ComparePointers ) != hash )
     return "the element comparator could not be updated after being set once";
 
-  if( SHashContains( hash, element) )
+  if( SHashContains( hash, element ) )
     return "changing the element comparator did not result in different behavior";
 
   SHashDestroy( hash );
