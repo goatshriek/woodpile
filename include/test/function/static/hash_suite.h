@@ -461,6 +461,22 @@ TestSetKeyComparatorToNull
 ( void );
 
 /**
+ * Tests the SHashSetKeyComparator function with an SHash having two keys that
+ * are considered equal by the new comparator.
+ *
+ * @test Changing the key comparator in an SHash with two keys that are
+ * considered identical by the new comparator must return the SHash. The size
+ * of the hash must be reduced by one after the call. Calling SHashGet with one
+ * of the keys must return the element mapped to the key. Calling SHashGet with
+ * the other key must return NULL.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestSetKeyComparatorWithEqualKeys
+( void );
+
+/**
  * Tests the SHashSetKeyComparator function with a NULL SHash.
  *
  * @test Setting the comaprator on a NULL SHash must return NULL whether the
