@@ -179,7 +179,7 @@ void *
 SHashPut
 ( SHash *hash, void *key, void *value )
 {
-  unsigned long long i;
+  unsigned long long i, start;
   void *result;
 
   if( !value )
@@ -187,22 +187,29 @@ SHashPut
 
   VALIDATE_PARAMETERS( hash && key )
 
-  i = SHashGetIndex( hash, key );
-  while( hash->values[i] && hash->compare_keys( key, hash->values[i] ) != 0 ){
+  i = start = SHashGetIndex( hash, key );
+
+  do {
+    if( !hash->values[i] ){
+      hash->size++;
+      hash->values[i] = key;
+      hash->values[i+1] = value;
+
+      return value;
+    }
+
+    if( hash->compare_keys( key, hash->values[i] ) == 0 ){
+      result = hash->values[i+1];
+      hash->values[i] = key;
+      hash->values[i+1] = value;
+
+      return result;
+    }
+
     i = (i+2)%(hash->capacity*2);
-  }
+  } while( i != start );
 
-  if( hash->values[i] ){
-    result = hash->values[i+1];
-  } else {
-    result = value;
-    hash->size++;
-  }
-
-  hash->values[i] = key;
-  hash->values[i+1] = value;
-
-  return result;
+  return NULL;
 }
 
 void *
