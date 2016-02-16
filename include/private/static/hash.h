@@ -50,19 +50,4 @@ SHash *
 SHashRehash
 ( SHash *hash );
 
-/**
- * Resolves a collision in the given SHash. Assumes that hash is not full, that
- * is that the hash has enough capacity for a new element.
- *
- * @param hash the SHash with the collision. Must not be NULL.
- * @param key the new key causing the collision. Must not be NULL.
- * @param index the original index of the key
- *
- * @return the index to use for the key that resolves the collision
- */
-static
-unsigned long long
-SHashResolveCollision
-( const SHash *hash, const *key, unsigned long long index );
-
 #endif

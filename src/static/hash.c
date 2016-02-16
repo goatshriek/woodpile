@@ -344,27 +344,39 @@ SHash *
 SHashRehash
 ( SHash *hash )
 {
-  unsigned long long i;
-  void **new_values;
+  unsigned long long i, j, start;
+  void **old_values;
 
-  new_values = calloc( hash->capacity*2, sizeof( void * ) );
-  VALIDATE_ALLOCATION( new_values )
+  hash->values = calloc( hash->capacity*2, sizeof( void * ) );
+  VALIDATE_ALLOCATION( hash->values )
 
+  hash->size = 0;
   for( i=0; i < hash->capacity*2; i+=2 ){
-    if( !hash->values[i] )
+    if( !old_values[i] )
       continue;
+
+    j = start = SHashGetIndex( hash, old_values[i] );
+    do {
+      if( !hash->values[j] ){
+        hash->size++;
+        hash->values[j] = old_values[i];
+        hash->values[j+1] = old_values[i+1];
+
+        break;
+      }
+
+      if( hash->compare_keys( hash->values[j], old_values[i] ) == 0 ){
+        hash->values[j] = old_values[i];
+        hash->values[j+1] = old_values[i+1];
+
+        break;
+      }
+
+      j = (j+2)%(hash->capacity*2);
+    } while( j != start );
   }
 
+  free( old_values );
+
   return hash;
-}
-
-static
-unsigned long long
-SHashResolveCollision
-( const SHash *hash, const *key, unsigned long long index )
-{
-  //if( !hash->values[index] || hash->compare_keys( key, hash->values[index] ) == 0 )
-    return index;
-
-  //return SHashResolveCollision( hash, key, (index+2)%(hash->capacity*2) );
 }

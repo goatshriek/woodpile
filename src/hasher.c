@@ -22,7 +22,7 @@ unsigned long long
 ModFold
 ( unsigned long long hash, unsigned long long max )
 {
-  return hash % max;
+  return hash%max;
 }
 
 unsigned long long
@@ -70,8 +70,11 @@ unsigned long long
 XORFold
 ( unsigned long long hash, unsigned long long max )
 {
-  while( hash > max ){
+  while( hash >= max ){
     hash = (hash & 0xff) ^ (hash >> 8);
+
+    if( (hash >> 8) == 0 )
+      return hash%max;
   }
 
   return hash;
