@@ -252,11 +252,40 @@ SHash *
 SHashSetCapacity
 ( SHash *hash, size_t capacity )
 {
+  size_t old_capacity;
+  unsigned long long i, j, start;
+  void **old_values;
+
   VALIDATE_PARAMETERS( hash )
 
-  hash->capacity = capacity;
+  old_values = hash->values;
+  hash->values = calloc( capacity*2, sizeof( void * ) );
+  VALIDATE_ALLOCATION( hash->values )
 
-  return SHashRehash( hash );
+  old_capacity = hash->capacity;
+  hash->capacity = capacity;
+  hash->size = 0;
+  for( i=0; i < old_capacity*2; i+=2 ){
+    if( !old_values[i] )
+      continue;
+
+    j = start = SHashGetIndex( hash, old_values[i] );
+    do {
+      if( !hash->values[j] ){
+        hash->size++;
+        hash->values[j] = old_values[i];
+        hash->values[j+1] = old_values[i+1];
+
+        break;
+      }
+
+      j = (j+2)%(capacity*2);
+    } while( j != start );
+  }
+
+  free( old_values );
+
+  return hash;
 }
 
 SHash *
@@ -347,6 +376,7 @@ SHashRehash
   unsigned long long i, j, start;
   void **old_values;
 
+  old_values = hash->values;
   hash->values = calloc( hash->capacity*2, sizeof( void * ) );
   VALIDATE_ALLOCATION( hash->values )
 
