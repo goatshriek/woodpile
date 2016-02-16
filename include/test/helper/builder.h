@@ -67,6 +67,25 @@ BuildDSplay
 ( void );
 
 /**
+ * Creates an SHash that is full. The hash contains a mapping of one set of
+ * strings to another set of strings. The size and capacity of the hash are
+ * equal.
+ *
+ * do => c
+ * re => d
+ * mi => e
+ * fa => f
+ * so => g
+ * la => a
+ * ti => b
+ *
+ * @return a new SHash or NULL on failure
+ */
+SHash *
+BuildFullSHash
+( void );
+
+/**
  * Creates an SHash. The hash contains a mapping of one set of strings to
  * another set of strings.
  *

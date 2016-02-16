@@ -55,6 +55,8 @@ main
   TEST( IsEmptyWithPopulatedSHash )
   TEST( IsEmptyWithNullSHash )
   TEST( New )
+  TEST( PutExistingKeyIntoFullSHash )
+  TEST( PutNewKeyIntoFullSHash )
   TEST( PutValueIntoEmptySHash )
   TEST( PutValueIntoPopulatedSHash )
   TEST( Remove )
@@ -361,6 +363,35 @@ TestNew
 }
 
 const char *
+TestPutExistingKeyIntoFullSHash
+( void )
+{
+  SHash *hash;
+  const char *result;
+
+  hash = BuildFullSHash();
+  if( !hash )
+    return "could not build a full hash";
+
+  result = SHashPut( hash, "mi", "my name, I call myself" );
+  if( !result )
+    return "an existing key could not be replaced in a full hash";
+  ASSERT_STRINGS_EQUAL( "e", result, "the returned value was not the previous element" )
+
+  result = SHashGet( hash, "mi" );
+  if( !result)
+    return "the key no longer had an element associated with it";
+  ASSERT_STRINGS_EQUAL( "my name, I call myself", result, "the new element was not returned for the key" )
+
+  if( SHashContains( hash, "e" ) )
+    return "the previous element was not removed from the hash";
+
+  SHashDestroy( hash );
+
+  return NULL;
+}
+
+const char *
 TestPutIntoNullSHash
 ( void )
 {
@@ -375,6 +406,27 @@ TestPutIntoNullSHash
 
   if( SHashPut( NULL, "key", "value" ) != NULL )
     return "a non-NULL value was returned for a NULL hash";
+
+  return NULL;
+}
+
+const char *
+TestPutNewKeyIntoFullSHash
+( void )
+{
+  SHash *hash;
+
+  hash = BuildFullSHash();
+  if( !hash )
+    return "could not build a full hash";
+
+  if( SHashPut( hash, "key", "value" ) != NULL )
+    return "a new key was added to a full hash";
+
+  if( SHashContains( hash, "value" ) )
+    return "the new value existed in the hash after a failed put";
+
+  SHashDestroy( hash );
 
   return NULL;
 }

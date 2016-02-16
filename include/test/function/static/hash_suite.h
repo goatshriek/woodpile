@@ -235,6 +235,20 @@ TestNew
 ( void );
 
 /**
+ * Tests the SHashPut function with a full SHash and a key that already exists
+ * in the hash.
+ *
+ * @test Putting a key that already exists in the hash must return the previous
+ * value mapped to the key. The new value must exist in the hash and be mapped
+ * to the key, and the old value must no longer exist in the hash.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestPutExistingKeyIntoFullSHash
+( void );
+
+/**
  * Tests the SHashPut function with a NULL SHash.
  *
  * @test Calling the function with a NULL SHash must return NULL regardless of
@@ -244,6 +258,19 @@ TestNew
  */
 const char *
 TestPutIntoNullSHash
+( void );
+
+/**
+ * Tests the SHashPut function with a full SHash and a key that does not yet
+ * exist in the hash.
+ *
+ * @test Attempting to put a new key into the hash must return NULL. The new
+ * key must not exist in the hash after the call.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestPutNewKeyIntoFullSHash
 ( void );
 
 /** 

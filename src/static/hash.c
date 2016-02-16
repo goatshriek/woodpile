@@ -327,7 +327,7 @@ SHashHashToString
 static
 unsigned long long
 SHashGetIndex
-( const SHash *hash, void *key )
+( const SHash *hash, const void *key )
 {
   return hash->fold( hash->hash( key, hash->seed ), hash->capacity )*2;
 }
@@ -349,4 +349,15 @@ SHashRehash
   }
 
   return hash;
+}
+
+static
+unsigned long long
+SHashResolveCollision
+( const SHash *hash, const *key, unsigned long long index )
+{
+  //if( !hash->values[index] || hash->compare_keys( key, hash->values[index] ) == 0 )
+    return index;
+
+  //return SHashResolveCollision( hash, key, (index+2)%(hash->capacity*2) );
 }

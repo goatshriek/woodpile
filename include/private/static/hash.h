@@ -23,15 +23,15 @@ struct SHash {
 /**
  * Gets the index of a key.
  *
- * @param hash the SHash to use for the index
- * @param key the key to use for the index
+ * @param hash the SHash to use for the index. Must not be NULL.
+ * @param key the key to use for the index. Must not be NULL.
  *
  * @return the index of the key
  */
 static
 unsigned long long
 SHashGetIndex
-( const SHash *hash, void *key );
+( const SHash *hash, const void *key );
 
 /**
  * Rehashes the keys in an SHash. This is required whenever changes are made
@@ -41,7 +41,7 @@ SHashGetIndex
  *
  * This is a costly operation and should be avoided if possible.
  *
-  * @param hash the SHash to rehash
+  * @param hash the SHash to rehash. Must not be NULL.
   *
   * @return the SHash that was rehashed
  */
@@ -49,5 +49,20 @@ static
 SHash *
 SHashRehash
 ( SHash *hash );
+
+/**
+ * Resolves a collision in the given SHash. Assumes that hash is not full, that
+ * is that the hash has enough capacity for a new element.
+ *
+ * @param hash the SHash with the collision. Must not be NULL.
+ * @param key the new key causing the collision. Must not be NULL.
+ * @param index the original index of the key
+ *
+ * @return the index to use for the key that resolves the collision
+ */
+static
+unsigned long long
+SHashResolveCollision
+( const SHash *hash, const *key, unsigned long long index );
 
 #endif

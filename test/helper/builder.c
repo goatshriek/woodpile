@@ -57,6 +57,31 @@ BuildDSplay
 }
 
 SHash *
+BuildFullSHash
+( void )
+{
+  SHash *hash;
+
+  hash = SHashNewDictionary();
+  if( !hash )
+    return NULL;
+
+  SHashSetCapacity( hash, 7 );
+  SHashSetHasher( hash, NullHash );
+  SHashSetElementComparator( hash, CompareStrings );
+
+  SHashPut( hash, "do", "c" );
+  SHashPut( hash, "re", "d" );
+  SHashPut( hash, "mi", "e" );
+  SHashPut( hash, "fa", "f" );
+  SHashPut( hash, "so", "g" );
+  SHashPut( hash, "la", "a" );
+  SHashPut( hash, "ti", "b" );
+
+  return hash;
+}
+
+SHash *
 BuildSHash
 ( void )
 {
