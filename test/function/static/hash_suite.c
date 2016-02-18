@@ -64,6 +64,7 @@ main
   TEST( SetCapacity )
   TEST( SetElementComparator )
   TEST( SetKeyComparator )
+  TEST( SetKeyComparatorWithEqualKeys )
   TEST( Size )
   TEST( SizeWithEmptySHash )
   TEST( SizeWithNullSHash )
@@ -587,6 +588,27 @@ TestRemoveNonExistentKey
 }
 
 const char *
+TestRemoveNullKey
+( void )
+{
+  SHash *hash;
+
+  hash = BuildSHash();
+  if( !hash )
+    return "could not build a populated hash";
+
+  if( SHashRemove( hash, NULL ) )
+    return "a non-NULL hash and NULL key did not return NULL";
+
+  if( SHashRemove( NULL, NULL ) )
+    return "a NULL hash and key did not return NULL";
+
+  SHashDestroy( hash );
+
+  return NULL;
+}
+
+const char *
 TestSetCapacity
 ( void )
 {
@@ -765,24 +787,22 @@ TestSetKeyComparatorToNull
   return NULL;
 }
 
+/**
+ * Tests the SHashSetKeyComparator function with an SHash having two keys that
+ * are considered equal by the new comparator.
+ *
+ * @test Changing the key comparator in an SHash with two keys that are
+ * considered identical by the new comparator must return the SHash. The size
+ * of the hash must be reduced by one after the call. Calling SHashGet with one
+ * of the keys must return the element mapped to the key. Calling SHashGet with
+ * the other key must return NULL.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
 const char *
-TestRemoveNullKey
+TestSetKeyComparatorWithEqualKeys
 ( void )
 {
-  SHash *hash;
-
-  hash = BuildSHash();
-  if( !hash )
-    return "could not build a populated hash";
-
-  if( SHashRemove( hash, NULL ) )
-    return "a non-NULL hash and NULL key did not return NULL";
-
-  if( SHashRemove( NULL, NULL ) )
-    return "a NULL hash and key did not return NULL";
-
-  SHashDestroy( hash );
-
   return NULL;
 }
 
