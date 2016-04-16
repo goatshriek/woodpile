@@ -94,7 +94,7 @@ TestContainsDuplicateValues
 
   if( SHashPut( hash, "3RD", value ) != value )
     return "a duplicate could not be added to the hash";
-  
+
   key = SHashContains( hash, value );
   if( !key )
     return "true was not returned for a value in the hash twice";
@@ -359,7 +359,7 @@ TestNew
   hash = SHashNew();
   if( !hash )
     return "NULL was returned with a non-NULL hashing function";
-    
+
   return NULL;
 }
 

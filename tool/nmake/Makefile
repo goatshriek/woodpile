@@ -160,7 +160,7 @@ check: $(TESTEXES)
   test\function\dynamic\tree\splay_suite.exe >> test-suite.log
   test\function\dynamic\tree\splay\const_iterator_suite.exe >> test-suite.log
   test\function\dynamic\tree\splay\iterator_suite.exe >> test-suite.log
-  REM test\function\static\hash_suite.exe >> test-suite.log
+  test\function\static\hash_suite.exe >> test-suite.log
   test\function\static\queue_suite.exe >> test-suite.log
   test\function\static\stack_suite.exe >> test-suite.log
   cd $(BASEDIR)

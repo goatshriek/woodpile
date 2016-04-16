@@ -110,9 +110,10 @@ SHashGet
   do{
     if( hash->compare_keys( key, hash->values[i] ) == 0 ){
       return hash->values[i+1];
-    } else {
-      i = (i+2)%(hash->capacity*2);
     }
+
+    i = (i+2)%(hash->capacity*2);
+
   } while( hash->values[i] && i != start );
 
   return NULL;
@@ -221,17 +222,17 @@ SHashRemove
   void *result;
 
   VALIDATE_PARAMETERS( hash && key )
- 
+
   i = start = hash->fold( hash->hash( key, hash->seed ), hash->capacity )*2;
   if( !hash->values[i] )
     return NULL;
- 
+
   while( hash->compare_keys( key, hash->values[i] ) != 0 ){
     i = (i+2)%(hash->capacity*2);
 
     if( !hash->values[i] || i == start )
       return NULL;
-  } 
+  }
 
   result = hash->values[i+1];
   hash->values[i] = hash->values[i+1] = NULL;

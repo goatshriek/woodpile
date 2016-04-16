@@ -61,7 +61,16 @@ unsigned long long
 WoodpileHash
 ( const void *str, unsigned long long seed )
 {
-  return ((unsigned long long) str) ^ ((unsigned long long) seed);
+  size_t i=0;
+  const char *str_cast;
+  unsigned long long sum=0;
+
+  str_cast = str;
+  while( str_cast[i] != '\0' ){
+    sum += str_cast[i++];
+  }
+
+  return ((unsigned long long) sum) ^ ((unsigned long long) seed);
 }
 
 #endif
