@@ -650,14 +650,14 @@ TestRemoveRootElement
   new_element[7] = 'h';
   new_element[8] = 'i';
   new_element[9] = '\0';
-  
+
   existing_element = DSplayFirst( splay );
   if( !DSplayAdd( splay, new_element ) )
     return "could not add a new element to the splay";
 
   size = DSplaySize( splay );
 
-  if( DSplayRemove( splay, new_element ) != new_element )
+  if( DSplayRemove( splay, "abcdefghi" ) != new_element )
     return "the element was not returned when removed";
 
   if( !DSplayContains( splay, existing_element ) )
