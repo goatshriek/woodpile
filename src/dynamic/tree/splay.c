@@ -11,15 +11,14 @@ DSplay *
 DSplayAdd
 ( DSplay *splay, void *element )
 {
-  int comparison;
-  Node *current_node, *new_node, *parent;
+  int comparison = 0;
+  Node *current_node, *new_node, *parent=NULL;
 
   VALIDATE_PARAMETERS( splay )
 
   if( !element )
     return splay;
 
-  parent = NULL;
   current_node = splay->root;
   while( current_node ){
     comparison = splay->compare( element, current_node->element );
@@ -108,7 +107,6 @@ DSplayFirst
 ( const DSplay *splay )
 {
   Node *node;
-  void *element = NULL;
 
   VALIDATE_PARAMETERS( splay )
 
@@ -128,7 +126,6 @@ DSplayLast
 ( const DSplay *splay )
 {
   Node *node;
-  void *element = NULL;
 
   VALIDATE_PARAMETERS( splay )
 
@@ -236,7 +233,7 @@ DSplayRemove
 ( DSplay *splay, const void *element )
 {
   Node *node, *parent, *root;
-  int comparison;
+  int comparison = 0;
   void *removed;
 
   VALIDATE_PARAMETERS( splay && element )

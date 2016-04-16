@@ -631,14 +631,28 @@ TestRemoveRootElement
   DSplay *splay;
   size_t size;
   void *existing_element;
-  void *new_element = "new element";
+  char *new_element;
 
   splay = BuildDSplay();
   if( !splay )
     return "could not build a populated splay";
 
+  new_element = malloc( sizeof( char ) * 10 );
+  if( !new_element )
+    return "could not build an array of ints";
+  new_element[0] = 'a';
+  new_element[1] = 'b';
+  new_element[2] = 'c';
+  new_element[3] = 'd';
+  new_element[4] = 'e';
+  new_element[5] = 'f';
+  new_element[6] = 'g';
+  new_element[7] = 'h';
+  new_element[8] = 'i';
+  new_element[9] = '\0';
+  
   existing_element = DSplayFirst( splay );
-  if( !DSplayAdd( splay, "new element" ) )
+  if( !DSplayAdd( splay, new_element ) )
     return "could not add a new element to the splay";
 
   size = DSplaySize( splay );

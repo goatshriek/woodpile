@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include <woodpile/comparator.h>
 #include <woodpile/hasher.h>
 #include <woodpile/static/hash.h>
@@ -354,7 +355,7 @@ SHashSize
 }
 
 char *
-SHashHashToString
+SHashToString
 ( const SHash *hash, char * ( *element_to_string )( const void * ) )
 {
   return NULL;

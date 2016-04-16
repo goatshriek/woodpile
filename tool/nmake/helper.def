@@ -2,6 +2,9 @@ LIBRARY    helper
 
 EXPORTS
   BuildDList                   @1
-  BuildSQueue                  @2
-  BuildSStack                  @3
-  ElementToString              @4
+  BuildDSplay                  @2
+  BuildFullSHash               @3
+  BuildSHash                   @4
+  BuildSQueue                  @5
+  BuildSStack                  @6
+  ElementToString              @7
