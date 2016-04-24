@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <woodpile/config.h>
 #include <woodpile/hasher.h>
 #include <woodpile/static/hash.h>
 #include "lib/validate.h"
@@ -77,6 +78,271 @@ main
     return EXIT_SUCCESS;
 }
 
+#ifdef __WOODPILE_PARAMETER_VALIDATION
+
+const char *
+TestContainsNullValue
+( void )
+{
+  if( SHashContains( NULL, NULL ) != NULL )
+    return "NULL was not returned for a NULL hash and value";
+
+  if( SHashContains( common_hash, NULL ) != NULL )
+    return "NULL was not returned for a NULL value";
+
+  return NULL;
+}
+
+const char *
+TestContainsWithNullSHash
+( void )
+{
+  if( SHashContains( NULL, NULL ) != NULL )
+    return "NULL was not returned for a NULL hash and value";
+
+  if( SHashContains( NULL, "value" ) != NULL )
+    return "NULL was not returned for a NULL hash";
+
+  return NULL;
+}
+
+const char *
+TestCopyNullSHash
+( void )
+{
+  if( SHashCopy( NULL ) != NULL )
+    return "a non-NULL value was returned for a NULL hash";
+
+  return NULL;
+}
+
+const char *
+TestGetFromNullSHash
+( void )
+{
+  if( SHashGet( NULL, NULL ) != NULL )
+    return "a non-NULL value was returned for a NULL hash and key";
+
+  if( SHashGet( NULL, "key" ) != NULL )
+    return "a non-NULL value was returned for a NULL hash";
+
+  return NULL;
+}
+
+const char *
+TestGetNullKeyFromSHash
+( void )
+{
+  if( SHashGet( NULL, NULL ) != NULL )
+    return "a non-NULL value was returned for a NULL hash and key";
+
+  if( SHashGet( common_hash, NULL ) != NULL )
+    return "a non-NULL value was returned for a NULL key";
+
+  return NULL;
+}
+
+const char *
+TestPutIntoNullSHash
+( void )
+{
+  if( SHashPut( NULL, NULL, NULL ) != NULL )
+    return "a non-NULL value was returned for a NULL hash, key, and value";
+
+  if( SHashPut( NULL, NULL, "value" ) != NULL )
+    return "a non-NULL value was returned for a NULL hash and key";
+
+  if( SHashPut( NULL, "key", NULL ) != NULL )
+    return "a non-NULL value was returned for a NULl hash and value";
+
+  if( SHashPut( NULL, "key", "value" ) != NULL )
+    return "a non-NULL value was returned for a NULL hash";
+
+  return NULL;
+}
+
+const char *
+TestPutNullKeyIntoSHash
+( void )
+{
+  SHash *hash;
+
+  hash = BuildSHash();
+  if( !hash )
+    return "could not build a populated hash";
+
+  if( SHashPut( NULL, NULL, NULL ) != NULL )
+    return "a non-NULL value was returned for a NULL hash, key, and value";
+
+  if( SHashPut( NULL, NULL, "value" ) != NULL )
+    return "a non-NULL value was returned for a NULL hash and key";
+
+  if( SHashPut( hash, NULL, NULL ) != NULL )
+    return "a non-NULL value was returned for a NULL key and value";
+
+  if( SHashPut( hash, NULL, "value" ) != NULL )
+    return "a non-NULL value was returned for a NULL key";
+
+  SHashDestroy( hash );
+
+  return NULL;
+}
+
+const char *
+TestPutNullValueIntoSHash
+( void )
+{
+  SHash *hash;
+
+  hash = BuildSHash();
+  if( !hash )
+    return "could not build a populated hash";
+
+  if( SHashPut( NULL, NULL, NULL ) != NULL )
+    return "a non-NULL value was returned for a NULL hash, key, and value";
+
+  if( SHashPut( NULL, "key", NULL ) != NULL )
+    return "a non-NULL value was returned for a NULL hash and value";
+
+  if( SHashPut( hash, NULL, NULL ) != NULL )
+    return "a non-NULL value was returned for a NULL key and value";
+
+  if( SHashPut( hash, "key", NULL ) != NULL )
+    return "a non-NULL value was returned for a NULL value";
+
+  SHashDestroy( hash );
+
+  return NULL;
+}
+
+const char *
+TestRemoveFromNullSHash
+( void )
+{
+  if( SHashRemove( NULL, NULL ) != NULL )
+    return "NULL was not returned for a NULL hash and key";
+
+  if( SHashRemove( NULL, "key" ) != NULL )
+    return "NULL was not returned for a NULL hash and non-NULL key";
+
+  return NULL;
+}
+
+const char *
+TestRemoveNullKey
+( void )
+{
+  SHash *hash;
+
+  hash = BuildSHash();
+  if( !hash )
+    return "could not build a populated hash";
+
+  if( SHashRemove( hash, NULL ) )
+    return "a non-NULL hash and NULL key did not return NULL";
+
+  if( SHashRemove( NULL, NULL ) )
+    return "a NULL hash and key did not return NULL";
+
+  SHashDestroy( hash );
+
+  return NULL;
+}
+
+const char *
+TestSetCapacityWithNullSHash
+( void )
+{
+  SHash *hash;
+
+  hash = BuildSHash();
+  if( !hash )
+    return "could not build a populated hash";
+
+  if( SHashSetCapacity( NULL, 512 ) != NULL )
+    return "NULL was not returned for a NULL hash";
+
+  SHashDestroy( hash );
+
+  return NULL;
+}
+
+const char *
+TestSetElementComparatorToNull
+( void )
+{
+  SHash *hash;
+  comparator_t previous;
+
+  hash = BuildSHash();
+  if( !hash )
+    return "could not build a populated hash";
+
+  previous = SHashElementComparator( hash );
+
+  if( SHashSetElementComparator( hash, NULL ) != NULL )
+    return "NULL was not returned for a NULL comparator";
+
+  if( SHashElementComparator( hash ) != previous )
+    return "the comparator was changed after a call with a NULL comparator";
+
+  SHashDestroy( hash );
+
+  return NULL;
+}
+
+const char *
+TestSetElementComparatorWithNullSHash
+( void )
+{
+  if( SHashSetElementComparator( NULL, NULL ) != NULL )
+    return "a non-NULL value was not returned for a NULL hash and comparator";
+
+  if( SHashSetElementComparator( NULL, ComparePointers ) != NULL )
+    return "a non-NULL value was not returned for a NULL hash";
+
+  return NULL;
+}
+
+const char *
+TestSetKeyComparatorToNull
+( void )
+{
+  SHash *hash;
+  comparator_t previous;
+
+  hash = BuildSHash();
+  if( !hash )
+    return "could not build a populated hash";
+
+  previous = SHashKeyComparator( hash );
+
+  if( SHashSetKeyComparator( hash, NULL ) != NULL )
+    return "NULL was not returned for a NULL comparator";
+
+  if( SHashKeyComparator( hash ) != previous )
+    return "the comparator was changed after a call with a NULL comparator";
+
+  SHashDestroy( hash );
+
+  return NULL;
+}
+
+const char *
+TestSetKeyComparatorWithNullSHash
+( void )
+{
+  if( SHashSetKeyComparator( NULL, NULL ) != NULL )
+    return "a non-NULL value was not returned for a NULL hash and comparator";
+
+  if( SHashSetKeyComparator( NULL, ComparePointers ) != NULL )
+    return "a non-NULL value was not returned for a NULL hash";
+
+  return NULL;
+}
+
+#endif
+
 const char *
 TestContainsDuplicateValues
 ( void )
@@ -118,19 +384,6 @@ TestContainsNonExistentValue
 }
 
 const char *
-TestContainsNullValue
-( void )
-{
-  if( SHashContains( NULL, NULL ) != NULL )
-    return "NULL was not returned for a NULL hash and value";
-
-  if( SHashContains( common_hash, NULL ) != NULL )
-    return "NULL was not returned for a NULL value";
-
-  return NULL;
-}
-
-const char *
 TestContainsUniqueValue
 ( void )
 {
@@ -141,19 +394,6 @@ TestContainsUniqueValue
     return "a value existing in the hash was not returned";
 
   ASSERT_STRINGS_EQUAL( "3rd", value, "the correct key was not returned" )
-
-  return NULL;
-}
-
-const char *
-TestContainsWithNullSHash
-( void )
-{
-  if( SHashContains( NULL, NULL ) != NULL )
-    return "NULL was not returned for a NULL hash and value";
-
-  if( SHashContains( NULL, "value" ) != NULL )
-    return "NULL was not returned for a NULL hash";
 
   return NULL;
 }
@@ -208,16 +448,6 @@ TestCopyDistinct
 }
 
 const char *
-TestCopyNullSHash
-( void )
-{
-  if( SHashCopy( NULL ) != NULL )
-    return "a non-NULL value was returned for a NULL hash";
-
-  return NULL;
-}
-
-const char *
 TestCopySize
 ( void )
 {
@@ -255,32 +485,6 @@ TestDestroyPopulatedSHash
     return "could not build a populated hash";
 
   SHashDestroy( hash );
-
-  return NULL;
-}
-
-const char *
-TestGetFromNullSHash
-( void )
-{
-  if( SHashGet( NULL, NULL ) != NULL )
-    return "a non-NULL value was returned for a NULL hash and key";
-
-  if( SHashGet( NULL, "key" ) != NULL )
-    return "a non-NULL value was returned for a NULL hash";
-
-  return NULL;
-}
-
-const char *
-TestGetNullKeyFromSHash
-( void )
-{
-  if( SHashGet( NULL, NULL ) != NULL )
-    return "a non-NULL value was returned for a NULL hash and key";
-
-  if( SHashGet( common_hash, NULL ) != NULL )
-    return "a non-NULL value was returned for a NULL key";
 
   return NULL;
 }
@@ -393,25 +597,6 @@ TestPutExistingKeyIntoFullSHash
 }
 
 const char *
-TestPutIntoNullSHash
-( void )
-{
-  if( SHashPut( NULL, NULL, NULL ) != NULL )
-    return "a non-NULL value was returned for a NULL hash, key, and value";
-
-  if( SHashPut( NULL, NULL, "value" ) != NULL )
-    return "a non-NULL value was returned for a NULL hash and key";
-
-  if( SHashPut( NULL, "key", NULL ) != NULL )
-    return "a non-NULL value was returned for a NULl hash and value";
-
-  if( SHashPut( NULL, "key", "value" ) != NULL )
-    return "a non-NULL value was returned for a NULL hash";
-
-  return NULL;
-}
-
-const char *
 TestPutNewKeyIntoFullSHash
 ( void )
 {
@@ -426,60 +611,6 @@ TestPutNewKeyIntoFullSHash
 
   if( SHashContains( hash, "value" ) )
     return "the new value existed in the hash after a failed put";
-
-  SHashDestroy( hash );
-
-  return NULL;
-}
-
-const char *
-TestPutNullKeyIntoSHash
-( void )
-{
-  SHash *hash;
-
-  hash = BuildSHash();
-  if( !hash )
-    return "could not build a populated hash";
-
-  if( SHashPut( NULL, NULL, NULL ) != NULL )
-    return "a non-NULL value was returned for a NULL hash, key, and value";
-
-  if( SHashPut( NULL, NULL, "value" ) != NULL )
-    return "a non-NULL value was returned for a NULL hash and key";
-
-  if( SHashPut( hash, NULL, NULL ) != NULL )
-    return "a non-NULL value was returned for a NULL key and value";
-
-  if( SHashPut( hash, NULL, "value" ) != NULL )
-    return "a non-NULL value was returned for a NULL key";
-
-  SHashDestroy( hash );
-
-  return NULL;
-}
-
-const char *
-TestPutNullValueIntoSHash
-( void )
-{
-  SHash *hash;
-
-  hash = BuildSHash();
-  if( !hash )
-    return "could not build a populated hash";
-
-  if( SHashPut( NULL, NULL, NULL ) != NULL )
-    return "a non-NULL value was returned for a NULL hash, key, and value";
-
-  if( SHashPut( NULL, "key", NULL ) != NULL )
-    return "a non-NULL value was returned for a NULL hash and value";
-
-  if( SHashPut( hash, NULL, NULL ) != NULL )
-    return "a non-NULL value was returned for a NULL key and value";
-
-  if( SHashPut( hash, "key", NULL ) != NULL )
-    return "a non-NULL value was returned for a NULL value";
 
   SHashDestroy( hash );
 
@@ -557,19 +688,6 @@ TestRemove
 }
 
 const char *
-TestRemoveFromNullSHash
-( void )
-{
-  if( SHashRemove( NULL, NULL ) != NULL )
-    return "NULL was not returned for a NULL hash and key";
-
-  if( SHashRemove( NULL, "key" ) != NULL )
-    return "NULL was not returned for a NULL hash and non-NULL key";
-
-  return NULL;
-}
-
-const char *
 TestRemoveNonExistentKey
 ( void )
 {
@@ -581,27 +699,6 @@ TestRemoveNonExistentKey
 
   if( SHashRemove( hash, "doesn't exist" ) )
     return "removing a non-existent key did not return NULL";
-
-  SHashDestroy( hash );
-
-  return NULL;
-}
-
-const char *
-TestRemoveNullKey
-( void )
-{
-  SHash *hash;
-
-  hash = BuildSHash();
-  if( !hash )
-    return "could not build a populated hash";
-
-  if( SHashRemove( hash, NULL ) )
-    return "a non-NULL hash and NULL key did not return NULL";
-
-  if( SHashRemove( NULL, NULL ) )
-    return "a NULL hash and key did not return NULL";
 
   SHashDestroy( hash );
 
@@ -633,24 +730,6 @@ TestSetCapacity
   ASSERT_STRINGS_EQUAL( "Eighth", SHashGet( hash, "8th" ), "the eighth element was no longer accessible" )
   ASSERT_STRINGS_EQUAL( "Ninth", SHashGet( hash, "9th" ), "the ninth element was no longer accessible" )
   ASSERT_STRINGS_EQUAL( "Tenth", SHashGet( hash, "10th" ), "the tenth element was no longer accessible" )
-
-  SHashDestroy( hash );
-
-  return NULL;
-}
-
-const char *
-TestSetCapacityWithNullSHash
-( void )
-{
-  SHash *hash;
-
-  hash = BuildSHash();
-  if( !hash )
-    return "could not build a populated hash";
-
-  if( SHashSetCapacity( NULL, 512 ) != NULL )
-    return "NULL was not returned for a NULL hash";
 
   SHashDestroy( hash );
 
@@ -698,43 +777,6 @@ TestSetElementComparator
 }
 
 const char *
-TestSetElementComparatorToNull
-( void )
-{
-  SHash *hash;
-  comparator_t previous;
-
-  hash = BuildSHash();
-  if( !hash )
-    return "could not build a populated hash";
-
-  previous = SHashElementComparator( hash );
-
-  if( SHashSetElementComparator( hash, NULL ) != NULL )
-    return "NULL was not returned for a NULL comparator";
-
-  if( SHashElementComparator( hash ) != previous )
-    return "the comparator was changed after a call with a NULL comparator";
-
-  SHashDestroy( hash );
-
-  return NULL;
-}
-
-const char *
-TestSetElementComparatorWithNullSHash
-( void )
-{
-  if( SHashSetElementComparator( NULL, NULL ) != NULL )
-    return "a non-NULL value was not returned for a NULL hash and comparator";
-
-  if( SHashSetElementComparator( NULL, ComparePointers ) != NULL )
-    return "a non-NULL value was not returned for a NULL hash";
-
-  return NULL;
-}
-
-const char *
 TestSetKeyComparator
 ( void )
 {
@@ -763,30 +805,6 @@ TestSetKeyComparator
   return NULL;
 }
 
-const char *
-TestSetKeyComparatorToNull
-( void )
-{
-  SHash *hash;
-  comparator_t previous;
-
-  hash = BuildSHash();
-  if( !hash )
-    return "could not build a populated hash";
-
-  previous = SHashKeyComparator( hash );
-
-  if( SHashSetKeyComparator( hash, NULL ) != NULL )
-    return "NULL was not returned for a NULL comparator";
-
-  if( SHashKeyComparator( hash ) != previous )
-    return "the comparator was changed after a call with a NULL comparator";
-
-  SHashDestroy( hash );
-
-  return NULL;
-}
-
 /**
  * Tests the SHashSetKeyComparator function with an SHash having two keys that
  * are considered equal by the new comparator.
@@ -803,19 +821,6 @@ const char *
 TestSetKeyComparatorWithEqualKeys
 ( void )
 {
-  return NULL;
-}
-
-const char *
-TestSetKeyComparatorWithNullSHash
-( void )
-{
-  if( SHashSetKeyComparator( NULL, NULL ) != NULL )
-    return "a non-NULL value was not returned for a NULL hash and comparator";
-
-  if( SHashSetKeyComparator( NULL, ComparePointers ) != NULL )
-    return "a non-NULL value was not returned for a NULL hash";
-
   return NULL;
 }
 

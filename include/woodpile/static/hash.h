@@ -296,7 +296,8 @@ SHashSize
  *
  * @param hash the SHash to get a representation of. Must not be NULL.
  * @param element_to_string a function returning string representations of
- * elements
+ * elements. If the function is set to NULL, then a string representation of
+ * each element's address is used.
  *
  * @return a char buffer holding a string representation of the SHash
  */

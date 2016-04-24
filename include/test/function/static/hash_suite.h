@@ -6,6 +6,202 @@
  * Hash tests
  */
 
+#include <woodpile/config.h>
+
+#ifdef __WOODPILE_PARAMETER_VALIDATION
+
+/**
+ * Tests the SHashContains function a NULL value supplied.
+ *
+ * @test A NULL value must return a logically false value, whether the SHash
+ * supplied is NULL or non-NULL.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestContainsNullValue
+( void );
+
+/**
+ * Tests the SHashContains function with a NULL SHash.
+ *
+ * @test A NULL hash must return 0, whether the value supplied is NULL or
+ * non-NULL.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestContainsWithNullSHash
+( void );
+
+/**
+ * Tests the CopySHash function with a NULL SHash.
+ *
+ * @test a NULL SHash must return NULL.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestCopyNullSHash
+( void );
+
+/**
+ * Tests the SHashGet function with a NULL SHash.
+ *
+ * @test Calling the function with a NULL SHash must return NULL regardless of
+ * key being NULL or non-NULL.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestGetFromNullSHash
+( void );
+
+/**
+ * Tests the SHashGet function with a NULL key.
+ *
+ * @test Calling the function with a NULL key must return NULL regardless of
+ * the hash being NULL or non-NULL.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestGetNullKeyFromSHash
+( void );
+
+/**
+ * Tests the SHashPut function with a NULL SHash.
+ *
+ * @test Calling the function with a NULL SHash must return NULL regardless of
+ * key or value being NULL or non-NULL.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestPutIntoNullSHash
+( void );
+
+/**
+ * Tests the SHashPut function with a NULL key.
+ *
+ * @test Calling the function with a NULL key must return NULL regardless of
+ * the hash or value being NULL or non-NULL.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestPutNullKeyIntoSHash
+( void );
+
+/**
+ * Tests the SHashPut function with a NULL value.
+ *
+ * @test Calling the function with a NULL value must return NULL regardless of
+ * the hash or key being NULL or non-NULL.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestPutNullValueIntoSHash
+( void );
+
+/**
+ * Tests the SHashRemove function with a NULL SHash.
+ *
+ * @test Removing from a NULL SHash must return NULL, whether the key
+ * supplied is NULL or non-NULL.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestRemoveFromNullSHash
+( void );
+
+/**
+ * Tests the SHashRemove function with a NULL key.
+ *
+ * @test Removing a NULL key must return NULL, whether the SHash supplied is
+ * NULL or non-NULL.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestRemoveNullKey
+( void );
+
+/**
+ * Tests the SHashSetCapacity function with a NULL SHash.
+ *
+ * @test A NULL SHash must return NULL.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestSetCapacityWithNullSHash
+( void );
+
+/**
+ * Tests the SHashSetElementComparator function with a NULL comparator.
+ *
+ * @test Setting to a NULL comparator must return NULL. The hash must have the
+ * same element comparator as it did before the call.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestSetElementComparatorToNull
+( void );
+
+/**
+ * Tests the SHashSetElementComparator function with a NULL SHash.
+ *
+ * @test Setting the comparator on a NULL SHash must return NULL whether the
+ * comparator is NULL or non-NULL.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestSetElementComparatorWithNullSHash
+( void );
+
+/**
+ * Tests the SHashSetKeyComparator function with a NULL comparator.
+ *
+ * @test Setting to a NULL comparator must return NULL. The hash must have the
+ * same key comparator as it did before the call.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestSetKeyComparatorToNull
+( void );
+
+/**
+ * Tests the SHashSetKeyComparator function with a NULL SHash.
+ *
+ * @test Setting the comaprator on a NULL SHash must return NULL whether the
+ * comparator is NULL or non-NULL.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestSetKeyComparatorWithNullSHash
+( void );
+
+/**
+ * Tests the SHashToString function with a NULL SHash.
+ *
+ * @test The function must return a NULL string, regardless of whether the
+ * element_to_string function is NULL or non-NULL.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestToStringWithNullSHash
+( void );
+
+#endif
+
 /**
  * Tests the SHashContains function with a value existing multiple times in the
  * SHash.
@@ -32,18 +228,6 @@ TestContainsNonExistentValue
 ( void );
 
 /**
- * Tests the SHashContains function a NULL value supplied.
- *
- * @test A NULL value must return a logically false value, whether the SHash
- * supplied is NULL or non-NULL.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestContainsNullValue
-( void );
-
-/**
  * Tests the SHashContains function with values that exist in the SHash exactly
  * once.
  *
@@ -53,18 +237,6 @@ TestContainsNullValue
  */
 const char *
 TestContainsUniqueValue
-( void );
-
-/**
- * Tests the SHashContains function with a NULL SHash.
- *
- * @test A NULL hash must return 0, whether the value supplied is NULL or
- * non-NULL.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestContainsWithNullSHash
 ( void );
 
 /**
@@ -101,17 +273,6 @@ TestCopyDistinct
 ( void );
 
 /**
- * Tests the CopySHash function with a NULL SHash.
- *
- * @test a NULL SHash must return NULL.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestCopyNullSHash
-( void );
-
-/**
  * Tests the size of the SHash returned by the CopySHash function.
  *
  * @test The copy of a populated SHash must be the same size as the original.
@@ -142,30 +303,6 @@ TestDestroyNullSHash
  */
 const char *
 TestDestroyPopulatedSHash
-( void );
-
-/**
- * Tests the SHashGet function with a NULL SHash.
- *
- * @test Calling the function with a NULL SHash must return NULL regardless of
- * key being NULL or non-NULL.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestGetFromNullSHash
-( void );
-
-/** 
- * Tests the SHashGet function with a NULL key.
- *
- * @test Calling the function with a NULL key must return NULL regardless of
- * the hash being NULL or non-NULL.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestGetNullKeyFromSHash
 ( void );
 
 /**
@@ -249,18 +386,6 @@ TestPutExistingKeyIntoFullSHash
 ( void );
 
 /**
- * Tests the SHashPut function with a NULL SHash.
- *
- * @test Calling the function with a NULL SHash must return NULL regardless of
- * key or value being NULL or non-NULL.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestPutIntoNullSHash
-( void );
-
-/**
  * Tests the SHashPut function with a full SHash and a key that does not yet
  * exist in the hash.
  *
@@ -271,30 +396,6 @@ TestPutIntoNullSHash
  */
 const char *
 TestPutNewKeyIntoFullSHash
-( void );
-
-/** 
- * Tests the SHashPut function with a NULL key.
- *
- * @test Calling the function with a NULL key must return NULL regardless of
- * the hash or value being NULL or non-NULL.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestPutNullKeyIntoSHash
-( void );
-
-/** 
- * Tests the SHashPut function with a NULL value.
- *
- * @test Calling the function with a NULL value must return NULL regardless of
- * the hash or key being NULL or non-NULL.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestPutNullValueIntoSHash
 ( void );
 
 /**
@@ -336,18 +437,6 @@ TestRemove
 ( void );
 
 /**
- * Tests the SHashRemove function with a NULL SHash.
- *
- * @test Removing from a NULL SHash must return NULL, whether the key
- * supplied is NULL or non-NULL.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestRemoveFromNullSHash
-( void );
-
-/**
  * Tests the SHashRemove function with a key that does not exist in the
  * SHash.
  *
@@ -357,18 +446,6 @@ TestRemoveFromNullSHash
  */
 const char *
 TestRemoveNonExistentKey
-( void );
-
-/**
- * Tests the SHashRemove function with a NULL key.
- *
- * @test Removing a NULL key must return NULL, whether the SHash supplied is
- * NULL or non-NULL.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestRemoveNullKey
 ( void );
 
 /**
@@ -384,17 +461,6 @@ TestSetCapacity
 ( void );
 
 /**
- * Tests the SHashSetCapacity function with a NULL SHash.
- *
- * @test A NULL SHash must return NULL.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestSetCapacityWithNullSHash
-( void );
-
-/**
  *  Tests the SHashSetElementComparator function.
  *
  *  @test After setting the comparator to a function comparing equality by a
@@ -406,30 +472,6 @@ TestSetCapacityWithNullSHash
  */
 const char *
 TestSetElementComparator
-( void );
-
-/**
- * Tests the SHashSetElementComparator function with a NULL comparator.
- *
- * @test Setting to a NULL comparator must return NULL. The hash must have the
- * same element comparator as it did before the call.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestSetElementComparatorToNull
-( void );
-
-/**
- * Tests the SHashSetElementComparator function with a NULL SHash.
- *
- * @test Setting the comparator on a NULL SHash must return NULL whether the
- * comparator is NULL or non-NULL.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestSetElementComparatorWithNullSHash
 ( void );
 
 /**
@@ -449,18 +491,6 @@ TestSetKeyComparator
 ( void );
 
 /**
- * Tests the SHashSetKeyComparator function with a NULL comparator.
- *
- * @test Setting to a NULL comparator must return NULL. The hash must have the
- * same key comparator as it did before the call.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestSetKeyComparatorToNull
-( void );
-
-/**
  * Tests the SHashSetKeyComparator function with an SHash having two keys that
  * are considered equal by the new comparator.
  *
@@ -474,18 +504,6 @@ TestSetKeyComparatorToNull
  */
 const char *
 TestSetKeyComparatorWithEqualKeys
-( void );
-
-/**
- * Tests the SHashSetKeyComparator function with a NULL SHash.
- *
- * @test Setting the comaprator on a NULL SHash must return NULL whether the
- * comparator is NULL or non-NULL.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestSetKeyComparatorWithNullSHash
 ( void );
 
 /**
@@ -519,6 +537,45 @@ TestSizeWithEmptySHash
  */
 const char *
 TestSizeWithNullSHash
+( void );
+
+/**
+ * Tests the SHashToString function an empty SHash.
+ *
+ * @test An empty SHash must return a string of "{}";
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestToStringWithEmptySHash
+( void );
+
+/**
+ * Tests the SHashToString function with a NULL element_to_string function.
+ *
+ * @test The function must return a NULL string, regardless of whether the
+ * hash is NULL or non-NULL.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestToStringWithNullFunction
+( void );
+
+/**
+ * Tests the SHashToString function with a populated SHash.
+ *
+ * @test The function must return a string starting and ending with '{' and '}'
+ * respectively. The string representation of each key must exist in the string.
+ * The string representation of each value must exist in the string immediately
+ * after the key's representation, separated only by an '=' character. A ','
+ * immediately followed by a ' ' character must exist between each key and value
+ * pair.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestToStringWithPopulatedSHash
 ( void );
 
 #endif
