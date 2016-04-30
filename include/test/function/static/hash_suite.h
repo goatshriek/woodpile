@@ -328,6 +328,18 @@ TestGetFromPopulatedSHash
 ( void );
 
 /**
+ * Tests the SHashGet function with two keys that have a hash collision.
+ *
+ * @test The value associated with the keys must be returned for both keys that
+ * have a collision.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestGetWithCollidingKeys
+( void );
+
+/**
  * Tests the SHashIsEmpty function with an empty SHash.
  *
  * @test A SHash with no elements must return a positive value.
@@ -422,6 +434,18 @@ TestPutValueIntoEmptySHash
  */
 const char *
 TestPutValueIntoPopulatedSHash
+( void );
+
+/**
+ * Tests the SHashPut function with two keys that have a hash collision.
+ *
+ * @test Adding a key that has a collision with a key already existing in the
+ * hash must return the value place into the hash.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestPutWithCollidingKeys
 ( void );
 
 /**

@@ -852,10 +852,10 @@ TestSetKeyComparatorWithEqualKeys
   if( !second_string )
     return "could not build the second test string";
 
-  first_string[0] = second_string[0] = 'm';
-  first_string[1] = second_string[1] = 'e';
+  first_string[0] = second_string[0] = 'c';
+  first_string[1] = second_string[1] = 'r';
   first_string[2] = second_string[2] = 'a';
-  first_string[3] = second_string[3] = 't';
+  first_string[3] = second_string[3] = 's';
   first_string[4] = second_string[4] = '\0';
 
   third_string = malloc( sizeof( char ) * 7 );
