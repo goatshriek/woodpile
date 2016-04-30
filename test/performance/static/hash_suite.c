@@ -14,7 +14,7 @@ main
 {
   const char *filename = "../../data/american_english_words.txt";
   clock_t city_load_time, spooky_load_time, woodpile_load_time;
-  SHash *city_hash, *spooky_hash, *woodpile_hash; 
+  shash_t *city_hash, *spooky_hash, *woodpile_hash; 
 
   // opening the dictionary file
   FILE *words = fopen( filename, "r" );
@@ -74,7 +74,7 @@ main
 static
 clock_t
 LoadSHash
-( SHash *hash, FILE *stream )
+( shash_t *hash, FILE *stream )
 {
   clock_t begin, total_clocks=0;
   char key[100];

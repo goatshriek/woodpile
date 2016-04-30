@@ -9,7 +9,7 @@
 
 size_t
 SHashCapacity
-( const SHash *hash )
+( const shash_t *hash )
 {
   if( SHashIsEmpty( hash ) )
     return 0;
@@ -19,7 +19,7 @@ SHashCapacity
 
 void *
 SHashContains
-( const SHash *hash, const void *element )
+( const shash_t *hash, const void *element )
 {
   unsigned long long i;
 
@@ -39,15 +39,15 @@ SHashContains
   return NULL;
 }
 
-SHash *
+shash_t *
 SHashCopy
-( const SHash *hash )
+( const shash_t *hash )
 {
-  SHash *copy;
+  shash_t *copy;
 
   VALIDATE_PARAMETERS( hash )
 
-  copy = malloc( sizeof( SHash ) );
+  copy = malloc( sizeof( shash_t ) );
   VALIDATE_ALLOCATION( copy )
 
   copy->values = calloc( hash->capacity * 2, sizeof( void * ) );
@@ -67,7 +67,7 @@ SHashCopy
 
 void
 SHashDestroy
-( const SHash *hash )
+( const shash_t *hash )
 {
   if( hash ){
     free( hash->values );
@@ -79,7 +79,7 @@ SHashDestroy
 
 comparator_t
 SHashElementComparator
-( const SHash *hash )
+( const shash_t *hash )
 {
   VALIDATE_PARAMETERS( hash )
 
@@ -88,7 +88,7 @@ SHashElementComparator
 
 folder_t
 SHashFolder
-( const SHash *hash )
+( const shash_t *hash )
 {
   VALIDATE_PARAMETERS( hash )
 
@@ -97,7 +97,7 @@ SHashFolder
 
 void *
 SHashGet
-( const SHash *hash, const void *key )
+( const shash_t *hash, const void *key )
 {
   unsigned long long start, i;
 
@@ -121,31 +121,31 @@ SHashGet
 
 unsigned short
 SHashIsEmpty
-( const SHash *hash )
+( const shash_t *hash )
 {
   return hash == NULL || hash->size == 0;
 }
 
 comparator_t
 SHashKeyComparator
-( const SHash *hash ){
+( const shash_t *hash ){
   VALIDATE_PARAMETERS( hash )
 
   return hash->compare_keys;
 }
 
-SHash *
+shash_t *
 SHashNew
 ( void )
 {
   return SHashNewSized( 256 );
 }
 
-SHash *
+shash_t *
 SHashNewDictionary
 ( void )
 {
-  SHash *hash;
+  shash_t *hash;
 
   hash = SHashNewSized( 256 );
   hash->compare_keys = CompareStrings;
@@ -154,13 +154,13 @@ SHashNewDictionary
   return hash;
 }
 
-SHash *
+shash_t *
 SHashNewSized
 ( size_t capacity )
 {
-  SHash *hash;
+  shash_t *hash;
 
-  hash = malloc( sizeof( SHash ) );
+  hash = malloc( sizeof( shash_t ) );
   VALIDATE_ALLOCATION( hash )
 
   hash->values = calloc( capacity * 2, sizeof( void * ) );
@@ -179,7 +179,7 @@ SHashNewSized
 
 void *
 SHashPut
-( SHash *hash, void *key, void *value )
+( shash_t *hash, void *key, void *value )
 {
   unsigned long long i, start;
   void *result;
@@ -216,7 +216,7 @@ SHashPut
 
 void *
 SHashRemove
-( SHash *hash, const void *key )
+( shash_t *hash, const void *key )
 {
   unsigned long long i, start, previous;
   void *result;
@@ -250,9 +250,9 @@ SHashRemove
   return result;
 }
 
-SHash *
+shash_t *
 SHashSetCapacity
-( SHash *hash, size_t capacity )
+( shash_t *hash, size_t capacity )
 {
   size_t old_capacity;
   unsigned long long i, j, start;
@@ -290,9 +290,9 @@ SHashSetCapacity
   return hash;
 }
 
-SHash *
+shash_t *
 SHashSetElementComparator
-( SHash *hash, comparator_t comparator )
+( shash_t *hash, comparator_t comparator )
 {
   VALIDATE_PARAMETERS( hash && comparator )
 
@@ -301,9 +301,9 @@ SHashSetElementComparator
   return hash;
 }
 
-SHash *
+shash_t *
 SHashSetFolder
-( SHash *hash, folder_t folder )
+( shash_t *hash, folder_t folder )
 {
   VALIDATE_PARAMETERS( hash && folder )
 
@@ -312,9 +312,9 @@ SHashSetFolder
   return SHashRehash( hash );
 }
 
-SHash *
+shash_t *
 SHashSetHasher
-( SHash *hash, hasher_t hasher )
+( shash_t *hash, hasher_t hasher )
 {
   VALIDATE_PARAMETERS( hash && hasher )
 
@@ -323,9 +323,9 @@ SHashSetHasher
   return SHashRehash( hash );
 }
 
-SHash *
+shash_t *
 SHashSetKeyComparator
-( SHash *hash, comparator_t comparator )
+( shash_t *hash, comparator_t comparator )
 {
   VALIDATE_PARAMETERS( hash && comparator )
 
@@ -334,9 +334,9 @@ SHashSetKeyComparator
   return SHashRehash( hash );
 }
 
-SHash *
+shash_t *
 SHashSetSeed
-( SHash *hash, unsigned long long seed )
+( shash_t *hash, unsigned long long seed )
 {
   VALIDATE_PARAMETERS( hash )
 
@@ -347,7 +347,7 @@ SHashSetSeed
 
 size_t
 SHashSize
-( const SHash *hash )
+( const shash_t *hash )
 {
   if( SHashIsEmpty( hash ) )
     return 0;
@@ -357,7 +357,7 @@ SHashSize
 
 char *
 SHashToString
-( const SHash *hash, char * ( *element_to_string )( const void * ) )
+( const shash_t *hash, char * ( *element_to_string )( const void * ) )
 {
   return NULL;
 }
@@ -365,15 +365,15 @@ SHashToString
 static
 unsigned long long
 SHashGetIndex
-( const SHash *hash, const void *key )
+( const shash_t *hash, const void *key )
 {
   return hash->fold( hash->hash( key, hash->seed ), hash->capacity )*2;
 }
 
 static
-SHash *
+shash_t *
 SHashRehash
-( SHash *hash )
+( shash_t *hash )
 {
   unsigned long long i, j, start;
   void **old_values;

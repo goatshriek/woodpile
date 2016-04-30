@@ -8,7 +8,7 @@
 #include "test/function/static/hash_suite.h"
 #include "test/helper.h"
 
-static const SHash *common_hash = NULL;
+static const shash_t *common_hash = NULL;
 
 int
 main
@@ -39,6 +39,7 @@ main
   TEST( SetElementComparatorWithNullSHash )
   TEST( SetKeyComparatorToNull )
   TEST( SetKeyComparatorWithNullSHash )
+  TEST( ToStringWithNullSHash )
 #endif
 
   TEST( ContainsDuplicateValues )
@@ -69,6 +70,9 @@ main
   TEST( Size )
   TEST( SizeWithEmptySHash )
   TEST( SizeWithNullSHash )
+  TEST( ToStringWithEmptySHash )
+  TEST( ToStringWithNullFunction )
+  TEST( ToStringWithPopulatedSHash )
 
   SHashDestroy( common_hash );
 
@@ -165,7 +169,7 @@ const char *
 TestPutNullKeyIntoSHash
 ( void )
 {
-  SHash *hash;
+  shash_t *hash;
 
   hash = BuildSHash();
   if( !hash )
@@ -192,7 +196,7 @@ const char *
 TestPutNullValueIntoSHash
 ( void )
 {
-  SHash *hash;
+  shash_t *hash;
 
   hash = BuildSHash();
   if( !hash )
@@ -232,7 +236,7 @@ const char *
 TestRemoveNullKey
 ( void )
 {
-  SHash *hash;
+  shash_t *hash;
 
   hash = BuildSHash();
   if( !hash )
@@ -253,7 +257,7 @@ const char *
 TestSetCapacityWithNullSHash
 ( void )
 {
-  SHash *hash;
+  shash_t *hash;
 
   hash = BuildSHash();
   if( !hash )
@@ -271,7 +275,7 @@ const char *
 TestSetElementComparatorToNull
 ( void )
 {
-  SHash *hash;
+  shash_t *hash;
   comparator_t previous;
 
   hash = BuildSHash();
@@ -308,7 +312,7 @@ const char *
 TestSetKeyComparatorToNull
 ( void )
 {
-  SHash *hash;
+  shash_t *hash;
   comparator_t previous;
 
   hash = BuildSHash();
@@ -341,13 +345,26 @@ TestSetKeyComparatorWithNullSHash
   return NULL;
 }
 
+const char *
+TestToStringWithNullSHash
+( void )
+{
+  if( SHashToString( NULL, NULL ) != NULL )
+    return "a non-NULL value was returned for a NULL hash and function";
+
+  if( SHashToString( NULL, ElementToString ) )
+    return "a non-NULL value was returned for a NULL hash and non-NULL function";
+
+  return NULL;
+}
+
 #endif
 
 const char *
 TestContainsDuplicateValues
 ( void )
 {
-  SHash *hash;
+  shash_t *hash;
   void *key, *value;
 
   hash = BuildSHash();
@@ -402,7 +419,7 @@ const char *
 TestCopy
 ( void )
 {
-  SHash *copy;
+  shash_t *copy;
 
   copy = SHashCopy( common_hash );
   if( !copy )
@@ -417,7 +434,7 @@ const char *
 TestCopyContents
 ( void )
 {
-  SHash *copy;
+  shash_t *copy;
 
   copy = SHashCopy( common_hash );
   if( !copy )
@@ -435,7 +452,7 @@ const char *
 TestCopyDistinct
 ( void )
 {
-  SHash *copy;
+  shash_t *copy;
 
   copy = SHashCopy( common_hash );
 
@@ -451,7 +468,7 @@ const char *
 TestCopySize
 ( void )
 {
-  SHash *copy;
+  shash_t *copy;
 
   copy = SHashCopy( common_hash );
   if( !copy )
@@ -478,7 +495,7 @@ const char *
 TestDestroyPopulatedSHash
 ( void )
 {
-  SHash *hash;
+  shash_t *hash;
 
   hash = BuildSHash();
   if( !hash )
@@ -493,7 +510,7 @@ const char *
 TestGetFromEmptySHash
 ( void )
 {
-  SHash *hash;
+  shash_t *hash;
 
   hash = SHashNewDictionary();
   if( SHashGet( hash, "1st" ) != NULL )
@@ -520,7 +537,7 @@ const char *
 TestIsEmptyWithEmptySHash
 ( void )
 {
-  SHash *hash;
+  shash_t *hash;
 
   hash = SHashNew();
   if( !hash )
@@ -558,7 +575,7 @@ const char *
 TestNew
 ( void )
 {
-  SHash *hash;
+  shash_t *hash;
 
   hash = SHashNew();
   if( !hash )
@@ -571,7 +588,7 @@ const char *
 TestPutExistingKeyIntoFullSHash
 ( void )
 {
-  SHash *hash;
+  shash_t *hash;
   const char *result;
 
   hash = BuildFullSHash();
@@ -600,7 +617,7 @@ const char *
 TestPutNewKeyIntoFullSHash
 ( void )
 {
-  SHash *hash;
+  shash_t *hash;
 
   hash = BuildFullSHash();
   if( !hash )
@@ -621,7 +638,7 @@ const char *
 TestPutValueIntoEmptySHash
 ( void )
 {
-  SHash *hash;
+  shash_t *hash;
   void *key = "Test Key";
   void *value = "Test Value";
 
@@ -644,7 +661,7 @@ const char *
 TestPutValueIntoPopulatedSHash
 ( void )
 {
-  SHash *hash;
+  shash_t *hash;
   void *key = "Test Key";
   void *value = "Test Value";
 
@@ -667,7 +684,7 @@ const char *
 TestRemove
 ( void )
 {
-  SHash *hash;
+  shash_t *hash;
   void *value;
 
   hash = BuildSHash();
@@ -691,7 +708,7 @@ const char *
 TestRemoveNonExistentKey
 ( void )
 {
-  SHash *hash;
+  shash_t *hash;
 
   hash = BuildSHash();
   if( !hash )
@@ -709,7 +726,7 @@ const char *
 TestSetCapacity
 ( void )
 {
-  SHash *hash;
+  shash_t *hash;
 
   hash = BuildSHash();
   if( !hash )
@@ -740,7 +757,7 @@ const char *
 TestSetElementComparator
 ( void )
 {
-  SHash *hash;
+  shash_t *hash;
   char *element;
 
   element = malloc( sizeof( char ) * 7 );
@@ -780,7 +797,7 @@ const char *
 TestSetKeyComparator
 ( void )
 {
-  SHash *hash;
+  shash_t *hash;
   char *new_element = "Fourth Place";
   char *new_key = "4th";
 
@@ -821,6 +838,74 @@ const char *
 TestSetKeyComparatorWithEqualKeys
 ( void )
 {
+  char *first_string = NULL;
+  char *second_string = NULL;
+  char *third_string = NULL;
+  shash_t *hash = NULL;
+  size_t previous_size;
+
+  first_string = malloc( sizeof( char ) * 5 );
+  if( !first_string )
+    return "could not build the first test string";
+
+  second_string = malloc( sizeof( char ) * 5 );
+  if( !second_string )
+    return "could not build the second test string";
+
+  first_string[0] = second_string[0] = 'm';
+  first_string[1] = second_string[1] = 'e';
+  first_string[2] = second_string[2] = 'a';
+  first_string[3] = second_string[3] = 't';
+  first_string[4] = second_string[4] = '\0';
+
+  third_string = malloc( sizeof( char ) * 7 );
+  if( !third_string )
+    return "could not build the third test string";
+  third_string[0] = 'c';
+  third_string[1] = 'h';
+  third_string[2] = 'e';
+  third_string[3] = 'e';
+  third_string[4] = 's';
+  third_string[5] = 'e';
+  third_string[6] = '\0';
+
+  hash = SHashNew();
+  if( !hash )
+    return "could not build a new hash";
+
+  if( !SHashPut( hash, first_string, "first string value" ) )
+    return "could not add the first string";
+
+  if( !SHashPut( hash, second_string, "second string value" ) )
+    return "could not add the second string";
+
+  if( !SHashPut( hash, third_string, "third string value ") )
+    return "could not add the third string";
+
+  previous_size = SHashSize( hash );
+
+  if( SHashSetKeyComparator( hash, CompareStrings ) != hash )
+    return "the key comparator could not be changed";
+
+  if( previous_size-1 == SHashSize( hash ) )
+    return "the size was not decreased by one after a comparator change";
+
+  if( !SHashGet( hash, first_string ) || !SHashGet( hash, second_string) )
+    return "the keys no longer existed in the hash";
+
+  printf( "%s\n", SHashGet( hash, first_string ) );
+  printf( "%s\n", SHashGet( hash, second_string ) );
+
+  if( strcmp( "first string value", SHashGet( hash, first_string ) ) != 0 ){
+    if( strcmp( "second string value", SHashGet( hash, first_string ) ) != 0 )
+      return "the value was not mapped to both keys 1";
+    if( strcmp( "second string value", SHashGet( hash, second_string ) ) != 0 )
+      return "the value was not mapped to both keys 2";
+  } else {
+    if( strcmp( "first string value", SHashGet( hash, second_string ) ) != 0 )
+      return "the value was not mapped to both keys 3";
+  }
+
   return NULL;
 }
 
@@ -838,7 +923,7 @@ const char *
 TestSizeWithEmptySHash
 ( void )
 {
-  SHash *hash;
+  shash_t *hash;
 
   hash = SHashNew();
   if( !hash )
@@ -859,5 +944,53 @@ TestSizeWithNullSHash
   if( SHashSize( NULL ) != 0 )
     return "0 was not returned for a NULL hash";
 
+  return NULL;
+}
+
+/**
+ * Tests the SHashToString function an empty SHash.
+ *
+ * @test An empty SHash must return a string of "{}";
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestToStringWithEmptySHash
+( void )
+{
+  return NULL;
+}
+
+/**
+ * Tests the SHashToString function with a NULL element_to_string function.
+ *
+ * @test The function must return a NULL string, regardless of whether the
+ * hash is NULL or non-NULL.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestToStringWithNullFunction
+( void )
+{
+  return NULL;
+}
+
+/**
+ * Tests the SHashToString function with a populated SHash.
+ *
+ * @test The function must return a string starting and ending with '{' and '}'
+ * respectively. The string representation of each key must exist in the string.
+ * The string representation of each value must exist in the string immediately
+ * after the key's representation, separated only by an '=' character. A ','
+ * immediately followed by a ' ' character must exist between each key and value
+ * pair.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestToStringWithPopulatedSHash
+( void )
+{
   return NULL;
 }

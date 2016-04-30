@@ -4,6 +4,18 @@
 #include "lib/str.h"
 #include "test/helper/fixture.h"
 
+unsigned long long
+CollisionHash
+( const void *data, unsigned long long seed )
+{
+  if( strcmp( data, "collision" ) == 0 )
+    return 0xbabee;
+  else if( strcmp( data, "crash" ) == 0 )
+    return 0xbabee;
+  else
+    return WoodpileHash( data, seed );
+}
+
 char *
 ElementToString
 ( const void *element )

@@ -9,7 +9,7 @@
 #include <woodpile/static/hash.h>
 
 /** the Static Hash container */
-struct SHash {
+struct shash_t {
   size_t capacity; /**< the number of elements the hash can hold */
   comparator_t compare_keys; /**< the key comparison function */
   comparator_t compare_elements; /**< the element comparison function */
@@ -31,7 +31,7 @@ struct SHash {
 static
 unsigned long long
 SHashGetIndex
-( const SHash *hash, const void *key );
+( const shash_t *hash, const void *key );
 
 /**
  * Rehashes the keys in an SHash. This is required whenever changes are made
@@ -46,8 +46,8 @@ SHashGetIndex
   * @return the SHash that was rehashed
  */
 static
-SHash *
+shash_t *
 SHashRehash
-( SHash *hash );
+( shash_t *hash );
 
 #endif

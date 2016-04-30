@@ -22,6 +22,6 @@
 static
 clock_t
 LoadSHash
-( SHash *hash, FILE *stream );
+( shash_t *hash, FILE *stream );
 
 #endif

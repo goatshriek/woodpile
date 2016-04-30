@@ -81,7 +81,7 @@ BuildDSplay
  *
  * @return a new SHash or NULL on failure
  */
-SHash *
+shash_t *
 BuildFullSHash
 ( void );
 
@@ -102,7 +102,7 @@ BuildFullSHash
  *
  * @return a new SHash or NULL on failure.
  */
-SHash *
+shash_t *
 BuildSHash
 ( void );
 

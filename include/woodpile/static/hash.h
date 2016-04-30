@@ -25,8 +25,8 @@
  * depends on pending implementation
  */
 
-struct SHash;
-typedef struct SHash SHash;
+struct shash_t;
+typedef struct shash_t shash_t;
 
 /**
  * Gets the current capacity of the SHash.
@@ -37,7 +37,7 @@ typedef struct SHash SHash;
  */
 size_t
 SHashCapacity
-( const SHash *hash );
+( const shash_t *hash );
 
 /**
  * Searches a SHash for a given element. If the element exists in the hash, one
@@ -56,7 +56,7 @@ SHashCapacity
  */
 void *
 SHashContains
-( const SHash *hash, const void *element );
+( const shash_t *hash, const void *element );
 
 /**
  * Creates a copy of a SHash. Elements within the hash are not copied, meaning
@@ -68,9 +68,9 @@ SHashContains
  *
  * @return the copy of the original SHash or NULL on failure
  */
-SHash *
+shash_t *
 SHashCopy
-( const SHash *hash );
+( const shash_t *hash );
 
 /**
  * Destroys a SHash. Does not affect the elements stored in the hash.
@@ -79,7 +79,7 @@ SHashCopy
  */
 void
 SHashDestroy
-( const SHash *hash );
+( const shash_t *hash );
 
 /**
  * Gets the comparator used to compare elements in the hash.
@@ -90,7 +90,7 @@ SHashDestroy
  */
 comparator_t
 SHashElementComparator
-( const SHash *hash );
+( const shash_t *hash );
 
 /**
  * Gets the folding function used in the hash.
@@ -101,7 +101,7 @@ SHashElementComparator
  */
 folder_t
 SHashFolder
-( const SHash *hash );
+( const shash_t *hash );
 
 /**
  * Retrieves the value mapped to a given key. If the key does not exist in the
@@ -115,7 +115,7 @@ SHashFolder
  */
 void *
 SHashGet
-( const SHash *hash, const void *key );
+( const shash_t *hash, const void *key );
 
 /**
  * Checks a SHash to see if it's empty.
@@ -126,7 +126,7 @@ SHashGet
  */
 unsigned short
 SHashIsEmpty
-( const SHash *hash );
+( const shash_t *hash );
 
 /**
  * Gets the comparator used to compare keys in the hash.
@@ -137,7 +137,7 @@ SHashIsEmpty
  */
 comparator_t
 SHashKeyComparator
-( const SHash *hash );
+( const shash_t *hash );
 
 /**
  * Creates a new SHash. The default capacity of the hash is 256. If the hashing
@@ -148,7 +148,7 @@ SHashKeyComparator
  *
  * @return a new SHash or NULL on failure
  */
-SHash *
+shash_t *
 SHashNew
 ( void );
 
@@ -158,7 +158,7 @@ SHashNew
  *
  * @return a new SHash or NULL on failure
  */
-SHash *
+shash_t *
 SHashNewDictionary
 ( void );
 
@@ -172,7 +172,7 @@ SHashNewDictionary
  *
  * @return a new SHash of the provided capacity, or NULL on failure
  */
-SHash *
+shash_t *
 SHashNewSized
 ( size_t capacity );
 
@@ -192,7 +192,7 @@ SHashNewSized
  */
 void *
 SHashPut
-( SHash *hash, void *key, void *value );
+( shash_t *hash, void *key, void *value );
 
 /**
  * Removes the element mapped to the given key. If there is no such element,
@@ -205,7 +205,7 @@ SHashPut
  */
 void *
 SHashRemove
-( SHash *hash, const void *key );
+( shash_t *hash, const void *key );
 
 /**
  * Changes a SHash's capacity, specifically the number of buckets.
@@ -215,9 +215,9 @@ SHashRemove
  *
  * @return the SHash having been resized
  */
-SHash *
+shash_t *
 SHashSetCapacity
-( SHash *hash, size_t capacity );
+( shash_t *hash, size_t capacity );
 
 /**
  * Sets the comparator used to compare elements held in a StaticHash. This
@@ -229,9 +229,9 @@ SHashSetCapacity
  *
  * @return the SHash with the updated comparator
  */
-SHash *
+shash_t *
 SHashSetElementComparator
-( SHash *hash, comparator_t comparator );
+( shash_t *hash, comparator_t comparator );
 
 /**
  * Sets the folding function for an SHash.
@@ -239,9 +239,9 @@ SHashSetElementComparator
  * @param hash The SHash to update. Must not be NULL.
  * @param folder The folding function to use. Must not be NULL.
  */
-SHash *
+shash_t *
 SHashSetFolder
-( SHash *hash, folder_t folder );
+( shash_t *hash, folder_t folder );
 
 /**
  * Sets the hashing function for an SHash.
@@ -249,9 +249,9 @@ SHashSetFolder
  * @param hash The SHash to update. Must not be NULL.
  * @param hasher The hashing function to use. Must not be NULL.
  */
-SHash *
+shash_t *
 SHashSetHasher
-( SHash *hash, hasher_t hasher );
+( shash_t *hash, hasher_t hasher );
 
 /**
  * Sets the comparator used to compare keys in a SHash. This comparator is used
@@ -263,9 +263,9 @@ SHashSetHasher
  *
  * @return the SHash with the updated comparator
  */
-SHash *
+shash_t *
 SHashSetKeyComparator
-( SHash *hash, comparator_t comparator );
+( shash_t *hash, comparator_t comparator );
 
 /**
  * Sets the seed used for the SHash.
@@ -275,9 +275,9 @@ SHashSetKeyComparator
  *
  * @return the SHash with the updated seed
  */
-SHash *
+shash_t *
 SHashSetSeed
-( SHash *hash, unsigned long long seed );
+( shash_t *hash, unsigned long long seed );
 
 /**
  * Gets the number of elements in a SHash. An empty hash will return 0.
@@ -288,7 +288,7 @@ SHashSetSeed
  */
 size_t
 SHashSize
-( const SHash *hash );
+( const shash_t *hash );
 
 /**
  * Creates a string representation of the given SHash, using the provided
@@ -303,6 +303,6 @@ SHashSize
  */
 char *
 SHashToString
-( const SHash *hash, char * ( *element_to_string )( const void * ) );
+( const shash_t *hash, char * ( *element_to_string )( const void * ) );
 
 #endif

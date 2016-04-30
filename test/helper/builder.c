@@ -56,11 +56,11 @@ BuildDSplay
   return DSplayAdd( splay, "Mike" );
 }
 
-SHash *
+shash_t *
 BuildFullSHash
 ( void )
 {
-  SHash *hash;
+  shash_t *hash;
 
   hash = SHashNewDictionary();
   if( !hash )
@@ -81,11 +81,11 @@ BuildFullSHash
   return hash;
 }
 
-SHash *
+shash_t *
 BuildSHash
 ( void )
 {
-  SHash *hash;
+  shash_t *hash;
 
   hash = SHashNewDictionary();
   if( !hash )
