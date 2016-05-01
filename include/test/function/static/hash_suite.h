@@ -440,7 +440,8 @@ TestPutValueIntoPopulatedSHash
  * Tests the SHashPut function with two keys that have a hash collision.
  *
  * @test Adding a key that has a collision with a key already existing in the
- * hash must return the value place into the hash.
+ * hash must return the value place into the hash. The size of the hash must
+ * increase by one after the call to the function.
  *
  * @return NULL on completion or a string describing the failure
  */

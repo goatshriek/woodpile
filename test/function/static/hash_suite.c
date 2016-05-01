@@ -53,6 +53,7 @@ main
   TEST( DestroyPopulatedSHash )
   TEST( GetFromEmptySHash )
   TEST( GetFromPopulatedSHash )
+  TEST( GetWithCollidingKeys )
   TEST( IsEmptyWithEmptySHash )
   TEST( IsEmptyWithPopulatedSHash )
   TEST( IsEmptyWithNullSHash )
@@ -61,6 +62,7 @@ main
   TEST( PutNewKeyIntoFullSHash )
   TEST( PutValueIntoEmptySHash )
   TEST( PutValueIntoPopulatedSHash )
+  TEST( PutWithCollidingKeys )
   TEST( Remove )
   TEST( RemoveNonExistentKey )
   TEST( SetCapacity )
@@ -534,6 +536,30 @@ TestGetFromPopulatedSHash
 }
 
 const char *
+TestGetWithCollidingKeys
+( void )
+{
+  shash_t *hash;
+
+  hash = BuildSHash();
+  if( !hash )
+    return "could not build a populated hash";
+
+  if( SHashSetHasher( hash, CollisionHash ) != hash )
+    return "could not update the hashing function";
+
+  SHashPut( hash, "crash", "the value mapped to crash" );
+  SHashPut( hash, "collision", "the value mapped to collision" );
+
+  ASSERT_STRINGS_EQUAL( "the value mapped to crash", SHashGet(hash, "crash" ), "the value mapped to crash was not correct" )
+  ASSERT_STRINGS_EQUAL( "the value mapped to collision", SHashGet(hash, "collision" ), "the value mapped to collision was not correct" )
+
+  SHashDestroy( hash );
+
+  return NULL;
+}
+
+const char *
 TestIsEmptyWithEmptySHash
 ( void )
 {
@@ -674,6 +700,62 @@ TestPutValueIntoPopulatedSHash
 
   if( SHashGet( hash, key ) != value )
     return "could not retrieve a newly added value";
+
+  SHashDestroy( hash );
+
+  return NULL;
+}
+
+const char *
+TestPutWithCollidingKeys
+( void )
+{
+  char *crash, *collision;
+  shash_t *hash;
+  size_t previous_size;
+
+  crash = malloc( sizeof( char ) * 7 );
+  if( !crash )
+    return "could not allocate memory for the crash string";
+  crash[0] = 'v';
+  crash[1] = 'a';
+  crash[2] = 'l';
+  crash[3] = 'u';
+  crash[4] = 'e';
+  crash[5] = '1';
+  crash[6] = '\0';
+
+  collision = malloc( sizeof( char ) * 7 );
+  if( !collision )
+    return "could not allocate memory for the collision string";
+  crash[0] = 'v';
+  crash[1] = 'a';
+  crash[2] = 'l';
+  crash[3] = 'u';
+  crash[4] = 'e';
+  crash[5] = '2';
+  crash[6] = '\0';
+
+  hash = BuildSHash();
+  if( !hash )
+    return "could not build a populated hash";
+
+  if( SHashSetHasher( hash, CollisionHash ) != hash )
+    return "could not update the hashing function";
+
+  previous_size = SHashSize( hash );
+
+  if( SHashPut( hash, "crash", crash ) != crash )
+    return "could not put the first value into the hash";
+
+  if( previous_size+1 != SHashSize( hash ) )
+    return "the size was not increased by one after the first insertion";
+
+  if( SHashPut( hash, "collision", collision ) != collision )
+    return "could not put the second value into the hash";
+
+  if( previous_size+2 != SHashSize( hash ) )
+    return "the size was not increased by one after the second insertion";
 
   SHashDestroy( hash );
 
@@ -822,18 +904,6 @@ TestSetKeyComparator
   return NULL;
 }
 
-/**
- * Tests the SHashSetKeyComparator function with an SHash having two keys that
- * are considered equal by the new comparator.
- *
- * @test Changing the key comparator in an SHash with two keys that are
- * considered identical by the new comparator must return the SHash. The size
- * of the hash must be reduced by one after the call. Calling SHashGet with one
- * of the keys must return the element mapped to the key. Calling SHashGet with
- * the other key must return NULL.
- *
- * @return NULL on completion or a string describing the failure
- */
 const char *
 TestSetKeyComparatorWithEqualKeys
 ( void )
@@ -852,10 +922,10 @@ TestSetKeyComparatorWithEqualKeys
   if( !second_string )
     return "could not build the second test string";
 
-  first_string[0] = second_string[0] = 'c';
-  first_string[1] = second_string[1] = 'r';
+  first_string[0] = second_string[0] = 'm';
+  first_string[1] = second_string[1] = 'e';
   first_string[2] = second_string[2] = 'a';
-  first_string[3] = second_string[3] = 's';
+  first_string[3] = second_string[3] = 't';
   first_string[4] = second_string[4] = '\0';
 
   third_string = malloc( sizeof( char ) * 7 );
