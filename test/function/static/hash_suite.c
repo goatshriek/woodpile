@@ -37,6 +37,8 @@ main
   TEST( SetCapacityWithNullSHash)
   TEST( SetElementComparatorToNull )
   TEST( SetElementComparatorWithNullSHash )
+  TEST( SetHasherWithNullHasher )
+  TEST( SetHasherWithNullSHash )
   TEST( SetKeyComparatorToNull )
   TEST( SetKeyComparatorWithNullSHash )
   TEST( ToStringWithNullSHash )
@@ -306,6 +308,46 @@ TestSetElementComparatorWithNullSHash
 
   if( SHashSetElementComparator( NULL, ComparePointers ) != NULL )
     return "a non-NULL value was not returned for a NULL hash";
+
+  return NULL;
+}
+
+const char *
+TestSetHasherWithNullHasher
+( void )
+{
+  hasher_t hasher;
+  shash_t *hash;
+
+  hash = BuildSHash();
+  if( !hash )
+    return "could not build a populated hash";
+
+  if( SHashSetHasher( NULL, NULL ) != NULL )
+    return "NULL was not returned for a NULL hash and hasher";
+
+  hasher = SHashGetHasher( hash );
+
+  if( SHashSetHasher( hash, NULL) != NULL )
+    return "NULL was not returned for a NULL hasher";
+
+  if( SHashGetHasher( hash ) != hasher )
+    return "the hasher was changed after a call with a NULL hasher";
+
+  SHashDestroy( hash );
+
+  return NULL;
+}
+
+const char *
+TestSetHasherWithNullSHash
+( void )
+{
+  if( SHashSetHasher( NULL, NULL ) != NULL )
+    return "NULL was not returned for a NULL hash and hasher";
+
+  if( SHashSetHasher( NULL, NullHash ) != NULL )
+    return "NULL was not returned for a NULL hash and non-NULL hasher";
 
   return NULL;
 }

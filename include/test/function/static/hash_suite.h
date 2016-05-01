@@ -165,6 +165,31 @@ TestSetElementComparatorWithNullSHash
 ( void );
 
 /**
+ * Tests the SHashSetHasher function with a NULL hashing function.
+ *
+ * @test Setting to a NULL hasher must return NULL, regardless of whether the
+ * SHash is NULL or non-NULL. The hash must have the same hashing function as
+ * it did before the call.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestSetHasherWithNullHasher
+( void );
+
+/**
+ * Tests the SHashSetHasher function with a NULL SHash.
+ *
+ * @test Setting the hasher on a NULL SHash must return NULL whether the hasher
+ * is NULL or non-NULL.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestSetHasherWithNullSHash
+( void );
+
+/**
  * Tests the SHashSetKeyComparator function with a NULL comparator.
  *
  * @test Setting to a NULL comparator must return NULL. The hash must have the
@@ -497,6 +522,32 @@ TestSetCapacity
  */
 const char *
 TestSetElementComparator
+( void );
+
+/**
+ * Tests the SHashSetHasher function.
+ *
+ * @test After setting the hasher function on the hash, the size of the hash
+ * must not change. All keys in the hash must still be mapped to the same value
+ * as before the change, using the SHashGet function.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestSetHasher
+( void );
+
+/**
+ * Tests the SHashSetHasher function with a function that has new collisions.
+ *
+ * @test After setting the hasher function to one that collides for two keys,
+ * the size of the hash must not have changed. Each of the keys with colliding
+ * hash values must still be mapped to the same value as before the change.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestSetHasherWithCollisions
 ( void );
 
 /**
