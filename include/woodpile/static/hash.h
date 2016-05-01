@@ -248,6 +248,8 @@ SHashSetFolder
  *
  * @param hash The SHash to update. Must not be NULL.
  * @param hasher The hashing function to use. Must not be NULL.
+ *
+ * @return hash
  */
 shash_t *
 SHashSetHasher
@@ -261,7 +263,7 @@ SHashSetHasher
  * @param hash The SHash to update with the comparator. Must not be NULL.
  * @param comparator The new comparator to use for keys. Must not be NULL.
  *
- * @return the SHash with the updated comparator
+ * @return hash with the updated comparator
  */
 shash_t *
 SHashSetKeyComparator

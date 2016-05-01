@@ -69,6 +69,8 @@ main
   TEST( RemoveNonExistentKey )
   TEST( SetCapacity )
   TEST( SetElementComparator )
+  TEST( SetHasher )
+  TEST( SetHasherWithCollisions )
   TEST( SetKeyComparator )
   TEST( SetKeyComparatorWithEqualKeys )
   TEST( Size )
@@ -911,6 +913,71 @@ TestSetElementComparator
 
   if( SHashContains( hash, element ) )
     return "changing the element comparator did not result in different behavior";
+
+  SHashDestroy( hash );
+
+  return NULL;
+}
+
+const char *
+TestSetHasher
+( void )
+{
+  shash_t *hash;
+  size_t previous_size;
+
+  hash = BuildSHash();
+  if( !hash )
+    return "could not build a populated hash";
+
+  previous_size = SHashSize( hash );
+
+  if( SHashSetHasher( hash, NullHash ) != hash )
+    return "the hasher could not be changed";
+
+  ASSERT_STRINGS_EQUAL( "First", SHashGet( hash, "1st" ), "the key-value mappings were changed" )
+  ASSERT_STRINGS_EQUAL( "Second", SHashGet( hash, "2nd" ), "the key-value mappings were changed" )
+  ASSERT_STRINGS_EQUAL( "Third", SHashGet( hash, "3rd" ), "the key-value mappings were changed" )
+  ASSERT_STRINGS_EQUAL( "Fourth", SHashGet( hash, "4th" ), "the key-value mappings were changed" )
+  ASSERT_STRINGS_EQUAL( "Fifth", SHashGet( hash, "5th" ), "the key-value mappings were changed" )
+  ASSERT_STRINGS_EQUAL( "Sixth", SHashGet( hash, "6th" ), "the key-value mappings were changed" )
+  ASSERT_STRINGS_EQUAL( "Seventh", SHashGet( hash, "7th" ), "the key-value mappings were changed" )
+  ASSERT_STRINGS_EQUAL( "Eighth", SHashGet( hash, "8th" ), "the key-value mappings were changed" )
+  ASSERT_STRINGS_EQUAL( "Ninth", SHashGet( hash, "9th" ), "the key-value mappings were changed" )
+  ASSERT_STRINGS_EQUAL( "Tenth", SHashGet( hash, "10th" ), "the key-value mappings were changed" )
+
+  if( SHashSize( hash ) != previous_size )
+    return "the size of the hash changed after changing the hasher";
+
+  SHashDestroy( hash );
+
+  return NULL;
+}
+
+const char *
+TestSetHasherWithCollisions
+( void )
+{
+  shash_t *hash;
+  size_t previous_size;
+
+  hash = SHashNewDictionary();
+  if( !hash )
+    return "could not build a new hash";
+
+  SHashPut( hash, "crash", "the value for crash" );
+  SHashPut( hash, "collision", "the value for collision" );
+
+  previous_size = SHashSize( hash );
+
+  if( SHashSetHasher( hash, CollisionHash ) != hash )
+    return "could not change the hashing value";
+
+  ASSERT_STRINGS_EQUAL( "the value for crash", SHashGet( hash, "crash" ), "one of the collided keys no longer returned the correct value" )
+  ASSERT_STRINGS_EQUAL( "the value for collision", SHashGet( hash, "collision" ), "one of the collided keys no longer returned the correct value" )
+
+  if( SHashSize( hash )  != previous_size )
+    return "the size of the hash changed";
 
   SHashDestroy( hash );
 
