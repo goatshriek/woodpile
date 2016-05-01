@@ -71,6 +71,7 @@ main
   TEST( SetElementComparator )
   TEST( SetHasher )
   TEST( SetHasherWithCollisions )
+  TEST( SetHasherWithEmptySHash )
   TEST( SetKeyComparator )
   TEST( SetKeyComparatorWithEqualKeys )
   TEST( Size )
@@ -978,6 +979,27 @@ TestSetHasherWithCollisions
 
   if( SHashSize( hash )  != previous_size )
     return "the size of the hash changed";
+
+  SHashDestroy( hash );
+
+  return NULL;
+}
+
+const char *
+TestSetHasherWithEmptySHash
+( void )
+{
+  shash_t *hash;
+
+  hash = SHashNew();
+  if( !hash )
+    return "could not build a new hash";
+
+  if( SHashSetHasher( hash, NullHash ) != hash )
+    return "the hasher could not be set on an empty hash";
+
+  if( !SHashIsEmpty( hash ) )
+    return "after setting the hasher the hash was no longer empty";
 
   SHashDestroy( hash );
 

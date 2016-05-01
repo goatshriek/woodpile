@@ -551,6 +551,18 @@ TestSetHasherWithCollisions
 ( void );
 
 /**
+ * Tests the SHashSetHasher function with an empty SHash.
+ *
+ * @test After setting the hash function on the hash, the hash must still be
+ * empty.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestSetHasherWithEmptySHash
+( void );
+
+/**
  *  Tests the SHashSetKeyComparator function.
  *
  *  @test After setting the comparator to a function comparing equality by a
