@@ -7,4 +7,6 @@ EXPORTS
   BuildSHash                   @4
   BuildSQueue                  @5
   BuildSStack                  @6
-  ElementToString              @7
+  CollisionHash                @7
+  ElementToString              @8
+  NullHash                     @9

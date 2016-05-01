@@ -931,6 +931,7 @@ TestSetKeyComparatorWithEqualKeys
   third_string = malloc( sizeof( char ) * 7 );
   if( !third_string )
     return "could not build the third test string";
+
   third_string[0] = 'c';
   third_string[1] = 'h';
   third_string[2] = 'e';
@@ -942,6 +943,9 @@ TestSetKeyComparatorWithEqualKeys
   hash = SHashNew();
   if( !hash )
     return "could not build a new hash";
+
+  SHashSetHasher( hash, WoodpileHash );
+  SHashSetKeyComparator( hash, ComparePointers );
 
   if( !SHashPut( hash, first_string, "first string value" ) )
     return "could not add the first string";
@@ -957,14 +961,11 @@ TestSetKeyComparatorWithEqualKeys
   if( SHashSetKeyComparator( hash, CompareStrings ) != hash )
     return "the key comparator could not be changed";
 
-  if( previous_size-1 == SHashSize( hash ) )
+  if( SHashSize( hash ) != previous_size-1 )
     return "the size was not decreased by one after a comparator change";
 
   if( !SHashGet( hash, first_string ) || !SHashGet( hash, second_string) )
     return "the keys no longer existed in the hash";
-
-  printf( "%s\n", SHashGet( hash, first_string ) );
-  printf( "%s\n", SHashGet( hash, second_string ) );
 
   if( strcmp( "first string value", SHashGet( hash, first_string ) ) != 0 ){
     if( strcmp( "second string value", SHashGet( hash, first_string ) ) != 0 )
