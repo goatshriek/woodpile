@@ -73,6 +73,7 @@ main
   TEST( SetHasherWithCollisions )
   TEST( SetHasherWithEmptySHash )
   TEST( SetKeyComparator )
+  TEST( SetKeyComparatorWithEmptySHash )
   TEST( SetKeyComparatorWithEqualKeys )
   TEST( Size )
   TEST( SizeWithEmptySHash )
@@ -1029,6 +1030,27 @@ TestSetKeyComparator
 
   if( SHashPut( hash, new_key, new_element ) != new_element )
     return "the key comparator was not changed after being unset";
+
+  SHashDestroy( hash );
+
+  return NULL;
+}
+
+const char *
+TestSetKeyComparatorWithEmptySHash
+( void )
+{
+  shash_t *hash;
+
+  hash = SHashNew();
+  if( !hash )
+    return "could not build a new hash";
+
+  if( SHashSetKeyComparator( hash, CompareStrings ) != hash )
+    return "the key comparator could not be set";
+
+  if( !SHashIsEmpty( hash ) )
+    return "after the setting of the comparator the hash was no longer empty";
 
   SHashDestroy( hash );
 

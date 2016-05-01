@@ -579,6 +579,18 @@ TestSetKeyComparator
 ( void );
 
 /**
+ * Tests the SHashSetKeyComparator function with an empty SHash
+ *
+ * @test Changing the key comparator in an empty SHash must return the hash
+ * itself. The hash must still be empty after the call.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestSetKeyComparatorWithEmptySHash
+( void );
+
+/**
  * Tests the SHashSetKeyComparator function with an SHash having two keys that
  * are considered equal by the new comparator.
  *
