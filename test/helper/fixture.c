@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
-
+#include <woodpile/hasher.h>
 #include "lib/str.h"
 #include "test/helper/fixture.h"
 

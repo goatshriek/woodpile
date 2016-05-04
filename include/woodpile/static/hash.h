@@ -118,6 +118,17 @@ SHashGet
 ( const shash_t *hash, const void *key );
 
 /**
+ * Retrieves the hashing function being used to hash keys.
+ *
+ * @param hash the SHash to get the hasher of. Must not be NULL.
+ *
+ * @return the hasher used by the hash
+ */
+hasher_t
+SHashGetHasher
+( const shash_t *hash );
+
+/**
  * Checks a SHash to see if it's empty.
  *
  * @param hash the SHash to check

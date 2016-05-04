@@ -119,6 +119,15 @@ SHashGet
   return NULL;
 }
 
+hasher_t
+SHashGetHasher
+( const shash_t *hash )
+{
+  VALIDATE_PARAMETERS( hash )
+
+  return hash->hash;
+}
+
 unsigned short
 SHashIsEmpty
 ( const shash_t *hash )
