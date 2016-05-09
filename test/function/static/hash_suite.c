@@ -5,6 +5,7 @@
 #include <woodpile/hasher.h>
 #include <woodpile/static/hash.h>
 #include "lib/validate.h"
+#include "test/function/common_suite.h"
 #include "test/function/static/hash_suite.h"
 #include "test/helper.h"
 
@@ -56,9 +57,9 @@ main
   TEST( GetFromEmptySHash )
   TEST( GetFromPopulatedSHash )
   TEST( GetWithCollidingKeys )
-  TEST( IsEmptyWithEmptySHash )
-  TEST( IsEmptyWithPopulatedSHash )
-  TEST( IsEmptyWithNullSHash )
+  TEST( IsEmptyWithEmpty )
+  TEST( IsEmptyWithNull )
+  TEST( IsEmptyWithPopulated )
   TEST( New )
   TEST( PutExistingKeyIntoFullSHash )
   TEST( PutNewKeyIntoFullSHash )
