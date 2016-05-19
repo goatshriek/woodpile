@@ -7,6 +7,7 @@ woodpile_ROOT_DIR = $(top_srcdir)/../..
 vpath %.h $(woodpile_ROOT_DIR)/include
 vpath %.c $(woodpile_ROOT_DIR)
 
+
 # header files
 include_HEADERS = $(woodpile_ROOT_DIR)/include/woodpile.h
 
@@ -133,7 +134,7 @@ test_function_static_hash_suite_SOURCES = test/function/common_suite.c \
                                           test/function/static/hash_suite.c
 test_function_static_hash_suite_LDADD = $(test_libraries)
 test_function_static_hash_suite_CFLAGS = -D TEST_TYPE=shash_t -D TEST_PREFIX=SHash $(AM_CFLAGS)
-test_function_static_hash_suite_SHORTNAME = tfshash
+#test_function_static_hash_suite_SHORTNAME = tfshash
 
 test_function_static_queue_suite_SOURCES = test/function/static/queue_suite.c
 test_function_static_queue_suite_LDADD = $(test_libraries)
