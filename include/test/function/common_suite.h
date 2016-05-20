@@ -14,9 +14,13 @@
 //#define TEST_PREFIX SHash
 
 # ifdef TEST_TYPE
-#  ifdef TEST_PREFIX
+#  ifdef TEST_FUNCTION_NEW
+#   ifdef TEST_FUNCTION_DESTROY
+#    ifdef TEST_FUNCTION_IS_EMPTY
+#     ifdef TEST_FUNCTION_BUILD
 
-typedef TEST_TYPE test_struct_t;
+struct TEST_TYPE;
+typedef struct TEST_TYPE test_struct_t;
 
 /**
  * Tests the IsEmpty function with an empty structure.
@@ -51,6 +55,9 @@ const char *
 TestIsEmptyWithPopulated
 ( void );
 
+#     endif
+#    endif
+#   endif
 #  endif
 # endif
 #endif

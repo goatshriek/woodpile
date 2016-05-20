@@ -133,8 +133,12 @@ test_function_dynamic_tree_splay_iterator_suite_LDADD = $(test_libraries)
 test_function_static_hash_suite_SOURCES = test/function/common_suite.c \
                                           test/function/static/hash_suite.c
 test_function_static_hash_suite_LDADD = $(test_libraries)
-test_function_static_hash_suite_CFLAGS = -D TEST_TYPE=shash_t -D TEST_PREFIX=SHash $(AM_CFLAGS)
-#test_function_static_hash_suite_SHORTNAME = tfshash
+test_function_static_hash_suite_CFLAGS = -D TEST_TYPE=shash_t \
+                                         -D TEST_FUNCTION_NEW=SHashNew \
+                                         -D TEST_FUNCTION_BUILD=BuildSHash \
+                                         -D TEST_FUNCTION_IS_EMPTY=SHashIsEmpty \
+                                         -D TEST_FUNCTION_DESTROY=SHashDestroy \
+                                         $(AM_CFLAGS)
 
 test_function_static_queue_suite_SOURCES = test/function/static/queue_suite.c
 test_function_static_queue_suite_LDADD = $(test_libraries)

@@ -9,14 +9,14 @@ TestIsEmptyWithEmpty
 {
   test_struct_t *structure;
 
-  structure = SHashNew();
+  structure = TEST_FUNCTION_NEW();
   if( !structure )
     return "a new structure could not be created";
 
-  if( !TYPE_PREFIX##IsEmpty( structure ) )
+  if( !TEST_FUNCTION_IS_EMPTY( structure ) )
     return "a false value was returned for an empty structure";
 
-  TYPE_PREFIX##Destroy( structure );
+  TEST_FUNCTION_DESTROY( structure );
 
   return NULL;
 }
@@ -25,7 +25,7 @@ const char *
 TestIsEmptyWithNull
 ( void )
 {
-  if( !TYPE_PREFIX##IsEmpty( NULL ) )
+  if( !TEST_FUNCTION_IS_EMPTY( NULL ) )
     return "a false value was returned for a NULL hash";
 
   return NULL;
@@ -35,12 +35,14 @@ const char *
 TestIsEmptyWithPopulated
 ( void )
 {
-  common_structure = Build##TYPE_PREFIX();
-  if( !common_structure ){
+  test_struct_t *structure;
+
+  structure = TEST_FUNCTION_BUILD();
+  if( !structure ){
     return "could not build a test structure";
   }
 
-  if( TYPE_PREFIX##IsEmpty( common_structure ) )
+  if( TEST_FUNCTION_IS_EMPTY( structure ) )
     return "a true value was returned for a populated hash";
 
   return NULL;
