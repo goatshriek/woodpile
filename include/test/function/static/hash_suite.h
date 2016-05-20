@@ -309,28 +309,6 @@ TestCopySize
 ( void );
 
 /**
- * Tests the DestroySHash function with a NULL SHash.
- *
- * @test a NULL SHash must not cause an error.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestDestroyNullSHash
-( void );
-
-/**
- * Tests the DestroySHash function with a populated SHash.
- *
- * @test A populated SHash must not cause an error.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestDestroyPopulatedSHash
-( void );
-
-/**
  * Tests the SHashGet function with an empty SHash.
  *
  * @test Calling the function with an empty hash must return NULL.

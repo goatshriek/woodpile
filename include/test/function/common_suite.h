@@ -30,7 +30,7 @@ typedef struct TEST_TYPE test_struct_t;
  * @return NULL on completion or a string describing the failure
  */
 const char *
-TestDestroyWithNull
+TestDestroyNull
 ( void );
 
 /**

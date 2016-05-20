@@ -52,8 +52,8 @@ main
   TEST( CopyContents )
   TEST( CopyDistinct )
   TEST( CopySize )
-  TEST( DestroyNullSHash )
-  TEST( DestroyPopulatedSHash )
+  TEST( DestroyNull )
+  TEST( DestroyPopulated )
   TEST( GetFromEmptySHash )
   TEST( GetFromPopulatedSHash )
   TEST( GetWithCollidingKeys )
@@ -527,30 +527,6 @@ TestCopySize
     return "the size of the copy was not the same as the original";
 
   SHashDestroy( copy );
-
-  return NULL;
-}
-
-const char *
-TestDestroyNullSHash
-( void )
-{
-  SHashDestroy( NULL );
-
-  return NULL;
-}
-
-const char *
-TestDestroyPopulatedSHash
-( void )
-{
-  shash_t *hash;
-
-  hash = BuildSHash();
-  if( !hash )
-    return "could not build a populated hash";
-
-  SHashDestroy( hash );
 
   return NULL;
 }

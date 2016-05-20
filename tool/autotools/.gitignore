@@ -8,3 +8,4 @@ config.h.in~
 configure
 Makefile
 Makefile.in
+test

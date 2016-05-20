@@ -4,7 +4,7 @@
 #include "test/helper.h"
 
 const char *
-TestDestroyWithNull
+TestDestroyNull
 ( void )
 {
   TEST_FUNCTION_DESTROY( NULL );
