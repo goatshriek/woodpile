@@ -607,44 +607,6 @@ TestGetWithCollidingKeys
 }
 
 const char *
-TestIsEmptyWithEmptySHash
-( void )
-{
-  shash_t *hash;
-
-  hash = SHashNew();
-  if( !hash )
-    return "a new hash could not be created";
-
-  if( !SHashIsEmpty( hash ) )
-    return "a false value was returned for an empty hash";
-
-  SHashDestroy( hash );
-
-  return NULL;
-}
-
-const char *
-TestIsEmptyWithPopulatedSHash
-( void )
-{
-  if( SHashIsEmpty( common_hash ) )
-    return "a true value was returned for a populated hash";
-
-  return NULL;
-}
-
-const char *
-TestIsEmptyWithNullSHash
-( void )
-{
-  if( !SHashIsEmpty( NULL ) )
-    return "a false value was returned for a NULL hash";
-
-  return NULL;
-}
-
-const char *
 TestNew
 ( void )
 {

@@ -365,39 +365,6 @@ TestGetWithCollidingKeys
 ( void );
 
 /**
- * Tests the SHashIsEmpty function with an empty SHash.
- *
- * @test A SHash with no elements must return a positive value.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestIsEmptyWithEmptySHash
-( void );
-
-/**
- * Tests the SHashIsEmpty function with a populated SHash.
- *
- * @test A populated SHash must return 0.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestIsEmptyWithPopulatedSHash
-( void );
-
-/**
- * Tests the SHashIsEmpty function with a NULL SHash.
- *
- * @test a NULL SHash must return a positive value.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestIsEmptyWithNullSHash
-( void );
-
-/**
  * Tests the NewSHash function.
  *
  * @test Calling the function must return a non-NULL value.
