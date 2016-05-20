@@ -10,17 +10,32 @@
  * functions SHashIsEmpty and SHashNew.
  */
 
-//#define TEST_TYPE shash_t
-//#define TEST_PREFIX SHash
+#include <woodpile/config.h>
 
-# ifdef TEST_TYPE
-#  ifdef TEST_FUNCTION_NEW
-#   ifdef TEST_FUNCTION_DESTROY
-#    ifdef TEST_FUNCTION_IS_EMPTY
-#     ifdef TEST_FUNCTION_BUILD
+#ifdef TEST_FUNCTION_BUILD
+#ifdef TEST_FUNCTION_COPY
+#ifdef TEST_FUNCTION_DESTROY
+#ifdef TEST_FUNCTION_IS_EMPTY
+#ifdef TEST_FUNCTION_NEW
+#ifdef TEST_TYPE
 
 struct TEST_TYPE;
 typedef struct TEST_TYPE test_struct_t;
+
+#ifdef __WOODPILE_PARAMETER_VALIDATION
+
+/**
+ * Tests the Copy function with a NULL structure.
+ *
+ * @test a NULL structure must return NULL.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestCopyNull
+( void );
+
+#endif
 
 /**
  * Tests the Destroy function with a NULL structure.
@@ -88,9 +103,10 @@ const char *
 TestNew
 ( void );
 
-#     endif
-#    endif
-#   endif
-#  endif
-# endif
+#endif
+#endif
+#endif
+#endif
+#endif
+#endif
 #endif

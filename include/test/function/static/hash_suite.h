@@ -35,17 +35,6 @@ TestContainsWithNullSHash
 ( void );
 
 /**
- * Tests the CopySHash function with a NULL SHash.
- *
- * @test a NULL SHash must return NULL.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestCopyNullSHash
-( void );
-
-/**
  * Tests the SHashGet function with a NULL SHash.
  *
  * @test Calling the function with a NULL SHash must return NULL regardless of

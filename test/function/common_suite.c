@@ -3,6 +3,20 @@
 #include "test/function/common_suite.h"
 #include "test/helper.h"
 
+#ifdef __WOODPILE_PARAMETER_VALIDATION
+
+const char *
+TestCopyNull
+( void )
+{
+  if( TEST_FUNCTION_COPY( NULL ) != NULL )
+    return "a non-NULL value was returned for a NULL structure";
+
+  return NULL;
+}
+
+#endif
+
 const char *
 TestDestroyNull
 ( void )

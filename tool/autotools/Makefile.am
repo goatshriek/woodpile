@@ -134,6 +134,7 @@ test_function_static_hash_suite_SOURCES = test/function/common_suite.c \
                                           test/function/static/hash_suite.c
 test_function_static_hash_suite_LDADD = $(test_libraries)
 test_function_static_hash_suite_CFLAGS = -D TEST_FUNCTION_BUILD=BuildSHash \
+                                         -D TEST_FUNCTION_COPY=SHashCopy \
                                          -D TEST_FUNCTION_DESTROY=SHashDestroy \
                                          -D TEST_FUNCTION_IS_EMPTY=SHashIsEmpty \
                                          -D TEST_FUNCTION_NEW=SHashNew \

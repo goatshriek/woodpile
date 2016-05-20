@@ -27,7 +27,7 @@ main
 #ifdef __WOODPILE_PARAMETER_VALIDATION
   TEST( ContainsNullValue )
   TEST( ContainsWithNullSHash )
-  TEST( CopyNullSHash )
+  TEST( CopyNull )
   TEST( GetFromNullSHash )
   TEST( GetNullKeyFromSHash )
   TEST( PutIntoNullSHash )
@@ -115,16 +115,6 @@ TestContainsWithNullSHash
 
   if( SHashContains( NULL, "value" ) != NULL )
     return "NULL was not returned for a NULL hash";
-
-  return NULL;
-}
-
-const char *
-TestCopyNullSHash
-( void )
-{
-  if( SHashCopy( NULL ) != NULL )
-    return "a non-NULL value was returned for a NULL hash";
 
   return NULL;
 }
