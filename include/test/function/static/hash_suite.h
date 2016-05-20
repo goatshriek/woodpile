@@ -343,17 +343,6 @@ TestGetWithCollidingKeys
 ( void );
 
 /**
- * Tests the NewSHash function.
- *
- * @test Calling the function must return a non-NULL value.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestNew
-( void );
-
-/**
  * Tests the SHashPut function with a full SHash and a key that already exists
  * in the hash.
  *

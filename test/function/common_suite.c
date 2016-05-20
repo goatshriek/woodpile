@@ -71,3 +71,16 @@ TestIsEmptyWithPopulated
 
   return NULL;
 }
+
+const char *
+TestNew
+( void )
+{
+  test_struct_t *structure;
+
+  structure = TEST_FUNCTION_NEW();
+  if( !structure )
+    return "NULL was returned instead of a new structure";
+
+  return NULL;
+}

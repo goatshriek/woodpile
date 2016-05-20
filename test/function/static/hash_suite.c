@@ -583,19 +583,6 @@ TestGetWithCollidingKeys
 }
 
 const char *
-TestNew
-( void )
-{
-  shash_t *hash;
-
-  hash = SHashNew();
-  if( !hash )
-    return "NULL was returned with a non-NULL hashing function";
-
-  return NULL;
-}
-
-const char *
 TestPutExistingKeyIntoFullSHash
 ( void )
 {

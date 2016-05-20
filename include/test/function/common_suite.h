@@ -77,6 +77,17 @@ const char *
 TestIsEmptyWithPopulated
 ( void );
 
+/**
+ * Tests the New function.
+ *
+ * @test Calling the function must return a non-NULL value.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestNew
+( void );
+
 #     endif
 #    endif
 #   endif
