@@ -138,6 +138,7 @@ test_function_static_hash_suite_CFLAGS = -D TEST_FUNCTION_BUILD=BuildSHash \
                                          -D TEST_FUNCTION_DESTROY=SHashDestroy \
                                          -D TEST_FUNCTION_IS_EMPTY=SHashIsEmpty \
                                          -D TEST_FUNCTION_NEW=SHashNew \
+                                         -D TEST_FUNCTION_SIZE=SHashSize \
                                          -D TEST_TYPE=shash_t \
                                          $(AM_CFLAGS)
 

@@ -473,24 +473,6 @@ TestCopyContents
 }
 
 const char *
-TestCopySize
-( void )
-{
-  shash_t *copy;
-
-  copy = SHashCopy( common_hash );
-  if( !copy )
-    return "the hash could not be copied";
-
-  if( SHashSize( common_hash ) != SHashSize( copy ) )
-    return "the size of the copy was not the same as the original";
-
-  SHashDestroy( copy );
-
-  return NULL;
-}
-
-const char *
 TestGetFromEmptySHash
 ( void )
 {

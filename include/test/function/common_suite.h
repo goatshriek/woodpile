@@ -17,6 +17,7 @@
 #ifdef TEST_FUNCTION_DESTROY
 #ifdef TEST_FUNCTION_IS_EMPTY
 #ifdef TEST_FUNCTION_NEW
+#ifdef TEST_FUNCTION_SIZE
 #ifdef TEST_TYPE
 
 struct TEST_TYPE;
@@ -58,6 +59,18 @@ TestCopy
  */
 const char *
 TestCopyDistinct
+( void );
+
+/**
+ * Tests the size of the structure returned by the Copy function.
+ *
+ * @test The copy of a populated structure must be the same size as the
+ * original.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestCopySize
 ( void );
 
 /**
@@ -126,6 +139,7 @@ const char *
 TestNew
 ( void );
 
+#endif
 #endif
 #endif
 #endif

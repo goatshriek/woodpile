@@ -265,17 +265,6 @@ TestCopyContents
 ( void );
 
 /**
- * Tests the size of the SHash returned by the CopySHash function.
- *
- * @test The copy of a populated SHash must be the same size as the original.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestCopySize
-( void );
-
-/**
  * Tests the SHashGet function with an empty SHash.
  *
  * @test Calling the function with an empty hash must return NULL.

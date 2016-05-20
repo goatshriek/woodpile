@@ -21,7 +21,7 @@ const char *
 TestCopy
 ( void )
 {
-  test_struct_t *copy, *original;
+  const test_struct_t *copy, *original;
 
   original = TEST_FUNCTION_BUILD();
   if( !original )
@@ -29,7 +29,7 @@ TestCopy
 
   copy = TEST_FUNCTION_COPY( original );
   if( !copy )
-    return "NULL was returned for a non-NULL hash";
+    return "NULL was returned for a non-NULL structure";
 
   TEST_FUNCTION_DESTROY( original );
   TEST_FUNCTION_DESTROY( copy );
@@ -41,16 +41,41 @@ const char *
 TestCopyDistinct
 ( void )
 {
-  test_struct_t *copy, *original;
+  const test_struct_t *copy, *original;
 
   original = TEST_FUNCTION_BUILD();
   if( !original )
     return "could not build a populated structure";
 
   copy = TEST_FUNCTION_COPY( original );
+  if( !copy )
+    return "could not copy the original structure";
 
   if( copy == original )
     return "the copy was not distinct from the original";
+
+  TEST_FUNCTION_DESTROY( original );
+  TEST_FUNCTION_DESTROY( copy );
+
+  return NULL;
+}
+
+const char *
+TestCopySize
+( void )
+{
+  const test_struct_t *copy, *original;
+
+  original = TEST_FUNCTION_BUILD();
+  if( !original )
+    return "could not build a populated structure";
+
+  copy = TEST_FUNCTION_COPY( original );
+  if( !copy )
+    return "could not copy the original structure";
+
+  if( TEST_FUNCTION_SIZE( original ) != TEST_FUNCTION_SIZE( copy ) )
+    return "the size of the copy was not the same as the original";
 
   TEST_FUNCTION_DESTROY( original );
   TEST_FUNCTION_DESTROY( copy );
@@ -71,7 +96,7 @@ const char *
 TestDestroyPopulated
 ( void )
 {
-  test_struct_t *structure;
+  const test_struct_t *structure;
 
   structure = TEST_FUNCTION_BUILD();
   if( !structure )
@@ -86,7 +111,7 @@ const char *
 TestIsEmptyWithEmpty
 ( void )
 {
-  test_struct_t *structure;
+  const test_struct_t *structure;
 
   structure = TEST_FUNCTION_NEW();
   if( !structure )
@@ -114,7 +139,7 @@ const char *
 TestIsEmptyWithPopulated
 ( void )
 {
-  test_struct_t *structure;
+  const test_struct_t *structure;
 
   structure = TEST_FUNCTION_BUILD();
   if( !structure ){
@@ -131,11 +156,13 @@ const char *
 TestNew
 ( void )
 {
-  test_struct_t *structure;
+  const test_struct_t *structure;
 
   structure = TEST_FUNCTION_NEW();
   if( !structure )
     return "NULL was returned instead of a new structure";
+
+  TEST_FUNCTION_DESTROY( structure );
 
   return NULL;
 }
