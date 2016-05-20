@@ -3,31 +3,27 @@
 #include "test/function/common_suite.h"
 #include "test/helper.h"
 
-/**
- * Tests the Destroy function with a NULL structure.
- *
- * @test a NULL structure must not cause an error.
- *
- * @return NULL on completion or a string describing the failure
- */
 const char *
 TestDestroyWithNull
 ( void )
 {
+  TEST_FUNCTION_DESTROY( NULL );
+
   return NULL;
 }
 
-/**
- * Tests the Destroy function with a populated structure.
- *
- * @test A populated structure must not cause an error.
- *
- * @return NULL on completion or a string describing the failure
- */
 const char *
 TestDestroyPopulated
 ( void )
 {
+  test_struct_t *structure;
+
+  structure = TEST_FUNCTION_BUILD();
+  if( !structure )
+    return "could not build a populated structure";
+
+  TEST_FUNCTION_DESTROY( structure );
+
   return NULL;
 }
 
@@ -54,7 +50,7 @@ TestIsEmptyWithNull
 ( void )
 {
   if( !TEST_FUNCTION_IS_EMPTY( NULL ) )
-    return "a false value was returned for a NULL hash";
+    return "a false value was returned for a NULL structure";
 
   return NULL;
 }
@@ -71,7 +67,7 @@ TestIsEmptyWithPopulated
   }
 
   if( TEST_FUNCTION_IS_EMPTY( structure ) )
-    return "a true value was returned for a populated hash";
+    return "a true value was returned for a populated structure";
 
   return NULL;
 }
