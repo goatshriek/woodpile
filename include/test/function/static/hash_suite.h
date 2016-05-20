@@ -265,17 +265,6 @@ TestCopyContents
 ( void );
 
 /**
- * Tests the SHash returned by the CopySHash function.
- *
- * @test The copied SHash must be a different value than the original.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestCopyDistinct
-( void );
-
-/**
  * Tests the size of the SHash returned by the CopySHash function.
  *
  * @test The copy of a populated SHash must be the same size as the original.

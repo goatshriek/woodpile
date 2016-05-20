@@ -21,17 +21,38 @@ const char *
 TestCopy
 ( void )
 {
-  test_struct_t *copy, *structure;
+  test_struct_t *copy, *original;
 
-  structure = TEST_FUNCTION_BUILD();
-  if( !structure )
+  original = TEST_FUNCTION_BUILD();
+  if( !original )
     return "could not build a populated structure";
 
-  copy = TEST_FUNCTION_COPY( structure );
+  copy = TEST_FUNCTION_COPY( original );
   if( !copy )
     return "NULL was returned for a non-NULL hash";
 
-  TEST_FUNCTION_DESTROY( structure );
+  TEST_FUNCTION_DESTROY( original );
+  TEST_FUNCTION_DESTROY( copy );
+
+  return NULL;
+}
+
+const char *
+TestCopyDistinct
+( void )
+{
+  test_struct_t *copy, *original;
+
+  original = TEST_FUNCTION_BUILD();
+  if( !original )
+    return "could not build a populated structure";
+
+  copy = TEST_FUNCTION_COPY( original );
+
+  if( copy == original )
+    return "the copy was not distinct from the original";
+
+  TEST_FUNCTION_DESTROY( original );
   TEST_FUNCTION_DESTROY( copy );
 
   return NULL;

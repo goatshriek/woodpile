@@ -50,6 +50,17 @@ TestCopy
 ( void );
 
 /**
+ * Tests the structure returned by the Copy function.
+ *
+ * @test The copied structure must be a different value than the original.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestCopyDistinct
+( void );
+
+/**
  * Tests the Destroy function with a NULL structure.
  *
  * @test a NULL structure must not cause an error.

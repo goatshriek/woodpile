@@ -473,22 +473,6 @@ TestCopyContents
 }
 
 const char *
-TestCopyDistinct
-( void )
-{
-  shash_t *copy;
-
-  copy = SHashCopy( common_hash );
-
-  if( copy == common_hash )
-    return "the copy was not distinct from the original";
-
-  SHashDestroy( copy );
-
-  return NULL;
-}
-
-const char *
 TestCopySize
 ( void )
 {
