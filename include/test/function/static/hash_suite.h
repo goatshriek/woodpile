@@ -254,17 +254,6 @@ TestContainsUniqueValue
 ( void );
 
 /**
- * Tests the CopySHash function.
- *
- * @test A non-NULL SHash must be returned as the copy of a non-NULL SHash.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestCopy
-( void );
-
-/**
  * Tests the contents of the SHash returned by the CopySHash function.
  *
  * @test The copied SHash must point at the same elements as the original.

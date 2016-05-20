@@ -18,6 +18,26 @@ TestCopyNull
 #endif
 
 const char *
+TestCopy
+( void )
+{
+  test_struct_t *copy, *structure;
+
+  structure = TEST_FUNCTION_BUILD();
+  if( !structure )
+    return "could not build a populated structure";
+
+  copy = TEST_FUNCTION_COPY( structure );
+  if( !copy )
+    return "NULL was returned for a non-NULL hash";
+
+  TEST_FUNCTION_DESTROY( structure );
+  TEST_FUNCTION_DESTROY( copy );
+
+  return NULL;
+}
+
+const char *
 TestDestroyNull
 ( void )
 {

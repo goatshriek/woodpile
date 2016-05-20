@@ -455,21 +455,6 @@ TestContainsUniqueValue
 }
 
 const char *
-TestCopy
-( void )
-{
-  shash_t *copy;
-
-  copy = SHashCopy( common_hash );
-  if( !copy )
-    return "NULL was returned for a non-NULL hash";
-
-  SHashDestroy( copy );
-
-  return NULL;
-}
-
-const char *
 TestCopyContents
 ( void )
 {
