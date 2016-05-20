@@ -23,6 +23,28 @@ struct TEST_TYPE;
 typedef struct TEST_TYPE test_struct_t;
 
 /**
+ * Tests the Destroy function with a NULL structure.
+ *
+ * @test a NULL structure must not cause an error.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestDestroyWithNull
+( void );
+
+/**
+ * Tests the Destroy function with a populated structure.
+ *
+ * @test A populated structure must not cause an error.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestDestroyPopulated
+( void );
+
+/**
  * Tests the IsEmpty function with an empty structure.
  *
  * @test A structure with no elements must return a positive value.

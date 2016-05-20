@@ -3,6 +3,34 @@
 #include "test/function/common_suite.h"
 #include "test/helper.h"
 
+/**
+ * Tests the Destroy function with a NULL structure.
+ *
+ * @test a NULL structure must not cause an error.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestDestroyWithNull
+( void )
+{
+  return NULL;
+}
+
+/**
+ * Tests the Destroy function with a populated structure.
+ *
+ * @test A populated structure must not cause an error.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestDestroyPopulated
+( void )
+{
+  return NULL;
+}
+
 const char *
 TestIsEmptyWithEmpty
 ( void )
