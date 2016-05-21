@@ -27,6 +27,19 @@ struct dlist_t;
 typedef struct dlist_t dlist_t;
 
 /**
+ * Adds a single element to the end of a DynamicList. If element is NULL then
+ * nothing is done.
+ *
+ * @param list the DynamicList to append to. Must not be NULL.
+ * @param element the element to append
+ *
+ * @return list
+ */
+dlist_t *
+DListAppend
+( dlist_t *list, void *element );
+
+/**
  * Appends all elements in the second DynamicList to the end of the first. The
  * second list is not changed as a result of the operation. The elements are
  * appended in the order they exist in the second DynamicList.
@@ -37,48 +50,8 @@ typedef struct dlist_t dlist_t;
  * @return first
  */
 dlist_t *
-AppendAllToDynamicList
+DListAppendAll
 ( dlist_t *first, const dlist_t *second );
-#define DListAppendAll AppendAllToDynamicList
-
-/**
- * Adds a single element to the end of a DynamicList. If element is NULL then
- * nothing is done.
- *
- * @param list the DynamicList to append to. Must not be NULL.
- * @param element the element to append
- * 
- * @return list
- */
-dlist_t *
-AppendToDynamicList
-( dlist_t *list, void *element );
-#define DListAppend AppendToDynamicList
-
-/**
- * Creates a copy of a DynamicList. Elements within the DynamicList are not
- * copied, meaning that changes made to elements in the original DynamicList
- * will also change the elements in the copy. Changes made to the original
- * DynamicList will not affect the copy.
- *
- * @param list the DynamicList to copy. Must not be NULL.
- * 
- * @return a copy of the original DynamicList or NULL on failure
- */
-dlist_t *
-CopyDynamicList
-( const dlist_t *list );
-#define DListCopy CopyDynamicList
-
-/**
- * Destroys a DynamicList. Does not affect the elements stored within.
- *
- * @param list the DynamicList to destroy
- */
-void
-DestroyDynamicList
-( const dlist_t *list );
-#define DListDestroy DestroyDynamicList
 
 /**
  * Gets the last element in the DynamicList.
@@ -88,9 +61,8 @@ DestroyDynamicList
  * @return the last element of list, or NULL if list is empty
  */
 void *
-DynamicListBack
+DListBack
 ( const dlist_t *list );
-#define DListBack DynamicListBack
 
 /**
  * Searches a DynamicList for an element.
@@ -105,9 +77,31 @@ DynamicListBack
  * @return the number of entries of element in list
  */
 size_t
-DynamicListContains
+DListContains
 ( const dlist_t *list, const void *element );
-#define DListContains DynamicListContains
+
+/**
+ * Creates a copy of a DynamicList. Elements within the DynamicList are not
+ * copied, meaning that changes made to elements in the original DynamicList
+ * will also change the elements in the copy. Changes made to the original
+ * DynamicList will not affect the copy.
+ *
+ * @param list the DynamicList to copy. Must not be NULL.
+ * 
+ * @return a copy of the original DynamicList or NULL on failure
+ */
+dlist_t *
+DListCopy
+( const dlist_t *list );
+
+/**
+ * Destroys a DynamicList. Does not affect the elements stored within.
+ *
+ * @param list the DynamicList to destroy
+ */
+void
+DListDestroy
+( const dlist_t *list );
 
 /**
  * Gets the first element in the DynamicList.
@@ -117,9 +111,8 @@ DynamicListContains
  * @return the first element of list, or NULL if list is empty
  */
 void *
-DynamicListFront
+DListFront
 ( const dlist_t *list );
-#define DListFront DynamicListFront
 
 /**
  * Gets the element at the specified position in the DynamicList. If the
@@ -141,9 +134,8 @@ DynamicListFront
  * exist
  */
 void *
-DynamicListGet
+DListGet
 ( const dlist_t *list, int index );
-#define DListGet DynamicListGet
 
 /**
  * Checks whether or not a DynamicList is empty. A NULL DynamicList is
@@ -154,9 +146,30 @@ DynamicListGet
  * @return a positive value if the DynamicList is empty, 0 otherwise
  */
 unsigned short
-DynamicListIsEmpty
+DListIsEmpty
 ( const dlist_t *list );
-#define DListIsEmpty DynamicListIsEmpty
+
+/**
+ * Creates a new DynamicList.
+ *
+ * @return a new DynamicList or NULL on failure
+ */
+dlist_t *
+DListNew
+( void );
+
+/**
+ * Adds a single element to the beginning of a DynamicList. If element is NULL
+ * then nothing is done.
+ *
+ * @param list the DynamicList to prepend to. Must not be NULL.
+ * @param element the element to prepend
+ *
+ * @return list
+ */
+dlist_t *
+DListPrepend
+( dlist_t *list, void *element );
 
 /**
  * Gets the number of elements in the DynamicList. An empty DynamicList will
@@ -167,9 +180,8 @@ DynamicListIsEmpty
  * @return the number of elements in the DynamicList
  */
 unsigned
-DynamicListSize
+DListSize
 ( const dlist_t *list );
-#define DListSize DynamicListSize
 
 /**
  * Creates a string representation of the given DynamicList, using the provided
@@ -193,32 +205,7 @@ DynamicListSize
  * @return a char buffer holding a string representation of the DynamicList
  */
 char *
-DynamicListToString
+DListToString
 ( const dlist_t *list, char * ( *element_to_string )( const void * ) );
-#define DListToString DynamicListToString
-
-/**
- * Creates a new DynamicList.
- * 
- * @return a new DynamicList or NULL on failure
- */
-dlist_t *
-NewDynamicList
-( void );
-#define DListNew NewDynamicList
-
-/**
- * Adds a single element to the beginning of a DynamicList. If element is NULL
- * then nothing is done.
- *
- * @param list the DynamicList to prepend to. Must not be NULL.
- * @param element the element to prepend
- * 
- * @return list
- */
-dlist_t *
-PrependToDynamicList
-( dlist_t *list, void *element );
-#define DListPrepend PrependToDynamicList
 
 #endif
