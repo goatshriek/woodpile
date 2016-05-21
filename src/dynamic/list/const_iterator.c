@@ -7,7 +7,7 @@
 
 DListCItr *
 DListCBegin
-( const DList *list )
+( const dlist_t *list )
 {
   DListCItr *iterator;
 
@@ -24,7 +24,7 @@ DListCBegin
 
 DListCItr *
 DListCEnd
-( const DList *list )
+( const dlist_t *list )
 {
   DListCItr *iterator;
 

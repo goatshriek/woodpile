@@ -10,7 +10,7 @@
 
 /** the DynamicListIterator structure */
 struct DynamicListIterator {
-  DList *list; /**< the List this iterator is for */
+  dlist_t *list; /**< the List this iterator is for */
   Node *current; /**< the current value of the iterator */
   Node *previous; /**< the previous value of the iterator */
   /**

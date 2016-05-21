@@ -27,7 +27,7 @@
  *
  * @return a new DynamicList or NULL on failure
  */
-DList *
+dlist_t *
 BuildDList
 ( void );
 

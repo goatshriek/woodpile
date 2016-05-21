@@ -7,11 +7,11 @@
 #include "test/helper/builder.h"
 #include "test/helper/fixture.h"
 
-DList *
+dlist_t *
 BuildDList
 ( void )
 {
-  DList *list = DListNew();
+  dlist_t *list = DListNew();
 
   DListAppend( list, "This" );
   DListAppend( list, "is" );

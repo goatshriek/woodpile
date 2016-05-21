@@ -16,7 +16,7 @@ typedef struct Node Node;
 ( ( Node * ) ( ( ( intptr_t ) ( first ) ) ^ ( ( intptr_t ) ( second ) ) ) )
 
 /** the List container */
-struct DynamicList {
+struct dlist_t {
   Node *first; /**< the first Node in the list */
   Node *last; /**< the last Node in the list */
 };

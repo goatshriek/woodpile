@@ -64,7 +64,7 @@ AddToDynamicListIterator
  */
 DynamicListIterator *
 BeginDynamicList
-( DynamicList *list );
+( dlist_t *list );
 #define DListBegin BeginDynamicList
 
 /**
@@ -104,7 +104,7 @@ DestroyDynamicListIterator
  */
 DynamicListIterator *
 EndDynamicList
-( DynamicList *list );
+( dlist_t *list );
 #define DListEnd EndDynamicList
 
 /**

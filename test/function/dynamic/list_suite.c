@@ -77,8 +77,8 @@ const char *
 TestAppendAllOfEmptyList
 ( void )
 {
-  const DList *addition;
-  DList *target;
+  const dlist_t *addition;
+  dlist_t *target;
 
   target = BuildDList();
   if( !target )
@@ -101,7 +101,7 @@ const char *
 TestAppendAllOfNullList
 ( void )
 {
-  DList *list;
+  dlist_t *list;
 
   list = BuildDList();
   if( !list )
@@ -119,8 +119,8 @@ const char *
 TestAppendAllOfPopulatedList
 ( void )
 {
-  const DList *addition;
-  DList *target;
+  const dlist_t *addition;
+  dlist_t *target;
   size_t addition_size, i, target_size;
 
   addition = BuildDList();
@@ -152,7 +152,7 @@ const char *
 TestAppendAllToNullList
 ( void )
 {
-  const DList *list;
+  const dlist_t *list;
 
   if( DListAppendAll( NULL, NULL ) )
     return "a non-NULL value was returned when appending NULL to a NULL List";
@@ -173,7 +173,7 @@ const char *
 TestAppendNullElement
 ( void )
 {
-  DList *list;
+  dlist_t *list;
 
   list = BuildDList();
   if( !list )
@@ -191,7 +191,7 @@ const char *
 TestAppendToEmptyList
 ( void )
 {
-  DList *list;
+  dlist_t *list;
   void *element = "test value";
 
   list = DListNew();
@@ -231,7 +231,7 @@ const char *
 TestAppendToPopulatedList
 ( void )
 {
-  DList *list;
+  dlist_t *list;
   unsigned size;
   void *element = "test element to append";
 
@@ -259,7 +259,7 @@ const char *
 TestBackOfEmptyList
 ( void )
 {
-  const DList *list;
+  const dlist_t *list;
 
   list = DListNew();
   if( !list )
@@ -287,7 +287,7 @@ const char *
 TestBackOfPopulatedList
 ( void )
 {
-  const DList *list;
+  const dlist_t *list;
   unsigned size;
 
   list = BuildDList();
@@ -308,7 +308,7 @@ const char *
 TestContainsDuplicateElements
 ( void )
 {
-  DList *list;
+  dlist_t *list;
   void *element;
 
   list = BuildDList();
@@ -338,7 +338,7 @@ const char *
 TestContainsNonExistentElement
 ( void )
 {
-  const DList *list;
+  const dlist_t *list;
   const void *element = "this element does not exist in the List";
 
   list = BuildDList();
@@ -357,7 +357,7 @@ const char *
 TestContainsNullElement
 ( void )
 {
-  const DList *list;
+  const dlist_t *list;
 
   list = BuildDList();
   if( !list )
@@ -375,7 +375,7 @@ const char *
 TestContainsUniqueElement
 ( void )
 {
-  DList *list;
+  dlist_t *list;
   void *element = "the List will not contain this";
 
   list = BuildDList();
@@ -411,7 +411,7 @@ const char *
 TestCopy
 ( void )
 {
-  DList *copy, *list;
+  dlist_t *copy, *list;
 
   list = BuildDList();
   if( !list )
@@ -432,7 +432,7 @@ const char *
 TestCopyContents
 ( void )
 {
-  DList *copy, *list;
+  dlist_t *copy, *list;
   unsigned i, size;
 
   list = BuildDList();
@@ -460,7 +460,7 @@ const char *
 TestCopyDistinct
 ( void )
 {
-  const DList *copy, *list;
+  const dlist_t *copy, *list;
 
   list = BuildDList();
   if( !list )
@@ -491,7 +491,7 @@ const char *
 TestCopySize
 ( void )
 {
-  const DList *copy, *list;
+  const dlist_t *copy, *list;
 
   list = BuildDList();
   if( !list )
@@ -521,7 +521,7 @@ const char *
 TestDestroyPopulatedList
 ( void )
 {
-  const DList *list;
+  const dlist_t *list;
 
   list = BuildDList();
   if( !list )
@@ -536,7 +536,7 @@ const char *
 TestFrontOfEmptyList
 ( void )
 {
-  const DList *list;
+  const dlist_t *list;
 
   list = DListNew();
   if( !list )
@@ -564,7 +564,7 @@ const char *
 TestFrontOfPopulatedList
 ( void )
 {
-  const DList *list;
+  const dlist_t *list;
 
   list = BuildDList();
   if( !list )
@@ -582,7 +582,7 @@ const char *
 TestGetFromEmptyList
 ( void )
 {
-  const DList *list;
+  const dlist_t *list;
 
   list = DListNew();
   if( !list )
@@ -622,7 +622,7 @@ const char *
 TestGetNegativeIndex
 ( void )
 {
-  const DList *list;
+  const dlist_t *list;
   const void *element;
 
   list = BuildDList();
@@ -674,7 +674,7 @@ const char *
 TestGetNegativeIndexWrap
 ( void )
 {
-  const DList *list;
+  const dlist_t *list;
   unsigned size;
 
   list = BuildDList();
@@ -695,7 +695,7 @@ const char *
 TestGetPositiveIndex
 ( void )
 {
-  const DList *list;
+  const dlist_t *list;
   const void *element;
 
   list = BuildDList();
@@ -741,7 +741,7 @@ const char *
 TestGetPositiveIndexWrap
 ( void )
 {
-  const DList *list;
+  const dlist_t *list;
   unsigned size;
 
   list = BuildDList();
@@ -762,7 +762,7 @@ const char *
 TestGetZeroIndex
 ( void )
 {
-  const DList *list;
+  const dlist_t *list;
 
   list = BuildDList();
   if( !list )
@@ -780,7 +780,7 @@ const char *
 TestNew
 ( void )
 {
-  const DList *list;
+  const dlist_t *list;
 
   list = DListNew();
   if( !list )
@@ -795,7 +795,7 @@ const char *
 TestNewListIsEmpty
 ( void )
 {
-  const DList *list;
+  const dlist_t *list;
 
   list = DListNew();
   if( !list )
@@ -823,7 +823,7 @@ const char *
 TestPopulatedListIsNotEmpty
 ( void )
 {
-  const DList *list;
+  const dlist_t *list;
 
   list = BuildDList();
   if( !list )
@@ -841,7 +841,7 @@ const char *
 TestPrependNullElement
 ( void )
 {
-  DList *list;
+  dlist_t *list;
 
   list = BuildDList();
   if( !list )
@@ -859,7 +859,7 @@ const char *
 TestPrependToEmptyList
 ( void )
 {
-  DList *list;
+  dlist_t *list;
   void *element = "test value";
 
   list = DListNew();
@@ -899,7 +899,7 @@ const char *
 TestPrependToPopulatedList
 ( void )
 {
-  DList *list;
+  dlist_t *list;
   unsigned size;
   void *element = "test element to prepend";
 
@@ -927,7 +927,7 @@ const char *
 TestSizeOfEmptyList
 ( void )
 {
-  const DList *list;
+  const dlist_t *list;
 
   list = DListNew();
   if( !list )
@@ -955,7 +955,7 @@ const char *
 TestSizeOfPopulatedList
 ( void )
 {
-  const DList *list;
+  const dlist_t *list;
 
   list = BuildDList();
   if( !list )
@@ -974,7 +974,7 @@ TestToStringWithEmptyList
 ( void )
 {
   char *str;
-  const DList *list;
+  const dlist_t *list;
 
   list = DListNew();
   if( !list )
@@ -997,7 +997,7 @@ TestToStringWithNullFunction
 {
   char pointer[100];
   char *str;
-  const DList *list;
+  const dlist_t *list;
   unsigned i, size;
 
   list = BuildDList();
@@ -1039,7 +1039,7 @@ TestToStringWithPopulatedList
 ( void )
 {
   char *str;
-  const DList *list;
+  const dlist_t *list;
 
   list = BuildDList();
   if( !list )

@@ -43,7 +43,7 @@ DListItrAdd
 
 DListItr *
 DListBegin
-( DList *list )
+( dlist_t *list )
 {
   DListItr *iterator;
 
@@ -85,7 +85,7 @@ DListItrDestroy
 
 DListItr *
 DListEnd
-( DList *list )
+( dlist_t *list )
 {
   DListItr *iterator;
 

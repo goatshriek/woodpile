@@ -23,9 +23,8 @@
  * Memory overhead can be calculated as follows:
  * 2 * sizeof( void * ) * ( number_of_elements + 1 )
  */
-struct DynamicList;
-typedef struct DynamicList DynamicList;
-typedef struct DynamicList DList;
+struct dlist_t;
+typedef struct dlist_t dlist_t;
 
 /**
  * Appends all elements in the second DynamicList to the end of the first. The
@@ -37,9 +36,9 @@ typedef struct DynamicList DList;
  *
  * @return first
  */
-DynamicList *
+dlist_t *
 AppendAllToDynamicList
-( DynamicList *first, const DynamicList *second );
+( dlist_t *first, const dlist_t *second );
 #define DListAppendAll AppendAllToDynamicList
 
 /**
@@ -51,9 +50,9 @@ AppendAllToDynamicList
  * 
  * @return list
  */
-DynamicList *
+dlist_t *
 AppendToDynamicList
-( DynamicList *list, void *element );
+( dlist_t *list, void *element );
 #define DListAppend AppendToDynamicList
 
 /**
@@ -66,9 +65,9 @@ AppendToDynamicList
  * 
  * @return a copy of the original DynamicList or NULL on failure
  */
-DynamicList *
+dlist_t *
 CopyDynamicList
-( const DynamicList *list );
+( const dlist_t *list );
 #define DListCopy CopyDynamicList
 
 /**
@@ -78,7 +77,7 @@ CopyDynamicList
  */
 void
 DestroyDynamicList
-( const DynamicList *list );
+( const dlist_t *list );
 #define DListDestroy DestroyDynamicList
 
 /**
@@ -90,7 +89,7 @@ DestroyDynamicList
  */
 void *
 DynamicListBack
-( const DynamicList *list );
+( const dlist_t *list );
 #define DListBack DynamicListBack
 
 /**
@@ -107,7 +106,7 @@ DynamicListBack
  */
 size_t
 DynamicListContains
-( const DynamicList *list, const void *element );
+( const dlist_t *list, const void *element );
 #define DListContains DynamicListContains
 
 /**
@@ -119,7 +118,7 @@ DynamicListContains
  */
 void *
 DynamicListFront
-( const DynamicList *list );
+( const dlist_t *list );
 #define DListFront DynamicListFront
 
 /**
@@ -143,7 +142,7 @@ DynamicListFront
  */
 void *
 DynamicListGet
-( const DynamicList *list, int index );
+( const dlist_t *list, int index );
 #define DListGet DynamicListGet
 
 /**
@@ -156,7 +155,7 @@ DynamicListGet
  */
 unsigned short
 DynamicListIsEmpty
-( const DynamicList *list );
+( const dlist_t *list );
 #define DListIsEmpty DynamicListIsEmpty
 
 /**
@@ -169,7 +168,7 @@ DynamicListIsEmpty
  */
 unsigned
 DynamicListSize
-( const DynamicList *list );
+( const dlist_t *list );
 #define DListSize DynamicListSize
 
 /**
@@ -195,7 +194,7 @@ DynamicListSize
  */
 char *
 DynamicListToString
-( const DynamicList *list, char * ( *element_to_string )( const void * ) );
+( const dlist_t *list, char * ( *element_to_string )( const void * ) );
 #define DListToString DynamicListToString
 
 /**
@@ -203,7 +202,7 @@ DynamicListToString
  * 
  * @return a new DynamicList or NULL on failure
  */
-DynamicList *
+dlist_t *
 NewDynamicList
 ( void );
 #define DListNew NewDynamicList
@@ -217,9 +216,9 @@ NewDynamicList
  * 
  * @return list
  */
-DynamicList *
+dlist_t *
 PrependToDynamicList
-( DynamicList *list, void *element );
+( dlist_t *list, void *element );
 #define DListPrepend PrependToDynamicList
 
 #endif

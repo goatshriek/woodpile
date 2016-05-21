@@ -74,7 +74,7 @@ const char *
 TestAddNullElement
 ( void )
 {
-  DList *list;
+  dlist_t *list;
   DListItr *iterator;
 
   if( DListItrAdd( NULL, NULL ) != NULL )
@@ -101,7 +101,7 @@ const char *
 TestAddToBeginning
 ( void )
 {
-  DList *list;
+  dlist_t *list;
   DListItr *iterator;
   void *element = "new element";
 
@@ -138,7 +138,7 @@ const char *
 TestAddToEmptyList
 ( void )
 {
-  DList *list;
+  dlist_t *list;
   DListItr *iterator;
   void *element = "new element";
 
@@ -172,7 +172,7 @@ const char *
 TestAddToEnd
 ( void )
 {
-  DList *list;
+  dlist_t *list;
   DListItr *iterator;
   void *element = "new element";
 
@@ -209,7 +209,7 @@ const char *
 TestAddToMiddle
 ( void )
 {
-  DList *list;
+  dlist_t *list;
   DListItr *iterator;
   void *element = "new element";
 
@@ -264,7 +264,7 @@ const char *
 TestBeginWithEmptyList
 ( void )
 {
-  DList *list;
+  dlist_t *list;
   DListItr *iterator;
 
   list = DListNew();
@@ -301,7 +301,7 @@ const char *
 TestBeginWithPopulatedList
 ( void )
 {
-  DList *list;
+  dlist_t *list;
   DListItr *iterator;
   const void *element;
 
@@ -331,7 +331,7 @@ const char *
 TestCopy
 ( void )
 {
-  DList *list;
+  dlist_t *list;
   DListItr *copy, *iterator;
 
   list = BuildDList();
@@ -357,7 +357,7 @@ const char *
 TestCopyContents
 ( void )
 {
-  DList *list;
+  dlist_t *list;
   DListItr *copy, *iterator;
   const void *element;
 
@@ -394,7 +394,7 @@ const char *
 TestCopyDistinct
 ( void )
 {
-  DList *list;
+  dlist_t *list;
   DListItr *copy, *iterator;
   const void *element_1, *element_2, *element_3;
 
@@ -453,7 +453,7 @@ const char *
 TestCopyPosition
 ( void )
 {
-  DList *list;
+  dlist_t *list;
   DListItr *copy, *iterator;
 
   list = BuildDList();
@@ -485,7 +485,7 @@ const char *
 TestDestroy
 ( void )
 {
-  DList *list;
+  dlist_t *list;
   DListItr *iterator;
 
   list = BuildDList();
@@ -516,7 +516,7 @@ const char *
 TestEndWithEmptyList
 ( void )
 {
-  DList *list;
+  dlist_t *list;
   DListItr *iterator;
 
   list = DListNew();
@@ -553,7 +553,7 @@ const char *
 TestEndWithPopulatedList
 ( void )
 {
-  DList *list;
+  dlist_t *list;
   DListItr *iterator;
   const void *element;
 
@@ -583,7 +583,7 @@ const char *
 TestHasNextAtBeginning
 ( void )
 {
-  DList *list;
+  dlist_t *list;
   DListItr *iterator;
 
   list = BuildDList();
@@ -607,7 +607,7 @@ const char *
 TestHasNextAtEnd
 ( void )
 {
-  DList *list;
+  dlist_t *list;
   DListItr *iterator;
 
   list = BuildDList();
@@ -631,7 +631,7 @@ const char *
 TestHasNextAtMiddle
 ( void )
 {
-  DList *list;
+  dlist_t *list;
   DListItr *iterator;
 
   list = BuildDList();
@@ -659,7 +659,7 @@ const char *
 TestHasNextWithEmptyList
 ( void )
 {
-  DList *list;
+  dlist_t *list;
   DListItr *iterator;
 
   list = DListNew();
@@ -693,7 +693,7 @@ const char *
 TestHasPreviousAtBeginning
 ( void )
 {
-  DList *list;
+  dlist_t *list;
   DListItr *iterator;
 
   list = BuildDList();
@@ -717,7 +717,7 @@ const char *
 TestHasPreviousAtEnd
 ( void )
 {
-  DList *list;
+  dlist_t *list;
   DListItr *iterator;
 
   list = BuildDList();
@@ -741,7 +741,7 @@ const char *
 TestHasPreviousAtMiddle
 ( void )
 {
-  DList *list;
+  dlist_t *list;
   DListItr *iterator;
 
   list = BuildDList();
@@ -769,7 +769,7 @@ const char *
 TestHasPreviousWithEmptyList
 ( void )
 {
-  DList *list;
+  dlist_t *list;
   DListItr *iterator;
 
   list = DListNew();
@@ -803,7 +803,7 @@ const char *
 TestNextAtBeginning
 ( void )
 {
-  DList *list;
+  dlist_t *list;
   DListItr *iterator;
 
   list = BuildDList();
@@ -827,7 +827,7 @@ const char *
 TestNextAtEnd
 ( void )
 {
-  DList *list;
+  dlist_t *list;
   DListItr *iterator;
 
   list = BuildDList();
@@ -851,7 +851,7 @@ const char *
 TestNextAtMiddle
 ( void )
 {
-  DList *list;
+  dlist_t *list;
   DListItr *iterator;
   const void *element;
 
@@ -908,7 +908,7 @@ const char *
 TestNextWithEmptyList
 ( void )
 {
-  DList *list;
+  dlist_t *list;
   DListItr *iterator;
 
   list = DListNew();
@@ -942,7 +942,7 @@ const char *
 TestPreviousAtBeginning
 ( void )
 {
-  DList *list;
+  dlist_t *list;
   DListItr *iterator;
 
   list = BuildDList();
@@ -966,7 +966,7 @@ const char *
 TestPreviousAtEnd
 ( void )
 {
-  DList *list;
+  dlist_t *list;
   DListItr *iterator;
 
   list = BuildDList();
@@ -990,7 +990,7 @@ const char *
 TestPreviousAtMiddle
 ( void )
 {
-  DList *list;
+  dlist_t *list;
   DListItr *iterator;
   const void *element;
 
@@ -1047,7 +1047,7 @@ const char *
 TestPreviousWithEmptyList
 ( void )
 {
-  DList *list;
+  dlist_t *list;
   DListItr *iterator;
 
   list = DListNew();
@@ -1081,7 +1081,7 @@ const char *
 TestRemoveAfterNext
 ( void )
 {
-  DList *list;
+  dlist_t *list;
   DListItr *iterator;
   const void *element;
 
@@ -1125,7 +1125,7 @@ const char *
 TestRemoveAfterNextAndAdd
 ( void )
 {
-  DList *list;
+  dlist_t *list;
   DListItr *iterator;
   void *added = "new element", *first;
 
@@ -1162,7 +1162,7 @@ const char *
 TestRemoveAfterPrevious
 ( void )
 {
-  DList *list;
+  dlist_t *list;
   DListItr *iterator;
   const void *element;
 
@@ -1206,7 +1206,7 @@ const char *
 TestRemoveAfterPreviousAndAdd
 ( void )
 {
-  DList *list;
+  dlist_t *list;
   DListItr *iterator;
   void *added = "new element", *last;
 
@@ -1243,7 +1243,7 @@ const char *
 TestRemoveAfterRemove
 ( void )
 {
-  DList *list;
+  dlist_t *list;
   DListItr *iterator;
   const void *element, *removed;
 
@@ -1282,7 +1282,7 @@ const char *
 TestRemoveBeforeNextOrPrevious
 ( void )
 {
-  DList *list;
+  dlist_t *list;
   DListItr *iterator;
 
   list = BuildDList();
