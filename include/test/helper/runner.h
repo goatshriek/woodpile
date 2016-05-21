@@ -11,8 +11,10 @@
 #define TEST( test )                                                           \
 result = Test##test();                                                         \
 if( result ){                                                                  \
-  printf( "Test%s Failed: %s\n", #test, result );                              \
+  printf( "Fail: Test%s - %s\n", #test, result );                              \
   failure_count++;                                                             \
+} else {                                                                       \
+  printf( "Pass: Test%s\n", #test );                                          \
 }
 
 #endif
