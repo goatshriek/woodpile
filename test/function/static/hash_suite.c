@@ -27,7 +27,6 @@ main
 #ifdef __WOODPILE_PARAMETER_VALIDATION
   TEST( ContainsNullValue )
   TEST( ContainsWithNullSHash )
-  TEST( CopyNull )
   TEST( GetFromNullSHash )
   TEST( GetNullKeyFromSHash )
   TEST( PutIntoNullSHash )
@@ -43,24 +42,34 @@ main
   TEST( SetKeyComparatorToNull )
   TEST( SetKeyComparatorWithNullSHash )
   TEST( ToStringWithNullSHash )
+
+#ifdef TEST_FUNCTION_COMMON_SUITE_AVAILABLE
+  TEST( CopyNull )
+#endif
+
+#endif
+
+#ifdef TEST_FUNCTION_COMMON_SUITE_AVAILABLE
+  TEST( Copy )
+  TEST( CopyDistinct )
+  TEST( CopySize )
+  TEST( DestroyNull )
+  TEST( DestroyPopulated )
+  TEST( IsEmptyWithEmpty )
+  TEST( IsEmptyWithNull )
+  TEST( IsEmptyWithPopulated )
+  TEST( New )
+  TEST( SizeWithEmpty )
+  TEST( SizeWithNull )
 #endif
 
   TEST( ContainsDuplicateValues )
   TEST( ContainsNonExistentValue )
   TEST( ContainsUniqueValue )
-  TEST( Copy )
   TEST( CopyContents )
-  TEST( CopyDistinct )
-  TEST( CopySize )
-  TEST( DestroyNull )
-  TEST( DestroyPopulated )
   TEST( GetFromEmptySHash )
   TEST( GetFromPopulatedSHash )
   TEST( GetWithCollidingKeys )
-  TEST( IsEmptyWithEmpty )
-  TEST( IsEmptyWithNull )
-  TEST( IsEmptyWithPopulated )
-  TEST( New )
   TEST( PutExistingKeyIntoFullSHash )
   TEST( PutNewKeyIntoFullSHash )
   TEST( PutValueIntoEmptySHash )
@@ -77,8 +86,6 @@ main
   TEST( SetKeyComparatorWithEmptySHash )
   TEST( SetKeyComparatorWithEqualKeys )
   TEST( Size )
-  TEST( SizeWithEmpty )
-  TEST( SizeWithNull )
   TEST( ToStringWithEmptySHash )
   TEST( ToStringWithNullFunction )
   TEST( ToStringWithPopulatedSHash )
