@@ -16,14 +16,37 @@ main( void )
   const char *result;
 
 #ifdef __WOODPILE_PARAMETER_VALIDATION
+  printf( "Running Parameter Validation Tests\n======\n" );
+
   TEST( AppendAllToNullList )
   TEST( AppendToNullList )
   TEST( BackOfNullList )
-  TEST( CopyNullList )
   TEST( FrontOfNullList )
   TEST( PrependToNullList )
   TEST( ToStringWithNullList )
+
+#ifdef TEST_FUNCTION_COMMON_SUITE_AVAILABLE
+  TEST( CopyNull )
 #endif
+#endif
+
+#ifdef TEST_FUNCTION_COMMON_SUITE_AVAILABLE
+  printf( "\nRunning Common Functionality Tests\n======\n" );
+
+  TEST( Copy )
+  TEST( CopyDistinct )
+  TEST( CopySize )
+  TEST( DestroyNull )
+  TEST( DestroyPopulated )
+  TEST( IsEmptyWithNew )
+  TEST( IsEmptyWithNull )
+  TEST( IsEmptyWithPopulated )
+  TEST( New )
+  TEST( SizeWithEmpty )
+  TEST( SizeWithNull )
+#endif
+
+  printf( "\nRunning Dynamic List Functionality Tests\n======\n" );
 
   TEST( AppendAllOfEmptyList )
   TEST( AppendAllOfNullList )
@@ -38,12 +61,7 @@ main( void )
   TEST( ContainsNullElement )
   TEST( ContainsUniqueElement )
   TEST( ContainsWithNullList )
-  TEST( Copy )
   TEST( CopyContents )
-  TEST( CopyDistinct )
-  TEST( CopySize )
-  TEST( DestroyNullList )
-  TEST( DestroyPopulatedList )
   TEST( FrontOfEmptyList )
   TEST( FrontOfPopulatedList )
   TEST( GetFromEmptyList )
@@ -53,15 +71,9 @@ main( void )
   TEST( GetPositiveIndex )
   TEST( GetPositiveIndexWrap )
   TEST( GetZeroIndex )
-  TEST( New )
-  TEST( NewListIsEmpty )
-  TEST( NullListIsEmpty )
-  TEST( PopulatedListIsNotEmpty )
   TEST( PrependNullElement )
   TEST( PrependToEmptyList )
   TEST( PrependToPopulatedList )
-  TEST( SizeOfEmptyList )
-  TEST( SizeOfNullList )
   TEST( SizeOfPopulatedList )
   TEST( ToStringWithEmptyList )
   TEST( ToStringWithNullFunction )
@@ -408,27 +420,6 @@ TestContainsWithNullList
 }
 
 const char *
-TestCopy
-( void )
-{
-  dlist_t *copy, *list;
-
-  list = BuildDList();
-  if( !list )
-    return "could not build a List";
-
-  copy = DListCopy( list );
-
-  if( !copy )
-    return "NULL was returned for a non-NULL List";
-
-  DListDestroy( copy );
-  DListDestroy( list );
-
-  return NULL;
-}
-
-const char *
 TestCopyContents
 ( void )
 {
@@ -451,82 +442,6 @@ TestCopyContents
   }
 
   DListDestroy( copy );
-  DListDestroy( list );
-
-  return NULL;
-}
-
-const char *
-TestCopyDistinct
-( void )
-{
-  const dlist_t *copy, *list;
-
-  list = BuildDList();
-  if( !list )
-    return "could not build a List";
-
-  copy = DListCopy( list );
-
-  if( copy == list )
-    return "the copy List was the same structure as the original List";
-
-  DListDestroy( copy );
-  DListDestroy( list );
-
-  return NULL;
-}
-
-const char *
-TestCopyNullList
-( void )
-{
-  if( DListCopy( NULL ) != NULL )
-    return "NULL was not returned when copying a NULL List";
-
-  return NULL;
-}
-
-const char *
-TestCopySize
-( void )
-{
-  const dlist_t *copy, *list;
-
-  list = BuildDList();
-  if( !list )
-    return "could not build a List";
-
-  copy = DListCopy( list );
-
-  if( DListSize( list ) != DListSize( copy ) )
-    return "the copy was not the same size as the original";
-
-  DListDestroy( copy );
-  DListDestroy( list );
-
-  return NULL;
-}
-
-const char *
-TestDestroyNullList
-( void )
-{
-  DListDestroy( NULL );
-
-  return NULL;
-}
-
-const char *
-TestDestroyPopulatedList
-( void )
-{
-  const dlist_t *list;
-
-  list = BuildDList();
-  if( !list )
-    return "could not build a List";
-
   DListDestroy( list );
 
   return NULL;
@@ -777,67 +692,6 @@ TestGetZeroIndex
 }
 
 const char *
-TestNew
-( void )
-{
-  const dlist_t *list;
-
-  list = DListNew();
-  if( !list )
-    return "a new List could not be constructed";
-
-  DListDestroy( list );
-
-  return NULL;
-}
-
-const char *
-TestNewListIsEmpty
-( void )
-{
-  const dlist_t *list;
-
-  list = DListNew();
-  if( !list )
-    return "could not build a List";
-
-  if( !DListIsEmpty( list ) )
-    return "a newly constructed List was not empty";
-
-  DListDestroy( list );
-
-  return NULL;
-}
-
-const char *
-TestNullListIsEmpty
-( void )
-{
-  if( !DListIsEmpty( NULL ) )
-    return "a NULL List was not empty";
-
-  return NULL;
-}
-
-const char *
-TestPopulatedListIsNotEmpty
-( void )
-{
-  const dlist_t *list;
-
-  list = BuildDList();
-  if( !list )
-    return "could not build a List";
-
-  if( DListIsEmpty( list ) )
-    return "a populated List was empty";
-
-  DListDestroy( list );
-
-  return NULL;
-}
-
-const char *
 TestPrependNullElement
 ( void )
 {
@@ -919,34 +773,6 @@ TestPrependToPopulatedList
     return "the List size did not increase by one after prepending";
 
   DListDestroy( list );
-
-  return NULL;
-}
-
-const char *
-TestSizeOfEmptyList
-( void )
-{
-  const dlist_t *list;
-
-  list = DListNew();
-  if( !list )
-    return "could not build a List";
-
-  if( DListSize( list ) != 0 )
-    return "an empty List did not have a size of 0";
-
-  DListDestroy( list );
-
-  return NULL;
-}
-
-const char *
-TestSizeOfNullList
-( void )
-{
-  if( DListSize( NULL ) != 0 )
-    return "a NULL List did not have a size of 0";
 
   return NULL;
 }

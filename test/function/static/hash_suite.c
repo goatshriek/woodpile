@@ -59,7 +59,7 @@ main
   TEST( CopySize )
   TEST( DestroyNull )
   TEST( DestroyPopulated )
-  TEST( IsEmptyWithEmpty )
+  TEST( IsEmptyWithNew )
   TEST( IsEmptyWithNull )
   TEST( IsEmptyWithPopulated )
   TEST( New )

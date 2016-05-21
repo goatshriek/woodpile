@@ -197,17 +197,6 @@ TestContainsWithNullList
 ( void );
 
 /**
- * Tests the CopyList function.
- *
- * @test A non-NULL List must be returned as the copy of a non-NULL List.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestCopy
-( void );
-
-/**
  * Tests the contents of the List returned by the CopyList function.
  *
  * @test The copied List must point at the same elements as the original.
@@ -230,17 +219,6 @@ TestCopyDistinct
 ( void );
 
 /**
- * Tests the CopyList function with a NULL List.
- *
- * @test a NULL List must return NULL.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestCopyNullList
-( void );
-
-/**
  * Tests the size of the List returned by the CopyList function.
  *
  * @test The copy of a populated List must be the same size as the original.
@@ -249,28 +227,6 @@ TestCopyNullList
  */
 const char *
 TestCopySize
-( void );
-
-/**
- * Tests the DestroyList function with a NULL List.
- * 
- * @test A NULL List must not cause an error.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestDestroyNullList
-( void );
-
-/**
- * Tests the DestroyList function with a populated List.
- *
- *  @test A populated List must not cause an error.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestDestroyPopulatedList
 ( void );
 
 /**
@@ -398,50 +354,6 @@ TestGetZeroIndex
 ( void );
 
 /**
- * Tests the NewList function.
- *
- * @test Calling the function must return a non-NULL value
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestNew
-( void );
-
-/** 
- * Tests the ListIsEmpty function with an new List.
- *
- * @test A newly constructed List must return a value that is logically true.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestNewListIsEmpty
-( void );
-
-/**
- * Tests the ListIsEmpty function with a NULL List.
- *
- * @test A NULL List must return a value that is logically true.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestNullListIsEmpty
-( void );
-
-/**
- * Tests the ListIsEmpty function with a populated List.
- *
- * @test A populated List must return a value that is logically false.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestPopulatedListIsNotEmpty
-( void );
-
-/**
  * Tests the PrependToList function with a NULL element.
  *
  * @test A NULL element must return the List to prepend to, regardless of whether
@@ -487,28 +399,6 @@ TestPrependToNullList
  */
 const char *
 TestPrependToPopulatedList
-( void );
-
-/**
- * Tests the ListSize function with an empty List.
- *
- * @test An empty List must return 0.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestSizeOfEmptyList
-( void );
-
-/**
- * Tests the ListSize function with a NULL List.
- *
- * @test A NULL List must return 0.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestSizeOfNullList
 ( void );
 
 /**
