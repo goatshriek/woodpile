@@ -10,7 +10,7 @@ dlist_t *
 DListAppendAll
 ( dlist_t *first, const dlist_t *second )
 {
-  Node *node, *previous=NULL, *temp;
+  node_t *node, *previous=NULL, *temp;
 
   VALIDATE_PARAMETERS( first )
 
@@ -33,14 +33,14 @@ dlist_t *
 DListAppend
 ( dlist_t *list, void *element )
 {
-  Node *node;
+  node_t *node;
 
   VALIDATE_PARAMETERS( list )
 
   if( !element )
     return list;
 
-  node = malloc( sizeof( Node ) );
+  node = malloc( sizeof( node_t ) );
   VALIDATE_ALLOCATION( node )
 
   node->neighbors = list->last;
@@ -61,7 +61,7 @@ DListCopy
 ( const dlist_t *list )
 {
   dlist_t *copy;
-  Node *node, *previous=NULL, *temp;
+  node_t *node, *previous=NULL, *temp;
 
   VALIDATE_PARAMETERS( list )
 
@@ -82,7 +82,7 @@ void
 DListDestroy
 ( const dlist_t *list )
 {
-  const Node *previous=NULL, *current, *next;
+  const node_t *previous=NULL, *current, *next;
 
   if( !list )
     return;
@@ -117,7 +117,7 @@ size_t
 DListContains
 ( const dlist_t *list, const void *element )
 {
-  Node *node, *previous = NULL, *temp;
+  node_t *node, *previous = NULL, *temp;
   size_t count=0;
 
   if( !list )
@@ -152,7 +152,7 @@ void *
 DListGet
 ( const dlist_t *list, int index )
 {
-  Node *current, *next, *previous=NULL, *start;
+  node_t *current, *next, *previous=NULL, *start;
   size_t i, steps;
 
   if( DListIsEmpty( list ) )
@@ -192,7 +192,7 @@ unsigned
 DListSize
 ( const dlist_t *list )
 {
-  Node *node, *previous = NULL, *temp;
+  node_t *node, *previous = NULL, *temp;
   unsigned size = 0;
 
   if( !list )
@@ -216,7 +216,7 @@ DListToString
 {
   char *str;
   const char *element;
-  const Node *current, *next, *previous=NULL;
+  const node_t *current, *next, *previous=NULL;
   size_t element_length, str_capacity=100, str_length=1;
 
   VALIDATE_PARAMETERS( list )
@@ -278,11 +278,11 @@ dlist_t *
 DListPrepend
 ( dlist_t *list, void *element )
 {
-  Node *node;
+  node_t *node;
 
   VALIDATE_PARAMETERS( list )
 
-  node = malloc( sizeof( Node ) );
+  node = malloc( sizeof( node_t ) );
   VALIDATE_ALLOCATION( node )
 
   node->neighbors = list->first;

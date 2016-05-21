@@ -9,7 +9,7 @@ DSplayCBegin
 ( const DSplay *splay )
 {
   DSplayCItr *itr;
-  const Node *current;
+  const node_t *current;
 
   VALIDATE_PARAMETERS( splay )
 
@@ -33,7 +33,7 @@ DSplayCEnd
 ( const DSplay *splay )
 {
   DSplayCItr *itr;
-  const Node *current;
+  const node_t *current;
 
   VALIDATE_PARAMETERS( splay )
 

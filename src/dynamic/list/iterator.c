@@ -8,12 +8,12 @@ DListItr *
 DListItrAdd
 ( DListItr *iterator, void *element )
 {
-  Node *addition;
+  node_t *addition;
 
   if( !iterator || !element )
     return iterator;
 
-  addition = malloc( sizeof( Node ) );
+  addition = malloc( sizeof( node_t ) );
   VALIDATE_ALLOCATION( addition )
 
   addition->neighbors = XORNODES( iterator->previous, iterator->current );
@@ -119,7 +119,7 @@ void *
 DListItrNext
 ( DListItr *iterator )
 {
-  Node *temp;
+  node_t *temp;
   void *element;
 
   VALIDATE_PARAMETERS( iterator )
@@ -141,7 +141,7 @@ void *
 DListItrPrevious
 ( DListItr *iterator )
 {
-  Node *temp;
+  node_t *temp;
   void *element;
 
   VALIDATE_PARAMETERS( iterator )
@@ -163,7 +163,7 @@ void *
 DListItrRemove
 ( DListItr *iterator )
 {
-  Node *left_neighbor, *removed, *right_neighbor;
+  node_t *left_neighbor, *removed, *right_neighbor;
   void *element;
 
   VALIDATE_PARAMETERS( iterator )
