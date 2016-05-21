@@ -184,3 +184,13 @@ TestSizeWithEmpty
 
   return NULL;
 }
+
+const char *
+TestSizeWithNull
+( void )
+{
+  if( TEST_FUNCTION_SIZE( NULL ) != 0 )
+    return "0 was not returned for a NULL structure";
+
+  return NULL;
+}

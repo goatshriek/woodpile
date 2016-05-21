@@ -78,7 +78,7 @@ main
   TEST( SetKeyComparatorWithEqualKeys )
   TEST( Size )
   TEST( SizeWithEmpty )
-  TEST( SizeWithNullSHash )
+  TEST( SizeWithNull )
   TEST( ToStringWithEmptySHash )
   TEST( ToStringWithNullFunction )
   TEST( ToStringWithPopulatedSHash )
@@ -1006,16 +1006,6 @@ TestSize
 {
   if( SHashSize( common_hash ) != 10 )
     return "the correct size was not returned for a hash";
-
-  return NULL;
-}
-
-const char *
-TestSizeWithNullSHash
-( void )
-{
-  if( SHashSize( NULL ) != 0 )
-    return "0 was not returned for a NULL hash";
 
   return NULL;
 }
