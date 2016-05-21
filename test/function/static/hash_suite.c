@@ -25,6 +25,8 @@ main
   }
 
 #ifdef __WOODPILE_PARAMETER_VALIDATION
+  printf( "Running Parameter Validation Tests\n======\n" );
+
   TEST( ContainsNullValue )
   TEST( ContainsWithNullSHash )
   TEST( GetFromNullSHash )
@@ -50,6 +52,8 @@ main
 #endif
 
 #ifdef TEST_FUNCTION_COMMON_SUITE_AVAILABLE
+  printf( "\nRunning Common Functionality Tests\n======\n" );
+
   TEST( Copy )
   TEST( CopyDistinct )
   TEST( CopySize )
@@ -62,6 +66,8 @@ main
   TEST( SizeWithEmpty )
   TEST( SizeWithNull )
 #endif
+
+  printf( "\nRunning Static Hash Functionality Tests\n======\n" );
 
   TEST( ContainsDuplicateValues )
   TEST( ContainsNonExistentValue )
