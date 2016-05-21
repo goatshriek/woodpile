@@ -19,6 +19,7 @@
 #ifdef TEST_FUNCTION_NEW
 #ifdef TEST_FUNCTION_SIZE
 #ifdef TEST_TYPE
+#define TEST_FUNCTION_COMMON_SUITE_AVAILABLE
 
 struct TEST_TYPE;
 typedef struct TEST_TYPE test_struct_t;

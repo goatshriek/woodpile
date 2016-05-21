@@ -3,6 +3,8 @@
 #include "test/function/common_suite.h"
 #include "test/helper.h"
 
+#ifdef TEST_FUNCTION_COMMON_SUITE_AVAILABLE
+
 #ifdef __WOODPILE_PARAMETER_VALIDATION
 
 const char *
@@ -194,3 +196,5 @@ TestSizeWithNull
 
   return NULL;
 }
+
+#endif
