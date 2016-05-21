@@ -166,3 +166,21 @@ TestNew
 
   return NULL;
 }
+
+const char *
+TestSizeWithEmpty
+( void )
+{
+  const test_struct_t *structure;
+
+  structure = TEST_FUNCTION_NEW();
+  if( !structure )
+    return "could not create an empty structure";
+
+  if( TEST_FUNCTION_SIZE( structure ) != 0 )
+    return "the size of an empty structure was not zero";
+
+  TEST_FUNCTION_DESTROY( structure );
+
+  return NULL;
+}

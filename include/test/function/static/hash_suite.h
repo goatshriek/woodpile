@@ -508,17 +508,6 @@ TestSize
 ( void );
 
 /**
- * Tests the SHashSize function with an empty SHash.
- *
- * @test An empty SHash must return 0.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestSizeWithEmptySHash
-( void );
-
-/**
  * Tests the SHashSize function with a NULL SHash.
  *
  * @test A NULL SHash must return 0.

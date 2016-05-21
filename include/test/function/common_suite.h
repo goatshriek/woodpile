@@ -139,6 +139,17 @@ const char *
 TestNew
 ( void );
 
+/**
+ * Tests the Size function with an empty structure.
+ *
+ * @test An empty structure must return 0.
+ *
+ * @return NULL on completion or a string describing the failure
+ */
+const char *
+TestSizeWithEmpty
+( void );
+
 #endif
 #endif
 #endif
