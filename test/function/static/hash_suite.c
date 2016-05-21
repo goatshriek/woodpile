@@ -5,6 +5,7 @@
 #include <woodpile/hasher.h>
 #include <woodpile/static/hash.h>
 #include "lib/validate.h"
+#include "test/function/common_suite.h"
 #include "test/function/static/hash_suite.h"
 #include "test/helper.h"
 
@@ -24,9 +25,10 @@ main
   }
 
 #ifdef __WOODPILE_PARAMETER_VALIDATION
+  printf( "Running Parameter Validation Tests\n======\n" );
+
   TEST( ContainsNullValue )
   TEST( ContainsWithNullSHash )
-  TEST( CopyNullSHash )
   TEST( GetFromNullSHash )
   TEST( GetNullKeyFromSHash )
   TEST( PutIntoNullSHash )
@@ -42,24 +44,38 @@ main
   TEST( SetKeyComparatorToNull )
   TEST( SetKeyComparatorWithNullSHash )
   TEST( ToStringWithNullSHash )
+
+#ifdef TEST_FUNCTION_COMMON_SUITE_AVAILABLE
+  TEST( CopyNull )
 #endif
+
+#endif
+
+#ifdef TEST_FUNCTION_COMMON_SUITE_AVAILABLE
+  printf( "\nRunning Common Functionality Tests\n======\n" );
+
+  TEST( Copy )
+  TEST( CopyDistinct )
+  TEST( CopySize )
+  TEST( DestroyNull )
+  TEST( DestroyPopulated )
+  TEST( IsEmptyWithEmpty )
+  TEST( IsEmptyWithNull )
+  TEST( IsEmptyWithPopulated )
+  TEST( New )
+  TEST( SizeWithEmpty )
+  TEST( SizeWithNull )
+#endif
+
+  printf( "\nRunning Static Hash Functionality Tests\n======\n" );
 
   TEST( ContainsDuplicateValues )
   TEST( ContainsNonExistentValue )
   TEST( ContainsUniqueValue )
-  TEST( Copy )
   TEST( CopyContents )
-  TEST( CopyDistinct )
-  TEST( CopySize )
-  TEST( DestroyNullSHash )
-  TEST( DestroyPopulatedSHash )
   TEST( GetFromEmptySHash )
   TEST( GetFromPopulatedSHash )
   TEST( GetWithCollidingKeys )
-  TEST( IsEmptyWithEmptySHash )
-  TEST( IsEmptyWithPopulatedSHash )
-  TEST( IsEmptyWithNullSHash )
-  TEST( New )
   TEST( PutExistingKeyIntoFullSHash )
   TEST( PutNewKeyIntoFullSHash )
   TEST( PutValueIntoEmptySHash )
@@ -76,8 +92,6 @@ main
   TEST( SetKeyComparatorWithEmptySHash )
   TEST( SetKeyComparatorWithEqualKeys )
   TEST( Size )
-  TEST( SizeWithEmptySHash )
-  TEST( SizeWithNullSHash )
   TEST( ToStringWithEmptySHash )
   TEST( ToStringWithNullFunction )
   TEST( ToStringWithPopulatedSHash )
@@ -114,16 +128,6 @@ TestContainsWithNullSHash
 
   if( SHashContains( NULL, "value" ) != NULL )
     return "NULL was not returned for a NULL hash";
-
-  return NULL;
-}
-
-const char *
-TestCopyNullSHash
-( void )
-{
-  if( SHashCopy( NULL ) != NULL )
-    return "a non-NULL value was returned for a NULL hash";
 
   return NULL;
 }
@@ -464,21 +468,6 @@ TestContainsUniqueValue
 }
 
 const char *
-TestCopy
-( void )
-{
-  shash_t *copy;
-
-  copy = SHashCopy( common_hash );
-  if( !copy )
-    return "NULL was returned for a non-NULL hash";
-
-  SHashDestroy( copy );
-
-  return NULL;
-}
-
-const char *
 TestCopyContents
 ( void )
 {
@@ -492,64 +481,6 @@ TestCopyContents
     return "the copy did not point at the same elements as the original";
 
   SHashDestroy( copy );
-
-  return NULL;
-}
-
-const char *
-TestCopyDistinct
-( void )
-{
-  shash_t *copy;
-
-  copy = SHashCopy( common_hash );
-
-  if( copy == common_hash )
-    return "the copy was not distinct from the original";
-
-  SHashDestroy( copy );
-
-  return NULL;
-}
-
-const char *
-TestCopySize
-( void )
-{
-  shash_t *copy;
-
-  copy = SHashCopy( common_hash );
-  if( !copy )
-    return "the hash could not be copied";
-
-  if( SHashSize( common_hash ) != SHashSize( copy ) )
-    return "the size of the copy was not the same as the original";
-
-  SHashDestroy( copy );
-
-  return NULL;
-}
-
-const char *
-TestDestroyNullSHash
-( void )
-{
-  SHashDestroy( NULL );
-
-  return NULL;
-}
-
-const char *
-TestDestroyPopulatedSHash
-( void )
-{
-  shash_t *hash;
-
-  hash = BuildSHash();
-  if( !hash )
-    return "could not build a populated hash";
-
-  SHashDestroy( hash );
 
   return NULL;
 }
@@ -601,57 +532,6 @@ TestGetWithCollidingKeys
   ASSERT_STRINGS_EQUAL( "the value mapped to collision", SHashGet(hash, "collision" ), "the value mapped to collision was not correct" )
 
   SHashDestroy( hash );
-
-  return NULL;
-}
-
-const char *
-TestIsEmptyWithEmptySHash
-( void )
-{
-  shash_t *hash;
-
-  hash = SHashNew();
-  if( !hash )
-    return "a new hash could not be created";
-
-  if( !SHashIsEmpty( hash ) )
-    return "a false value was returned for an empty hash";
-
-  SHashDestroy( hash );
-
-  return NULL;
-}
-
-const char *
-TestIsEmptyWithPopulatedSHash
-( void )
-{
-  if( SHashIsEmpty( common_hash ) )
-    return "a true value was returned for a populated hash";
-
-  return NULL;
-}
-
-const char *
-TestIsEmptyWithNullSHash
-( void )
-{
-  if( !SHashIsEmpty( NULL ) )
-    return "a false value was returned for a NULL hash";
-
-  return NULL;
-}
-
-const char *
-TestNew
-( void )
-{
-  shash_t *hash;
-
-  hash = SHashNew();
-  if( !hash )
-    return "NULL was returned with a non-NULL hashing function";
 
   return NULL;
 }
@@ -1139,34 +1019,6 @@ TestSize
 {
   if( SHashSize( common_hash ) != 10 )
     return "the correct size was not returned for a hash";
-
-  return NULL;
-}
-
-const char *
-TestSizeWithEmptySHash
-( void )
-{
-  shash_t *hash;
-
-  hash = SHashNew();
-  if( !hash )
-    return "could not create an empty hash";
-
-  if( SHashSize( hash ) != 0 )
-    return "the size of an empty hash was not zero";
-
-  SHashDestroy( hash );
-
-  return NULL;
-}
-
-const char *
-TestSizeWithNullSHash
-( void )
-{
-  if( SHashSize( NULL ) != 0 )
-    return "0 was not returned for a NULL hash";
 
   return NULL;
 }

@@ -35,17 +35,6 @@ TestContainsWithNullSHash
 ( void );
 
 /**
- * Tests the CopySHash function with a NULL SHash.
- *
- * @test a NULL SHash must return NULL.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestCopyNullSHash
-( void );
-
-/**
  * Tests the SHashGet function with a NULL SHash.
  *
  * @test Calling the function with a NULL SHash must return NULL regardless of
@@ -265,17 +254,6 @@ TestContainsUniqueValue
 ( void );
 
 /**
- * Tests the CopySHash function.
- *
- * @test A non-NULL SHash must be returned as the copy of a non-NULL SHash.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestCopy
-( void );
-
-/**
  * Tests the contents of the SHash returned by the CopySHash function.
  *
  * @test The copied SHash must point at the same elements as the original.
@@ -284,50 +262,6 @@ TestCopy
  */
 const char *
 TestCopyContents
-( void );
-
-/**
- * Tests the SHash returned by the CopySHash function.
- *
- * @test The copied SHash must be a different value than the original.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestCopyDistinct
-( void );
-
-/**
- * Tests the size of the SHash returned by the CopySHash function.
- *
- * @test The copy of a populated SHash must be the same size as the original.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestCopySize
-( void );
-
-/**
- * Tests the DestroySHash function with a NULL SHash.
- *
- * @test a NULL SHash must not cause an error.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestDestroyNullSHash
-( void );
-
-/**
- * Tests the DestroySHash function with a populated SHash.
- *
- * @test A populated SHash must not cause an error.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestDestroyPopulatedSHash
 ( void );
 
 /**
@@ -362,50 +296,6 @@ TestGetFromPopulatedSHash
  */
 const char *
 TestGetWithCollidingKeys
-( void );
-
-/**
- * Tests the SHashIsEmpty function with an empty SHash.
- *
- * @test A SHash with no elements must return a positive value.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestIsEmptyWithEmptySHash
-( void );
-
-/**
- * Tests the SHashIsEmpty function with a populated SHash.
- *
- * @test A populated SHash must return 0.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestIsEmptyWithPopulatedSHash
-( void );
-
-/**
- * Tests the SHashIsEmpty function with a NULL SHash.
- *
- * @test a NULL SHash must return a positive value.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestIsEmptyWithNullSHash
-( void );
-
-/**
- * Tests the NewSHash function.
- *
- * @test Calling the function must return a non-NULL value.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestNew
 ( void );
 
 /**
@@ -615,28 +505,6 @@ TestSetKeyComparatorWithEqualKeys
  */
 const char *
 TestSize
-( void );
-
-/**
- * Tests the SHashSize function with an empty SHash.
- *
- * @test An empty SHash must return 0.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestSizeWithEmptySHash
-( void );
-
-/**
- * Tests the SHashSize function with a NULL SHash.
- *
- * @test A NULL SHash must return 0.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestSizeWithNullSHash
 ( void );
 
 /**

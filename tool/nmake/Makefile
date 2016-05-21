@@ -141,8 +141,8 @@ $(OUTDIR)\test\function\dynamic\tree\splay\const_iterator_suite.exe: $(OUTDIR)\h
 $(OUTDIR)\test\function\dynamic\tree\splay\iterator_suite.exe: $(OUTDIR)\helper.dll $(OUTDIR)\test\function\dynamic\tree\splay\iterator_suite.obj
   $(link) $(WOODPILELFLAGS) /out:$(OUTDIR)\test\function\dynamic\tree\splay\iterator_suite.exe $(OUTDIR)\woodpile.lib $(OUTDIR)\helper.lib $(OUTDIR)\test\function\dynamic\tree\splay\iterator_suite.obj
 
-$(OUTDIR)\test\function\static\hash_suite.exe: $(OUTDIR)\helper.dll $(OUTDIR)\test\function\static\hash_suite.obj
-  $(link) $(WOODPILELFLAGS) /out:$(OUTDIR)\test\function\static\hash_suite.exe $(OUTDIR)\woodpile.lib $(OUTDIR)\helper.lib $(OUTDIR)\test\function\static\hash_suite.obj
+$(OUTDIR)\test\function\static\hash_suite.exe: $(OUTDIR)\helper.dll $(OUTDIR)\test\function\static\hash_suite.obj $(OUTDIR)\test\function\static\hash_common.obj
+  $(link) $(WOODPILELFLAGS) /out:$(OUTDIR)\test\function\static\hash_suite.exe $(OUTDIR)\woodpile.lib $(OUTDIR)\helper.lib $(OUTDIR)\test\function\static\hash_suite.obj $(OUTDIR)\test\function\static\hash_common.obj
 
 $(OUTDIR)\test\function\static\queue_suite.exe: $(OUTDIR)\helper.dll $(OUTDIR)\test\function\static\queue_suite.obj
   $(link) $(WOODPILELFLAGS) /out:$(OUTDIR)\test\function\static\queue_suite.exe $(OUTDIR)\woodpile.lib $(OUTDIR)\helper.lib $(OUTDIR)\test\function\static\queue_suite.obj
@@ -187,6 +187,18 @@ $(OUTDIR)\test\function\dynamic\tree\splay\iterator_suite.obj: $(OUTDIR) $(TESTD
   
 $(OUTDIR)\test\function\static\hash_suite.obj: $(OUTDIR) $(TESTDIR)\function\static\hash_suite.c
   $(cc) $(WOODPILECFLAGS) /Fo$(OUTDIR)\test\function\static\ /Fd$(OUTDIR)\test\function\static\hash_suite.pdb $(TESTDIR)\function\static\hash_suite.c
+
+$(OUTDIR)\test\function\static\hash_common.obj: $(OUTDIR) $(TESTDIR)\function\common_suite.c
+  $(cc) $(WOODPILECFLAGS) /Fo$(OUTDIR)\test\function\static\hash_common.obj \
+        /Fd$(OUTDIR)\test\function\static\hash_common.pdb \
+        $(TESTDIR)\function\common_suite.c \
+        /DTEST_FUNCTION_BUILD=BuildSHash \
+        /DTEST_FUNCTION_COPY=SHashCopy \
+        /DTEST_FUNCTION_DESTROY=SHashDestroy \
+        /DTEST_FUNCTION_IS_EMPTY=SHashIsEmpty \
+        /DTEST_FUNCTION_NEW=SHashNew \
+        /DTEST_FUNCTION_SIZE=SHashSize \
+        /DTEST_TYPE=shash_t
   
 $(OUTDIR)\test\function\static\queue_suite.obj: $(OUTDIR) $(TESTDIR)\function\static\queue_suite.c
   $(cc) $(WOODPILECFLAGS) /Fo$(OUTDIR)\test\function\static\ /Fd$(OUTDIR)\test\function\static\queue_suite.pdb $(TESTDIR)\function\static\queue_suite.c
