@@ -95,21 +95,21 @@ EXPORTS
   SHashSetSeed @92
   SHashSize @93
   SHashToString @94
-  CopyStaticQueue @95
-  DestroyStaticQueue @96
-  NewStaticQueue @97
-  NewSizedStaticQueue @98
-  PeekAtStaticQueue @99
-  PopFromStaticQueue @100
-  PushToStaticQueue @101
-  StaticQueueCapacity @102
-  StaticQueueContains @103
-  StaticQueueIsEmpty @104
-  StaticQueueSize @105
-  StaticQueueToString @106
-  RemoveFromStaticQueue @107
-  SetStaticQueueCapacity @108
-  TrimStaticQueueToSize @109
+  SQueueCapacity @95
+  SQueueContains @96
+  SQueueCopy @97
+  SQueueDestroy @98
+  SQueueIsEmpty @99
+  SQueueNew @100
+  SQueueNewSized @101
+  SQueuePeek @102
+  SQueuePop @103
+  SQueuePush @104
+  SQueueRemove @105
+  SQueueSetCapacity @106
+  SQueueSize @107
+  SQueueToString @108
+  SQueueTrimToSize @109
   CopyStaticStack @110
   DestroyStaticStack @111
   NewSizedStaticStack @112

@@ -156,8 +156,13 @@ $(OUTDIR)\test\function\dynamic\tree\splay\iterator_suite.exe: $(OUTDIR)\helper.
 $(OUTDIR)\test\function\static\hash_suite.exe: $(OUTDIR)\helper.dll $(OUTDIR)\test\function\static\hash_suite.obj $(OUTDIR)\test\function\static\hash_common.obj
   $(link) $(WOODPILELFLAGS) /out:$(OUTDIR)\test\function\static\hash_suite.exe $(OUTDIR)\woodpile.lib $(OUTDIR)\helper.lib $(OUTDIR)\test\function\static\hash_suite.obj $(OUTDIR)\test\function\static\hash_common.obj
 
-$(OUTDIR)\test\function\static\queue_suite.exe: $(OUTDIR)\helper.dll $(OUTDIR)\test\function\static\queue_suite.obj
-  $(link) $(WOODPILELFLAGS) /out:$(OUTDIR)\test\function\static\queue_suite.exe $(OUTDIR)\woodpile.lib $(OUTDIR)\helper.lib $(OUTDIR)\test\function\static\queue_suite.obj
+$(OUTDIR)\test\function\static\queue_suite.exe: $(OUTDIR)\helper.dll $(OUTDIR)\test\function\static\queue_suite.obj $(OUTDIR)\test\function\static\queue_common.obj
+  $(link) $(WOODPILELFLAGS) \
+          /out:$(OUTDIR)\test\function\static\queue_suite.exe \
+          $(OUTDIR)\woodpile.lib \
+          $(OUTDIR)\helper.lib \
+          $(OUTDIR)\test\function\static\queue_suite.obj \
+          $(OUTDIR)\test\function\static\queue_common.obj
 
 $(OUTDIR)\test\function\static\stack_suite.exe: $(OUTDIR)\helper.dll $(OUTDIR)\test\function\static\stack_suite.obj
   $(link) $(WOODPILELFLAGS) /out:$(OUTDIR)\test\function\static\stack_suite.exe $(OUTDIR)\woodpile.lib $(OUTDIR)\helper.lib $(OUTDIR)\test\function\static\stack_suite.obj
@@ -256,7 +261,8 @@ $(OUTDIR)\test\function\static\hash_suite.obj: $(OUTDIR) $(TESTDIR)\function\sta
         /DTEST_TYPE=shash_t
 
 $(OUTDIR)\test\function\static\hash_common.obj: $(OUTDIR) $(TESTDIR)\function\common_suite.c
-  $(cc) $(WOODPILECFLAGS) /Fo$(OUTDIR)\test\function\static\hash_common.obj \
+  $(cc) $(WOODPILECFLAGS) \
+        /Fo$(OUTDIR)\test\function\static\hash_common.obj \
         /Fd$(OUTDIR)\test\function\static\hash_common.pdb \
         $(TESTDIR)\function\common_suite.c \
         /DTEST_FUNCTION_BUILD=BuildSHash \
@@ -268,7 +274,30 @@ $(OUTDIR)\test\function\static\hash_common.obj: $(OUTDIR) $(TESTDIR)\function\co
         /DTEST_TYPE=shash_t
   
 $(OUTDIR)\test\function\static\queue_suite.obj: $(OUTDIR) $(TESTDIR)\function\static\queue_suite.c
-  $(cc) $(WOODPILECFLAGS) /Fo$(OUTDIR)\test\function\static\ /Fd$(OUTDIR)\test\function\static\queue_suite.pdb $(TESTDIR)\function\static\queue_suite.c
+  $(cc) $(WOODPILECFLAGS) \
+        /Fo$(OUTDIR)\test\function\static\ \
+        /Fd$(OUTDIR)\test\function\static\queue_suite.pdb \
+        $(TESTDIR)\function\static\queue_suite.c \
+        /DTEST_FUNCTION_BUILD=BuildSQueue \
+        /DTEST_FUNCTION_COPY=SQueueCopy \
+        /DTEST_FUNCTION_DESTROY=SQueueDestroy \
+        /DTEST_FUNCTION_IS_EMPTY=SQueueIsEmpty \
+        /DTEST_FUNCTION_NEW=SQueueNew \
+        /DTEST_FUNCTION_SIZE=SQueueSize \
+        /DTEST_TYPE=squeue_t
+
+$(OUTDIR)\test\function\static\queue_common.obj: $(OUTDIR) $(TESTDIR)\function\common_suite.c
+  $(cc) $(WOODPILECFLAGS) \
+        /Fo$(OUTDIR)\test\function\static\queue_common.obj \
+        /Fd$(OUTDIR)\test\function\static\queue_common.pdb \
+        $(TESTDIR)\function\common_suite.c \
+        /DTEST_FUNCTION_BUILD=BuildSQueue \
+        /DTEST_FUNCTION_COPY=SQueueCopy \
+        /DTEST_FUNCTION_DESTROY=SQueueDestroy \
+        /DTEST_FUNCTION_IS_EMPTY=SQueueIsEmpty \
+        /DTEST_FUNCTION_NEW=SQueueNew \
+        /DTEST_FUNCTION_SIZE=SQueueSize \
+        /DTEST_TYPE=squeue_t
   
 $(OUTDIR)\test\function\static\stack_suite.obj: $(OUTDIR) $(TESTDIR)\function\static\stack_suite.c
   $(cc) $(WOODPILECFLAGS) /Fo$(OUTDIR)\test\function\static\ /Fd$(OUTDIR)\test\function\static\stack_suite.pdb $(TESTDIR)\function\static\stack_suite.c
