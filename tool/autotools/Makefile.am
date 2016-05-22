@@ -130,8 +130,17 @@ test_function_dynamic_list_const_iterator_suite_LDADD = $(test_libraries)
 test_function_dynamic_list_iterator_suite_SOURCES = test/function/dynamic/list/iterator_suite.c
 test_function_dynamic_list_iterator_suite_LDADD = $(test_libraries)
 
-test_function_dynamic_tree_splay_suite_SOURCES = test/function/dynamic/tree/splay_suite.c
+test_function_dynamic_tree_splay_suite_SOURCES = test/function/common_suite.c \
+                                                 test/function/dynamic/tree/splay_suite.c
 test_function_dynamic_tree_splay_suite_LDADD = $(test_libraries)
+test_function_dynamic_tree_splay_suite_CFLAGS = -D TEST_FUNCTION_BUILD=BuildDSplay \
+                                                -D TEST_FUNCTION_COPY=DSplayCopy \
+                                                -D TEST_FUNCTION_DESTROY=DSplayDestroy \
+                                                -D TEST_FUNCTION_IS_EMPTY=DSplayIsEmpty \
+                                                -D TEST_FUNCTION_NEW=DSplayNew \
+                                                -D TEST_FUNCTION_SIZE=DSplaySize \
+                                                -D TEST_TYPE=dsplay_t \
+                                                $(AM_CFLAGS)
 
 test_function_dynamic_tree_splay_const_iterator_suite_SOURCES = test/function/dynamic/tree/splay/const_iterator_suite.c
 test_function_dynamic_tree_splay_const_iterator_suite_LDADD = $(test_libraries)
