@@ -123,8 +123,14 @@ TESTEXES = $(OUTDIR)\test\function\dynamic\list_suite.exe \
            $(OUTDIR)\test\function\static\queue_suite.exe \
            $(OUTDIR)\test\function\static\stack_suite.exe
 
-$(OUTDIR)\test\function\dynamic\list_suite.exe: $(OUTDIR)\helper.dll $(OUTDIR)\test\function\dynamic\list_suite.obj $(OUTDIR)\lib\str.obj
-  $(link) $(WOODPILELFLAGS) /out:$(OUTDIR)\test\function\dynamic\list_suite.exe $(OUTDIR)\woodpile.lib $(OUTDIR)\helper.lib $(OUTDIR)\test\function\dynamic\list_suite.obj $(OUTDIR)\lib\str.obj
+$(OUTDIR)\test\function\dynamic\list_suite.exe: $(OUTDIR)\helper.dll $(OUTDIR)\test\function\dynamic\list_suite.obj $(OUTDIR)\lib\str.obj $(OUTDIR)\test\function\dynamic\list_common.obj
+  $(link) $(WOODPILELFLAGS) \
+          /out:$(OUTDIR)\test\function\dynamic\list_suite.exe \
+          $(OUTDIR)\woodpile.lib \
+          $(OUTDIR)\helper.lib \
+          $(OUTDIR)\test\function\dynamic\list_suite.obj \
+          $(OUTDIR)\test\function\dynamic\list_common.obj \
+          $(OUTDIR)\lib\str.obj
 
 $(OUTDIR)\test\function\dynamic\list\const_iterator_suite.exe: $(OUTDIR)\helper.dll $(OUTDIR)\test\function\dynamic\list\const_iterator_suite.obj
   $(link) $(WOODPILELFLAGS) /out:$(OUTDIR)\test\function\dynamic\list\const_iterator_suite.exe $(OUTDIR)\woodpile.lib $(OUTDIR)\helper.lib  $(OUTDIR)\test\function\dynamic\list\const_iterator_suite.obj
@@ -168,7 +174,23 @@ check: $(TESTEXES)
 
 # test object files
 $(OUTDIR)\test\function\dynamic\list_suite.obj: $(OUTDIR) $(TESTDIR)\function\dynamic\list_suite.c
-  $(cc) $(WOODPILECFLAGS) /Fo$(OUTDIR)\test\function\dynamic\ /Fd$(OUTDIR)\test\function\dynamic\list_suite.pdb $(TESTDIR)\function\dynamic\list_suite.c
+  $(cc) $(WOODPILECFLAGS) \
+        /Fo$(OUTDIR)\test\function\dynamic\ \
+        /Fd$(OUTDIR)\test\function\dynamic\list_suite.pdb \
+        $(TESTDIR)\function\dynamic\list_suite.c
+
+$(OUTDIR)\test\function\dynamic\list_common.obj: $(OUTDIR) $(TESTDIR)\function\common_suite.c
+  $(cc) $(WOODPILECFLAGS) \
+        /Fo$(OUTDIR)\test\function\dynamic\list_common.obj \
+        /Fd$(OUTDIR)\test\function\dynamic\list_common.pdb \
+        $(TESTDIR)\function\common_suite.c \
+        /DTEST_FUNCTION_BUILD=BuildDList \
+        /DTEST_FUNCTION_COPY=DListCopy \
+        /DTEST_FUNCTION_DESTROY=DListDestroy \
+        /DTEST_FUNCTION_IS_EMPTY=DListIsEmpty \
+        /DTEST_FUNCTION_NEW=DListNew \
+        /DTEST_FUNCTION_SIZE=DListSize \
+        /DTEST_TYPE=dlist_t
   
 $(OUTDIR)\test\function\dynamic\list\const_iterator_suite.obj: $(OUTDIR) $(TESTDIR)\function\dynamic\list\const_iterator_suite.c
   $(cc) $(WOODPILECFLAGS) /Fo$(OUTDIR)\test\function\dynamic\list\ /Fd$(OUTDIR)\test\function\dynamic\list\const_iterator.pdb $(TESTDIR)\function\dynamic\list\const_iterator_suite.c
@@ -186,7 +208,9 @@ $(OUTDIR)\test\function\dynamic\tree\splay\iterator_suite.obj: $(OUTDIR) $(TESTD
   $(cc) $(WOODPILECFLAGS) /Fo$(OUTDIR)\test\function\dynamic\tree\splay\ /Fd$(OUTDIR)\test\function\dynamic\tree\splay\iterator.pdb $(TESTDIR)\function\dynamic\tree\splay\iterator_suite.c
   
 $(OUTDIR)\test\function\static\hash_suite.obj: $(OUTDIR) $(TESTDIR)\function\static\hash_suite.c
-  $(cc) $(WOODPILECFLAGS) /Fo$(OUTDIR)\test\function\static\ /Fd$(OUTDIR)\test\function\static\hash_suite.pdb $(TESTDIR)\function\static\hash_suite.c
+  $(cc) $(WOODPILECFLAGS) /Fo$(OUTDIR)\test\function\static\ \
+        /Fd$(OUTDIR)\test\function\static\hash_suite.pdb \
+        $(TESTDIR)\function\static\hash_suite.c
 
 $(OUTDIR)\test\function\static\hash_common.obj: $(OUTDIR) $(TESTDIR)\function\common_suite.c
   $(cc) $(WOODPILECFLAGS) /Fo$(OUTDIR)\test\function\static\hash_common.obj \

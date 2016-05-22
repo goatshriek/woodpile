@@ -150,7 +150,7 @@ TestAppendAllOfPopulatedList
     return "the target list was not returned from the append action";
 
   for( i = 0; i < addition_size; i++ ){
-    if( DListGet( target, target_size + i ) != DListGet( addition, i ) )
+    if( DListGet( target, (int)(target_size + i) ) != DListGet( addition, (int) i ) )
       return "the List items were not appended in their original order";
   }
 
