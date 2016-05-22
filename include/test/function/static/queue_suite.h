@@ -68,17 +68,6 @@ TestContainsWithNullQueue
 ( void );
 
 /**
- * Tests the CopyQueue function.
- *
- * @test A non-NULL Queue must be returned as the copy of a non-NULL Queue.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestCopy
-( void );
-
-/**
  * Tests the contents of the Queue returned by the CopyQueue function.
  *
  * @test The copied Queue must point at the same elements as the original.
@@ -87,105 +76,6 @@ TestCopy
  */
 const char *
 TestCopyContents
-( void );
-
-/**
- * Tests the Queue returned by the CopyQueue function.
- *
- * @test The copied Queue must be a different value than the original.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestCopyDistinct
-( void );
-
-/**
- * Tests the CopyQueue function with a NULL Queue.
- *
- * @test a NULL Queue must return NULL.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestCopyNullQueue
-( void );
-
-/**
- * Tests the size of the Queue returned by the CopyQueue function.
- *
- * @test The copy of a populated Queue must be the same size as the original.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestCopySize
-( void );
-
-/**
- * Tests the DestroyQueue function with a NULL Queue.
- *
- * @test a NULL Queue must not cause an error.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestDestroyNullQueue
-( void );
-
-/**
- * Tests the DestroyQueue function with a populated Queue.
- *
- * @test A populated Queue must not cause an error.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestDestroyPopulatedQueue
-( void );
-
-/**
- * Tests the QueueIsEmpty function with an empty Queue.
- *
- * @test A Queue with no elements must return a positive value.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestIsEmptyWithEmptyQueue
-( void );
-
-/**
- * Tests the QueueIsEmpty function with a populated Queue.
- *
- * @test A populated Queue must return 0.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestIsEmptyWithPopulatedQueue
-( void );
-
-/**
- * Tests the QueueIsEmpty function with a NULL Queue.
- *
- * @test a NULL Queue must return a positive value.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestIsEmptyWithNullQueue
-( void );
-
-/**
- * Tests the NewQueue function.
- *
- * @test Calling the function must return a non-NULL value.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestNew
 ( void );
 
 /**
@@ -400,28 +290,6 @@ TestRemoveUniqueValue
  */
 const char *
 TestSize
-( void );
-
-/**
- * Tests the QueueSize function with an empty Queue.
- *
- * @test An empty Queue must return 0.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestSizeWithEmptyQueue
-( void );
-
-/**
- * Tests the QueueSize function with a NULL Queue.
- *
- * @test A NULL Queue must return 0.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestSizeWithNullQueue
 ( void );
 
 #endif

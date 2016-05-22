@@ -160,8 +160,17 @@ test_function_static_hash_suite_CFLAGS = -D TEST_FUNCTION_BUILD=BuildSHash \
                                          -D TEST_TYPE=shash_t \
                                          $(AM_CFLAGS)
 
-test_function_static_queue_suite_SOURCES = test/function/static/queue_suite.c
+test_function_static_queue_suite_SOURCES = test/function/common_suite.c \
+                                           test/function/static/queue_suite.c
 test_function_static_queue_suite_LDADD = $(test_libraries)
+test_function_static_queue_suite_CFLAGS = -D TEST_FUNCTION_BUILD=BuildSQueue \
+                                          -D TEST_FUNCTION_COPY=SQueueCopy \
+                                          -D TEST_FUNCTION_DESTROY=SQueueDestroy \
+                                          -D TEST_FUNCTION_IS_EMPTY=SQueueIsEmpty \
+                                          -D TEST_FUNCTION_NEW=SQueueNew \
+                                          -D TEST_FUNCTION_SIZE=SQueueSize \
+                                          -D TEST_TYPE=squeue_t \
+                                          $(AM_CFLAGS)
 
 test_function_static_stack_suite_SOURCES = test/function/static/stack_suite.c
 test_function_static_stack_suite_LDADD = $(test_libraries)

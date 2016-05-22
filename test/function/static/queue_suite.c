@@ -1,10 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-
 #include <woodpile/config.h>
 #include <woodpile/static/queue.h>
-
+#include "test/function/common_suite.h"
 #include "test/function/static/queue_suite.h"
 #include "test/helper.h"
 
@@ -15,28 +14,44 @@ main
   unsigned failure_count = 0;
   const char *result;
 
+  printf( "### Static Queue Functionality Test Suite\n" );
+
 #ifdef __WOODPILE_PARAMETER_VALIDATION
-  TEST( CopyNullQueue )
+  printf( "\nRunning Parameter Validation Tests\n======\n" );
+
   TEST( PopFromNullQueue )
   TEST( PushNullValue )
   TEST( PushToNullQueue )
+
+#ifdef TEST_FUNCTION_COMMON_SUITE_AVAILABLE
+  TEST( CopyNull )
 #endif
+#endif
+
+#ifdef TEST_FUNCTION_COMMON_SUITE_AVAILABLE
+  printf( "\nRunning Common Tests\n======\n" );
+
+  TEST( Copy )
+  TEST( CopyDistinct )
+  TEST( CopySize )
+  TEST( DestroyNull )
+  TEST( DestroyPopulated )
+  TEST( IsEmptyWithNew )
+  TEST( IsEmptyWithNull )
+  TEST( IsEmptyWithPopulated )
+  TEST( New )
+  TEST( SizeWithEmpty )
+  TEST( SizeWithNull )
+#endif
+
+  printf( "\nRunning Specific Tests\n======\n" );
 
   TEST( ContainsDuplicateValues )
   TEST( ContainsNonExistentValue )
   TEST( ContainsNullValue )
   TEST( ContainsUniqueValue )
   TEST( ContainsWithNullQueue )
-  TEST( Copy )
   TEST( CopyContents )
-  TEST( CopyDistinct )
-  TEST( CopySize )
-  TEST( DestroyNullQueue )
-  TEST( DestroyPopulatedQueue )
-  TEST( IsEmptyWithEmptyQueue )
-  TEST( IsEmptyWithPopulatedQueue )
-  TEST( IsEmptyWithNullQueue )
-  TEST( New )
   TEST( PeekAtEmptyQueue )
   TEST( PeekAtNullQueue )
   TEST( PeekAtPopulatedQueue )
@@ -52,8 +67,8 @@ main
   TEST( RemoveNullValue )
   TEST( RemoveUniqueValue )
   TEST( Size )
-  TEST( SizeWithEmptyQueue )
-  TEST( SizeWithNullQueue )
+
+  printf( "\n" );
 
   if( failure_count > 0 )
     return EXIT_FAILURE;
@@ -168,27 +183,6 @@ TestContainsWithNullQueue
 }
 
 const char *
-TestCopy
-( void )
-{
-  squeue_t *copy, *queue;
-
-  queue = BuildSQueue();
-  if( !queue )
-    return "could not build a Queue";
-
-  copy = SQueueCopy( queue );
-
-  if( !copy )
-    return "NULL was returned for a non-NULL Queue";
-
-  SQueueDestroy( copy );
-  SQueueDestroy( queue );
-
-  return NULL;
-}
-
-const char *
 TestCopyContents
 ( void )
 {
@@ -212,143 +206,6 @@ TestCopyContents
   }
 
   SQueueDestroy( copy );
-  SQueueDestroy( queue );
-
-  return NULL;
-}
-
-const char *
-TestCopyDistinct
-( void )
-{
-  const squeue_t *copy, *queue;
-
-  queue = BuildSQueue();
-  if( !queue )
-    return "could not build a Queue";
-
-  copy = SQueueCopy( queue );
-
-  if( copy == queue )
-    return "the copy Queue was the same structure as the original Queue";
-
-  SQueueDestroy( copy );
-  SQueueDestroy( queue );
-
-  return NULL;
-}
-
-const char *
-TestCopyNullQueue
-( void )
-{
-  if( SQueueCopy( NULL ) != NULL )
-    return "NULL was not returned when copying a NULL Queue";
-
-  return NULL;
-}
-
-const char *
-TestCopySize
-( void )
-{
-  const squeue_t *copy, *queue;
-
-  queue = BuildSQueue();
-  if( !queue )
-    return "could not build a Queue";
-
-  copy = SQueueCopy( queue );
-
-  if( SQueueSize( queue ) != SQueueSize( copy ) )
-    return "the copy was not the same size as the original";
-
-  SQueueDestroy( copy );
-  SQueueDestroy( queue );
-
-  return NULL;
-}
-
-const char *
-TestDestroyNullQueue
-( void )
-{
-  SQueueDestroy( NULL );
-  
-  return NULL;
-}
-
-const char *
-TestDestroyPopulatedQueue
-( void )
-{
-  const squeue_t *queue;
-  
-  queue = BuildSQueue();
-  if( !queue )
-    return "could not build a Queue";
-
-  SQueueDestroy( queue );
-
-  return NULL;
-}
-
-const char *
-TestIsEmptyWithEmptyQueue
-( void )
-{
-  squeue_t *queue;
-
-  queue = SQueueNew();
-  if( !queue )
-    return "could not build a Queue";
-
-  if( SQueueIsEmpty( queue ) <= 0 )
-    return "a non-positive value was returned for an empty Queue";
-
-  SQueueDestroy( queue );
-
-  return NULL;
-}
-
-const char *
-TestIsEmptyWithPopulatedQueue
-( void )
-{
-  squeue_t *queue;
-  
-  queue = BuildSQueue();
-  if( !queue )
-    return "could not build a Queue";
-
-  if( SQueueIsEmpty( queue ) > 0 )
-    return "a positive value was returned for a populated Queue";
-
-  SQueueDestroy( queue );
-
-  return NULL;
-}
-
-const char *
-TestIsEmptyWithNullQueue
-( void )
-{
-  if( SQueueIsEmpty( NULL ) <= 0 )
-    return "a non-positive value was returned for a NULL Queue";
-
-  return NULL;
-}
-
-const char *
-TestNew
-( void )
-{
-  const squeue_t *queue;
-
-  queue = SQueueNew();
-  if( !queue )
-    return "a new Queue could not be constructed";
-
   SQueueDestroy( queue );
 
   return NULL;
@@ -742,34 +599,6 @@ TestSize
     return "a populated Queue did not return the correct size";
 
   SQueueDestroy( queue );
-
-  return NULL;
-}
-
-const char *
-TestSizeWithEmptyQueue
-( void )
-{
-  const squeue_t *queue;
-
-  queue = SQueueNew(); 
-  if( !queue )
-    return "could not build a Queue";
-
-  if( SQueueSize( queue ) != 0 )
-    return "an empty Queue did not return 0";
-
-  SQueueDestroy( queue );
-
-  return NULL;
-}
-
-const char *
-TestSizeWithNullQueue
-( void )
-{
-  if( SQueueSize( NULL ) != 0 )
-    return "a NULL Queue did not return 0";
 
   return NULL;
 }
