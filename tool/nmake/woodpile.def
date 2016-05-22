@@ -43,17 +43,17 @@ EXPORTS
   NextInDynamicListIterator @40
   PreviousInDynamicListIterator @41
   RemoveFromDynamicListIterator @42
-  AddToDynamicSplay @43
-  CopyDynamicSplay @44
-  DestroyDynamicSplay @45
-  DynamicSplayContains @46
-  DynamicSplayIsEmpty @47
-  DynamicSplaySize @48
-  DynamicSplayToString @49
-  FirstInDynamicSplay @50
-  LastInDynamicSplay @51
-  NewDynamicSplay @52
-  RemoveFromDynamicSplay @53
+  DSplayAdd @43
+  DSplayContains @44
+  DSplayCopy @45
+  DSplayDestroy @46
+  DSplayFirst @47
+  DSplayIsEmpty @48
+  DSplayLast @49
+  DSplayNew @50
+  DSplayRemove @51
+  DSplaySize @52
+  DSplayToString @53
   CBeginDynamicSplay @54
   CEndDynamicSplay @55
   CopyDynamicSplayConstIterator @56
