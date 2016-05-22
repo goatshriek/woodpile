@@ -1,11 +1,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-
 #include <woodpile/config.h>
 #include <woodpile/dynamic/list.h>
-
 #include "lib/str.h"
+#include "test/function/common_suite.h"
 #include "test/function/dynamic/list_suite.h"
 #include "test/helper.h"
 
@@ -18,7 +17,7 @@ main( void )
   printf( "### Dynamic List Functionality Test Suite\n" );
 
 #ifdef __WOODPILE_PARAMETER_VALIDATION
-  printf( "Running Parameter Validation Tests\n======\n" );
+  printf( "\nRunning Parameter Validation Tests\n======\n" );
 
   TEST( AppendAllToNullList )
   TEST( AppendToNullList )

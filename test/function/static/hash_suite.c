@@ -27,7 +27,7 @@ main
   }
 
 #ifdef __WOODPILE_PARAMETER_VALIDATION
-  printf( "Running Parameter Validation Tests\n======\n" );
+  printf( "\nRunning Parameter Validation Tests\n======\n" );
 
   TEST( ContainsNullValue )
   TEST( ContainsWithNullSHash )

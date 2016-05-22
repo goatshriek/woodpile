@@ -183,7 +183,14 @@ $(OUTDIR)\test\function\dynamic\list_suite.obj: $(OUTDIR) $(TESTDIR)\function\dy
   $(cc) $(WOODPILECFLAGS) \
         /Fo$(OUTDIR)\test\function\dynamic\ \
         /Fd$(OUTDIR)\test\function\dynamic\list_suite.pdb \
-        $(TESTDIR)\function\dynamic\list_suite.c
+        $(TESTDIR)\function\dynamic\list_suite.c \
+        /DTEST_FUNCTION_BUILD=BuildDList \
+        /DTEST_FUNCTION_COPY=DListCopy \
+        /DTEST_FUNCTION_DESTROY=DListDestroy \
+        /DTEST_FUNCTION_IS_EMPTY=DListIsEmpty \
+        /DTEST_FUNCTION_NEW=DListNew \
+        /DTEST_FUNCTION_SIZE=DListSize \
+        /DTEST_TYPE=dlist_t
 
 $(OUTDIR)\test\function\dynamic\list_common.obj: $(OUTDIR) $(TESTDIR)\function\common_suite.c
   $(cc) $(WOODPILECFLAGS) \
@@ -205,7 +212,17 @@ $(OUTDIR)\test\function\dynamic\list\iterator_suite.obj: $(OUTDIR) $(TESTDIR)\fu
   $(cc) $(WOODPILECFLAGS) /Fo$(OUTDIR)\test\function\dynamic\list\ /Fd$(OUTDIR)\test\function\dynamic\list\iterator.pdb $(TESTDIR)\function\dynamic\list\iterator_suite.c
   
 $(OUTDIR)\test\function\dynamic\tree\splay_suite.obj: $(OUTDIR) $(TESTDIR)\function\dynamic\tree\splay_suite.c
-  $(cc) $(WOODPILECFLAGS) /Fo$(OUTDIR)\test\function\dynamic\tree\ /Fd$(OUTDIR)\test\function\dynamic\tree\splay.pdb $(TESTDIR)\function\dynamic\tree\splay_suite.c
+  $(cc) $(WOODPILECFLAGS) \
+        /Fo$(OUTDIR)\test\function\dynamic\tree\ \
+        /Fd$(OUTDIR)\test\function\dynamic\tree\splay.pdb \
+        $(TESTDIR)\function\dynamic\tree\splay_suite.c \
+        /DTEST_FUNCTION_BUILD=BuildDSplay \
+        /DTEST_FUNCTION_COPY=DSplayCopy \
+        /DTEST_FUNCTION_DESTROY=DSplayDestroy \
+        /DTEST_FUNCTION_IS_EMPTY=DSplayIsEmpty \
+        /DTEST_FUNCTION_NEW=DSplayNew \
+        /DTEST_FUNCTION_SIZE=DSplaySize \
+        /DTEST_TYPE=dsplay_t
 
 $(OUTDIR)\test\function\dynamic\tree\splay_common.obj: $(OUTDIR) $(TESTDIR)\function\common_suite.c
   $(cc) $(WOODPILECFLAGS) \
@@ -229,7 +246,14 @@ $(OUTDIR)\test\function\dynamic\tree\splay\iterator_suite.obj: $(OUTDIR) $(TESTD
 $(OUTDIR)\test\function\static\hash_suite.obj: $(OUTDIR) $(TESTDIR)\function\static\hash_suite.c
   $(cc) $(WOODPILECFLAGS) /Fo$(OUTDIR)\test\function\static\ \
         /Fd$(OUTDIR)\test\function\static\hash_suite.pdb \
-        $(TESTDIR)\function\static\hash_suite.c
+        $(TESTDIR)\function\static\hash_suite.c \
+        /DTEST_FUNCTION_BUILD=BuildSHash \
+        /DTEST_FUNCTION_COPY=SHashCopy \
+        /DTEST_FUNCTION_DESTROY=SHashDestroy \
+        /DTEST_FUNCTION_IS_EMPTY=SHashIsEmpty \
+        /DTEST_FUNCTION_NEW=SHashNew \
+        /DTEST_FUNCTION_SIZE=SHashSize \
+        /DTEST_TYPE=shash_t
 
 $(OUTDIR)\test\function\static\hash_common.obj: $(OUTDIR) $(TESTDIR)\function\common_suite.c
   $(cc) $(WOODPILECFLAGS) /Fo$(OUTDIR)\test\function\static\hash_common.obj \

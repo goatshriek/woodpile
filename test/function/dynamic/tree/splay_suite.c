@@ -17,7 +17,7 @@ main( void )
   printf( "### Dynamic Splay Tree Functionality Test Suite\n" );
 
 #ifdef __WOODPILE_PARAMETER_VALIDATION
-  printf( "Running Parameter Validation Tests\n======\n" );
+  printf( "\nRunning Parameter Validation Tests\n======\n" );
 
   TEST( AddToNullDynamicSplay )
   TEST( FirstInNullDynamicSplay )
@@ -461,7 +461,7 @@ TestNewWithNullComparator
 {
   const dsplay_t *splay;
 
-  splay = DSplayNew();
+  splay = DSplayNewWithComparator( NULL );
   if( splay != NULL )
     return "a new splay was created with a NULL comparator";
 
