@@ -108,11 +108,11 @@ BuildSHash
   return hash;
 }
 
-SQueue *
+squeue_t *
 BuildSQueue
 ( void )
 {
-  SQueue *queue = SQueueNew();
+  squeue_t *queue = SQueueNew();
 
   SQueuePush( queue, "front of Queue" );
   SQueuePush( queue, "test string" );

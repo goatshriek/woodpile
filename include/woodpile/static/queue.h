@@ -19,9 +19,8 @@
  * Memory overhead can be calculated as follows:
  * sizeof( size_t ) * 3 + sizeof( void * ) * ( queue_capacity + 1 )
  */
-struct StaticQueue;
-typedef struct StaticQueue StaticQueue;
-typedef struct StaticQueue SQueue;
+struct squeue_t;
+typedef struct squeue_t squeue_t;
 
 /**
  * Creates a copy of a Queue. Elements within the Queue are not copied, meaning
@@ -33,9 +32,9 @@ typedef struct StaticQueue SQueue;
  *
  * @return the copy of the original Queue or NULL on failure
  */
-StaticQueue *
+squeue_t *
 CopyStaticQueue
-( const StaticQueue *queue );
+( const squeue_t *queue );
 #define SQueueCopy CopyStaticQueue
 
 /**
@@ -45,7 +44,7 @@ CopyStaticQueue
  */
 void
 DestroyStaticQueue
-( const StaticQueue *queue );
+( const squeue_t *queue );
 #define SQueueDestroy DestroyStaticQueue
 
 /**
@@ -53,7 +52,7 @@ DestroyStaticQueue
  *
  * @return a new Queue or NULL on failure
  */
-StaticQueue *
+squeue_t *
 NewStaticQueue
 ( void );
 #define SQueueNew NewStaticQueue
@@ -65,7 +64,7 @@ NewStaticQueue
  *
  * @return a new Queue of the provided capacity, or NULL on failure
  */
-StaticQueue *
+squeue_t *
 NewSizedStaticQueue
 ( size_t capacity );
 #define SQueueNewSized NewSizedStaticQueue
@@ -79,7 +78,7 @@ NewSizedStaticQueue
  */
 void *
 PeekAtStaticQueue
-( const StaticQueue *queue );
+( const squeue_t *queue );
 #define SQueuePeek PeekAtStaticQueue
 
 /**
@@ -91,7 +90,7 @@ PeekAtStaticQueue
  */
 void *
 PopFromStaticQueue
-( StaticQueue *queue );
+( squeue_t *queue );
 #define SQueuePop PopFromStaticQueue
 
 /**
@@ -103,9 +102,9 @@ PopFromStaticQueue
  *
  * @return the Queue pushed to, or NULL on failure
  */
-StaticQueue *
+squeue_t *
 PushToStaticQueue
-( StaticQueue *queue, void *value );
+( squeue_t *queue, void *value );
 #define SQueuePush PushToStaticQueue
 
 /**
@@ -117,7 +116,7 @@ PushToStaticQueue
  */
 size_t
 StaticQueueCapacity
-( const StaticQueue *queue );
+( const squeue_t *queue );
 #define SQueueCapacity StaticQueueCapacity
 
 /**
@@ -130,7 +129,7 @@ StaticQueueCapacity
  */
 size_t
 StaticQueueContains
-( const StaticQueue *queue, const void *element );
+( const squeue_t *queue, const void *element );
 #define SQueueContains StaticQueueContains
 
 /**
@@ -142,7 +141,7 @@ StaticQueueContains
  */
 unsigned short
 StaticQueueIsEmpty
-( const StaticQueue *queue );
+( const squeue_t *queue );
 #define SQueueIsEmpty StaticQueueIsEmpty
 
 /**
@@ -154,7 +153,7 @@ StaticQueueIsEmpty
  */
 size_t
 StaticQueueSize
-( const StaticQueue *queue);
+( const squeue_t *queue);
 #define SQueueSize StaticQueueSize
 
 /**
@@ -169,7 +168,7 @@ StaticQueueSize
  */
 char *
 StaticQueueToString
-( const StaticQueue *queue, char * ( *element_to_string )( const void * ) );
+( const squeue_t *queue, char * ( *element_to_string )( const void * ) );
 #define SQueueToString StaticQueueToString
 
 /**
@@ -184,7 +183,7 @@ StaticQueueToString
  */
 void *
 RemoveFromStaticQueue
-( StaticQueue *queue, const void *value );
+( squeue_t *queue, const void *value );
 #define SQueueRemove RemoveFromStaticQueue
 
 /**
@@ -197,9 +196,9 @@ RemoveFromStaticQueue
  *
  * @return the Queue having been resized
  */
-StaticQueue *
+squeue_t *
 SetStaticQueueCapacity
-( StaticQueue *queue, size_t capacity );
+( squeue_t *queue, size_t capacity );
 #define SQueueSetCapacity SetStaticQueueCapacity
 
 /**
@@ -213,7 +212,7 @@ SetStaticQueueCapacity
  */
 size_t
 TrimStaticQueueToSize
-( StaticQueue *queue );
+( squeue_t *queue );
 #define SQueueTrimToSize TrimStaticQueueToSize
 
 #endif

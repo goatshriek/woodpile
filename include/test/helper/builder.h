@@ -118,7 +118,7 @@ BuildSHash
  *
  * @return a new Queue or NULL on failure
  */
-SQueue *
+squeue_t *
 BuildSQueue
 ( void );
 

@@ -4,15 +4,15 @@
 #include "lib/validate.h"
 #include "private/static/queue.h"
 
-SQueue *
+squeue_t *
 SQueueCopy
-( const SQueue *original )
+( const squeue_t *original )
 {
-  SQueue *copy;
+  squeue_t *copy;
 
   VALIDATE_PARAMETERS( original )
 
-  copy = malloc( sizeof( SQueue ) );
+  copy = malloc( sizeof( squeue_t ) );
   VALIDATE_ALLOCATION( copy )
 
   copy->elements = malloc( sizeof( void * ) * original->capacity );
@@ -29,7 +29,7 @@ SQueueCopy
 
 void
 SQueueDestroy
-( const SQueue *queue )
+( const squeue_t *queue )
 {
   if( !queue )
     return;
@@ -40,11 +40,11 @@ SQueueDestroy
   return;
 }
 
-SQueue *
+squeue_t *
 SQueueNew
 ( void )
 {
-  SQueue *queue = malloc( sizeof( SQueue ) );
+  squeue_t *queue = malloc( sizeof( squeue_t ) );
   VALIDATE_ALLOCATION( queue )
 
   queue->front = queue->back = 0;
@@ -56,7 +56,7 @@ SQueueNew
   return queue;
 }
 
-SQueue *
+squeue_t *
 SQueueNewSized
 ( size_t capacity )
 {
@@ -65,7 +65,7 @@ SQueueNewSized
 
 void *
 SQueuePeek
-( const SQueue *queue )
+( const squeue_t *queue )
 {
   if( SQueueIsEmpty( queue ) )
     return NULL;
@@ -75,7 +75,7 @@ SQueuePeek
 
 void *
 SQueuePop
-( SQueue *queue )
+( squeue_t *queue )
 {
   void *value;
 
@@ -91,9 +91,9 @@ SQueuePop
   return value;
 }
 
-SQueue *
+squeue_t *
 SQueuePush
-( SQueue *queue, void *element )
+( squeue_t *queue, void *element )
 {
   size_t new_back;
 
@@ -111,14 +111,14 @@ SQueuePush
 
 size_t
 SQueueCapacity
-( const SQueue *queue )
+( const squeue_t *queue )
 {
   return 0;
 }
 
 size_t
 SQueueContains
-( const SQueue *queue, const void *element )
+( const squeue_t *queue, const void *element )
 {
   size_t count = 0, current;
 
@@ -138,14 +138,14 @@ SQueueContains
 
 unsigned short
 SQueueIsEmpty
-( const SQueue *queue )
+( const squeue_t *queue )
 {
   return queue == NULL || queue->front == queue->back;
 }
 
 size_t
 SQueueSize
-( const SQueue *queue )
+( const squeue_t *queue )
 {
   if( !queue )
     return 0;
@@ -157,14 +157,14 @@ SQueueSize
 
 char *
 SQueueToString
-( const SQueue *queue, char * ( *element_to_string )( const void * ) )
+( const squeue_t *queue, char * ( *element_to_string )( const void * ) )
 {
   return NULL;
 }
 
 void *
 SQueueRemove
-( SQueue *queue, const void *value )
+( squeue_t *queue, const void *value )
 {
   size_t current;
   void *queue_value;
@@ -193,16 +193,16 @@ SQueueRemove
   return NULL;
 }
 
-SQueue *
+squeue_t *
 SQueueSetCapacity
-( SQueue *queue, size_t capacity )
+( squeue_t *queue, size_t capacity )
 {
   return NULL;
 }
 
 size_t
 SQueueTrimToSize
-( SQueue *queue )
+( squeue_t *queue )
 {
   return 0;
 }

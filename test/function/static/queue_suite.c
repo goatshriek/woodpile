@@ -65,7 +65,7 @@ const char *
 TestContainsDuplicateValues
 ( void )
 {
-  SQueue *queue;
+  squeue_t *queue;
   void *value;
 
   queue = BuildSQueue();
@@ -95,7 +95,7 @@ const char *
 TestContainsNonExistentValue
 ( void )
 {
-  const SQueue *queue;
+  const squeue_t *queue;
   const void *value = "this value does not exist in the Queue";
   
   queue = BuildSQueue();
@@ -114,7 +114,7 @@ const char *
 TestContainsNullValue
 ( void )
 {
-  const SQueue *queue;
+  const squeue_t *queue;
 
   if( SQueueContains( NULL, NULL ) )
     return "a NULL value and Queue did not return 0";
@@ -135,7 +135,7 @@ const char *
 TestContainsUniqueValue
 ( void )
 {
-  SQueue *queue;
+  squeue_t *queue;
   void *value = "the Queue will contain this";
 
   queue = BuildSQueue();
@@ -171,7 +171,7 @@ const char *
 TestCopy
 ( void )
 {
-  SQueue *copy, *queue;
+  squeue_t *copy, *queue;
 
   queue = BuildSQueue();
   if( !queue )
@@ -192,7 +192,7 @@ const char *
 TestCopyContents
 ( void )
 {
-  SQueue *copy, *queue;
+  squeue_t *copy, *queue;
   const void *copy_value, *queue_value;
 
   queue = BuildSQueue();
@@ -221,7 +221,7 @@ const char *
 TestCopyDistinct
 ( void )
 {
-  const SQueue *copy, *queue;
+  const squeue_t *copy, *queue;
 
   queue = BuildSQueue();
   if( !queue )
@@ -252,7 +252,7 @@ const char *
 TestCopySize
 ( void )
 {
-  const SQueue *copy, *queue;
+  const squeue_t *copy, *queue;
 
   queue = BuildSQueue();
   if( !queue )
@@ -282,7 +282,7 @@ const char *
 TestDestroyPopulatedQueue
 ( void )
 {
-  const SQueue *queue;
+  const squeue_t *queue;
   
   queue = BuildSQueue();
   if( !queue )
@@ -297,7 +297,7 @@ const char *
 TestIsEmptyWithEmptyQueue
 ( void )
 {
-  SQueue *queue;
+  squeue_t *queue;
 
   queue = SQueueNew();
   if( !queue )
@@ -315,7 +315,7 @@ const char *
 TestIsEmptyWithPopulatedQueue
 ( void )
 {
-  SQueue *queue;
+  squeue_t *queue;
   
   queue = BuildSQueue();
   if( !queue )
@@ -343,7 +343,7 @@ const char *
 TestNew
 ( void )
 {
-  const SQueue *queue;
+  const squeue_t *queue;
 
   queue = SQueueNew();
   if( !queue )
@@ -358,7 +358,7 @@ const char *
 TestPeekAtEmptyQueue
 ( void )
 {
-  const SQueue *queue;
+  const squeue_t *queue;
   
   queue = SQueueNew();
   if( !queue )
@@ -387,7 +387,7 @@ TestPeekAtPopulatedQueue
 ( void )
 {
   char *str;
-  const SQueue *queue;
+  const squeue_t *queue;
 
   queue = BuildSQueue();
   if( !queue )
@@ -408,7 +408,7 @@ const char *
 TestPopFromEmptyQueue
 ( void )
 {
-  SQueue *queue;
+  squeue_t *queue;
 
   queue = SQueueNew();
   if( !queue )
@@ -437,7 +437,7 @@ TestPopFromPopulatedQueue
 ( void )
 {
   const char *str;
-  SQueue *queue;
+  squeue_t *queue;
 
   queue = BuildSQueue();
   if( !queue )
@@ -459,7 +459,7 @@ TestPopRemovesValue
 ( void )
 {
   const char *str;
-  SQueue *queue;
+  squeue_t *queue;
 
   queue = BuildSQueue();
   if( !queue )
@@ -499,7 +499,7 @@ const char *
 TestPushNullValue
 ( void )
 {
-  SQueue *queue;
+  squeue_t *queue;
 
   if( SQueuePush( NULL, NULL ) )
     return "a non-NULL value was returned for a NULL value and Queue";
@@ -520,7 +520,7 @@ const char *
 TestPushToEmptyQueue
 ( void )
 {
-  SQueue *queue;
+  squeue_t *queue;
   void *value = "test value";
 
   queue = SQueueNew();
@@ -560,7 +560,7 @@ const char *
 TestPushToPopulatedQueue
 ( void )
 {
-  SQueue *queue;
+  squeue_t *queue;
   size_t i, size;
   void *front_value, *value = "test push string";
 
@@ -594,7 +594,7 @@ const char *
 TestRemoveDuplicateValues
 ( void )
 {
-  SQueue *queue;
+  squeue_t *queue;
   void *value;
   
   queue = BuildSQueue();
@@ -641,7 +641,7 @@ const char *
 TestRemoveLast
 ( void )
 {
-  SQueue *queue;
+  squeue_t *queue;
   void *value = "test value";
 
   queue = SQueueNew();
@@ -667,7 +667,7 @@ TestRemoveNonExistentValue
 ( void )
 {
   const char *value = "this doesn't exist in the Queue";
-  SQueue *queue;
+  squeue_t *queue;
 
   queue = BuildSQueue();
   if( !queue )
@@ -685,7 +685,7 @@ const char *
 TestRemoveNullValue
 ( void )
 {
-  SQueue *queue;
+  squeue_t *queue;
 
   if( SQueueRemove( NULL, NULL ) )
     return "a non-NULL value was returned for a NULL value and Queue";
@@ -706,7 +706,7 @@ const char *
 TestRemoveUniqueValue
 ( void )
 {
-  SQueue *queue;
+  squeue_t *queue;
   void *value;
 
   queue = BuildSQueue();
@@ -732,7 +732,7 @@ const char *
 TestSize
 ( void )
 {
-  const SQueue *queue;
+  const squeue_t *queue;
 
   queue = BuildSQueue();
   if( !queue )
@@ -750,7 +750,7 @@ const char *
 TestSizeWithEmptyQueue
 ( void )
 {
-  const SQueue *queue;
+  const squeue_t *queue;
 
   queue = SQueueNew(); 
   if( !queue )

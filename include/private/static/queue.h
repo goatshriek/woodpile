@@ -7,7 +7,7 @@
  */
 
 /** the Queue container */
-struct StaticQueue {
+struct squeue_t {
   size_t back; /**< the index of the back element + 1 */
   size_t capacity; /**< the max number of elements held */
   void **elements; /**< the elements */
