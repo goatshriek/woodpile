@@ -112,8 +112,17 @@ libhelper_la_LIBADD = libwoodpile.la
 test_libraries = libhelper.la \
                  libwoodpile.la
 
-test_function_dynamic_list_suite_SOURCES = test/function/dynamic/list_suite.c
+test_function_dynamic_list_suite_SOURCES = test/function/common_suite.c \
+                                           test/function/dynamic/list_suite.c
 test_function_dynamic_list_suite_LDADD = $(test_libraries)
+test_function_dynamic_list_suite_CFLAGS = -D TEST_FUNCTION_BUILD=BuildDList \
+                                          -D TEST_FUNCTION_COPY=DListCopy \
+                                          -D TEST_FUNCTION_DESTROY=DListDestroy \
+                                          -D TEST_FUNCTION_IS_EMPTY=DListIsEmpty \
+                                          -D TEST_FUNCTION_NEW=DListNew \
+                                          -D TEST_FUNCTION_SIZE=DListSize \
+                                          -D TEST_TYPE=dlist_t \
+                                          $(AM_CFLAGS)
 
 test_function_dynamic_list_const_iterator_suite_SOURCES = test/function/dynamic/list/const_iterator_suite.c
 test_function_dynamic_list_const_iterator_suite_LDADD = $(test_libraries)

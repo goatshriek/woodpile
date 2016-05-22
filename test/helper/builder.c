@@ -7,11 +7,11 @@
 #include "test/helper/builder.h"
 #include "test/helper/fixture.h"
 
-DList *
+dlist_t *
 BuildDList
 ( void )
 {
-  DList *list = DListNew();
+  dlist_t *list = DListNew();
 
   DListAppend( list, "This" );
   DListAppend( list, "is" );
@@ -22,11 +22,11 @@ BuildDList
   return DListAppend( list, "strings!" );
 }
 
-DSplay *
+dsplay_t *
 BuildDSplay
 ( void )
 {
-  DSplay *splay = DSplayNew( ( comparator_t ) strcmp );
+  dsplay_t *splay = DSplayNewWithComparator( CompareStrings );
 
   DSplayAdd( splay, "Alpha" );
   DSplayAdd( splay, "Zulu" );

@@ -16,4 +16,9 @@
  */
 #define __WOODPILE_ALL_HASHERS 1
 
+/**
+ * defined to enable parameter validation of function calls
+ */
+#define __WOODPILE_PARAMETER_VALIDATION 1
+
 #endif

@@ -110,7 +110,7 @@ TestDestroyPopulated
 }
 
 const char *
-TestIsEmptyWithEmpty
+TestIsEmptyWithNew
 ( void )
 {
   const test_struct_t *structure;

@@ -7,12 +7,12 @@
 #include "lib/validate.h"
 #include "private/dynamic/tree/splay.h"
 
-DSplay *
+dsplay_t *
 DSplayAdd
-( DSplay *splay, void *element )
+( dsplay_t *splay, void *element )
 {
   int comparison = 0;
-  Node *current_node, *new_node, *parent=NULL;
+  node_t *current_node, *new_node, *parent=NULL;
 
   VALIDATE_PARAMETERS( splay )
 
@@ -32,7 +32,7 @@ DSplayAdd
       current_node = current_node->right_child;
   }
 
-  new_node = malloc( sizeof( Node ) );
+  new_node = malloc( sizeof( node_t ) );
   VALIDATE_ALLOCATION( new_node )
 
   if( parent ){
@@ -54,9 +54,9 @@ DSplayAdd
 
 unsigned short
 DSplayContains
-( DSplay *splay, const void *element )
+( dsplay_t *splay, const void *element )
 {
-  Node *node;
+  node_t *node;
 
   if( splay == NULL || element == NULL )
     return 0;
@@ -72,15 +72,15 @@ DSplayContains
   }
 }
 
-DSplay *
+dsplay_t *
 DSplayCopy
-( const DSplay *splay )
+( const dsplay_t *splay )
 {
-  DSplay *copy;
+  dsplay_t *copy;
 
   VALIDATE_PARAMETERS( splay )
 
-  copy = malloc( sizeof( DSplay ) );
+  copy = malloc( sizeof( dsplay_t ) );
   VALIDATE_ALLOCATION( copy )
 
   copy->root = CopyTree( splay->root );
@@ -92,7 +92,7 @@ DSplayCopy
 
 void
 DSplayDestroy
-( const DSplay *splay )
+( const dsplay_t *splay )
 {
   if( !splay )
     return;
@@ -104,9 +104,9 @@ DSplayDestroy
 
 void *
 DSplayFirst
-( const DSplay *splay )
+( const dsplay_t *splay )
 {
-  Node *node;
+  node_t *node;
 
   VALIDATE_PARAMETERS( splay )
 
@@ -123,9 +123,9 @@ DSplayFirst
 
 void *
 DSplayLast
-( const DSplay *splay )
+( const dsplay_t *splay )
 {
-  Node *node;
+  node_t *node;
 
   VALIDATE_PARAMETERS( splay )
 
@@ -142,14 +142,14 @@ DSplayLast
 
 unsigned short
 DSplayIsEmpty
-( const DSplay *splay )
+( const dsplay_t *splay )
 {
   return ( ( splay == NULL ) || ( splay->root == NULL ) );
 }
 
 size_t
 DSplaySize
-( const DSplay *splay )
+( const dsplay_t *splay )
 {
   if( !splay )
     return 0;
@@ -159,11 +159,11 @@ DSplaySize
 
 char *
 DSplayToString
-( const DSplay *splay, to_string_t element_to_string )
+( const dsplay_t *splay, to_string_t element_to_string )
 {
   char *str;
   const char *element;
-  const Node *current, *next;
+  const node_t *current, *next;
   size_t element_length, str_capacity=100, str_length=1;
 
   VALIDATE_PARAMETERS( splay )
@@ -213,26 +213,35 @@ DSplayToString
   return str;
 }
 
-DSplay *
+dsplay_t *
 DSplayNew
+()
+{
+  return DSplayNewWithComparator( ComparePointers );
+}
+
+dsplay_t *
+DSplayNewWithComparator
 ( comparator_t compare )
 {
-  DSplay *splay;
+  dsplay_t *splay;
 
-  splay = malloc( sizeof( DSplay ) );
+  VALIDATE_PARAMETERS( compare );
+
+  splay = malloc( sizeof( dsplay_t ) );
   VALIDATE_ALLOCATION( splay )
- 
+
   splay->root = NULL;
-  splay->compare = compare ? compare : ComparePointers;
- 
+  splay->compare = compare;
+
   return splay;
 }
 
 void *
 DSplayRemove
-( DSplay *splay, const void *element )
+( dsplay_t *splay, const void *element )
 {
-  Node *node, *parent, *root;
+  node_t *node, *parent, *root;
   int comparison = 0;
   void *removed;
 
@@ -272,11 +281,11 @@ DSplayRemove
   return NULL;
 }
 
-const Node *
+const node_t *
 ConstNextNode
-( const Node *node )
+( const node_t *node )
 {
-  const Node *next, *previous;
+  const node_t *next, *previous;
 
   if( node->right_child )
     return TreeMinimum( node->right_child );
@@ -295,11 +304,11 @@ ConstNextNode
   return NULL;
 }
 
-const Node *
+const node_t *
 ConstPreviousNode
-( const Node *node )
+( const node_t *node )
 {
-  const Node *next, *previous;
+  const node_t *next, *previous;
 
   if( node->left_child )
     return TreeMaximum( node->left_child );
@@ -319,13 +328,13 @@ ConstPreviousNode
 }
 
 static
-Node *
+node_t *
 CopyTree
-( const Node *root )
+( const node_t *root )
 {
-  Node *copy;
+  node_t *copy;
 
-  copy = malloc( sizeof( Node ) );
+  copy = malloc( sizeof( node_t ) );
   VALIDATE_ALLOCATION( copy )
 
   if( root->left_child ){
@@ -349,9 +358,9 @@ CopyTree
 static
 void
 DestroyFullNode
-( Node *node )
+( node_t *node )
 {
-  Node *replacement;
+  node_t *replacement;
 
   replacement = TreeMaximum( node->left_child );
   node->element = replacement->element;
@@ -362,7 +371,7 @@ DestroyFullNode
 static
 void
 DestroyLeafNode
-( Node *node )
+( node_t *node )
 {
   if( node->parent ){
     if( node == node->parent->left_child )
@@ -377,7 +386,7 @@ DestroyLeafNode
 static
 void
 DestroyLeftParentNode
-( Node *node )
+( node_t *node )
 {
   if( node->parent ){
     if( node == node->parent->left_child )
@@ -393,7 +402,7 @@ DestroyLeftParentNode
 
 void
 DestroyNode
-( Node *node )
+( node_t *node )
 {
   if( !node )
     return;
@@ -411,7 +420,7 @@ DestroyNode
 static
 void
 DestroyRightParentNode
-( Node *node )
+( node_t *node )
 {
   if( node->parent ){
     if( node == node->parent->left_child )
@@ -428,7 +437,7 @@ DestroyRightParentNode
 static
 void
 DestroyTree
-( const Node *root )
+( const node_t *root )
 {
   if( !root )
     return;
@@ -440,9 +449,9 @@ DestroyTree
 }
 
 static
-Node *
+node_t *
 FindNode
-( Node *node, const void *element, comparator_t compare )
+( node_t *node, const void *element, comparator_t compare )
 {
   int comparison;
 
@@ -463,9 +472,9 @@ FindNode
 static
 void
 LeftRotate
-( Node *node )
+( node_t *node )
 {
-  Node *old_right;
+  node_t *old_right;
 
   old_right = node->right_child;
   node->right_child = old_right->left_child;
@@ -486,11 +495,11 @@ LeftRotate
   node->parent = old_right;
 }
 
-Node *
+node_t *
 NextNode
-( Node *node )
+( node_t *node )
 {
-  Node *next, *previous;
+  node_t *next, *previous;
 
   if( node->right_child )
     return TreeMinimum( node->right_child );
@@ -509,11 +518,11 @@ NextNode
   return NULL;
 }
 
-Node *
+node_t *
 PreviousNode
-( Node *node )
+( node_t *node )
 {
-  Node *next, *previous;
+  node_t *next, *previous;
 
   if( node->left_child )
     return TreeMaximum( node->left_child );
@@ -535,9 +544,9 @@ PreviousNode
 static
 void
 RightRotate
-( Node *node )
+( node_t *node )
 {
-  Node *old_left;
+  node_t *old_left;
 
   old_left = node->left_child;
   node->left_child = old_left->right_child;
@@ -560,7 +569,7 @@ RightRotate
 
 void
 Splay
-( Node *node )
+( node_t *node )
 {
   if( !node->parent )
     return;
@@ -591,31 +600,31 @@ Splay
 }
 
 static
-Node *
+node_t *
 TreeMaximum
-( Node *root )
+( node_t *root )
 {
   if( !root->right_child )
     return root;
-  
+
   return TreeMaximum( root->right_child );
 }
 
 static
-Node *
+node_t *
 TreeMinimum
-( Node *root )
+( node_t *root )
 {
   if( !root->left_child )
     return root;
-  
+
   return TreeMinimum( root->left_child );
 }
 
 static
 size_t
 TreeSize
-( Node *root )
+( node_t *root )
 {
   if( !root )
     return 0;

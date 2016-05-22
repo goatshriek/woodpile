@@ -7,7 +7,7 @@
 
 DListCItr *
 DListCBegin
-( const DList *list )
+( const dlist_t *list )
 {
   DListCItr *iterator;
 
@@ -24,7 +24,7 @@ DListCBegin
 
 DListCItr *
 DListCEnd
-( const DList *list )
+( const dlist_t *list )
 {
   DListCItr *iterator;
 
@@ -81,7 +81,7 @@ const void *
 DListCItrNext
 ( DListCItr *iterator )
 {
-  const Node *temp;
+  const node_t *temp;
   const void *element;
 
   VALIDATE_PARAMETERS( iterator )
@@ -102,7 +102,7 @@ const void *
 DListCItrPrevious
 ( DListCItr *iterator )
 {
-  const Node *temp;
+  const node_t *temp;
   const void *element;
 
   VALIDATE_PARAMETERS( iterator )

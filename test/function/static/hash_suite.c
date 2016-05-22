@@ -18,6 +18,8 @@ main
   unsigned failure_count = 0;
   const char *result;
 
+  printf( "### Static Hash Functionality Test Suite\n" );
+
   common_hash = BuildSHash();
   if( !common_hash ){
     printf( "Could not build a test SHash" );
@@ -25,7 +27,7 @@ main
   }
 
 #ifdef __WOODPILE_PARAMETER_VALIDATION
-  printf( "Running Parameter Validation Tests\n======\n" );
+  printf( "\nRunning Parameter Validation Tests\n======\n" );
 
   TEST( ContainsNullValue )
   TEST( ContainsWithNullSHash )
@@ -52,14 +54,14 @@ main
 #endif
 
 #ifdef TEST_FUNCTION_COMMON_SUITE_AVAILABLE
-  printf( "\nRunning Common Functionality Tests\n======\n" );
+  printf( "\nRunning Common Tests\n======\n" );
 
   TEST( Copy )
   TEST( CopyDistinct )
   TEST( CopySize )
   TEST( DestroyNull )
   TEST( DestroyPopulated )
-  TEST( IsEmptyWithEmpty )
+  TEST( IsEmptyWithNew )
   TEST( IsEmptyWithNull )
   TEST( IsEmptyWithPopulated )
   TEST( New )
@@ -67,7 +69,7 @@ main
   TEST( SizeWithNull )
 #endif
 
-  printf( "\nRunning Static Hash Functionality Tests\n======\n" );
+  printf( "\nRunning Specific Tests\n======\n" );
 
   TEST( ContainsDuplicateValues )
   TEST( ContainsNonExistentValue )
@@ -95,6 +97,8 @@ main
   TEST( ToStringWithEmptySHash )
   TEST( ToStringWithNullFunction )
   TEST( ToStringWithPopulatedSHash )
+
+  printf( "\n" );
 
   SHashDestroy( common_hash );
 

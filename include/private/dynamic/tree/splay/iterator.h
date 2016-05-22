@@ -10,9 +10,9 @@
 
 /** the DynamicSplayIterator structure */
 struct DynamicSplayIterator {
-  DSplay *splay; /**< the splay this iterator is for */
-  Node *current; /**< the iterator's current position */
-  Node *previous; /**< the iterator's previous position */
+  dsplay_t *splay; /**< the splay this iterator is for */
+  node_t *current; /**< the iterator's current position */
+  node_t *previous; /**< the iterator's previous position */
   /**
    * direction the iterator last went in
    *  0 - no calls to DSPlayItrNext or DSplayItrPrevious since the last call to

@@ -6,10 +6,10 @@
 
 DSplayCItr *
 DSplayCBegin
-( const DSplay *splay )
+( const dsplay_t *splay )
 {
   DSplayCItr *itr;
-  const Node *current;
+  const node_t *current;
 
   VALIDATE_PARAMETERS( splay )
 
@@ -30,10 +30,10 @@ DSplayCBegin
 
 DSplayCItr *
 DSplayCEnd
-( const DSplay *splay )
+( const dsplay_t *splay )
 {
   DSplayCItr *itr;
-  const Node *current;
+  const node_t *current;
 
   VALIDATE_PARAMETERS( splay )
 

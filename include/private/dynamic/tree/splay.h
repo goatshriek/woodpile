@@ -9,23 +9,23 @@
 #include <stdint.h>
 #include <woodpile/dynamic/tree/splay.h>
 
-struct Node;
+struct node_t;
 
-typedef struct Node Node;
+typedef struct node_t node_t;
 
 /** the Splay container */
-struct DynamicSplay {
+struct dsplay_t {
   comparator_t compare; /**< the comparator used for elements */
-  Node *root; /**< the root Node of the tree */
+  node_t *root; /**< the root Node of the tree */
 };
 
 /**
  * A node in the Splay, representing a single value.
  */
-struct Node {
-  Node *left_child; /**< the Node's left childe */
-  Node *parent; /**< the Node's parent */
-  Node *right_child; /**< the Node's right child */
+struct node_t {
+  node_t *left_child; /**< the Node's left childe */
+  node_t *parent; /**< the Node's parent */
+  node_t *right_child; /**< the Node's right child */
   void *element; /**< the element held by the Node */
 };
 
@@ -36,9 +36,9 @@ struct Node {
  *
  * @return the next node from the given point
  */
-const Node *
+const node_t *
 ConstNextNode
-( const Node *node );
+( const node_t *node );
 
 /**
  * Gets the previous node from the given node.
@@ -47,9 +47,9 @@ ConstNextNode
  *
  * @return the previous node from the given point
  */
-const Node *
+const node_t *
 ConstPreviousNode
-( const Node *node );
+( const node_t *node );
 
 /**
  * Creates a copy of a tree.
@@ -59,9 +59,9 @@ ConstPreviousNode
  * @return the copy of the original node
  */
 static
-Node *
+node_t *
 CopyTree
-( const Node *root );
+( const node_t *root );
 
 /**
  * Removes the given node from its tree.
@@ -73,7 +73,7 @@ CopyTree
 static
 void
 DestroyFullNode
-( Node *node );
+( node_t *node );
 
 /**
  * Removes the given node from its tree.
@@ -85,7 +85,7 @@ DestroyFullNode
 static
 void
 DestroyLeafNode
-( Node *node );
+( node_t *node );
 
 /**
  * Removes the given node from its tree.
@@ -97,7 +97,7 @@ DestroyLeafNode
 static
 void
 DestroyLeftParentNode
-( Node *node );
+( node_t *node );
 
 /**
  * Removes the given node from its tree.
@@ -106,7 +106,7 @@ DestroyLeftParentNode
  */
 void
 DestroyNode
-( Node *node );
+( node_t *node );
 
 /**
  * Removes the given node from its tree.
@@ -118,7 +118,7 @@ DestroyNode
 static
 void
 DestroyRightParentNode
-( Node *node );
+( node_t *node );
 
 /**
  * Destroys a tree, including all of its nodes.
@@ -128,7 +128,7 @@ DestroyRightParentNode
 static
 void
 DestroyTree
-( const Node *root );
+( const node_t *root );
 
 /**
  * Searches a tree for a node with a value equal to element according to the
@@ -141,9 +141,9 @@ DestroyTree
  * @return the child node holding element, or NULL if one does not exist
  */
 static
-Node *
+node_t *
 FindNode
-( Node *root, const void *element, comparator_t compare );
+( node_t *root, const void *element, comparator_t compare );
 
 /**
  * Performs a left rotation about a node.
@@ -153,7 +153,7 @@ FindNode
 static
 void
 LeftRotate
-( Node *node );
+( node_t *node );
 
 /**
  * Gets the next node from the given node.
@@ -162,9 +162,9 @@ LeftRotate
  *
  * @return the next node from the given point
  */
-Node *
+node_t *
 NextNode
-( Node *node );
+( node_t *node );
 
 /**
  * Gets the previous node from the given node.
@@ -173,9 +173,9 @@ NextNode
  *
  * @return the previous node from the given point
  */
-Node *
+node_t *
 PreviousNode
-( Node *node );
+( node_t *node );
 
 /**
  * Performs a right rotation about a node.
@@ -185,7 +185,7 @@ PreviousNode
 static
 void
 RightRotate
-( Node *node );
+( node_t *node );
 
 /**
  * Moves a node to the top of its tree by a series of right and left rotations.
@@ -196,7 +196,7 @@ RightRotate
  */
 void
 Splay
-( Node *node );
+( node_t *node );
 
 /**
  * Finds the maximum node of a given tree.
@@ -206,9 +206,9 @@ Splay
  * @return the maximum node of the tree
  */
 static
-Node *
+node_t *
 TreeMaximum
-( Node *root );
+( node_t *root );
 
 /**
  * Finds the minimum node of a given tree.
@@ -218,9 +218,9 @@ TreeMaximum
  * @return the minimum node of the tree
  */
 static
-Node *
+node_t *
 TreeMinimum
-( Node *root );
+( node_t *root );
 
 /**
  * Finds the number of nodes in a given tree.
@@ -232,6 +232,6 @@ TreeMinimum
 static
 size_t
 TreeSize
-( Node *root );
+( node_t *root );
 
 #endif

@@ -10,9 +10,9 @@
 
 /** the DynamicListIterator structure */
 struct DynamicListIterator {
-  DList *list; /**< the List this iterator is for */
-  Node *current; /**< the current value of the iterator */
-  Node *previous; /**< the previous value of the iterator */
+  dlist_t *list; /**< the List this iterator is for */
+  node_t *current; /**< the current value of the iterator */
+  node_t *previous; /**< the previous value of the iterator */
   /**
    * direction the iterator last went in
    *  0 - no calls to NextInListIterator or PreviousInListIterator since the

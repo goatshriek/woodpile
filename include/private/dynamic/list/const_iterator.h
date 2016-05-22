@@ -10,8 +10,8 @@
 
 /** the ListConstIterator structure */
 struct DynamicListConstIterator {
-  const Node *current; /**< the current value of the iterator */
-  const Node *previous; /**< the previous value of the iterator */
+  const node_t *current; /**< the current value of the iterator */
+  const node_t *previous; /**< the previous value of the iterator */
 };
 
 #endif

@@ -35,7 +35,7 @@ typedef struct DynamicListConstIterator DListCItr;
  */
 DynamicListConstIterator *
 CBeginDynamicList
-( const DynamicList *list );
+( const dlist_t *list );
 #define DListCBegin CBeginDynamicList
 
 /**
@@ -52,7 +52,7 @@ CBeginDynamicList
  */
 DynamicListConstIterator *
 CEndDynamicList
-( const DynamicList *list );
+( const dlist_t *list );
 #define DListCEnd CEndDynamicList
 
 /**

@@ -1,11 +1,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-
 #include <woodpile/config.h>
 #include <woodpile/dynamic/tree/splay.h>
-
 #include "lib/str.h"
+#include "test/function/common_suite.h"
 #include "test/function/dynamic/tree/splay_suite.h"
 #include "test/helper.h"
 
@@ -15,15 +14,41 @@ main( void )
   unsigned failure_count = 0;
   const char *result;
 
+  printf( "### Dynamic Splay Tree Functionality Test Suite\n" );
+
 #ifdef __WOODPILE_PARAMETER_VALIDATION
+  printf( "\nRunning Parameter Validation Tests\n======\n" );
+
   TEST( AddToNullDynamicSplay )
-  TEST( CopyNullDynamicSplay )
   TEST( FirstInNullDynamicSplay )
   TEST( LastInNullDynamicSplay )
+  TEST( NewWithNullComparator )
   TEST( RemoveFromNullDynamicSplay )
   TEST( RemoveNullElement )
   TEST( ToStringWithNullDynamicSplay )
+
+#ifdef TEST_FUNCTION_COMMON_SUITE_AVAILABLE
+  TEST( CopyNull )
 #endif
+#endif
+
+#ifdef TEST_FUNCTION_COMMON_SUITE_AVAILABLE
+  printf( "\nRunning Common Tests\n======\n" );
+
+  TEST( Copy )
+  TEST( CopyDistinct )
+  TEST( CopySize )
+  TEST( DestroyNull )
+  TEST( DestroyPopulated )
+  TEST( IsEmptyWithNew )
+  TEST( IsEmptyWithNull )
+  TEST( IsEmptyWithPopulated )
+  TEST( New )
+  TEST( SizeWithEmpty )
+  TEST( SizeWithNull )
+#endif
+
+  printf( "\nRunning Specific Tests\n======\n" );
 
   TEST( AddDuplicateElement )
   TEST( AddNullElement )
@@ -33,30 +58,21 @@ main( void )
   TEST( ContainsNullElement )
   TEST( ContainsUniqueElement )
   TEST( ContainsWithNullDynamicSplay )
-  TEST( Copy )
   TEST( CopyContents )
-  TEST( CopyDistinct )
-  TEST( CopySize )
-  TEST( DestroyNullDynamicSplay )
-  TEST( DestroyPopulatedDynamicSplay )
   TEST( FirstInEmptyDynamicSplay )
   TEST( FirstInPopulatedDynamicSplay )
   TEST( LastInEmptyDynamicSplay )
   TEST( LastInPopulatedDynamicSplay )
-  TEST( New )
-  TEST( NewWithNullComparator )
-  TEST( NewDynamicSplayIsEmpty )
-  TEST( NullDynamicSplayIsEmpty )
-  TEST( PopulatedDynamicSplayIsNotEmpty )
+  TEST( NewWithComparator )
   TEST( RemoveNonExistentElement )
   TEST( RemoveRootElement )
   TEST( RemoveUniqueElement )
-  TEST( SizeOfEmptyDynamicSplay )
-  TEST( SizeOfNullDynamicSplay )
   TEST( SizeOfPopulatedDynamicSplay )
   TEST( ToStringWithEmptyDynamicSplay )
   TEST( ToStringWithNullFunction )
   TEST( ToStringWithPopulatedDynamicSplay )
+
+  printf( "\n" );
 
   if( failure_count > 0 )
     return EXIT_FAILURE;
@@ -68,7 +84,7 @@ const char *
 TestAddDuplicateElement
 ( void )
 {
-  DSplay *splay;
+  dsplay_t *splay;
   size_t size;
   void *element;
 
@@ -97,7 +113,7 @@ const char *
 TestAddNullElement
 ( void )
 {
-  DSplay *splay;
+  dsplay_t *splay;
 
   splay = BuildDSplay();
   if( !splay )
@@ -115,10 +131,10 @@ const char *
 TestAddToEmptyDynamicSplay
 ( void )
 {
-  DSplay *splay;
+  dsplay_t *splay;
   void *element = "new element";
 
-  splay = DSplayNew( ( comparator_t ) strcmp );
+  splay = DSplayNewWithComparator( CompareStrings );
   if( !splay )
     return "could not build an empty splay";
 
@@ -155,7 +171,7 @@ const char *
 TestAddToPopulatedDynamicSplay
 ( void )
 {
-  DSplay *splay;
+  dsplay_t *splay;
   size_t before_size;
   void *element = "new element";
 
@@ -183,7 +199,7 @@ const char *
 TestContainsNonExistentElement
 ( void )
 {
-  DSplay *splay;
+  dsplay_t *splay;
   void *element = "i don't exist";
 
   splay = BuildDSplay();
@@ -202,7 +218,7 @@ const char *
 TestContainsNullElement
 ( void )
 {
-  DSplay *splay;
+  dsplay_t *splay;
 
   splay = BuildDSplay();
   if( !splay )
@@ -223,7 +239,7 @@ const char *
 TestContainsUniqueElement
 ( void )
 {
-  DSplay *splay;
+  dsplay_t *splay;
   void *element;
 
   splay = BuildDSplay();
@@ -258,31 +274,10 @@ TestContainsWithNullDynamicSplay
 }
 
 const char *
-TestCopy
-( void )
-{
-  DSplay *copy;
-  const DSplay *splay;
-
-  splay = BuildDSplay();
-  if( !splay )
-    return "could not build a populated splay";
-
-  copy = DSplayCopy( splay );
-  if( !copy )
-    return "a NULL splay was returned as the copy of a non-NULL splay";
-
-  DSplayDestroy( copy );
-  DSplayDestroy( splay );
-
-  return NULL;
-}
-
-const char *
 TestCopyContents
 ( void )
 {
-  DSplay *copy, *splay;
+  dsplay_t *copy, *splay;
   void *copy_element, *original_element;
 
   splay = BuildDSplay();
@@ -315,91 +310,12 @@ TestCopyContents
 }
 
 const char *
-TestCopyDistinct
-( void )
-{
-  DSplay *copy;
-  const DSplay *splay;
-
-  splay = BuildDSplay();
-  if( !splay )
-    return "could not build a populated splay";
-
-  copy = DSplayCopy( splay );
-  if( copy == splay )
-    return "the copy is the same structure as the original";
-
-  DSplayDestroy( copy );
-  DSplayDestroy( splay );
-
-  return NULL;
-}
-
-const char *
-TestCopyNullDynamicSplay
-( void )
-{
-  if( DSplayCopy( NULL ) != NULL )
-    return "NULL was not returned as the copy of a NULL splay";
-
-  return NULL;
-}
-
-const char *
-TestCopySize
-( void )
-{
-  DSplay *copy;
-  const DSplay *splay;
-
-  splay = BuildDSplay();
-  if( !splay )
-    return "could not build a populated splay";
-
-  copy = DSplayCopy( splay );
-  if( !copy )
-    return "could not copy a splay";
-
-  if( DSplaySize( copy ) != DSplaySize( splay ) )
-    return "the copy did not have the same size as the original";
-
-  DSplayDestroy( copy );
-  DSplayDestroy( splay );
-
-  return NULL;
-}
-
-const char *
-TestDestroyNullDynamicSplay
-( void )
-{
-  DSplayDestroy( NULL );
-
-  return NULL;
-}
-
-const char *
-TestDestroyPopulatedDynamicSplay
-( void )
-{
-  const DSplay *splay;
-
-  splay = BuildDSplay();
-  if( !splay )
-    return "could not build a populated splay";
-
-  DSplayDestroy( splay );
-
-  return NULL;
-}
-
-const char *
 TestFirstInEmptyDynamicSplay
 ( void )
 {
-  const DSplay *splay;
+  const dsplay_t *splay;
 
-  splay = DSplayNew( NULL );
+  splay = DSplayNew();
   if( !splay )
     return "could not build an empty splay";
 
@@ -425,7 +341,7 @@ const char *
 TestFirstInPopulatedDynamicSplay
 ( void )
 {
-  const DSplay *splay;
+  const dsplay_t *splay;
   const char *element;
 
   splay = BuildDSplay();
@@ -447,9 +363,9 @@ const char *
 TestLastInEmptyDynamicSplay
 ( void )
 {
-  const DSplay *splay;
+  const dsplay_t *splay;
 
-  splay = DSplayNew( NULL );
+  splay = DSplayNew();
   if( !splay )
     return "could not build an empty splay";
 
@@ -475,7 +391,7 @@ const char *
 TestLastInPopulatedDynamicSplay
 ( void )
 {
-  const DSplay *splay;
+  const dsplay_t *splay;
   const char *element;
 
   splay = BuildDSplay();
@@ -494,12 +410,12 @@ TestLastInPopulatedDynamicSplay
 }
 
 const char *
-TestNew
+TestNewWithComparator
 ( void )
 {
-  const DSplay *splay;
+  const dsplay_t *splay;
 
-  splay = DSplayNew( ( comparator_t ) strcmp );
+  splay = DSplayNewWithComparator( CompareStrings );
   if( !splay )
     return "a new splay could not be created";
 
@@ -512,59 +428,11 @@ const char *
 TestNewWithNullComparator
 ( void )
 {
-  const DSplay *splay;
+  const dsplay_t *splay;
 
-  splay = DSplayNew( NULL );
-  if( !splay )
-    return "a new splay could not be created with a NULL comparator";
-
-  DSplayDestroy( splay );
-
-  return NULL;
-}
-
-const char *
-TestNewDynamicSplayIsEmpty
-( void )
-{
-  const DSplay *splay;
-
-  splay = DSplayNew( NULL );
-  if( !splay )
-    return "could not create a new splay";
-
-  if( !DSplayIsEmpty( splay ) )
-    return "a false value was returned for a new splay";
-
-  DSplayDestroy( splay );
-
-  return NULL;
-}
-
-const char *
-TestNullDynamicSplayIsEmpty
-( void )
-{
-  if( !DSplayIsEmpty( NULL ) )
-    return "a false value was returned for a NULL splay";
-
-  return NULL;
-}
-
-const char *
-TestPopulatedDynamicSplayIsNotEmpty
-( void )
-{
-  const DSplay *splay;
-
-  splay = BuildDSplay();
-  if( !splay )
-    return "could not build a populated splay";
-
-  if( DSplayIsEmpty( splay ) )
-    return "a true value was returned for a populated splay";
-
-  DSplayDestroy( splay );
+  splay = DSplayNewWithComparator( NULL );
+  if( splay != NULL )
+    return "a new splay was created with a NULL comparator";
 
   return NULL;
 }
@@ -588,7 +456,7 @@ const char *
 TestRemoveNonExistentElement
 ( void )
 {
-  DSplay *splay;
+  dsplay_t *splay;
   void *element = "non existent";
 
   splay = BuildDSplay();
@@ -607,7 +475,7 @@ const char *
 TestRemoveNullElement
 ( void )
 {
-  DSplay *splay;
+  dsplay_t *splay;
 
   if( DSplayRemove( NULL, NULL ) != NULL )
     return "NULL was not returned for a NULL splay and NULL element";
@@ -628,7 +496,7 @@ const char *
 TestRemoveRootElement
 ( void )
 {
-  DSplay *splay;
+  dsplay_t *splay;
   size_t size;
   void *existing_element;
   char *new_element;
@@ -673,7 +541,7 @@ const char *
 TestRemoveUniqueElement
 ( void )
 {
-  DSplay *splay;
+  dsplay_t *splay;
   size_t size;
   void *element;
 
@@ -702,36 +570,10 @@ TestRemoveUniqueElement
 }
 
 const char *
-TestSizeOfEmptyDynamicSplay
-( void )
-{
-  const DSplay *splay;
-
-  splay = DSplayNew( NULL );
-
-  if( DSplaySize( splay ) != 0 )
-    return "a new splay did not have a size of 0";
-
-  DSplayDestroy( splay );
-
-  return NULL;
-}
-
-const char *
-TestSizeOfNullDynamicSplay
-( void )
-{
-  if( DSplaySize( NULL ) != 0 )
-    return "a NULL splay did not have a size of 0";
-
-  return NULL;
-}
-
-const char *
 TestSizeOfPopulatedDynamicSplay
 ( void )
 {
-  const DSplay *splay;
+  const dsplay_t *splay;
 
   splay = BuildDSplay();
   if( !splay )
@@ -750,9 +592,9 @@ TestToStringWithEmptyDynamicSplay
 ( void )
 {
   char *str;
-  const DSplay *splay;
+  const dsplay_t *splay;
 
-  splay = DSplayNew( NULL );
+  splay = DSplayNew();
   if( !splay )
     return "could not build a new splay";
 
@@ -774,7 +616,7 @@ TestToStringWithNullFunction
 {
   char pointer[100];
   char *str, *element;
-  DSplay *splay;
+  dsplay_t *splay;
 
   splay = BuildDSplay();
   if( !splay )
@@ -823,7 +665,7 @@ TestToStringWithPopulatedDynamicSplay
 ( void )
 {
   char *str;
-  const DSplay *splay;
+  const dsplay_t *splay;
 
   splay = BuildDSplay();
   if( !splay )

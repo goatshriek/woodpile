@@ -6,11 +6,11 @@
 #include "lib/validate.h"
 #include "private/dynamic/list.h"
 
-DList *
+dlist_t *
 DListAppendAll
-( DList *first, const DList *second )
+( dlist_t *first, const dlist_t *second )
 {
-  Node *node, *previous=NULL, *temp;
+  node_t *node, *previous=NULL, *temp;
 
   VALIDATE_PARAMETERS( first )
 
@@ -29,18 +29,18 @@ DListAppendAll
   return first;
 }
 
-DList *
+dlist_t *
 DListAppend
-( DList *list, void *element )
+( dlist_t *list, void *element )
 {
-  Node *node;
+  node_t *node;
 
   VALIDATE_PARAMETERS( list )
 
   if( !element )
     return list;
 
-  node = malloc( sizeof( Node ) );
+  node = malloc( sizeof( node_t ) );
   VALIDATE_ALLOCATION( node )
 
   node->neighbors = list->last;
@@ -56,12 +56,12 @@ DListAppend
   return list;
 }
 
-DList *
+dlist_t *
 DListCopy
-( const DList *list )
+( const dlist_t *list )
 {
-  DList *copy;
-  Node *node, *previous=NULL, *temp;
+  dlist_t *copy;
+  node_t *node, *previous=NULL, *temp;
 
   VALIDATE_PARAMETERS( list )
 
@@ -80,9 +80,9 @@ DListCopy
 
 void
 DListDestroy
-( const DList *list )
+( const dlist_t *list )
 {
-  const Node *previous=NULL, *current, *next;
+  const node_t *previous=NULL, *current, *next;
 
   if( !list )
     return;
@@ -103,7 +103,7 @@ DListDestroy
 
 void *
 DListBack
-( const DList *list )
+( const dlist_t *list )
 {
   VALIDATE_PARAMETERS( list )
 
@@ -115,9 +115,9 @@ DListBack
 
 size_t
 DListContains
-( const DList *list, const void *element )
+( const dlist_t *list, const void *element )
 {
-  Node *node, *previous = NULL, *temp;
+  node_t *node, *previous = NULL, *temp;
   size_t count=0;
 
   if( !list )
@@ -138,7 +138,7 @@ DListContains
 
 void *
 DListFront
-( const DList *list )
+( const dlist_t *list )
 {
   VALIDATE_PARAMETERS( list )
 
@@ -150,9 +150,9 @@ DListFront
 
 void *
 DListGet
-( const DList *list, int index )
+( const dlist_t *list, int index )
 {
-  Node *current, *next, *previous=NULL, *start;
+  node_t *current, *next, *previous=NULL, *start;
   size_t i, steps;
 
   if( DListIsEmpty( list ) )
@@ -183,16 +183,16 @@ DListGet
 
 unsigned short
 DListIsEmpty
-( const DList *list )
+( const dlist_t *list )
 {
   return !list || !list->first;
 }
 
 unsigned
 DListSize
-( const DList *list )
+( const dlist_t *list )
 {
-  Node *node, *previous = NULL, *temp;
+  node_t *node, *previous = NULL, *temp;
   unsigned size = 0;
 
   if( !list )
@@ -212,11 +212,11 @@ DListSize
 
 char *
 DListToString
-( const DList *list, char * ( *element_to_string )( const void * ) )
+( const dlist_t *list, char * ( *element_to_string )( const void * ) )
 {
   char *str;
   const char *element;
-  const Node *current, *next, *previous=NULL;
+  const node_t *current, *next, *previous=NULL;
   size_t element_length, str_capacity=100, str_length=1;
 
   VALIDATE_PARAMETERS( list )
@@ -262,11 +262,11 @@ DListToString
   return str;
 }
 
-DList *
+dlist_t *
 DListNew
 ( void )
 {
-  DList *list = malloc( sizeof( DList ) );
+  dlist_t *list = malloc( sizeof( dlist_t ) );
   VALIDATE_ALLOCATION( list )
 
   list->first = list->last = NULL;
@@ -274,15 +274,15 @@ DListNew
   return list;
 }
 
-DList *
+dlist_t *
 DListPrepend
-( DList *list, void *element )
+( dlist_t *list, void *element )
 {
-  Node *node;
+  node_t *node;
 
   VALIDATE_PARAMETERS( list )
 
-  node = malloc( sizeof( Node ) );
+  node = malloc( sizeof( node_t ) );
   VALIDATE_ALLOCATION( node )
 
   node->neighbors = list->first;

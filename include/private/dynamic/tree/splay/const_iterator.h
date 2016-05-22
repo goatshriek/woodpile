@@ -10,8 +10,8 @@
 
 /** the DynamicSplayConstIterator structure */
 struct DynamicSplayConstIterator {
-  const Node *current; /**< the current node of the iterator */
-  const Node *previous; /**< the previous node of the iterator */
+  const node_t *current; /**< the current node of the iterator */
+  const node_t *previous; /**< the previous node of the iterator */
 };
 
 #endif

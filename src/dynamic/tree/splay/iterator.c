@@ -6,10 +6,10 @@
 
 DSplayItr *
 DSplayBegin
-( DSplay *splay )
+( dsplay_t *splay )
 {
   DSplayItr *itr;
-  Node *current;
+  node_t *current;
 
   VALIDATE_PARAMETERS( splay )
 
@@ -60,10 +60,10 @@ DSplayItrDestroy
 
 DSplayItr *
 DSplayEnd
-( DSplay *splay )
+( dsplay_t *splay )
 {
   DSplayItr *itr;
-  Node *current;
+  node_t *current;
 
   VALIDATE_PARAMETERS( splay )
 
@@ -134,7 +134,7 @@ void *
 DSplayItrRemove
 ( DSplayItr *iterator )
 {
-  Node *removed, *root;
+  node_t *removed, *root;
   void *element;
 
   VALIDATE_PARAMETERS( iterator )

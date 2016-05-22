@@ -8,7 +8,7 @@
 #include "test/function/dynamic/list/const_iterator_suite.h"
 #include "test/helper.h"
 
-static const DList *common_list = NULL;
+static const dlist_t *common_list = NULL;
 
 int
 main( void )
@@ -71,7 +71,7 @@ const char *
 TestCBeginWithEmptyList
 ( void )
 {
-  const DList *list;
+  const dlist_t *list;
   DListCItr *iterator;
 
   list = DListNew();
@@ -132,7 +132,7 @@ const char *
 TestCEndWithEmptyList
 ( void )
 {
-  const DList *list;
+  const dlist_t *list;
   DListCItr *iterator;
 
   list = DListNew();
@@ -405,7 +405,7 @@ const char *
 TestHasNextWithEmptyList
 ( void )
 {
-  const DList *list;
+  const dlist_t *list;
   DListCItr *iterator;
 
   list = DListNew();
@@ -497,7 +497,7 @@ const char *
 TestHasPreviousWithEmptyList
 ( void )
 {
-  const DList *list;
+  const dlist_t *list;
   DListCItr *iterator;
 
   list = DListNew();
@@ -618,7 +618,7 @@ const char *
 TestNextWithEmptyList
 ( void )
 {
-  const DList *list;
+  const dlist_t *list;
   DListCItr *iterator;
 
   list = DListNew();
@@ -739,7 +739,7 @@ const char *
 TestPreviousWithEmptyList
 ( void )
 {
-  const DList *list;
+  const dlist_t *list;
   DListCItr *iterator;
 
   list = DListNew();

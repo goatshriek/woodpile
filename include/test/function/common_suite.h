@@ -19,7 +19,7 @@
 #ifdef TEST_FUNCTION_NEW
 #ifdef TEST_FUNCTION_SIZE
 #ifdef TEST_TYPE
-#define TEST_FUNCTION_COMMON_SUITE_AVAILABLE
+#define TEST_FUNCTION_COMMON_SUITE_AVAILABLE 1
 
 struct TEST_TYPE;
 typedef struct TEST_TYPE test_struct_t;
@@ -104,7 +104,7 @@ TestDestroyPopulated
  * @return NULL on completion or a string describing the failure
  */
 const char *
-TestIsEmptyWithEmpty
+TestIsEmptyWithNew
 ( void );
 
 /**
