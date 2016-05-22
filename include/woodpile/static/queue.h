@@ -23,6 +23,29 @@ struct squeue_t;
 typedef struct squeue_t squeue_t;
 
 /**
+ * Gets the current capacity of the Queue.
+ *
+ * @param queue the Queue to get the capacity of
+ *
+ * @return the current capacity of the Queue
+ */
+size_t
+SQueueCapacity
+( const squeue_t *queue );
+
+/**
+ * Searches a Queue for an element.
+ *
+ * @param queue the Queue to search
+ * @param element the element to search for
+ *
+ * @return the number of entries of element in queue
+ */
+size_t
+SQueueContains
+( const squeue_t *queue, const void *element );
+
+/**
  * Creates a copy of a Queue. Elements within the Queue are not copied, meaning
  * that changes made to elements in the original Queue will also change the
  * elements in the copy. Changes made to the original Queue will not affect the
@@ -33,9 +56,8 @@ typedef struct squeue_t squeue_t;
  * @return the copy of the original Queue or NULL on failure
  */
 squeue_t *
-CopyStaticQueue
+SQueueCopy
 ( const squeue_t *queue );
-#define SQueueCopy CopyStaticQueue
 
 /**
  * Destroys a Queue. Does not affect the elements stored in the Queue.
@@ -43,9 +65,19 @@ CopyStaticQueue
  * @param queue the Queue to destroy
  */
 void
-DestroyStaticQueue
+SQueueDestroy
 ( const squeue_t *queue );
-#define SQueueDestroy DestroyStaticQueue
+
+/**
+ * Checks a Queue to see if it's empty.
+ *
+ * @param queue the Queue to check
+ *
+ * @return a positive value if the Queue is empty, 0 otherwise
+ */
+unsigned short
+SQueueIsEmpty
+( const squeue_t *queue );
 
 /**
  * Creates a new Queue. The default capacity of the Queue is 100.
@@ -53,9 +85,8 @@ DestroyStaticQueue
  * @return a new Queue or NULL on failure
  */
 squeue_t *
-NewStaticQueue
+SQueueNew
 ( void );
-#define SQueueNew NewStaticQueue
 
 /**
  * Creates a new Queue of the given capacity.
@@ -65,9 +96,8 @@ NewStaticQueue
  * @return a new Queue of the provided capacity, or NULL on failure
  */
 squeue_t *
-NewSizedStaticQueue
+SQueueNewSized
 ( size_t capacity );
-#define SQueueNewSized NewSizedStaticQueue
 
 /**
  * Gets the front element of the Queue, but does not remove it.
@@ -77,9 +107,8 @@ NewSizedStaticQueue
  * @return the front element of the Queue
  */
 void *
-PeekAtStaticQueue
+SQueuePeek
 ( const squeue_t *queue );
-#define SQueuePeek PeekAtStaticQueue
 
 /**
  * Removes the front element from the Queue and returns it.
@@ -89,9 +118,8 @@ PeekAtStaticQueue
  * @return the front value of the Queue, or NULL on failure
  */
 void *
-PopFromStaticQueue
+SQueuePop
 ( squeue_t *queue );
-#define SQueuePop PopFromStaticQueue
 
 /**
  * Puts an element at the back of the Queue. If the Queue or value passed are
@@ -103,73 +131,8 @@ PopFromStaticQueue
  * @return the Queue pushed to, or NULL on failure
  */
 squeue_t *
-PushToStaticQueue
+SQueuePush
 ( squeue_t *queue, void *value );
-#define SQueuePush PushToStaticQueue
-
-/**
- * Gets the current capacity of the Queue.
- *
- * @param queue the Queue to get the capacity of
- *
- * @return the current capacity of the Queue
- */
-size_t
-StaticQueueCapacity
-( const squeue_t *queue );
-#define SQueueCapacity StaticQueueCapacity
-
-/**
- * Searches a Queue for an element.
- *
- * @param queue the Queue to search
- * @param element the element to search for
- *
- * @return the number of entries of element in queue
- */
-size_t
-StaticQueueContains
-( const squeue_t *queue, const void *element );
-#define SQueueContains StaticQueueContains
-
-/**
- * Checks a Queue to see if it's empty.
- *
- * @param queue the Queue to check
- *
- * @return a positive value if the Queue is empty, 0 otherwise
- */
-unsigned short
-StaticQueueIsEmpty
-( const squeue_t *queue );
-#define SQueueIsEmpty StaticQueueIsEmpty
-
-/**
- * Gets the number of elements in a Queue. An empty Queue will return 0.
- *
- * @param queue the Queue to measure
- *
- * @return the number of elements in the Queue
- */
-size_t
-StaticQueueSize
-( const squeue_t *queue);
-#define SQueueSize StaticQueueSize
-
-/**
- * Creates a string representation of the given Queue, using the provided
- * function to get the string representation of each element.
- *
- * @param queue the Queue to get a representation of
- * @param element_to_string a function returining string representations of
- * elements
- *
- * @return a char buffer holding a string representation of the Queue
- */
-char *
-StaticQueueToString
-( const squeue_t *queue, char * ( *element_to_string )( const void * ) );
-#define SQueueToString StaticQueueToString
 
 /**
  * Removes the first occurrence of a value from the Queue given. If the value
@@ -182,9 +145,8 @@ StaticQueueToString
  * @return the value removed, or NULL if the value did not exist in the Queue
  */
 void *
-RemoveFromStaticQueue
+SQueueRemove
 ( squeue_t *queue, const void *value );
-#define SQueueRemove RemoveFromStaticQueue
 
 /**
  * Changes a Queue's capacity to a new value. If the new capacity is smaller
@@ -197,9 +159,33 @@ RemoveFromStaticQueue
  * @return the Queue having been resized
  */
 squeue_t *
-SetStaticQueueCapacity
+SQueueSetCapacity
 ( squeue_t *queue, size_t capacity );
-#define SQueueSetCapacity SetStaticQueueCapacity
+
+/**
+ * Gets the number of elements in a Queue. An empty Queue will return 0.
+ *
+ * @param queue the Queue to measure
+ *
+ * @return the number of elements in the Queue
+ */
+size_t
+SQueueSize
+( const squeue_t *queue);
+
+/**
+ * Creates a string representation of the given Queue, using the provided
+ * function to get the string representation of each element.
+ *
+ * @param queue the Queue to get a representation of
+ * @param element_to_string a function returining string representations of
+ * elements
+ *
+ * @return a char buffer holding a string representation of the Queue
+ */
+char *
+SQueueToString
+( const squeue_t *queue, char * ( *element_to_string )( const void * ) );
 
 /**
  * Shrinks the Queue to its current size. This guarantees that the Queue is
@@ -211,8 +197,7 @@ SetStaticQueueCapacity
  * @return the new size of the Queue
  */
 size_t
-TrimStaticQueueToSize
+SQueueTrimToSize
 ( squeue_t *queue );
-#define SQueueTrimToSize TrimStaticQueueToSize
 
 #endif
