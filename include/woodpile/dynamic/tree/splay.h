@@ -32,9 +32,9 @@
  * Memory overhead can be calculated as follows:
  * sizeof( void * ) * ( ( number_of_elements * 4 ) + 2 )
  */
-struct DynamicSplay;
+struct dsplay_t;
 
-typedef struct DynamicSplay DSplay;
+typedef struct dsplay_t dsplay_t;
 typedef char * ( *to_string_t )( const void * );
 
 /**
@@ -46,9 +46,9 @@ typedef char * ( *to_string_t )( const void * );
  *
  * @return splay, or NULL on failure
  */
-DSplay *
+dsplay_t *
 AddToDynamicSplay
-( DSplay *splay, void *element );
+( dsplay_t *splay, void *element );
 /** shortened AddToDynamicSplay function name */
 #define DSplayAdd AddToDynamicSplay
 
@@ -58,12 +58,12 @@ AddToDynamicSplay
  * elements in the copy. Changes made to splay will not affect the copy.
  *
  * @param splay the DynamicSplay to copy. Must not be NULL.
- * 
+ *
  * @return a copy of the original DynamicSplay or NULL on failure
  */
-DSplay *
+dsplay_t *
 CopyDynamicSplay
-( const DSplay *splay );
+( const dsplay_t *splay );
 /** shortened CopyDynamicSplay function name */
 #define DSplayCopy CopyDynamicSplay
 
@@ -74,7 +74,7 @@ CopyDynamicSplay
  */
 void
 DestroyDynamicSplay
-( const DSplay *splay );
+( const dsplay_t *splay );
 /** shortened DestroyDynamicSplay function name */
 #define DSplayDestroy DestroyDynamicSplay
 
@@ -90,7 +90,7 @@ DestroyDynamicSplay
  */
 unsigned short
 DynamicSplayContains
-( DSplay *splay, const void *element );
+( dsplay_t *splay, const void *element );
 /** shortened DynamicSplayContains function name */
 #define DSplayContains DynamicSplayContains
 
@@ -104,7 +104,7 @@ DynamicSplayContains
  */
 unsigned short
 DynamicSplayIsEmpty
-( const DSplay *splay );
+( const dsplay_t *splay );
 /** shortened DynamicSplayIsEmpty function name */
 #define DSplayIsEmpty DynamicSplayIsEmpty
 
@@ -118,7 +118,7 @@ DynamicSplayIsEmpty
  */
 size_t
 DynamicSplaySize
-( const DSplay *splay );
+( const dsplay_t *splay );
 /** shortened DynamicSplaySize function name */
 #define DSplaySize DynamicSplaySize
 
@@ -145,7 +145,7 @@ DynamicSplaySize
  */
 char *
 DynamicSplayToString
-( const DSplay *splay, to_string_t element_to_string );
+( const dsplay_t *splay, to_string_t element_to_string );
 /** shortened DynamicSplayToString function name */
 #define DSplayToString DynamicSplayToString
 
@@ -159,7 +159,7 @@ DynamicSplayToString
  */
 void *
 FirstInDynamicSplay
-( const DSplay *splay );
+( const dsplay_t *splay );
 /** shortened FirstInDynamicSplay function name */
 #define DSplayFirst FirstInDynamicSplay
 
@@ -173,7 +173,7 @@ FirstInDynamicSplay
  */
 void *
 LastInDynamicSplay
-( const DSplay *splay );
+( const dsplay_t *splay );
 /** shortened FirstInDynamicSplay function name */
 #define DSplayLast LastInDynamicSplay
 
@@ -181,12 +181,12 @@ LastInDynamicSplay
  * Creates a new DynamicSplay. If comparator is NULL then the elements will be
  * sorted according to their natural order (that is, the order of their
  * pointers).
- * 
+ *
  * @param comparator the comparator function for the DynamicSplay
  *
  * @return a new DynamicSplay or NULL on failure
  */
-DSplay *
+dsplay_t *
 NewDynamicSplay
 ( comparator_t comparator );
 /** shortened NewDynamicSplay function name */
@@ -202,7 +202,7 @@ NewDynamicSplay
  */
 void *
 RemoveFromDynamicSplay
-( DSplay *splay, const void *element );
+( dsplay_t *splay, const void *element );
 /** shortened RemoveFromDynamicSplay */
 #define DSplayRemove RemoveFromDynamicSplay
 

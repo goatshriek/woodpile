@@ -14,7 +14,7 @@ struct node_t;
 typedef struct node_t node_t;
 
 /** the Splay container */
-struct DynamicSplay {
+struct dsplay_t {
   comparator_t compare; /**< the comparator used for elements */
   node_t *root; /**< the root Node of the tree */
 };

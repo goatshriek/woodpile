@@ -6,7 +6,7 @@
 
 DSplayCItr *
 DSplayCBegin
-( const DSplay *splay )
+( const dsplay_t *splay )
 {
   DSplayCItr *itr;
   const node_t *current;
@@ -30,7 +30,7 @@ DSplayCBegin
 
 DSplayCItr *
 DSplayCEnd
-( const DSplay *splay )
+( const dsplay_t *splay )
 {
   DSplayCItr *itr;
   const node_t *current;

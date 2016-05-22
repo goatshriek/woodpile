@@ -7,9 +7,9 @@
 #include "lib/validate.h"
 #include "private/dynamic/tree/splay.h"
 
-DSplay *
+dsplay_t *
 DSplayAdd
-( DSplay *splay, void *element )
+( dsplay_t *splay, void *element )
 {
   int comparison = 0;
   node_t *current_node, *new_node, *parent=NULL;
@@ -54,7 +54,7 @@ DSplayAdd
 
 unsigned short
 DSplayContains
-( DSplay *splay, const void *element )
+( dsplay_t *splay, const void *element )
 {
   node_t *node;
 
@@ -72,15 +72,15 @@ DSplayContains
   }
 }
 
-DSplay *
+dsplay_t *
 DSplayCopy
-( const DSplay *splay )
+( const dsplay_t *splay )
 {
-  DSplay *copy;
+  dsplay_t *copy;
 
   VALIDATE_PARAMETERS( splay )
 
-  copy = malloc( sizeof( DSplay ) );
+  copy = malloc( sizeof( dsplay_t ) );
   VALIDATE_ALLOCATION( copy )
 
   copy->root = CopyTree( splay->root );
@@ -92,7 +92,7 @@ DSplayCopy
 
 void
 DSplayDestroy
-( const DSplay *splay )
+( const dsplay_t *splay )
 {
   if( !splay )
     return;
@@ -104,7 +104,7 @@ DSplayDestroy
 
 void *
 DSplayFirst
-( const DSplay *splay )
+( const dsplay_t *splay )
 {
   node_t *node;
 
@@ -123,7 +123,7 @@ DSplayFirst
 
 void *
 DSplayLast
-( const DSplay *splay )
+( const dsplay_t *splay )
 {
   node_t *node;
 
@@ -142,14 +142,14 @@ DSplayLast
 
 unsigned short
 DSplayIsEmpty
-( const DSplay *splay )
+( const dsplay_t *splay )
 {
   return ( ( splay == NULL ) || ( splay->root == NULL ) );
 }
 
 size_t
 DSplaySize
-( const DSplay *splay )
+( const dsplay_t *splay )
 {
   if( !splay )
     return 0;
@@ -159,7 +159,7 @@ DSplaySize
 
 char *
 DSplayToString
-( const DSplay *splay, to_string_t element_to_string )
+( const dsplay_t *splay, to_string_t element_to_string )
 {
   char *str;
   const char *element;
@@ -213,13 +213,13 @@ DSplayToString
   return str;
 }
 
-DSplay *
+dsplay_t *
 DSplayNew
 ( comparator_t compare )
 {
-  DSplay *splay;
+  dsplay_t *splay;
 
-  splay = malloc( sizeof( DSplay ) );
+  splay = malloc( sizeof( dsplay_t ) );
   VALIDATE_ALLOCATION( splay )
  
   splay->root = NULL;
@@ -230,7 +230,7 @@ DSplayNew
 
 void *
 DSplayRemove
-( DSplay *splay, const void *element )
+( dsplay_t *splay, const void *element )
 {
   node_t *node, *parent, *root;
   int comparison = 0;

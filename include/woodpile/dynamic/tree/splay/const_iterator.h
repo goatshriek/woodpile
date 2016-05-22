@@ -34,7 +34,7 @@ typedef struct DynamicSplayConstIterator DSplayCItr;
  */
 DSplayCItr *
 CBeginDynamicSplay
-( const DSplay *splay );
+( const dsplay_t *splay );
 #define DSplayCBegin CBeginDynamicSplay
 
 /**
@@ -51,7 +51,7 @@ CBeginDynamicSplay
  */
 DSplayCItr *
 CEndDynamicSplay
-( const DSplay *splay );
+( const dsplay_t *splay );
 #define DSplayCEnd CEndDynamicSplay
 
 /**

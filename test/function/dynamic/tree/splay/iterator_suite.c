@@ -66,7 +66,7 @@ const char *
 TestBeginWithEmptyDynamicSplay
 ( void )
 {
-  DSplay *splay;
+  dsplay_t *splay;
   DSplayItr *iterator;
 
   splay = DSplayNew( NULL );
@@ -103,7 +103,7 @@ const char *
 TestBeginWithPopulatedDynamicSplay
 ( void )
 {
-  DSplay *splay;
+  dsplay_t *splay;
   DSplayItr *iterator;
   const void *element;
 
@@ -133,7 +133,7 @@ const char *
 TestCopy
 ( void )
 {
-  DSplay *splay;
+  dsplay_t *splay;
   DSplayItr *copy, *iterator;
 
   splay = BuildDSplay();
@@ -159,7 +159,7 @@ const char *
 TestCopyContents
 ( void )
 {
-  DSplay *splay;
+  dsplay_t *splay;
   DSplayItr *copy, *iterator;
   const void *element;
 
@@ -196,7 +196,7 @@ const char *
 TestCopyDistinct
 ( void )
 {
-  DSplay *splay;
+  dsplay_t *splay;
   DSplayItr *copy, *iterator;
   const void *element_1, *element_2, *element_3;
 
@@ -255,7 +255,7 @@ const char *
 TestCopyPosition
 ( void )
 {
-  DSplay *splay;
+  dsplay_t *splay;
   DSplayItr *copy, *iterator;
 
   splay = BuildDSplay();
@@ -287,7 +287,7 @@ const char *
 TestDestroy
 ( void )
 {
-  DSplay *splay;
+  dsplay_t *splay;
   DSplayItr *iterator;
 
   splay = BuildDSplay();
@@ -318,7 +318,7 @@ const char *
 TestEndWithEmptyDynamicSplay
 ( void )
 {
-  DSplay *splay;
+  dsplay_t *splay;
   DSplayItr *iterator;
 
   splay = DSplayNew( NULL );
@@ -355,7 +355,7 @@ const char *
 TestEndWithPopulatedDynamicSplay
 ( void )
 {
-  DSplay *splay;
+  dsplay_t *splay;
   DSplayItr *iterator;
   const void *element;
 
@@ -385,7 +385,7 @@ const char *
 TestHasNextAtBeginning
 ( void )
 {
-  DSplay *splay;
+  dsplay_t *splay;
   DSplayItr *iterator;
 
   splay = BuildDSplay();
@@ -409,7 +409,7 @@ const char *
 TestHasNextAtEnd
 ( void )
 {
-  DSplay *splay;
+  dsplay_t *splay;
   DSplayItr *iterator;
 
   splay = BuildDSplay();
@@ -433,7 +433,7 @@ const char *
 TestHasNextAtMiddle
 ( void )
 {
-  DSplay *splay;
+  dsplay_t *splay;
   DSplayItr *iterator;
 
   splay = BuildDSplay();
@@ -461,7 +461,7 @@ const char *
 TestHasNextWithEmptyDynamicSplay
 ( void )
 {
-  DSplay *splay;
+  dsplay_t *splay;
   DSplayItr *iterator;
 
   splay = DSplayNew( NULL );
@@ -495,7 +495,7 @@ const char *
 TestHasPreviousAtBeginning
 ( void )
 {
-  DSplay *splay;
+  dsplay_t *splay;
   DSplayItr *iterator;
 
   splay = BuildDSplay();
@@ -519,7 +519,7 @@ const char *
 TestHasPreviousAtEnd
 ( void )
 {
-  DSplay *splay;
+  dsplay_t *splay;
   DSplayItr *iterator;
 
   splay = BuildDSplay();
@@ -543,7 +543,7 @@ const char *
 TestHasPreviousAtMiddle
 ( void )
 {
-  DSplay *splay;
+  dsplay_t *splay;
   DSplayItr *iterator;
 
   splay = BuildDSplay();
@@ -571,7 +571,7 @@ const char *
 TestHasPreviousWithEmptyDynamicSplay
 ( void )
 {
-  DSplay *splay;
+  dsplay_t *splay;
   DSplayItr *iterator;
 
   splay = DSplayNew( NULL );
@@ -605,7 +605,7 @@ const char *
 TestNextAtBeginning
 ( void )
 {
-  DSplay *splay;
+  dsplay_t *splay;
   DSplayItr *iterator;
 
   splay = BuildDSplay();
@@ -629,7 +629,7 @@ const char *
 TestNextAtEnd
 ( void )
 {
-  DSplay *splay;
+  dsplay_t *splay;
   DSplayItr *iterator;
 
   splay = BuildDSplay();
@@ -653,7 +653,7 @@ const char *
 TestNextAtMiddle
 ( void )
 {
-  DSplay *splay;
+  dsplay_t *splay;
   DSplayItr *iterator;
   const void *element;
 
@@ -710,7 +710,7 @@ const char *
 TestNextWithEmptyDynamicSplay
 ( void )
 {
-  DSplay *splay;
+  dsplay_t *splay;
   DSplayItr *iterator;
 
   splay = DSplayNew( NULL );
@@ -744,7 +744,7 @@ const char *
 TestPreviousAtBeginning
 ( void )
 {
-  DSplay *splay;
+  dsplay_t *splay;
   DSplayItr *iterator;
 
   splay = BuildDSplay();
@@ -768,7 +768,7 @@ const char *
 TestPreviousAtEnd
 ( void )
 {
-  DSplay *splay;
+  dsplay_t *splay;
   DSplayItr *iterator;
 
   splay = BuildDSplay();
@@ -792,7 +792,7 @@ const char *
 TestPreviousAtMiddle
 ( void )
 {
-  DSplay *splay;
+  dsplay_t *splay;
   DSplayItr *iterator;
   const void *element;
 
@@ -849,7 +849,7 @@ const char *
 TestPreviousWithEmptyDynamicSplay
 ( void )
 {
-  DSplay *splay;
+  dsplay_t *splay;
   DSplayItr *iterator;
 
   splay = DSplayNew( NULL );
@@ -883,7 +883,7 @@ const char *
 TestRemoveAfterNext
 ( void )
 {
-  DSplay *splay;
+  dsplay_t *splay;
   DSplayItr *iterator;
   const void *element;
 
@@ -924,7 +924,7 @@ const char *
 TestRemoveAfterPrevious
 ( void )
 {
-  DSplay *splay;
+  dsplay_t *splay;
   DSplayItr *iterator;
   const void *element;
 
@@ -965,7 +965,7 @@ const char *
 TestRemoveAfterRemove
 ( void )
 {
-  DSplay *splay;
+  dsplay_t *splay;
   DSplayItr *iterator;
   const void *element, *removed;
 
@@ -1006,7 +1006,7 @@ const char *
 TestRemoveBeforeNextOrPrevious
 ( void )
 {
-  DSplay *splay;
+  dsplay_t *splay;
   DSplayItr *iterator;
 
   splay = BuildDSplay();

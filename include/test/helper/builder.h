@@ -62,7 +62,7 @@ BuildDList
  * Zulu
  *
  */
-DSplay *
+dsplay_t *
 BuildDSplay
 ( void );
 

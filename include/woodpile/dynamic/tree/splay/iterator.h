@@ -41,7 +41,7 @@ typedef struct DynamicSplayIterator DSplayItr;
  */
 DSplayItr *
 BeginDynamicSplay
-( DSplay *splay );
+( dsplay_t *splay );
 #define DSplayBegin BeginDynamicSplay
 
 /**
@@ -82,7 +82,7 @@ DestroyDynamicSplayIterator
  */
 DSplayItr *
 EndDynamicSplay
-( DSplay *splay );
+( dsplay_t *splay );
 #define DSplayEnd EndDynamicSplay
 
 /**

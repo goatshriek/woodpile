@@ -6,7 +6,7 @@
 
 DSplayItr *
 DSplayBegin
-( DSplay *splay )
+( dsplay_t *splay )
 {
   DSplayItr *itr;
   node_t *current;
@@ -60,7 +60,7 @@ DSplayItrDestroy
 
 DSplayItr *
 DSplayEnd
-( DSplay *splay )
+( dsplay_t *splay )
 {
   DSplayItr *itr;
   node_t *current;

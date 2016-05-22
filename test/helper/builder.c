@@ -22,11 +22,11 @@ BuildDList
   return DListAppend( list, "strings!" );
 }
 
-DSplay *
+dsplay_t *
 BuildDSplay
 ( void )
 {
-  DSplay *splay = DSplayNew( ( comparator_t ) strcmp );
+  dsplay_t *splay = DSplayNew( ( comparator_t ) strcmp );
 
   DSplayAdd( splay, "Alpha" );
   DSplayAdd( splay, "Zulu" );

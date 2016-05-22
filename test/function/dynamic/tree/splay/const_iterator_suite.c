@@ -8,7 +8,7 @@
 #include "test/function/dynamic/tree/splay/const_iterator_suite.h"
 #include "test/helper.h"
 
-static const DSplay *common_splay = NULL;
+static const dsplay_t *common_splay = NULL;
 
 int
 main( void )
@@ -71,7 +71,7 @@ const char *
 TestCBeginWithEmptyDynamicSplay
 ( void )
 {
-  const DSplay *splay;
+  const dsplay_t *splay;
   DSplayCItr *iterator;
 
   splay = DSplayNew( NULL );
@@ -132,7 +132,7 @@ const char *
 TestCEndWithEmptyDynamicSplay
 ( void )
 {
-  const DSplay *splay;
+  const dsplay_t *splay;
   DSplayCItr *iterator;
 
   splay = DSplayNew( NULL );
@@ -405,7 +405,7 @@ const char *
 TestHasNextWithEmptyDynamicSplay
 ( void )
 {
-  const DSplay *splay;
+  const dsplay_t *splay;
   DSplayCItr *iterator;
 
   splay = DSplayNew( NULL );
@@ -497,7 +497,7 @@ const char *
 TestHasPreviousWithEmptyDynamicSplay
 ( void )
 {
-  const DSplay *splay;
+  const dsplay_t *splay;
   DSplayCItr *iterator;
 
   splay = DSplayNew( NULL );
@@ -618,7 +618,7 @@ const char *
 TestNextWithEmptyDynamicSplay
 ( void )
 {
-  const DSplay *splay;
+  const dsplay_t *splay;
   DSplayCItr *iterator;
 
   splay = DSplayNew( NULL );
@@ -739,7 +739,7 @@ const char *
 TestPreviousWithEmptyDynamicSplay
 ( void )
 {
-  const DSplay *splay;
+  const dsplay_t *splay;
   DSplayCItr *iterator;
 
   splay = DSplayNew( NULL );
