@@ -215,16 +215,25 @@ DSplayToString
 
 dsplay_t *
 DSplayNew
+()
+{
+  return DSplayNewWithComparator( ComparePointers );
+}
+
+dsplay_t *
+DSplayNewWithComparator
 ( comparator_t compare )
 {
   dsplay_t *splay;
 
+  VALIDATE_PARAMETERS( compare );
+
   splay = malloc( sizeof( dsplay_t ) );
   VALIDATE_ALLOCATION( splay )
- 
+
   splay->root = NULL;
-  splay->compare = compare ? compare : ComparePointers;
- 
+  splay->compare = compare;
+
   return splay;
 }
 
@@ -597,7 +606,7 @@ TreeMaximum
 {
   if( !root->right_child )
     return root;
-  
+
   return TreeMaximum( root->right_child );
 }
 
@@ -608,7 +617,7 @@ TreeMinimum
 {
   if( !root->left_child )
     return root;
-  
+
   return TreeMinimum( root->left_child );
 }
 

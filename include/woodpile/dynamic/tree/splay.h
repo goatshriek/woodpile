@@ -133,6 +133,20 @@ DSplayLast
  */
 dsplay_t *
 DSplayNew
+();
+
+/**
+ * Creates a new DynamicSplay. If comparator is NULL then the elements will be
+ * sorted according to their natural order (that is, the order of their
+ * pointers).
+ *
+ * @param comparator the comparator function for the DynamicSplay. Must not be
+ * NULL.
+ *
+ * @return a new DynamicSplay or NULL on failure
+ */
+dsplay_t *
+DSplayNewWithComparator
 ( comparator_t comparator );
 
 /**

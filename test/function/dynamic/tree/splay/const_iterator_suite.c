@@ -74,7 +74,7 @@ TestCBeginWithEmptyDynamicSplay
   const dsplay_t *splay;
   DSplayCItr *iterator;
 
-  splay = DSplayNew( NULL );
+  splay = DSplayNew();
   if( !splay )
     return "could not build a Splay";
 
@@ -135,7 +135,7 @@ TestCEndWithEmptyDynamicSplay
   const dsplay_t *splay;
   DSplayCItr *iterator;
 
-  splay = DSplayNew( NULL );
+  splay = DSplayNew();
   if( !splay )
     return "could not build a Splay";
 
@@ -408,7 +408,7 @@ TestHasNextWithEmptyDynamicSplay
   const dsplay_t *splay;
   DSplayCItr *iterator;
 
-  splay = DSplayNew( NULL );
+  splay = DSplayNew();
   if( !splay )
     return "could not build a Splay";
 
@@ -500,7 +500,7 @@ TestHasPreviousWithEmptyDynamicSplay
   const dsplay_t *splay;
   DSplayCItr *iterator;
 
-  splay = DSplayNew( NULL );
+  splay = DSplayNew();
   if( !splay )
     return "could not build a Splay";
 
@@ -621,7 +621,7 @@ TestNextWithEmptyDynamicSplay
   const dsplay_t *splay;
   DSplayCItr *iterator;
 
-  splay = DSplayNew( NULL );
+  splay = DSplayNew();
   if( !splay )
     return "could not build a Splay";
 
@@ -742,7 +742,7 @@ TestPreviousWithEmptyDynamicSplay
   const dsplay_t *splay;
   DSplayCItr *iterator;
 
-  splay = DSplayNew( NULL );
+  splay = DSplayNew();
   if( !splay )
     return "could not build a Splay";
 

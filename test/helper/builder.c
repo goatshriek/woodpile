@@ -26,7 +26,7 @@ dsplay_t *
 BuildDSplay
 ( void )
 {
-  dsplay_t *splay = DSplayNew( ( comparator_t ) strcmp );
+  dsplay_t *splay = DSplayNewWithComparator( CompareStrings );
 
   DSplayAdd( splay, "Alpha" );
   DSplayAdd( splay, "Zulu" );

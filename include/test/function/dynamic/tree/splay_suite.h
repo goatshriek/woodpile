@@ -11,7 +11,7 @@
  *
  * @test Adding an element already in the splay must return the splay. The
  * size of the splay must be unchanged.
- * 
+ *
  * @return NULL on completion or a string describing the failure
  */
 const char *
@@ -119,17 +119,6 @@ TestContainsWithNullDynamicSplay
 ( void );
 
 /**
- * Tests the CopyDynamicSplay function.
- *
- * @test A non-NULL DynamicSplay must be returned for a non-NULL DynamicSplay.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestCopy
-( void );
-
-/**
  * Tests the contents of the DynamicSplay returned by the CopyDynamicSplay
  * function.
  *
@@ -143,42 +132,8 @@ TestCopyContents
 ( void );
 
 /**
- * Tests the DynamicSplay returned by the CopyDynamicSplay function.
- *
- * @test The copied DynamicSplay must be a different structure than the original.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestCopyDistinct
-( void );
-
-/**
- * Tests the CopyDynamicSplay function with a NULL DynamicSplay.
- *
- * @test a NULL DynamicSplay must return NULL.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestCopyNullDynamicSplay
-( void );
-
-/**
- * Tests the size of the DynamicSplay returned by the CopyDynamicSplay function.
- *
- * @test The copy of a populated DynamicSplay must be the same size as the
- * original.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestCopySize
-( void );
-
-/**
  * Tests the DestroyDynamicSplay function with a NULL DynamicSplay.
- * 
+ *
  * @test A NULL DynamicSplay must not cause an error.
  *
  * @return NULL on completion or a string describing the failure
@@ -275,7 +230,7 @@ TestLastInPopulatedDynamicSplay
  * @return NULL on completion or a string describing the failure
  */
 const char *
-TestNew
+TestNewWithComparator
 ( void );
 
 /**
@@ -290,7 +245,7 @@ const char *
 TestNewWithNullComparator
 ( void );
 
-/** 
+/**
  * Tests the DynamicSplayIsEmpty function with an new DynamicSplay.
  *
  * @test A newly constructed DynamicSplay must return a value that is logically
@@ -362,7 +317,7 @@ TestRemoveNullElement
 
 /**
  * Tests the DSplayRemove function with an element that is currently the root.
- * 
+ *
 * @test Calling the function with an element that has just been splayed must
  * return the element itself. The element must be removed from the splay after
  * the call. The splay size must decrease by one after the call.

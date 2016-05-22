@@ -69,7 +69,7 @@ TestBeginWithEmptyDynamicSplay
   dsplay_t *splay;
   DSplayItr *iterator;
 
-  splay = DSplayNew( NULL );
+  splay = DSplayNew();
   if( !splay )
     return "could not build a splay";
 
@@ -321,9 +321,9 @@ TestEndWithEmptyDynamicSplay
   dsplay_t *splay;
   DSplayItr *iterator;
 
-  splay = DSplayNew( NULL );
+  splay = DSplayNew();
   if( !splay )
-    return "could not build a List";
+    return "could not build a new splay";
 
   iterator = DSplayEnd( splay );
   if( !iterator )
@@ -464,7 +464,7 @@ TestHasNextWithEmptyDynamicSplay
   dsplay_t *splay;
   DSplayItr *iterator;
 
-  splay = DSplayNew( NULL );
+  splay = DSplayNew();
   if( !splay )
     return "could not build an empty splay";
 
@@ -574,7 +574,7 @@ TestHasPreviousWithEmptyDynamicSplay
   dsplay_t *splay;
   DSplayItr *iterator;
 
-  splay = DSplayNew( NULL );
+  splay = DSplayNew();
   if( !splay )
     return "could not build a List";
 
@@ -713,7 +713,7 @@ TestNextWithEmptyDynamicSplay
   dsplay_t *splay;
   DSplayItr *iterator;
 
-  splay = DSplayNew( NULL );
+  splay = DSplayNew();
   if( !splay )
     return "could not build a List";
 
@@ -852,7 +852,7 @@ TestPreviousWithEmptyDynamicSplay
   dsplay_t *splay;
   DSplayItr *iterator;
 
-  splay = DSplayNew( NULL );
+  splay = DSplayNew();
   if( !splay )
     return "could not build a List";
 
