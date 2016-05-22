@@ -18,6 +18,8 @@ main
   unsigned failure_count = 0;
   const char *result;
 
+  printf( "### Static Hash Functionality Test Suite\n" );
+
   common_hash = BuildSHash();
   if( !common_hash ){
     printf( "Could not build a test SHash" );
@@ -52,7 +54,7 @@ main
 #endif
 
 #ifdef TEST_FUNCTION_COMMON_SUITE_AVAILABLE
-  printf( "\nRunning Common Functionality Tests\n======\n" );
+  printf( "\nRunning Common Tests\n======\n" );
 
   TEST( Copy )
   TEST( CopyDistinct )
@@ -67,7 +69,7 @@ main
   TEST( SizeWithNull )
 #endif
 
-  printf( "\nRunning Static Hash Functionality Tests\n======\n" );
+  printf( "\nRunning Specific Tests\n======\n" );
 
   TEST( ContainsDuplicateValues )
   TEST( ContainsNonExistentValue )
@@ -95,6 +97,8 @@ main
   TEST( ToStringWithEmptySHash )
   TEST( ToStringWithNullFunction )
   TEST( ToStringWithPopulatedSHash )
+
+  printf( "\n" );
 
   SHashDestroy( common_hash );
 

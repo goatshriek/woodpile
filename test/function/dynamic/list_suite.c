@@ -15,6 +15,8 @@ main( void )
   unsigned failure_count = 0;
   const char *result;
 
+  printf( "### Dynamic List Functionality Test Suite\n" );
+
 #ifdef __WOODPILE_PARAMETER_VALIDATION
   printf( "Running Parameter Validation Tests\n======\n" );
 
@@ -31,7 +33,7 @@ main( void )
 #endif
 
 #ifdef TEST_FUNCTION_COMMON_SUITE_AVAILABLE
-  printf( "\nRunning Common Functionality Tests\n======\n" );
+  printf( "\nRunning Common Tests\n======\n" );
 
   TEST( Copy )
   TEST( CopyDistinct )
@@ -46,7 +48,7 @@ main( void )
   TEST( SizeWithNull )
 #endif
 
-  printf( "\nRunning Dynamic List Functionality Tests\n======\n" );
+  printf( "\nRunning Specific Tests\n======\n" );
 
   TEST( AppendAllOfEmptyList )
   TEST( AppendAllOfNullList )
@@ -78,6 +80,8 @@ main( void )
   TEST( ToStringWithEmptyList )
   TEST( ToStringWithNullFunction )
   TEST( ToStringWithPopulatedList )
+
+  printf( "\n" );
 
   if( failure_count > 0 )
     return EXIT_FAILURE;
