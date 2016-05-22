@@ -132,28 +132,6 @@ TestCopyContents
 ( void );
 
 /**
- * Tests the DestroyDynamicSplay function with a NULL DynamicSplay.
- *
- * @test A NULL DynamicSplay must not cause an error.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestDestroyNullDynamicSplay
-( void );
-
-/**
- * Tests the DestroyDynamicSplay function with a populated DynamicSplay.
- *
- *  @test A populated DynamicSplay must not cause an error.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestDestroyPopulatedDynamicSplay
-( void );
-
-/**
  * Tests the FirstInDynamicSplay function with an empty splay.
  *
  * @test Calling the function with an empty splay must return NULL.
@@ -246,40 +224,6 @@ TestNewWithNullComparator
 ( void );
 
 /**
- * Tests the DynamicSplayIsEmpty function with an new DynamicSplay.
- *
- * @test A newly constructed DynamicSplay must return a value that is logically
- * true.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestNewDynamicSplayIsEmpty
-( void );
-
-/**
- * Tests the DynamicSplayIsEmpty function with a NULL DynamicSplay.
- *
- * @test A NULL DynamicSplay must return a value that is logically true.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestNullDynamicSplayIsEmpty
-( void );
-
-/**
- * Tests the DynamicSplayIsEmpty function with a populated DynamicSplay.
- *
- * @test A populated DynamicSplay must return a value that is logically false.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestPopulatedDynamicSplayIsNotEmpty
-( void );
-
-/**
  * Tests the DSplayRemove function with a NULL splay.
  *
  * @test Calling the function with a NULL splay must return NULL, regardless of
@@ -340,28 +284,6 @@ TestRemoveRootElement
  */
 const char *
 TestRemoveUniqueElement
-( void );
-
-/**
- * Tests the DynamicSplaySize function with an empty DynamicSplay.
- *
- * @test An empty DynamicSplay must return 0.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestSizeOfEmptyDynamicSplay
-( void );
-
-/**
- * Tests the DynamicSplaySize function with a NULL DynamicSplay.
- *
- * @test A NULL DynamicSplay must return 0.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestSizeOfNullDynamicSplay
 ( void );
 
 /**
