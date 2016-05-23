@@ -19,29 +19,50 @@ main
 #ifdef __WOODPILE_PARAMETER_VALIDATION
   printf( "\nRunning Parameter Validation Tests\n======\n" );
 
+#ifdef TEST_FUNCTION_COMMON_COPY_NULL
+  TEST( CopyNull )
+#endif
   TEST( PopFromNullQueue )
   TEST( PushNullValue )
   TEST( PushToNullQueue )
-
-#ifdef TEST_FUNCTION_COMMON_SUITE_AVAILABLE
-  TEST( CopyNull )
-#endif
 #endif
 
-#ifdef TEST_FUNCTION_COMMON_SUITE_AVAILABLE
+#ifdef TEST_TYPE
   printf( "\nRunning Common Tests\n======\n" );
 
+#ifdef TEST_FUNCTION_COMMON_COPY
   TEST( Copy )
+#endif
+#ifdef TEST_FUNCTION_COMMON_COPY_DISTINCT
   TEST( CopyDistinct )
+#endif
+#ifdef TEST_FUNCTION_COMMON_COPY_SIZE
   TEST( CopySize )
+#endif
+#ifdef TEST_FUNCTION_COMMON_DESTROY_NULL
   TEST( DestroyNull )
+#endif
+#ifdef TEST_FUNCTION_COMMON_DESTROY_POPULATED
   TEST( DestroyPopulated )
+#endif
+#ifdef TEST_FUNCTION_COMMON_IS_EMPTY_WITH_NEW
   TEST( IsEmptyWithNew )
+#endif
+#ifdef TEST_FUNCTION_COMMON_IS_EMPTY_WITH_NULL
   TEST( IsEmptyWithNull )
+#endif
+#ifdef TEST_FUNCTION_COMMON_IS_EMPTY_WITH_POPULATED
   TEST( IsEmptyWithPopulated )
+#endif
+#ifdef TEST_FUNCTION_COMMON_NEW
   TEST( New )
+#endif
+#ifdef TEST_FUNCTION_COMMON_SIZE_WITH_EMPTY
   TEST( SizeWithEmpty )
+#endif
+#ifdef TEST_FUNCTION_COMMON_SIZE_WITH_NULL
   TEST( SizeWithNull )
+#endif
 #endif
 
   printf( "\nRunning Specific Tests\n======\n" );
@@ -86,18 +107,18 @@ TestContainsDuplicateValues
   queue = BuildSQueue();
   if( !queue )
     return "could not build Queue";
-  
+
   value = SQueuePeek( queue );
   if( !value )
     return "the Queue did not have any values";
 
   SQueuePush( queue, value );
-  
+
   if( SQueueContains( queue, value ) != 2 )
     return "2 was not returned with a value existing in the Queue twice";
 
   SQueuePush( queue, value );
-  
+
   if( SQueueContains( queue, value ) != 3 )
     return "3 was not returned with a value existing in the Queue three times";
 
@@ -112,7 +133,7 @@ TestContainsNonExistentValue
 {
   const squeue_t *queue;
   const void *value = "this value does not exist in the Queue";
-  
+
   queue = BuildSQueue();
   if( !queue )
     return "could not build Queue";
@@ -156,7 +177,7 @@ TestContainsUniqueValue
   queue = BuildSQueue();
   if( !queue )
     return "could not build a Queue";
-  
+
   SQueuePush( queue, value );
 
   if( SQueueContains( queue, value ) != 1 )
@@ -216,7 +237,7 @@ TestPeekAtEmptyQueue
 ( void )
 {
   const squeue_t *queue;
-  
+
   queue = SQueueNew();
   if( !queue )
     return "could not build a Queue";
@@ -273,9 +294,9 @@ TestPopFromEmptyQueue
 
   if( SQueuePop( queue ) )
     return "a value was popped from an empty Queue";
- 
+
   SQueueDestroy( queue );
- 
+
   return NULL;
 }
 
@@ -321,27 +342,27 @@ TestPopRemovesValue
   queue = BuildSQueue();
   if( !queue )
     return "could not build a Queue";
-  
+
   str = SQueuePop( queue );
   if( !str )
     return "the first pop did not return a value";
   ASSERT_STRINGS_EQUAL( "front of Queue", str, "the first value popped was not the value at the front of the Queue" )
-  
+
   str = SQueuePop( queue );
   if( !str )
     return "the second pop did not return a value";
   ASSERT_STRINGS_EQUAL( "test string", str, "the second value popped was not the second value in the Queue" )
-  
+
   str = SQueuePop( queue );
   if( !str )
     return "the third pop did not return a value";
   ASSERT_STRINGS_EQUAL( "middle string", str, "the third value popped was not the third value in the Queue" )
-  
+
   str = SQueuePop( queue );
   if( !str )
     return "the fourth pop did not return a value";
   ASSERT_STRINGS_EQUAL( "second test string", str, "the fourth value popped was not the fourth value in the Queue" )
-  
+
   str = SQueuePop( queue );
   if( !str )
     return "the fifth pop did not return a value";
@@ -453,7 +474,7 @@ TestRemoveDuplicateValues
 {
   squeue_t *queue;
   void *value;
-  
+
   queue = BuildSQueue();
   if( !queue )
     return "could not build a Queue";

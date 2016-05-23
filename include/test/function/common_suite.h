@@ -12,20 +12,14 @@
 
 #include <woodpile/config.h>
 
-#ifdef TEST_FUNCTION_BUILD
-#ifdef TEST_FUNCTION_COPY
-#ifdef TEST_FUNCTION_DESTROY
-#ifdef TEST_FUNCTION_IS_EMPTY
-#ifdef TEST_FUNCTION_NEW
-#ifdef TEST_FUNCTION_SIZE
 #ifdef TEST_TYPE
-#define TEST_FUNCTION_COMMON_SUITE_AVAILABLE 1
 
 struct TEST_TYPE;
 typedef struct TEST_TYPE test_struct_t;
 
 #ifdef __WOODPILE_PARAMETER_VALIDATION
-
+#ifdef TEST_FUNCTION_COPY
+#define TEST_FUNCTION_COMMON_COPY_NULL 1
 /**
  * Tests the Copy function with a NULL structure.
  *
@@ -36,9 +30,13 @@ typedef struct TEST_TYPE test_struct_t;
 const char *
 TestCopyNull
 ( void );
-
+#endif
 #endif
 
+#ifdef TEST_FUNCTION_BUILD
+#ifdef TEST_FUNCTION_COPY
+#ifdef TEST_FUNCTION_DESTROY
+#define TEST_FUNCTION_COMMON_COPY 1
 /**
  * Tests the Copy function.
  *
@@ -50,7 +48,14 @@ TestCopyNull
 const char *
 TestCopy
 ( void );
+#endif
+#endif
+#endif
 
+#ifdef TEST_FUNCTION_BUILD
+#ifdef TEST_FUNCTION_COPY
+#ifdef TEST_FUNCTION_DESTROY
+#define TEST_FUNCTION_COMMON_COPY_DISTINCT 1
 /**
  * Tests the structure returned by the Copy function.
  *
@@ -61,7 +66,15 @@ TestCopy
 const char *
 TestCopyDistinct
 ( void );
+#endif
+#endif
+#endif
 
+#ifdef TEST_FUNCTION_BUILD
+#ifdef TEST_FUNCTION_COPY
+#ifdef TEST_FUNCTION_DESTROY
+#ifdef TEST_FUNCTION_SIZE
+#define TEST_FUNCTION_COMMON_COPY_SIZE 1
 /**
  * Tests the size of the structure returned by the Copy function.
  *
@@ -73,7 +86,13 @@ TestCopyDistinct
 const char *
 TestCopySize
 ( void );
+#endif
+#endif
+#endif
+#endif
 
+#ifdef TEST_FUNCTION_DESTROY
+#define TEST_FUNCTION_COMMON_DESTROY_NULL 1
 /**
  * Tests the Destroy function with a NULL structure.
  *
@@ -84,7 +103,11 @@ TestCopySize
 const char *
 TestDestroyNull
 ( void );
+#endif
 
+#ifdef TEST_FUNCTION_BUILD
+#ifdef TEST_FUNCTION_DESTROY
+#define TEST_FUNCTION_COMMON_DESTROY_POPULATED 1
 /**
  * Tests the Destroy function with a populated structure.
  *
@@ -95,7 +118,13 @@ TestDestroyNull
 const char *
 TestDestroyPopulated
 ( void );
+#endif
+#endif
 
+#ifdef TEST_FUNCTION_DESTROY
+#ifdef TEST_FUNCTION_IS_EMPTY
+#ifdef TEST_FUNCTION_NEW
+#define TEST_FUNCTION_COMMON_IS_EMPTY_WITH_NEW 1
 /**
  * Tests the IsEmpty function with an empty structure.
  *
@@ -106,7 +135,12 @@ TestDestroyPopulated
 const char *
 TestIsEmptyWithNew
 ( void );
+#endif
+#endif
+#endif
 
+#ifdef TEST_FUNCTION_IS_EMPTY
+#define TEST_FUNCTION_COMMON_IS_EMPTY_WITH_NULL 1
 /**
  * Tests the IsEmpty function with a NULL structure.
  *
@@ -117,7 +151,11 @@ TestIsEmptyWithNew
 const char *
 TestIsEmptyWithNull
 ( void );
+#endif
 
+#ifdef TEST_FUNCTION_BUILD
+#ifdef TEST_FUNCTION_IS_EMPTY
+#define TEST_FUNCTION_COMMON_IS_EMPTY_WITH_POPULATED 1
 /**
  * Tests the IsEmpty function with a populated structure.
  *
@@ -128,7 +166,12 @@ TestIsEmptyWithNull
 const char *
 TestIsEmptyWithPopulated
 ( void );
+#endif
+#endif
 
+#ifdef TEST_FUNCTION_DESTROY
+#ifdef TEST_FUNCTION_NEW
+#define TEST_FUNCTION_COMMON_NEW 1
 /**
  * Tests the New function.
  *
@@ -139,7 +182,13 @@ TestIsEmptyWithPopulated
 const char *
 TestNew
 ( void );
+#endif
+#endif
 
+#ifdef TEST_FUNCTION_DESTROY
+#ifdef TEST_FUNCTION_NEW
+#ifdef TEST_FUNCTION_SIZE
+#define TEST_FUNCTION_COMMON_SIZE_WITH_EMPTY 1
 /**
  * Tests the Size function with an empty structure.
  *
@@ -150,7 +199,12 @@ TestNew
 const char *
 TestSizeWithEmpty
 ( void );
+#endif
+#endif
+#endif
 
+#ifdef TEST_FUNCTION_SIZE
+#define TEST_FUNCTION_COMMON_SIZE_WITH_NULL 1
 /**
  * Tests the Size function with a NULL structure.
  *
@@ -161,12 +215,6 @@ TestSizeWithEmpty
 const char *
 TestSizeWithNull
 ( void );
-
-#endif
-#endif
-#endif
-#endif
-#endif
 #endif
 #endif
 #endif

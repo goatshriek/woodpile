@@ -19,6 +19,9 @@ main( void )
 #ifdef __WOODPILE_PARAMETER_VALIDATION
   printf( "\nRunning Parameter Validation Tests\n======\n" );
 
+#ifdef TEST_FUNCTION_COMMON_COPY_NULL
+  TEST( CopyNull )
+#endif
   TEST( AddToNullDynamicSplay )
   TEST( FirstInNullDynamicSplay )
   TEST( LastInNullDynamicSplay )
@@ -26,26 +29,44 @@ main( void )
   TEST( RemoveFromNullDynamicSplay )
   TEST( RemoveNullElement )
   TEST( ToStringWithNullDynamicSplay )
-
-#ifdef TEST_FUNCTION_COMMON_SUITE_AVAILABLE
-  TEST( CopyNull )
-#endif
 #endif
 
-#ifdef TEST_FUNCTION_COMMON_SUITE_AVAILABLE
+#ifdef TEST_TYPE
   printf( "\nRunning Common Tests\n======\n" );
 
+#ifdef TEST_FUNCTION_COMMON_COPY
   TEST( Copy )
+#endif
+#ifdef TEST_FUNCTION_COMMON_COPY_DISTINCT
   TEST( CopyDistinct )
+#endif
+#ifdef TEST_FUNCTION_COMMON_COPY_SIZE
   TEST( CopySize )
+#endif
+#ifdef TEST_FUNCTION_COMMON_DESTROY_NULL
   TEST( DestroyNull )
+#endif
+#ifdef TEST_FUNCTION_COMMON_DESTROY_POPULATED
   TEST( DestroyPopulated )
+#endif
+#ifdef TEST_FUNCTION_COMMON_IS_EMPTY_WITH_NEW
   TEST( IsEmptyWithNew )
+#endif
+#ifdef TEST_FUNCTION_COMMON_IS_EMPTY_WITH_NULL
   TEST( IsEmptyWithNull )
+#endif
+#ifdef TEST_FUNCTION_COMMON_IS_EMPTY_WITH_POPULATED
   TEST( IsEmptyWithPopulated )
+#endif
+#ifdef TEST_FUNCTION_COMMON_NEW
   TEST( New )
+#endif
+#ifdef TEST_FUNCTION_COMMON_SIZE_WITH_EMPTY
   TEST( SizeWithEmpty )
+#endif
+#ifdef TEST_FUNCTION_COMMON_SIZE_WITH_NULL
   TEST( SizeWithNull )
+#endif
 #endif
 
   printf( "\nRunning Specific Tests\n======\n" );

@@ -3,10 +3,7 @@
 #include "test/function/common_suite.h"
 #include "test/helper.h"
 
-#ifdef TEST_FUNCTION_COMMON_SUITE_AVAILABLE
-
-#ifdef __WOODPILE_PARAMETER_VALIDATION
-
+#ifdef TEST_FUNCTION_COMMON_COPY_NULL
 const char *
 TestCopyNull
 ( void )
@@ -16,9 +13,9 @@ TestCopyNull
 
   return NULL;
 }
-
 #endif
 
+#ifdef TEST_FUNCTION_COMMON_COPY
 const char *
 TestCopy
 ( void )
@@ -38,7 +35,9 @@ TestCopy
 
   return NULL;
 }
+#endif
 
+#ifdef TEST_FUNCTION_COMMON_COPY_DISTINCT
 const char *
 TestCopyDistinct
 ( void )
@@ -61,7 +60,9 @@ TestCopyDistinct
 
   return NULL;
 }
+#endif
 
+#ifdef TEST_FUNCTION_COMMON_COPY_SIZE
 const char *
 TestCopySize
 ( void )
@@ -84,7 +85,9 @@ TestCopySize
 
   return NULL;
 }
+#endif
 
+#ifdef TEST_FUNCTION_COMMON_DESTROY_NULL
 const char *
 TestDestroyNull
 ( void )
@@ -93,7 +96,9 @@ TestDestroyNull
 
   return NULL;
 }
+#endif
 
+#ifdef TEST_FUNCTION_COMMON_DESTROY_POPULATED
 const char *
 TestDestroyPopulated
 ( void )
@@ -108,7 +113,9 @@ TestDestroyPopulated
 
   return NULL;
 }
+#endif
 
+#ifdef TEST_FUNCTION_COMMON_IS_EMPTY_WITH_NEW
 const char *
 TestIsEmptyWithNew
 ( void )
@@ -126,7 +133,9 @@ TestIsEmptyWithNew
 
   return NULL;
 }
+#endif
 
+#ifdef TEST_FUNCTION_COMMON_IS_EMPTY_WITH_NULL
 const char *
 TestIsEmptyWithNull
 ( void )
@@ -136,7 +145,9 @@ TestIsEmptyWithNull
 
   return NULL;
 }
+#endif
 
+#ifdef TEST_FUNCTION_COMMON_IS_EMPTY_WITH_POPULATED
 const char *
 TestIsEmptyWithPopulated
 ( void )
@@ -153,7 +164,9 @@ TestIsEmptyWithPopulated
 
   return NULL;
 }
+#endif
 
+#ifdef TEST_FUNCTION_COMMON_NEW
 const char *
 TestNew
 ( void )
@@ -168,7 +181,9 @@ TestNew
 
   return NULL;
 }
+#endif
 
+#ifdef TEST_FUNCTION_COMMON_SIZE_WITH_EMPTY
 const char *
 TestSizeWithEmpty
 ( void )
@@ -186,7 +201,9 @@ TestSizeWithEmpty
 
   return NULL;
 }
+#endif
 
+#ifdef TEST_FUNCTION_COMMON_SIZE_WITH_NULL
 const char *
 TestSizeWithNull
 ( void )
@@ -196,5 +213,4 @@ TestSizeWithNull
 
   return NULL;
 }
-
 #endif
