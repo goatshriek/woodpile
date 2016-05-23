@@ -132,7 +132,7 @@ $(OUTDIR)\test\function\dynamic\list_suite.exe: $(OUTDIR)\helper.dll $(OUTDIR)\t
           $(OUTDIR)\test\function\dynamic\list_common.obj \
           $(OUTDIR)\lib\str.obj
 
-$(OUTDIR)\test\function\dynamic\list\const_iterator_suite.exe: $(OUTDIR)\helper.dll $(OUTDIR)\test\function\dynamic\list\const_iterator_suite.obj
+$(OUTDIR)\test\function\dynamic\list\const_iterator_suite.exe: $(OUTDIR)\helper.dll $(OUTDIR)\test\function\dynamic\list\const_iterator_suite.obj $(OUTDIR)\test\function\dynamic\list\const_iterator_common.obj
   $(link) $(WOODPILELFLAGS) /out:$(OUTDIR)\test\function\dynamic\list\const_iterator_suite.exe $(OUTDIR)\woodpile.lib $(OUTDIR)\helper.lib  $(OUTDIR)\test\function\dynamic\list\const_iterator_suite.obj
 
 $(OUTDIR)\test\function\dynamic\list\iterator_suite.exe: $(OUTDIR)\helper.dll $(OUTDIR)\test\function\dynamic\list\iterator_suite.obj $(OUTDIR)\test\function\dynamic\list\iterator_common.obj
@@ -216,7 +216,19 @@ $(OUTDIR)\test\function\dynamic\list_common.obj: $(OUTDIR) $(TESTDIR)\function\c
         /DTEST_TYPE=dlist_t
   
 $(OUTDIR)\test\function\dynamic\list\const_iterator_suite.obj: $(OUTDIR) $(TESTDIR)\function\dynamic\list\const_iterator_suite.c
-  $(cc) $(WOODPILECFLAGS) /Fo$(OUTDIR)\test\function\dynamic\list\ /Fd$(OUTDIR)\test\function\dynamic\list\const_iterator.pdb $(TESTDIR)\function\dynamic\list\const_iterator_suite.c
+  $(cc) $(WOODPILECFLAGS) \
+        /Fo$(OUTDIR)\test\function\dynamic\list\ \
+        /Fd$(OUTDIR)\test\function\dynamic\list\const_iterator.pdb \
+        $(TESTDIR)\function\dynamic\list\const_iterator_suite.c
+  
+$(OUTDIR)\test\function\dynamic\list\const_iterator_common.obj: $(OUTDIR) $(TESTDIR)\function\common_suite.c
+  $(cc) $(WOODPILECFLAGS) \
+        /Fo$(OUTDIR)\test\function\dynamic\list\const_iterator_common.obj \
+        /Fd$(OUTDIR)\test\function\dynamic\list\const_iterator_common.pdb \
+        $(TESTDIR)\function\common_suite.c \
+        /DTEST_FUNCTION_COPY=DListCItrCopy \
+        /DTEST_FUNCTION_DESTROY=DListCItrDestroy \
+        /DTEST_TYPE=dlist_citr_t
   
 $(OUTDIR)\test\function\dynamic\list\iterator_suite.obj: $(OUTDIR) $(TESTDIR)\function\dynamic\list\iterator_suite.c
   $(cc) $(WOODPILECFLAGS) \
