@@ -27,9 +27,8 @@
  * Memory overhead can be calculated as follows:
  * ( sizeof( void * ) * 3 ) + sizeof( unsigned short )
  */
-struct DynamicListIterator;
-typedef struct DynamicListIterator DynamicListIterator;
-typedef struct DynamicListIterator DListItr;
+struct dlist_itr_t;
+typedef struct dlist_itr_t dlist_itr_t;
 
 /**
  * Inserts the specified element into the list. The element is inserted
@@ -48,9 +47,9 @@ typedef struct DynamicListIterator DListItr;
  *
  * @return the DynamicListIterator the element was added to
  */
-DynamicListIterator *
+dlist_itr_t *
 AddToDynamicListIterator
-( DynamicListIterator *iterator, void *element );
+( dlist_itr_t *iterator, void *element );
 #define DListItrAdd AddToDynamicListIterator
 
 /**
@@ -62,7 +61,7 @@ AddToDynamicListIterator
  * @return a DynamicListIterator for the provided DynamicList. If list is NULL
  * or invalid then NULL is returned.
  */
-DynamicListIterator *
+dlist_itr_t *
 BeginDynamicList
 ( dlist_t *list );
 #define DListBegin BeginDynamicList
@@ -75,9 +74,9 @@ BeginDynamicList
  *
  * @return a copy of the original DynamicListIterator
  */
-DynamicListIterator *
+dlist_itr_t *
 CopyDynamicListIterator
-( const DynamicListIterator *iterator );
+( const dlist_itr_t *iterator );
 #define DListItrCopy CopyDynamicListIterator
 
 /**
@@ -88,7 +87,7 @@ CopyDynamicListIterator
  */
 void
 DestroyDynamicListIterator
-( DynamicListIterator *iterator );
+( dlist_itr_t *iterator );
 #define DListItrDestroy DestroyDynamicListIterator
 
 /**
@@ -102,7 +101,7 @@ DestroyDynamicListIterator
  * @return a DynamicListIterator for list. If list is NULL or invalid then NULL
  * is returned.
  */
-DynamicListIterator *
+dlist_itr_t *
 EndDynamicList
 ( dlist_t *list );
 #define DListEnd EndDynamicList
@@ -116,7 +115,7 @@ EndDynamicList
  */
 unsigned short
 DynamicListIteratorHasNext
-( const DynamicListIterator *iterator );
+( const dlist_itr_t *iterator );
 #define DListItrHasNext DynamicListIteratorHasNext
 
 /**
@@ -128,7 +127,7 @@ DynamicListIteratorHasNext
  */
 unsigned short
 DynamicListIteratorHasPrevious
-( const DynamicListIterator *iterator );
+( const dlist_itr_t *iterator );
 #define DListItrHasPrevious DynamicListIteratorHasPrevious
 
 /**
@@ -143,7 +142,7 @@ DynamicListIteratorHasPrevious
  */
 void *
 NextInDynamicListIterator
-( DynamicListIterator *iterator );
+( dlist_itr_t *iterator );
 #define DListItrNext NextInDynamicListIterator
 
 /**
@@ -159,7 +158,7 @@ NextInDynamicListIterator
  */
 void *
 PreviousInDynamicListIterator
-( DynamicListIterator *iterator );
+( dlist_itr_t *iterator );
 #define DListItrPrevious PreviousInDynamicListIterator
 
 /**
@@ -175,7 +174,7 @@ PreviousInDynamicListIterator
  */
 void *
 RemoveFromDynamicListIterator
-( DynamicListIterator *iterator );
+( dlist_itr_t *iterator );
 #define DListItrRemove RemoveFromDynamicListIterator
 
 #endif

@@ -75,7 +75,7 @@ TestAddNullElement
 ( void )
 {
   dlist_t *list;
-  DListItr *iterator;
+  dlist_itr_t *iterator;
 
   if( DListItrAdd( NULL, NULL ) != NULL )
     return "a non-NULL value was returned when adding a NULL element to a NULL ListIterator";
@@ -102,7 +102,7 @@ TestAddToBeginning
 ( void )
 {
   dlist_t *list;
-  DListItr *iterator;
+  dlist_itr_t *iterator;
   void *element = "new element";
 
   list = BuildDList();
@@ -139,7 +139,7 @@ TestAddToEmptyList
 ( void )
 {
   dlist_t *list;
-  DListItr *iterator;
+  dlist_itr_t *iterator;
   void *element = "new element";
 
   list = DListNew();
@@ -173,7 +173,7 @@ TestAddToEnd
 ( void )
 {
   dlist_t *list;
-  DListItr *iterator;
+  dlist_itr_t *iterator;
   void *element = "new element";
 
   list = BuildDList();
@@ -210,7 +210,7 @@ TestAddToMiddle
 ( void )
 {
   dlist_t *list;
-  DListItr *iterator;
+  dlist_itr_t *iterator;
   void *element = "new element";
 
   list = BuildDList();
@@ -265,7 +265,7 @@ TestBeginWithEmptyList
 ( void )
 {
   dlist_t *list;
-  DListItr *iterator;
+  dlist_itr_t *iterator;
 
   list = DListNew();
   if( !list )
@@ -302,7 +302,7 @@ TestBeginWithPopulatedList
 ( void )
 {
   dlist_t *list;
-  DListItr *iterator;
+  dlist_itr_t *iterator;
   const void *element;
 
   list = BuildDList();
@@ -332,7 +332,7 @@ TestCopy
 ( void )
 {
   dlist_t *list;
-  DListItr *copy, *iterator;
+  dlist_itr_t *copy, *iterator;
 
   list = BuildDList();
   if( !list )
@@ -358,7 +358,7 @@ TestCopyContents
 ( void )
 {
   dlist_t *list;
-  DListItr *copy, *iterator;
+  dlist_itr_t *copy, *iterator;
   const void *element;
 
   list = BuildDList();
@@ -395,7 +395,7 @@ TestCopyDistinct
 ( void )
 {
   dlist_t *list;
-  DListItr *copy, *iterator;
+  dlist_itr_t *copy, *iterator;
   const void *element_1, *element_2, *element_3;
 
   list = BuildDList();
@@ -454,7 +454,7 @@ TestCopyPosition
 ( void )
 {
   dlist_t *list;
-  DListItr *copy, *iterator;
+  dlist_itr_t *copy, *iterator;
 
   list = BuildDList();
   if( !list )
@@ -486,7 +486,7 @@ TestDestroy
 ( void )
 {
   dlist_t *list;
-  DListItr *iterator;
+  dlist_itr_t *iterator;
 
   list = BuildDList();
   if( !list )
@@ -517,7 +517,7 @@ TestEndWithEmptyList
 ( void )
 {
   dlist_t *list;
-  DListItr *iterator;
+  dlist_itr_t *iterator;
 
   list = DListNew();
   if( !list )
@@ -554,7 +554,7 @@ TestEndWithPopulatedList
 ( void )
 {
   dlist_t *list;
-  DListItr *iterator;
+  dlist_itr_t *iterator;
   const void *element;
 
   list = BuildDList();
@@ -584,7 +584,7 @@ TestHasNextAtBeginning
 ( void )
 {
   dlist_t *list;
-  DListItr *iterator;
+  dlist_itr_t *iterator;
 
   list = BuildDList();
   if( !list )
@@ -608,7 +608,7 @@ TestHasNextAtEnd
 ( void )
 {
   dlist_t *list;
-  DListItr *iterator;
+  dlist_itr_t *iterator;
 
   list = BuildDList();
   if( !list )
@@ -632,7 +632,7 @@ TestHasNextAtMiddle
 ( void )
 {
   dlist_t *list;
-  DListItr *iterator;
+  dlist_itr_t *iterator;
 
   list = BuildDList();
   if( !list )
@@ -660,7 +660,7 @@ TestHasNextWithEmptyList
 ( void )
 {
   dlist_t *list;
-  DListItr *iterator;
+  dlist_itr_t *iterator;
 
   list = DListNew();
   if( !list )
@@ -694,7 +694,7 @@ TestHasPreviousAtBeginning
 ( void )
 {
   dlist_t *list;
-  DListItr *iterator;
+  dlist_itr_t *iterator;
 
   list = BuildDList();
   if( !list )
@@ -718,7 +718,7 @@ TestHasPreviousAtEnd
 ( void )
 {
   dlist_t *list;
-  DListItr *iterator;
+  dlist_itr_t *iterator;
 
   list = BuildDList();
   if( !list )
@@ -742,7 +742,7 @@ TestHasPreviousAtMiddle
 ( void )
 {
   dlist_t *list;
-  DListItr *iterator;
+  dlist_itr_t *iterator;
 
   list = BuildDList();
   if( !list )
@@ -770,7 +770,7 @@ TestHasPreviousWithEmptyList
 ( void )
 {
   dlist_t *list;
-  DListItr *iterator;
+  dlist_itr_t *iterator;
 
   list = DListNew();
   if( !list )
@@ -804,7 +804,7 @@ TestNextAtBeginning
 ( void )
 {
   dlist_t *list;
-  DListItr *iterator;
+  dlist_itr_t *iterator;
 
   list = BuildDList();
   if( !list )
@@ -828,7 +828,7 @@ TestNextAtEnd
 ( void )
 {
   dlist_t *list;
-  DListItr *iterator;
+  dlist_itr_t *iterator;
 
   list = BuildDList();
   if( !list )
@@ -852,7 +852,7 @@ TestNextAtMiddle
 ( void )
 {
   dlist_t *list;
-  DListItr *iterator;
+  dlist_itr_t *iterator;
   const void *element;
 
   list = BuildDList();
@@ -909,7 +909,7 @@ TestNextWithEmptyList
 ( void )
 {
   dlist_t *list;
-  DListItr *iterator;
+  dlist_itr_t *iterator;
 
   list = DListNew();
   if( !list )
@@ -943,7 +943,7 @@ TestPreviousAtBeginning
 ( void )
 {
   dlist_t *list;
-  DListItr *iterator;
+  dlist_itr_t *iterator;
 
   list = BuildDList();
   if( !list )
@@ -967,7 +967,7 @@ TestPreviousAtEnd
 ( void )
 {
   dlist_t *list;
-  DListItr *iterator;
+  dlist_itr_t *iterator;
 
   list = BuildDList();
   if( !list )
@@ -991,7 +991,7 @@ TestPreviousAtMiddle
 ( void )
 {
   dlist_t *list;
-  DListItr *iterator;
+  dlist_itr_t *iterator;
   const void *element;
 
   list = BuildDList();
@@ -1048,7 +1048,7 @@ TestPreviousWithEmptyList
 ( void )
 {
   dlist_t *list;
-  DListItr *iterator;
+  dlist_itr_t *iterator;
 
   list = DListNew();
   if( !list )
@@ -1082,7 +1082,7 @@ TestRemoveAfterNext
 ( void )
 {
   dlist_t *list;
-  DListItr *iterator;
+  dlist_itr_t *iterator;
   const void *element;
 
   list = BuildDList();
@@ -1126,7 +1126,7 @@ TestRemoveAfterNextAndAdd
 ( void )
 {
   dlist_t *list;
-  DListItr *iterator;
+  dlist_itr_t *iterator;
   void *added = "new element", *first;
 
   list = BuildDList();
@@ -1163,7 +1163,7 @@ TestRemoveAfterPrevious
 ( void )
 {
   dlist_t *list;
-  DListItr *iterator;
+  dlist_itr_t *iterator;
   const void *element;
 
   list = BuildDList();
@@ -1207,7 +1207,7 @@ TestRemoveAfterPreviousAndAdd
 ( void )
 {
   dlist_t *list;
-  DListItr *iterator;
+  dlist_itr_t *iterator;
   void *added = "new element", *last;
 
   list = BuildDList();
@@ -1244,7 +1244,7 @@ TestRemoveAfterRemove
 ( void )
 {
   dlist_t *list;
-  DListItr *iterator;
+  dlist_itr_t *iterator;
   const void *element, *removed;
 
   list = BuildDList();
@@ -1283,7 +1283,7 @@ TestRemoveBeforeNextOrPrevious
 ( void )
 {
   dlist_t *list;
-  DListItr *iterator;
+  dlist_itr_t *iterator;
 
   list = BuildDList();
   if( !list )

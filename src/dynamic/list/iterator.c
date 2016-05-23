@@ -4,9 +4,9 @@
 #include "private/dynamic/list.h"
 #include "private/dynamic/list/iterator.h"
 
-DListItr *
+dlist_itr_t *
 DListItrAdd
-( DListItr *iterator, void *element )
+( dlist_itr_t *iterator, void *element )
 {
   node_t *addition;
 
@@ -41,15 +41,15 @@ DListItrAdd
   return iterator;
 }
 
-DListItr *
+dlist_itr_t *
 DListBegin
 ( dlist_t *list )
 {
-  DListItr *iterator;
+  dlist_itr_t *iterator;
 
   VALIDATE_PARAMETERS( list )
 
-  iterator = malloc( sizeof( DListItr ) );
+  iterator = malloc( sizeof( dlist_itr_t ) );
   VALIDATE_ALLOCATION( iterator )
 
   iterator->list = list;
@@ -59,15 +59,15 @@ DListBegin
   return iterator;
 }
 
-DListItr *
+dlist_itr_t *
 DListItrCopy
-( const DListItr *iterator )
+( const dlist_itr_t *iterator )
 {
-  DListItr *copy;
+  dlist_itr_t *copy;
 
   VALIDATE_PARAMETERS( iterator )
 
-  copy = malloc( sizeof( DListItr ) );
+  copy = malloc( sizeof( dlist_itr_t ) );
   VALIDATE_ALLOCATION( copy )
 
   copy->current = iterator->current;
@@ -78,20 +78,20 @@ DListItrCopy
 
 void
 DListItrDestroy
-( DListItr *iterator )
+( dlist_itr_t *iterator )
 {
   free( ( void * ) iterator );
 }
 
-DListItr *
+dlist_itr_t *
 DListEnd
 ( dlist_t *list )
 {
-  DListItr *iterator;
+  dlist_itr_t *iterator;
 
   VALIDATE_PARAMETERS( list )
 
-  iterator = malloc( sizeof( DListItr ) );
+  iterator = malloc( sizeof( dlist_itr_t ) );
   VALIDATE_ALLOCATION( iterator )
 
   iterator->list = list;
@@ -103,21 +103,21 @@ DListEnd
 
 unsigned short
 DListItrHasNext
-( const DListItr *iterator )
+( const dlist_itr_t *iterator )
 {
   return iterator != NULL && iterator->current != NULL;
 }
 
 unsigned short
 DListItrHasPrevious
-( const DListItr *iterator )
+( const dlist_itr_t *iterator )
 {
   return iterator != NULL && iterator->previous != NULL;
 }
 
 void *
 DListItrNext
-( DListItr *iterator )
+( dlist_itr_t *iterator )
 {
   node_t *temp;
   void *element;
@@ -139,7 +139,7 @@ DListItrNext
 
 void *
 DListItrPrevious
-( DListItr *iterator )
+( dlist_itr_t *iterator )
 {
   node_t *temp;
   void *element;
@@ -161,7 +161,7 @@ DListItrPrevious
 
 void *
 DListItrRemove
-( DListItr *iterator )
+( dlist_itr_t *iterator )
 {
   node_t *left_neighbor, *removed, *right_neighbor;
   void *element;

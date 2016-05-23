@@ -8,8 +8,8 @@
 
 #include "private/dynamic/list.h"
 
-/** the DynamicListIterator structure */
-struct DynamicListIterator {
+/** the dlist_itr_t structure */
+struct dlist_itr_t {
   dlist_t *list; /**< the List this iterator is for */
   node_t *current; /**< the current value of the iterator */
   node_t *previous; /**< the previous value of the iterator */
