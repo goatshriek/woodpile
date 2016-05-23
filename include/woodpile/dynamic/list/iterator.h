@@ -48,9 +48,8 @@ typedef struct dlist_itr_t dlist_itr_t;
  * @return the DynamicListIterator the element was added to
  */
 dlist_itr_t *
-AddToDynamicListIterator
+DListItrAdd
 ( dlist_itr_t *iterator, void *element );
-#define DListItrAdd AddToDynamicListIterator
 
 /**
  * Creates a new DynamicListIterator for the DynamicList provided. The iterator
@@ -62,9 +61,8 @@ AddToDynamicListIterator
  * or invalid then NULL is returned.
  */
 dlist_itr_t *
-BeginDynamicList
+DListBegin
 ( dlist_t *list );
-#define DListBegin BeginDynamicList
 
 /**
  * Creates a copy of a DynamicListIterator. The position of the copy will be the
@@ -75,9 +73,8 @@ BeginDynamicList
  * @return a copy of the original DynamicListIterator
  */
 dlist_itr_t *
-CopyDynamicListIterator
+DListItrCopy
 ( const dlist_itr_t *iterator );
-#define DListItrCopy CopyDynamicListIterator
 
 /**
  * Destroys a DynamicListIterator and releases its memory. This function does
@@ -86,9 +83,8 @@ CopyDynamicListIterator
  * @param iterator the DynamicListIterator to destroy
  */
 void
-DestroyDynamicListIterator
+DListItrDestroy
 ( dlist_itr_t *iterator );
-#define DListItrDestroy DestroyDynamicListIterator
 
 /**
  * Creates a new DynamicListIterator for the DynamicList provided. The iterator
@@ -102,9 +98,8 @@ DestroyDynamicListIterator
  * is returned.
  */
 dlist_itr_t *
-EndDynamicList
+DListEnd
 ( dlist_t *list );
-#define DListEnd EndDynamicList
 
 /**
  * Checks to see if a DynamicListIterator has a next value.
@@ -114,9 +109,8 @@ EndDynamicList
  * @return a positive value if a next value exists, and a 0 if not.
  */
 unsigned short
-DynamicListIteratorHasNext
+DListItrHasNext
 ( const dlist_itr_t *iterator );
-#define DListItrHasNext DynamicListIteratorHasNext
 
 /**
  * Checks to see if a DynamicListIterator has a previous value.
@@ -126,9 +120,8 @@ DynamicListIteratorHasNext
  * @return a positive value if a previous value exists, and a 0 if not.
  */
 unsigned short
-DynamicListIteratorHasPrevious
+DListItrHasPrevious
 ( const dlist_itr_t *iterator );
-#define DListItrHasPrevious DynamicListIteratorHasPrevious
 
 /**
  * Gets the next value in the DynamicListIterator. If the DynamicListIterator
@@ -141,9 +134,8 @@ DynamicListIteratorHasPrevious
  * @return the next value of the iterator, or NULL if there is not one
  */
 void *
-NextInDynamicListIterator
+DListItrNext
 ( dlist_itr_t *iterator );
-#define DListItrNext NextInDynamicListIterator
 
 /**
  * Gets the previous value in the DynamicListIterator. If iterator does not have
@@ -157,9 +149,8 @@ NextInDynamicListIterator
  * @return the previous value of the iterator, or NULL if there is not one
  */
 void *
-PreviousInDynamicListIterator
+DListItrPrevious
 ( dlist_itr_t *iterator );
-#define DListItrPrevious PreviousInDynamicListIterator
 
 /**
  * Removes from the list the last element returned by either
@@ -173,8 +164,7 @@ PreviousInDynamicListIterator
  * @return the element removed
  */
 void *
-RemoveFromDynamicListIterator
+DListItrRemove
 ( dlist_itr_t *iterator );
-#define DListItrRemove RemoveFromDynamicListIterator
 
 #endif

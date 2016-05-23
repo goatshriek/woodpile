@@ -33,16 +33,16 @@ EXPORTS
   DynamicListConstIteratorHasPrevious @30
   NextInDynamicListConstIterator @31
   PreviousInDynamicListConstIterator @32
-  AddToDynamicListIterator @33
-  BeginDynamicList @34
-  CopyDynamicListIterator @35
-  DestroyDynamicListIterator @36
-  EndDynamicList @37
-  DynamicListIteratorHasNext @38
-  DynamicListIteratorHasPrevious @39
-  NextInDynamicListIterator @40
-  PreviousInDynamicListIterator @41
-  RemoveFromDynamicListIterator @42
+  DListItrAdd @33
+  DListBegin @34
+  DListItrCopy @35
+  DListItrDestroy @36
+  DListEnd @37
+  DListItrHasNext @38
+  DListItrHasPrevious @39
+  DListItrNext @40
+  DListItrPrevious @41
+  DListItrRemove @42
   DSplayAdd @43
   DSplayContains @44
   DSplayCopy @45
