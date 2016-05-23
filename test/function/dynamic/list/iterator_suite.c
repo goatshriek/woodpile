@@ -1,10 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-
 #include <woodpile/config.h>
 #include <woodpile/dynamic/list/iterator.h>
-
+#include "test/function/common_suite.h"
 #include "test/function/dynamic/list/iterator_suite.h"
 #include "test/helper.h"
 
@@ -14,7 +13,14 @@ main( void )
   unsigned failure_count = 0;
   const char *result;
 
+  printf( "### Dynamic List Iterator Functionality Test Suite\n" );
+
 #ifdef __WOODPILE_PARAMETER_VALIDATION
+  printf( "\nRunning Parameter Validation Tests\n======\n" );
+
+#ifdef TEST_FUNCTION_COMMON_COPY_NULL
+  TEST( CopyNull )
+#endif
   TEST( BeginWithNullList )
   TEST( CopyNullIterator )
   TEST( EndWithNullList )
@@ -22,6 +28,16 @@ main( void )
   TEST( PreviousWithNullIterator )
   TEST( RemoveFromNullIterator )
 #endif
+
+#ifdef TEST_TYPE
+  printf( "\nRunning Common Tests\n======\n" );
+
+#ifdef TEST_FUNCTION_COMMON_DESTROY_NULL
+  TEST( DestroyNull )
+#endif
+#endif
+
+  printf( "\nRunning Specific Tests\n======\n" );
 
   TEST( AddNullElement )
   TEST( AddToBeginning )

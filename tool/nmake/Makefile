@@ -135,8 +135,13 @@ $(OUTDIR)\test\function\dynamic\list_suite.exe: $(OUTDIR)\helper.dll $(OUTDIR)\t
 $(OUTDIR)\test\function\dynamic\list\const_iterator_suite.exe: $(OUTDIR)\helper.dll $(OUTDIR)\test\function\dynamic\list\const_iterator_suite.obj
   $(link) $(WOODPILELFLAGS) /out:$(OUTDIR)\test\function\dynamic\list\const_iterator_suite.exe $(OUTDIR)\woodpile.lib $(OUTDIR)\helper.lib  $(OUTDIR)\test\function\dynamic\list\const_iterator_suite.obj
 
-$(OUTDIR)\test\function\dynamic\list\iterator_suite.exe: $(OUTDIR)\helper.dll $(OUTDIR)\test\function\dynamic\list\iterator_suite.obj
-  $(link) $(WOODPILELFLAGS) /out:$(OUTDIR)\test\function\dynamic\list\iterator_suite.exe $(OUTDIR)\woodpile.lib $(OUTDIR)\helper.lib $(OUTDIR)\test\function\dynamic\list\iterator_suite.obj
+$(OUTDIR)\test\function\dynamic\list\iterator_suite.exe: $(OUTDIR)\helper.dll $(OUTDIR)\test\function\dynamic\list\iterator_suite.obj $(OUTDIR)\test\function\dynamic\list\iterator_common.obj
+  $(link) $(WOODPILELFLAGS) \
+          /out:$(OUTDIR)\test\function\dynamic\list\iterator_suite.exe \
+          $(OUTDIR)\woodpile.lib \
+          $(OUTDIR)\helper.lib \
+          $(OUTDIR)\test\function\dynamic\list\iterator_suite.obj \
+          $(OUTDIR)\test\function\dynamic\list\iterator_common.obj
 
 $(OUTDIR)\test\function\dynamic\tree\splay_suite.exe: $(OUTDIR)\helper.dll $(OUTDIR)\test\function\dynamic\tree\splay_suite.obj $(OUTDIR)\lib\str.obj $(OUTDIR)\test\function\dynamic\tree\splay_common.obj
   $(link) $(WOODPILELFLAGS) \
@@ -214,7 +219,22 @@ $(OUTDIR)\test\function\dynamic\list\const_iterator_suite.obj: $(OUTDIR) $(TESTD
   $(cc) $(WOODPILECFLAGS) /Fo$(OUTDIR)\test\function\dynamic\list\ /Fd$(OUTDIR)\test\function\dynamic\list\const_iterator.pdb $(TESTDIR)\function\dynamic\list\const_iterator_suite.c
   
 $(OUTDIR)\test\function\dynamic\list\iterator_suite.obj: $(OUTDIR) $(TESTDIR)\function\dynamic\list\iterator_suite.c
-  $(cc) $(WOODPILECFLAGS) /Fo$(OUTDIR)\test\function\dynamic\list\ /Fd$(OUTDIR)\test\function\dynamic\list\iterator.pdb $(TESTDIR)\function\dynamic\list\iterator_suite.c
+  $(cc) $(WOODPILECFLAGS) \
+        /Fo$(OUTDIR)\test\function\dynamic\list\ \
+        /Fd$(OUTDIR)\test\function\dynamic\list\iterator.pdb \
+        $(TESTDIR)\function\dynamic\list\iterator_suite.c \
+        /DTEST_FUNCTION_COPY=DListItrCopy \
+        /DTEST_FUNCTION_DESTROY=DListItrDestroy \
+        /DTEST_TYPE=dlist_itr_t
+  
+$(OUTDIR)\test\function\dynamic\list\iterator_common.obj: $(OUTDIR) $(TESTDIR)\function\common_suite.c
+  $(cc) $(WOODPILECFLAGS) \
+        /Fo$(OUTDIR)\test\function\dynamic\list\iterator_common.obj \
+        /Fd$(OUTDIR)\test\function\dynamic\list\iterator_common.pdb \
+        $(TESTDIR)\function\common_suite.c \
+        /DTEST_FUNCTION_COPY=DListItrCopy \
+        /DTEST_FUNCTION_DESTROY=DListItrDestroy \
+        /DTEST_TYPE=dlist_itr_t
   
 $(OUTDIR)\test\function\dynamic\tree\splay_suite.obj: $(OUTDIR) $(TESTDIR)\function\dynamic\tree\splay_suite.c
   $(cc) $(WOODPILECFLAGS) \
