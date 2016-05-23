@@ -84,7 +84,7 @@ DListItrCopy
  */
 void
 DListItrDestroy
-( dlist_itr_t *iterator );
+( const dlist_itr_t *iterator );
 
 /**
  * Creates a new DynamicListIterator for the DynamicList provided. The iterator

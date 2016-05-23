@@ -78,7 +78,7 @@ DListItrCopy
 
 void
 DListItrDestroy
-( dlist_itr_t *iterator )
+( const dlist_itr_t *iterator )
 {
   free( ( void * ) iterator );
 }
@@ -181,7 +181,7 @@ DListItrRemove
       removed = iterator->current;
       if( !removed )
         return NULL;
-      
+
       left_neighbor = iterator->previous;
       right_neighbor = XORNODES( removed->neighbors, left_neighbor );
       break;
@@ -198,7 +198,7 @@ DListItrRemove
   } else {
     iterator->list->first = right_neighbor;
   }
-    
+
   if( right_neighbor ){
     right_neighbor->neighbors = XORNODES( left_neighbor,
                                 XORNODES( right_neighbor->neighbors,

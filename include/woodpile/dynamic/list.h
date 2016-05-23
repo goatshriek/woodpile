@@ -87,7 +87,7 @@ DListContains
  * DList will not affect the copy.
  *
  * @param list the DList to copy. Must not be NULL.
- * 
+ *
  * @return a copy of the original DList or NULL on failure
  */
 dlist_t *
@@ -179,7 +179,7 @@ DListPrepend
  *
  * @return the number of elements in the DList
  */
-unsigned
+size_t
 DListSize
 ( const dlist_t *list );
 

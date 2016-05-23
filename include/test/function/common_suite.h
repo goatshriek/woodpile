@@ -17,6 +17,42 @@
 struct TEST_TYPE;
 typedef struct TEST_TYPE test_struct_t;
 
+#ifdef TEST_FUNCTION_BUILD
+test_struct_t *
+TEST_FUNCTION_BUILD
+( void );
+#endif
+
+#ifdef TEST_FUNCTION_COPY
+test_struct_t *
+TEST_FUNCTION_COPY
+( const test_struct_t *original );
+#endif
+
+#ifdef TEST_FUNCTION_DESTROY
+void
+TEST_FUNCTION_DESTROY
+( const test_struct_t *structure );
+#endif
+
+#ifdef TEST_FUNCTION_IS_EMPTY
+unsigned short
+TEST_FUNCTION_IS_EMPTY
+( const test_struct_t *structure );
+#endif
+
+#ifdef TEST_FUNCTION_NEW
+test_struct_t *
+TEST_FUNCTION_NEW
+( void );
+#endif
+
+#ifdef TEST_FUNCTION_SIZE
+size_t
+TEST_FUNCTION_SIZE
+( const test_struct_t *structure );
+#endif
+
 #ifdef __WOODPILE_PARAMETER_VALIDATION
 #ifdef TEST_FUNCTION_COPY
 #define TEST_FUNCTION_COMMON_COPY_NULL 1

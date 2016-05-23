@@ -188,12 +188,12 @@ DListIsEmpty
   return !list || !list->first;
 }
 
-unsigned
+size_t
 DListSize
 ( const dlist_t *list )
 {
   node_t *node, *previous = NULL, *temp;
-  unsigned size = 0;
+  size_t size = 0;
 
   if( !list )
     return 0;
