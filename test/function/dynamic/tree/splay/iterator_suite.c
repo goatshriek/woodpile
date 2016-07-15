@@ -67,7 +67,7 @@ TestBeginWithEmptyDynamicSplay
 ( void )
 {
   dsplay_t *splay;
-  DSplayItr *iterator;
+  dsplay_itr_t *iterator;
 
   splay = DSplayNew();
   if( !splay )
@@ -104,7 +104,7 @@ TestBeginWithPopulatedDynamicSplay
 ( void )
 {
   dsplay_t *splay;
-  DSplayItr *iterator;
+  dsplay_itr_t *iterator;
   const void *element;
 
   splay = BuildDSplay();
@@ -134,7 +134,7 @@ TestCopy
 ( void )
 {
   dsplay_t *splay;
-  DSplayItr *copy, *iterator;
+  dsplay_itr_t *copy, *iterator;
 
   splay = BuildDSplay();
   if( !splay )
@@ -160,7 +160,7 @@ TestCopyContents
 ( void )
 {
   dsplay_t *splay;
-  DSplayItr *copy, *iterator;
+  dsplay_itr_t *copy, *iterator;
   const void *element;
 
   splay = BuildDSplay();
@@ -197,7 +197,7 @@ TestCopyDistinct
 ( void )
 {
   dsplay_t *splay;
-  DSplayItr *copy, *iterator;
+  dsplay_itr_t *copy, *iterator;
   const void *element_1, *element_2, *element_3;
 
   splay = BuildDSplay();
@@ -256,7 +256,7 @@ TestCopyPosition
 ( void )
 {
   dsplay_t *splay;
-  DSplayItr *copy, *iterator;
+  dsplay_itr_t *copy, *iterator;
 
   splay = BuildDSplay();
   if( !splay )
@@ -288,7 +288,7 @@ TestDestroy
 ( void )
 {
   dsplay_t *splay;
-  DSplayItr *iterator;
+  dsplay_itr_t *iterator;
 
   splay = BuildDSplay();
   if( !splay )
@@ -319,7 +319,7 @@ TestEndWithEmptyDynamicSplay
 ( void )
 {
   dsplay_t *splay;
-  DSplayItr *iterator;
+  dsplay_itr_t *iterator;
 
   splay = DSplayNew();
   if( !splay )
@@ -356,7 +356,7 @@ TestEndWithPopulatedDynamicSplay
 ( void )
 {
   dsplay_t *splay;
-  DSplayItr *iterator;
+  dsplay_itr_t *iterator;
   const void *element;
 
   splay = BuildDSplay();
@@ -386,7 +386,7 @@ TestHasNextAtBeginning
 ( void )
 {
   dsplay_t *splay;
-  DSplayItr *iterator;
+  dsplay_itr_t *iterator;
 
   splay = BuildDSplay();
   if( !splay )
@@ -410,7 +410,7 @@ TestHasNextAtEnd
 ( void )
 {
   dsplay_t *splay;
-  DSplayItr *iterator;
+  dsplay_itr_t *iterator;
 
   splay = BuildDSplay();
   if( !splay )
@@ -434,7 +434,7 @@ TestHasNextAtMiddle
 ( void )
 {
   dsplay_t *splay;
-  DSplayItr *iterator;
+  dsplay_itr_t *iterator;
 
   splay = BuildDSplay();
   if( !splay )
@@ -462,7 +462,7 @@ TestHasNextWithEmptyDynamicSplay
 ( void )
 {
   dsplay_t *splay;
-  DSplayItr *iterator;
+  dsplay_itr_t *iterator;
 
   splay = DSplayNew();
   if( !splay )
@@ -496,7 +496,7 @@ TestHasPreviousAtBeginning
 ( void )
 {
   dsplay_t *splay;
-  DSplayItr *iterator;
+  dsplay_itr_t *iterator;
 
   splay = BuildDSplay();
   if( !splay )
@@ -520,7 +520,7 @@ TestHasPreviousAtEnd
 ( void )
 {
   dsplay_t *splay;
-  DSplayItr *iterator;
+  dsplay_itr_t *iterator;
 
   splay = BuildDSplay();
   if( !splay )
@@ -544,7 +544,7 @@ TestHasPreviousAtMiddle
 ( void )
 {
   dsplay_t *splay;
-  DSplayItr *iterator;
+  dsplay_itr_t *iterator;
 
   splay = BuildDSplay();
   if( !splay )
@@ -572,7 +572,7 @@ TestHasPreviousWithEmptyDynamicSplay
 ( void )
 {
   dsplay_t *splay;
-  DSplayItr *iterator;
+  dsplay_itr_t *iterator;
 
   splay = DSplayNew();
   if( !splay )
@@ -606,7 +606,7 @@ TestNextAtBeginning
 ( void )
 {
   dsplay_t *splay;
-  DSplayItr *iterator;
+  dsplay_itr_t *iterator;
 
   splay = BuildDSplay();
   if( !splay )
@@ -630,7 +630,7 @@ TestNextAtEnd
 ( void )
 {
   dsplay_t *splay;
-  DSplayItr *iterator;
+  dsplay_itr_t *iterator;
 
   splay = BuildDSplay();
   if( !splay )
@@ -654,7 +654,7 @@ TestNextAtMiddle
 ( void )
 {
   dsplay_t *splay;
-  DSplayItr *iterator;
+  dsplay_itr_t *iterator;
   const void *element;
 
   splay = BuildDSplay();
@@ -711,7 +711,7 @@ TestNextWithEmptyDynamicSplay
 ( void )
 {
   dsplay_t *splay;
-  DSplayItr *iterator;
+  dsplay_itr_t *iterator;
 
   splay = DSplayNew();
   if( !splay )
@@ -745,7 +745,7 @@ TestPreviousAtBeginning
 ( void )
 {
   dsplay_t *splay;
-  DSplayItr *iterator;
+  dsplay_itr_t *iterator;
 
   splay = BuildDSplay();
   if( !splay )
@@ -769,7 +769,7 @@ TestPreviousAtEnd
 ( void )
 {
   dsplay_t *splay;
-  DSplayItr *iterator;
+  dsplay_itr_t *iterator;
 
   splay = BuildDSplay();
   if( !splay )
@@ -793,7 +793,7 @@ TestPreviousAtMiddle
 ( void )
 {
   dsplay_t *splay;
-  DSplayItr *iterator;
+  dsplay_itr_t *iterator;
   const void *element;
 
   splay = BuildDSplay();
@@ -850,7 +850,7 @@ TestPreviousWithEmptyDynamicSplay
 ( void )
 {
   dsplay_t *splay;
-  DSplayItr *iterator;
+  dsplay_itr_t *iterator;
 
   splay = DSplayNew();
   if( !splay )
@@ -884,7 +884,7 @@ TestRemoveAfterNext
 ( void )
 {
   dsplay_t *splay;
-  DSplayItr *iterator;
+  dsplay_itr_t *iterator;
   const void *element;
 
   splay = BuildDSplay();
@@ -925,7 +925,7 @@ TestRemoveAfterPrevious
 ( void )
 {
   dsplay_t *splay;
-  DSplayItr *iterator;
+  dsplay_itr_t *iterator;
   const void *element;
 
   splay = BuildDSplay();
@@ -966,7 +966,7 @@ TestRemoveAfterRemove
 ( void )
 {
   dsplay_t *splay;
-  DSplayItr *iterator;
+  dsplay_itr_t *iterator;
   const void *element, *removed;
 
   splay = BuildDSplay();
@@ -1007,7 +1007,7 @@ TestRemoveBeforeNextOrPrevious
 ( void )
 {
   dsplay_t *splay;
-  DSplayItr *iterator;
+  dsplay_itr_t *iterator;
 
   splay = BuildDSplay();
   if( !splay )

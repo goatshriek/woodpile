@@ -4,16 +4,16 @@
 #include "private/dynamic/tree/splay.h"
 #include "private/dynamic/tree/splay/iterator.h"
 
-DSplayItr *
+dsplay_itr_t *
 DSplayBegin
 ( dsplay_t *splay )
 {
-  DSplayItr *itr;
+  dsplay_itr_t *itr;
   node_t *current;
 
   VALIDATE_PARAMETERS( splay )
 
-  itr = malloc( sizeof( DSplayItr ) );
+  itr = malloc( sizeof( dsplay_itr_t ) );
   VALIDATE_ALLOCATION( itr )
 
   itr->splay = splay;
@@ -30,15 +30,15 @@ DSplayBegin
   return itr;
 }
 
-DSplayItr *
+dsplay_itr_t *
 DSplayItrCopy
-( const DSplayItr *iterator )
+( const dsplay_itr_t *iterator )
 {
-  DSplayItr *copy;
+  dsplay_itr_t *copy;
 
   VALIDATE_PARAMETERS( iterator )
 
-  copy = malloc( sizeof( DSplayItr ) );
+  copy = malloc( sizeof( dsplay_itr_t ) );
   VALIDATE_ALLOCATION( copy )
 
   copy->splay = iterator->splay;
@@ -51,23 +51,23 @@ DSplayItrCopy
 
 void
 DSplayItrDestroy
-( DSplayItr *iterator )
+( dsplay_itr_t *iterator )
 {
   free( ( void * ) iterator );
 
   return;
 }
 
-DSplayItr *
+dsplay_itr_t *
 DSplayEnd
 ( dsplay_t *splay )
 {
-  DSplayItr *itr;
+  dsplay_itr_t *itr;
   node_t *current;
 
   VALIDATE_PARAMETERS( splay )
 
-  itr = malloc( sizeof( DSplayItr ) );
+  itr = malloc( sizeof( dsplay_itr_t ) );
   VALIDATE_ALLOCATION( itr )
 
   itr->splay = splay;
@@ -86,21 +86,21 @@ DSplayEnd
 
 unsigned short
 DSplayItrHasNext
-( const DSplayItr *iterator )
+( const dsplay_itr_t *iterator )
 {
   return ( iterator != NULL ) && ( iterator->current != NULL );
 }
 
 unsigned short
 DSplayItrHasPrevious
-( const DSplayItr *iterator )
+( const dsplay_itr_t *iterator )
 {
   return ( iterator != NULL ) && ( iterator->previous != NULL );
 }
 
 void *
 DSplayItrNext
-( DSplayItr *iterator )
+( dsplay_itr_t *iterator )
 {
   VALIDATE_PARAMETERS( iterator )
 
@@ -116,7 +116,7 @@ DSplayItrNext
 
 void *
 DSplayItrPrevious
-( DSplayItr *iterator )
+( dsplay_itr_t *iterator )
 {
   VALIDATE_PARAMETERS( iterator )
 
@@ -132,7 +132,7 @@ DSplayItrPrevious
 
 void *
 DSplayItrRemove
-( DSplayItr *iterator )
+( dsplay_itr_t *iterator )
 {
   node_t *removed, *root;
   void *element;

@@ -9,7 +9,7 @@
 #include <woodpile/dynamic/tree/splay.h>
 
 /**
- * @struct DynamicSplayIterator
+ * @struct dsplay_itr_t
  * The DynamicSplayIterator provides a simple iterator for a DynamicSplay
  * structure. The splay may also have elements added to and/or removed from it
  * while being iterated through.
@@ -27,8 +27,8 @@
  * Memory overhead can be calculated as follows:
  * ( sizeof( void * ) * 3 ) + sizeof( unsigned short )
  */
-struct DynamicSplayIterator;
-typedef struct DynamicSplayIterator DSplayItr;
+struct dsplay_itr_t;
+typedef struct dsplay_itr_t dsplay_itr_t;
 
 /**
  * Creates a new DynamicSplayIterator for the DynamicSplay provided. The
@@ -39,7 +39,7 @@ typedef struct DynamicSplayIterator DSplayItr;
  * @return a DynamicSplayIterator for the provided DynamicSplay. If splay is NULL
  * or invalid then NULL is returned.
  */
-DSplayItr *
+dsplay_itr_t *
 BeginDynamicSplay
 ( dsplay_t *splay );
 #define DSplayBegin BeginDynamicSplay
@@ -52,9 +52,9 @@ BeginDynamicSplay
  *
  * @return a copy of the original DynamicSplayIterator
  */
-DSplayItr *
+dsplay_itr_t *
 CopyDynamicSplayIterator
-( const DSplayItr *iterator );
+( const dsplay_itr_t *iterator );
 #define DSplayItrCopy CopyDynamicSplayIterator
 
 /**
@@ -65,7 +65,7 @@ CopyDynamicSplayIterator
  */
 void
 DestroyDynamicSplayIterator
-( DSplayItr *iterator );
+( dsplay_itr_t *iterator );
 #define DSplayItrDestroy DestroyDynamicSplayIterator
 
 /**
@@ -80,7 +80,7 @@ DestroyDynamicSplayIterator
  * @return a DynamicSplayIterator for splay. If splay is NULL or invalid then
  * NULL is returned.
  */
-DSplayItr *
+dsplay_itr_t *
 EndDynamicSplay
 ( dsplay_t *splay );
 #define DSplayEnd EndDynamicSplay
@@ -94,7 +94,7 @@ EndDynamicSplay
  */
 unsigned short
 DynamicSplayIteratorHasNext
-( const DSplayItr *iterator );
+( const dsplay_itr_t *iterator );
 #define DSplayItrHasNext DynamicSplayIteratorHasNext
 
 /**
@@ -106,7 +106,7 @@ DynamicSplayIteratorHasNext
  */
 unsigned short
 DynamicSplayIteratorHasPrevious
-( const DSplayItr *iterator );
+( const dsplay_itr_t *iterator );
 #define DSplayItrHasPrevious DynamicSplayIteratorHasPrevious
 
 /**
@@ -121,7 +121,7 @@ DynamicSplayIteratorHasPrevious
  */
 void *
 NextInDynamicSplayIterator
-( DSplayItr *iterator );
+( dsplay_itr_t *iterator );
 #define DSplayItrNext NextInDynamicSplayIterator
 
 /**
@@ -137,7 +137,7 @@ NextInDynamicSplayIterator
  */
 void *
 PreviousInDynamicSplayIterator
-( DSplayItr *iterator );
+( dsplay_itr_t *iterator );
 #define DSplayItrPrevious PreviousInDynamicSplayIterator
 
 /**
@@ -153,7 +153,7 @@ PreviousInDynamicSplayIterator
  */
 void *
 RemoveFromDynamicSplayIterator
-( DSplayItr *iterator );
+( dsplay_itr_t *iterator );
 #define DSplayItrRemove RemoveFromDynamicSplayIterator
 
 #endif
