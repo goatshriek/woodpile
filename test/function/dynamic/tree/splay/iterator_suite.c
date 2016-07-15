@@ -1,10 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-
 #include <woodpile/config.h>
 #include <woodpile/dynamic/tree/splay/iterator.h>
-
+#include "test/function/common_suite.h"
 #include "test/function/dynamic/tree/splay/iterator_suite.h"
 #include "test/helper.h"
 
@@ -14,14 +13,31 @@ main( void )
   unsigned failure_count = 0;
   const char *result;
 
+  printf( "### Dynamic Splay Iterator Functionality Test Suite\n" );
+
 #ifdef __WOODPILE_PARAMETER_VALIDATION
+  printf( "\nRunning Parameter Validation Tests\n======\n" );
+
+#ifdef TEST_FUNCTION_COMMON_COPY_NULL
+  TEST( CopyNull )
+#endif
+
   TEST( BeginWithNullDynamicSplay )
-  TEST( CopyNullIterator )
   TEST( EndWithNullDynamicSplay )
   TEST( NextWithNullIterator )
   TEST( PreviousWithNullIterator )
   TEST( RemoveFromNullIterator )
 #endif
+
+#ifdef TEST_TYPE
+  printf( "\nRunning Common Tests\n======\n" );
+
+#ifdef TEST_FUNCTION_COMMON_DESTROY_NULL
+  TEST( DestroyNull )
+#endif
+#endif
+
+  printf( "\nRunning Specific Tests\n======\n" );
 
   TEST( BeginWithEmptyDynamicSplay )
   TEST( BeginWithPopulatedDynamicSplay )
@@ -30,7 +46,6 @@ main( void )
   TEST( CopyDistinct )
   TEST( CopyPosition )
   TEST( Destroy )
-  TEST( DestroyNullIterator )
   TEST( EndWithEmptyDynamicSplay )
   TEST( EndWithPopulatedDynamicSplay )
   TEST( HasNextAtBeginning )
@@ -242,16 +257,6 @@ TestCopyDistinct
 }
 
 const char *
-TestCopyNullIterator
-( void )
-{
-  if( DSplayItrCopy( NULL ) != NULL )
-    return "a non-NULL value was returned when copying NULL";
-
-  return NULL;
-}
-
-const char *
 TestCopyPosition
 ( void )
 {
@@ -301,15 +306,6 @@ TestDestroy
   DSplayItrDestroy( iterator );
 
   DSplayDestroy( splay );
-
-  return NULL;
-}
-
-const char *
-TestDestroyNullIterator
-( void )
-{
-  DSplayItrDestroy( NULL );
 
   return NULL;
 }

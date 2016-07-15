@@ -81,20 +81,9 @@ TestCopyDistinct
 ( void );
 
 /**
- * Tests the DSplayItrCopy function with a NULL iterator.
- *
- * @test A NULL iterator must return NULL.
- *
- * @return NULL on completion or a string describing the failure
- */
-const char *
-TestCopyNullIterator
-( void );
-
-/**
  * Tests the position of the iterator returned by the DSplayItrCopy
  * function.
- * 
+ *
  * @test The copy must have the same next element as the original. The copy must
  * have the same previous element as the original.
  *
@@ -113,17 +102,6 @@ TestCopyPosition
  */
 const char *
 TestDestroy
-( void );
-
-/**
- * Tests the DSplayItrDestroy function with a NULL iterator.
- *
- * @test A NULL iterator must not cause an error.
- *
- * @return NULL on success or a string describing the failure
- */
-const char *
-TestDestroyNullIterator
 ( void );
 
 /**
@@ -174,7 +152,7 @@ const char *
 TestHasNextAtBeginning
 ( void );
 
-/** 
+/**
  * Tests the DSplayItrHasNext function at the end of a splay.
  *
  * @test A iterator at the end of a splay must return a value that evaluates
@@ -234,7 +212,7 @@ const char *
 TestHasPreviousAtBeginning
 ( void );
 
-/** 
+/**
  * Tests the DSplayItrHasPrevious function at the end of a splay.
  *
  * @test A iterator at the end of a splay must return a value that evaluates
