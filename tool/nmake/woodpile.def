@@ -63,15 +63,15 @@ EXPORTS
   DynamicSplayConstIteratorHasPrevious @60
   NextInDynamicSplayConstIterator @61
   PreviousInDynamicSplayConstIterator @62
-  BeginDynamicSplay @63
-  CopyDynamicSplayIterator @64
-  DestroyDynamicSplayIterator @65
-  EndDynamicSplay @66
-  DynamicSplayIteratorHasNext @67
-  DynamicSplayIteratorHasPrevious @68
-  NextInDynamicSplayIterator @69
-  PreviousInDynamicSplayIterator @70
-  RemoveFromDynamicSplayIterator @71
+  DSplayBegin @63
+  DSplayItrCopy @64
+  DSplayItrDestroy @65
+  DSplayEnd @66
+  DSplayItrHasNext @67
+  DSplayItrHasPrevious @68
+  DSplayItrNext @69
+  DSplayItrPrevious @70
+  DSplayItrRemove @71
   SHashCapacity @72
   SHashContains @73
   SHashCopy @74

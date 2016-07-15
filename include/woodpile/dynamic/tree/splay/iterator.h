@@ -40,9 +40,8 @@ typedef struct dsplay_itr_t dsplay_itr_t;
  * or invalid then NULL is returned.
  */
 dsplay_itr_t *
-BeginDynamicSplay
+DSplayBegin
 ( dsplay_t *splay );
-#define DSplayBegin BeginDynamicSplay
 
 /**
  * Creates a copy of a DynamicSplayIterator. The position of the copy will be
@@ -53,9 +52,8 @@ BeginDynamicSplay
  * @return a copy of the original DynamicSplayIterator
  */
 dsplay_itr_t *
-CopyDynamicSplayIterator
+DSplayItrCopy
 ( const dsplay_itr_t *iterator );
-#define DSplayItrCopy CopyDynamicSplayIterator
 
 /**
  * Destroys a DynamicSplayIterator and releases its memory. This function does
@@ -64,9 +62,8 @@ CopyDynamicSplayIterator
  * @param iterator the DynamicSplayIterator to destroy
  */
 void
-DestroyDynamicSplayIterator
+DSplayItrDestroy
 ( dsplay_itr_t *iterator );
-#define DSplayItrDestroy DestroyDynamicSplayIterator
 
 /**
  * Creates a new DynamicSplayIterator for the DynamicSplay provided. The
@@ -81,9 +78,8 @@ DestroyDynamicSplayIterator
  * NULL is returned.
  */
 dsplay_itr_t *
-EndDynamicSplay
+DSplayEnd
 ( dsplay_t *splay );
-#define DSplayEnd EndDynamicSplay
 
 /**
  * Checks to see if a DSplayIterator has a next value.
@@ -93,9 +89,8 @@ EndDynamicSplay
  * @return a positive value if a next value exists, and a 0 if not.
  */
 unsigned short
-DynamicSplayIteratorHasNext
+DSplayItrHasNext
 ( const dsplay_itr_t *iterator );
-#define DSplayItrHasNext DynamicSplayIteratorHasNext
 
 /**
  * Checks to see if a DynamicSplayIterator has a previous value.
@@ -105,9 +100,8 @@ DynamicSplayIteratorHasNext
  * @return a positive value if a previous value exists, and a 0 if not.
  */
 unsigned short
-DynamicSplayIteratorHasPrevious
+DSplayItrHasPrevious
 ( const dsplay_itr_t *iterator );
-#define DSplayItrHasPrevious DynamicSplayIteratorHasPrevious
 
 /**
  * Gets the next value in the DynamicSplayIterator. If the DynamicSplayIterator
@@ -120,9 +114,8 @@ DynamicSplayIteratorHasPrevious
  * @return the next value of the iterator, or NULL if there is not one
  */
 void *
-NextInDynamicSplayIterator
+DSplayItrNext
 ( dsplay_itr_t *iterator );
-#define DSplayItrNext NextInDynamicSplayIterator
 
 /**
  * Gets the previous value in the DynamicSplayIterator. If iterator does not
@@ -136,9 +129,8 @@ NextInDynamicSplayIterator
  * @return the previous value of the iterator, or NULL if there is not one
  */
 void *
-PreviousInDynamicSplayIterator
+DSplayItrPrevious
 ( dsplay_itr_t *iterator );
-#define DSplayItrPrevious PreviousInDynamicSplayIterator
 
 /**
  * Removes from the splay the last element returned by either
@@ -152,8 +144,7 @@ PreviousInDynamicSplayIterator
  * @return the element removed
  */
 void *
-RemoveFromDynamicSplayIterator
+DSplayItrRemove
 ( dsplay_itr_t *iterator );
-#define DSplayItrRemove RemoveFromDynamicSplayIterator
 
 #endif
