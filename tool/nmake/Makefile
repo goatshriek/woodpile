@@ -155,11 +155,21 @@ $(OUTDIR)\test\function\dynamic\tree\splay_suite.exe: $(OUTDIR)\helper.dll $(OUT
 $(OUTDIR)\test\function\dynamic\tree\splay\const_iterator_suite.exe: $(OUTDIR)\helper.dll $(OUTDIR)\test\function\dynamic\tree\splay\const_iterator_suite.obj
   $(link) $(WOODPILELFLAGS) /out:$(OUTDIR)\test\function\dynamic\tree\splay\const_iterator_suite.exe $(OUTDIR)\woodpile.lib $(OUTDIR)\helper.lib $(OUTDIR)\test\function\dynamic\tree\splay\const_iterator_suite.obj
 
-$(OUTDIR)\test\function\dynamic\tree\splay\iterator_suite.exe: $(OUTDIR)\helper.dll $(OUTDIR)\test\function\dynamic\tree\splay\iterator_suite.obj
-  $(link) $(WOODPILELFLAGS) /out:$(OUTDIR)\test\function\dynamic\tree\splay\iterator_suite.exe $(OUTDIR)\woodpile.lib $(OUTDIR)\helper.lib $(OUTDIR)\test\function\dynamic\tree\splay\iterator_suite.obj
+$(OUTDIR)\test\function\dynamic\tree\splay\iterator_suite.exe: $(OUTDIR)\helper.dll $(OUTDIR)\test\function\dynamic\tree\splay\iterator_suite.obj $(OUTDIR)\test\function\dynamic\tree\splay\iterator_common.obj
+  $(link) $(WOODPILELFLAGS) \
+          /out:$(OUTDIR)\test\function\dynamic\tree\splay\iterator_suite.exe \
+          $(OUTDIR)\woodpile.lib \
+          $(OUTDIR)\helper.lib \
+          $(OUTDIR)\test\function\dynamic\tree\splay\iterator_suite.obj \
+          $(OUTDIR)\test\function\dynamic\tree\splay\iterator_common.obj
 
 $(OUTDIR)\test\function\static\hash_suite.exe: $(OUTDIR)\helper.dll $(OUTDIR)\test\function\static\hash_suite.obj $(OUTDIR)\test\function\static\hash_common.obj
-  $(link) $(WOODPILELFLAGS) /out:$(OUTDIR)\test\function\static\hash_suite.exe $(OUTDIR)\woodpile.lib $(OUTDIR)\helper.lib $(OUTDIR)\test\function\static\hash_suite.obj $(OUTDIR)\test\function\static\hash_common.obj
+  $(link) $(WOODPILELFLAGS) \
+          /out:$(OUTDIR)\test\function\static\hash_suite.exe \
+          $(OUTDIR)\woodpile.lib \
+          $(OUTDIR)\helper.lib \
+          $(OUTDIR)\test\function\static\hash_suite.obj \
+          $(OUTDIR)\test\function\static\hash_common.obj
 
 $(OUTDIR)\test\function\static\queue_suite.exe: $(OUTDIR)\helper.dll $(OUTDIR)\test\function\static\queue_suite.obj $(OUTDIR)\test\function\static\queue_common.obj
   $(link) $(WOODPILELFLAGS) \
@@ -275,10 +285,28 @@ $(OUTDIR)\test\function\dynamic\tree\splay_common.obj: $(OUTDIR) $(TESTDIR)\func
         /DTEST_TYPE=dsplay_t
   
 $(OUTDIR)\test\function\dynamic\tree\splay\const_iterator_suite.obj: $(OUTDIR) $(TESTDIR)\function\dynamic\tree\splay\const_iterator_suite.c
-  $(cc) $(WOODPILECFLAGS) /Fo$(OUTDIR)\test\function\dynamic\tree\splay\ /Fd$(OUTDIR)\test\function\dynamic\tree\splay\const_iterator.pdb $(TESTDIR)\function\dynamic\tree\splay\const_iterator_suite.c
+  $(cc) $(WOODPILECFLAGS) \
+        /Fo$(OUTDIR)\test\function\dynamic\tree\splay\ \
+        /Fd$(OUTDIR)\test\function\dynamic\tree\splay\const_iterator.pdb \
+        $(TESTDIR)\function\dynamic\tree\splay\const_iterator_suite.c
   
 $(OUTDIR)\test\function\dynamic\tree\splay\iterator_suite.obj: $(OUTDIR) $(TESTDIR)\function\dynamic\tree\splay\iterator_suite.c
-  $(cc) $(WOODPILECFLAGS) /Fo$(OUTDIR)\test\function\dynamic\tree\splay\ /Fd$(OUTDIR)\test\function\dynamic\tree\splay\iterator.pdb $(TESTDIR)\function\dynamic\tree\splay\iterator_suite.c
+  $(cc) $(WOODPILECFLAGS) \
+        /Fo$(OUTDIR)\test\function\dynamic\tree\splay\ \
+        /Fd$(OUTDIR)\test\function\dynamic\tree\splay\iterator.pdb \
+        $(TESTDIR)\function\dynamic\tree\splay\iterator_suite.c \
+        /DTEST_FUNCTION_COPY=DSplayItrCopy \
+        /DTEST_FUNCTION_DESTROY=DSplayItrDestroy \
+        /DTEST_TYPE=dsplay_itr_t
+  
+$(OUTDIR)\test\function\dynamic\tree\splay\iterator_common.obj: $(OUTDIR) $(TESTDIR)\function\common_suite.c
+  $(cc) $(WOODPILECFLAGS) \
+        /Fo$(OUTDIR)\test\function\dynamic\tree\splay\iterator_common.obj \
+        /Fd$(OUTDIR)\test\function\dynamic\tree\splay\iterator_common.pdb \
+        $(TESTDIR)\function\common_suite.c \
+        /DTEST_FUNCTION_COPY=DSplayItrCopy \
+        /DTEST_FUNCTION_DESTROY=DSplayItrDestroy \
+        /DTEST_TYPE=dsplay_itr_t
   
 $(OUTDIR)\test\function\static\hash_suite.obj: $(OUTDIR) $(TESTDIR)\function\static\hash_suite.c
   $(cc) $(WOODPILECFLAGS) /Fo$(OUTDIR)\test\function\static\ \
